@@ -127,7 +127,7 @@ class PageController extends Controller
         $subcategories = BlogSubcategory::all();
         $sub_subcategories = BlogSubSubcategory::all();
 
-        return view('backend.blog.page.new-page', [
+        return view('backend.global.page.new-page', [
             'categories' => $categories, 
             'subcategories' => $subcategories, 
             'sub_subcategories' => $sub_subcategories,
@@ -206,7 +206,7 @@ class PageController extends Controller
     {            
         $pages = Page::all();
         
-        return view('backend.blog.page.manage-pages', ['pages' => $pages]);
+        return view('backend.global.page.manage-pages', ['pages' => $pages]);
     }
 
     public function edit($id)
@@ -216,7 +216,7 @@ class PageController extends Controller
         $subcategories = BlogSubcategory::all();
         $sub_subcategories = BlogSubSubcategory::all();
         
-        return view('backend.blog.page.edit-page', [
+        return view('backend.global.page.edit-page', [
             'page' => $page,
             'categories' => $categories,
             'subcategories' => $subcategories,

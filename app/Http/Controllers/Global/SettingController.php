@@ -95,7 +95,7 @@ class SettingController extends Controller
     {
         $page = Setting::first();
 
-        return view('backend.blog.setting.edit', ['page' => $page]);
+        return view('backend.global.setting.edit', ['page' => $page]);
     }
 
     public function update(Request $request): RedirectResponse

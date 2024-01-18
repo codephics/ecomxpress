@@ -24,9 +24,9 @@
     </div>
 
     <div class="row">
-        @include('backend.blog.profile.partials.update-profile-information-form')
+        @include('backend.profile.partials.update-profile-information-form')
 
-        @include('backend.blog.profile.partials.update-password-form')
+        @include('backend.profile.partials.update-password-form')
     </div>
 </main>
 
