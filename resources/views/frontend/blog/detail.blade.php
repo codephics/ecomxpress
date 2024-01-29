@@ -1,4 +1,4 @@
-@extends('frontend.blog.skeleton.body')
+@extends('frontend.skeleton.body')
 @section('content')
 		<!-- Breadcrumb -->
 		<section>

@@ -1,4 +1,4 @@
-@extends('backend.blog.skeleton.body')
+@extends('backend.skeleton.body')
 
 @section('custom-head')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
@@ -32,7 +32,7 @@
         <div class="col-lg-2 align-self-center">
             <div class="row">
                 <div class="col-12 col-sm-12">
-                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('blog.page.new-page') }}">+ Add Page</a>
+                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('page.new-page') }}">+ Add Page</a>
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
                         <td>@if($page->status == 1) Live @else Draft @endif</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                              <a href="{{ route('blog.page.edit',$page->id) }}" class="btn btn-light">Edit</a>
+                              <a href="{{ route('page.edit',$page->id) }}" class="btn btn-light">Edit</a>
 
                               <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#deletepage{{ $page->id }}">Destroy</button>
 
@@ -111,7 +111,7 @@
                                       <div class="modal-body">
                                         <p>Do you really want to delete. This process cannot be undone.</p>
                                       </div>
-                                      <form method="POST" action="{{ route('blog.page.destroy',$page->id) }}">
+                                      <form method="POST" action="{{ route('page.destroy',$page->id) }}">
                                         @csrf
                                         @method('DELETE')
                                       <div class="modal-footer">

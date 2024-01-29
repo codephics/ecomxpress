@@ -1,4 +1,4 @@
-@extends('backend.blog.skeleton.body')
+@extends('backend.skeleton.body')
 @section('content') @section('custom-head')
 <script src="https://cdn.tiny.cloud/1/m9g2pjluv64jkrzcnksdf4ur6nd9lvyrbatcjua3iazeof63/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 @endsection
@@ -34,7 +34,7 @@
     @endif
 
     @if($page)
-    <form class="needs-validation" method="POST" action="{{ route('blog.setting.update') }}" enctype="multipart/form-data" novalidate>
+    <form class="needs-validation" method="POST" action="{{ route('setting.update') }}" enctype="multipart/form-data" novalidate>
         @csrf
         @method('PUT')
         <div class="row">
@@ -186,7 +186,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <img src="{{ asset('blog/image/setting/'.$page->og_image) }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('global/image/setting/'.$page->og_image) }}" class="img-thumbnail" alt="...">
                         </div>
                         <div class="mb-3">
                             <input class="form-control" type="text" name="og_img_alt_text" value="{{ $page->og_img_alt_text }}" placeholder="Alt Text" />
@@ -196,7 +196,7 @@
                             <input class="form-control" type="file" name="og_image" multiple />
                         </div>
                         <div class="mb-3">
-                            <img src="{{ asset('blog/image/setting/'.$page->favicon) }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('global/image/setting/'.$page->favicon) }}" class="img-thumbnail" alt="...">
                         </div>
                         <div class="mb-3">
                             <input class="form-control" type="text" name="favicon_alt_text" value="{{ $page->favicon_apple_alt_text }}" placeholder="Alt Text" />
@@ -206,7 +206,7 @@
                             <input class="form-control" type="file" name="favicon" />
                         </div>
                         <div class="mb-3">
-                            <img src="{{ asset('blog/image/setting/'.$page->favicon_16) }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('global/image/setting/'.$page->favicon_16) }}" class="img-thumbnail" alt="...">
                         </div>
                         <div class="mb-3">
                             <input class="form-control" type="text" name="favicon_16_alt_text" value="{{ $page->favicon_16_alt_text }}" placeholder="Alt Text" />
@@ -218,7 +218,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <img src="{{ asset('blog/image/setting/'.$page->favicon_apple) }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('global/image/setting/'.$page->favicon_apple) }}" class="img-thumbnail" alt="...">
                         </div>
                         <div class="mb-3">
                             <input class="form-control" type="text" name="favicon_apple_alt_text" value="{{ $page->favicon_apple_alt_text }}" placeholder="Alt Text" />
@@ -228,7 +228,7 @@
                             <input class="form-control" type="file" name="favicon_apple" />
                         </div>
                         <div class="mb-3">
-                            <img src="{{ asset('blog/image/setting/'.$page->favicon_32) }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('global/image/setting/'.$page->favicon_32) }}" class="img-thumbnail" alt="...">
                         </div>
                         <div class="mb-3">
                             <input class="form-control" type="text" name="favicon_32_alt_text" value="{{ $page->favicon_32_alt_text }}" placeholder="Alt Text" />
@@ -257,7 +257,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <img src="{{ asset('blog/image/setting/'.$page->logo) }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('global/image/setting/'.$page->logo) }}" class="img-thumbnail" alt="...">
                         </div>
                         <div class="mb-3">
                             <input class="form-control" type="text" name="logo_alt_text" value="{{ $page->logo_alt_text }}" placeholder="Alt Text" />
@@ -281,7 +281,7 @@
         </div>
     </form>
     @else
-    <form class="needs-validation" method="POST" action="{{ route('blog.setting.store') }}" enctype="multipart/form-data" novalidate>
+    <form class="needs-validation" method="POST" action="{{ route('setting.store') }}" enctype="multipart/form-data" novalidate>
         @csrf
         <div class="row">
             <div class="col-sm-9">
@@ -305,7 +305,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <img src="{{ asset('blog/image/setting/') }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('global/image/setting/') }}" class="img-thumbnail" alt="...">
                         </div>
                         <div class="mb-3">
                             <input class="form-control" type="text" name="favicon_apple_alt_text" value="" placeholder="Alt Text" />
@@ -315,7 +315,7 @@
                             <input class="form-control" type="file" name="favicon_apple" />
                         </div>
                         <div class="mb-3">
-                            <img src="{{ asset('blog/image/setting/') }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('global/image/setting/') }}" class="img-thumbnail" alt="...">
                         </div>
                         <div class="mb-3">
                             <input class="form-control" type="text" name="favicon_32_alt_text" value="" placeholder="Alt Text" />
@@ -325,7 +325,7 @@
                             <input class="form-control" type="file" name="favicon_32" />
                         </div>
                         <div class="mb-3">
-                            <img src="{{ asset('blog/image/setting/') }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('global/image/setting/') }}" class="img-thumbnail" alt="...">
                         </div>
                         <div class="mb-3">
                             <input class="form-control" type="text" name="favicon_16_alt_text" value="" placeholder="Alt Text" />
@@ -337,7 +337,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <img src="{{ asset('blog/image/setting/') }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('global/image/setting/') }}" class="img-thumbnail" alt="...">
                         </div>
                         <div class="mb-3">
                             <input class="form-control" type="text" name="logo_alt_text" value="" placeholder="Alt Text" />
@@ -347,10 +347,10 @@
                             <input class="form-control" type="file" name="logo" />
                         </div>
                         <div class="mb-3">
-                            <img src="{{ asset('blog/image/setting/') }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('global/image/setting/') }}" class="img-thumbnail" alt="...">
                         </div>
                         <div class="mb-3">
-                            <img src="{{ asset('blog/image/setting/') }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('global/image/setting/') }}" class="img-thumbnail" alt="...">
                         </div>
                         <div class="mb-3">
                             <input class="form-control" type="text" name="og_img_alt_text" value="" placeholder="Alt Text" />

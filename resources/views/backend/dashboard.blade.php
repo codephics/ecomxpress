@@ -1,4 +1,4 @@
-@extends('backend.blog.skeleton.body') @section('content')
+@extends('backend.skeleton.body') @section('content')
 <main class="container p-3 py-5">
     <!-- Breadcrumb -->
     <div class="row">
@@ -43,8 +43,8 @@
                             <li class="d-flex align-items-start mb-1"><a href="{{ route('blog.subcategories') }}">Manage Subcategories</a></li>
                             <li class="d-flex align-items-start mb-1"><a href="{{ route('blog.sub-subcategories') }}">Manage Sub Subcategories</a></li>
                             <li class="d-flex align-items-start mb-1"><a href="{{ route('blog.tag') }}">Manage Tags</a></li>
-                            <li class="d-flex align-items-start mb-1"><a href="{{ route('blog.page.manage-pages') }}">Manage Pages</a></li>
-                            <li class="d-flex align-items-start mb-1"><a href="{{ route('blog.setting.edit') }}">Manage Setting</a></li>
+                            <li class="d-flex align-items-start mb-1"><a href="{{ route('page.manage-pages') }}">Manage Pages</a></li>
+                            <li class="d-flex align-items-start mb-1"><a href="{{ route('setting.edit') }}">Manage Setting</a></li>
                         </ul>
                     </div>
                 </div>

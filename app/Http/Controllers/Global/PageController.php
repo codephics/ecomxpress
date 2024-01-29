@@ -42,7 +42,7 @@ class PageController extends Controller
         $setting = Setting::first();
         $blogs = Blog::take(36)->get();
 
-        return view('frontend.blog.homepage', [
+        return view('frontend.skeleton.content', [
             'page' => $page,
             'setting' => $setting,
             'blogs' => $blogs
@@ -82,7 +82,7 @@ class PageController extends Controller
         $page = Page::where('slug', 'privacy-policy')->firstOrFail();
         $setting = Setting::first();
         
-        return view('frontend.blog.privacy-policy', [
+        return view('frontend.global.privacy-policy', [
             'page' => $page,
             'setting' => $setting,
         ]);
@@ -93,7 +93,7 @@ class PageController extends Controller
         $page = Page::where('slug', 'terms-of-service')->firstOrFail();
         $setting = Setting::first();
         
-        return view('frontend.blog.terms-of-service', [
+        return view('frontend.global.terms-of-service', [
             'page' => $page,
             'setting' => $setting,
         ]);
@@ -104,7 +104,7 @@ class PageController extends Controller
         $page = Page::where('slug', 'license')->firstOrFail();
         $setting = Setting::first();
         
-        return view('frontend.blog.license', [
+        return view('frontend.global.license', [
             'page' => $page,
             'setting' => $setting,
         ]);
@@ -115,7 +115,7 @@ class PageController extends Controller
         $page = Page::where('slug', '404')->firstOrFail();
         $setting = Setting::first();
         
-        return view('frontend.blog.404', [
+        return view('frontend.global.404', [
             'page' => $page,
             'setting' => $setting,
         ]);

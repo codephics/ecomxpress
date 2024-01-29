@@ -3,6 +3,14 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// Ecommerce
+use App\Http\Controllers\Ecommerce\EcommerceController;
+use App\Http\Controllers\Ecommerce\EcommerceSellerController;
+use App\Http\Controllers\Ecommerce\EcommerceSiteController;
+use App\Http\Controllers\Ecommerce\EcommerceCategoryController;
+use App\Http\Controllers\Ecommerce\EcommerceAudioController;
+use App\Http\Controllers\Ecommerce\EcommerceSubscriptionController;
+
 // Blog
 use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\Blog\BlogCategoryController;
@@ -11,46 +19,97 @@ use App\Http\Controllers\Blog\BlogTagController;
 use App\Http\Controllers\Global\PageController;
 use App\Http\Controllers\Global\SettingController;
 use App\Http\Controllers\Global\SitemapController;
+
+
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Frontend -> Global
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
 
-// Blog
-Route::get('/', [PageController::class, 'homepage'])->name('blog.home');
+// Homepage
+Route::get('/', [PageController::class, 'homepage'])->name('front.home');
+
+// Privacy Policy
+Route::get('/privacy-policy', [PageController::class, 'privacy'])->name('privacy-policy');
+
+// Terms of Service
+Route::get('/terms-of-service', [PageController::class, 'terms'])->name('terms-of-service');
+
+Route::get('/license', [PageController::class, 'license'])->name('license');
+
+// 404
+Route::get('/404', [PageController::class, 'error404'])->name('404');
+
+// Sitemap
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+
+/*
+|--------------------------------------------------------------------------
+| Frontend -> Blog
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/more-blogs', [PageController::class, 'blogs'])->name('blog.more');
 Route::get('/detail/{slug}', [PageController::class, 'detail'])->name('blog.detail');
 
-// Privacy Policy
-Route::get('/privacy-policy', [PageController::class, 'privacy'])->name('blog.privacy-policy');
+/*
+|--------------------------------------------------------------------------
+| Frontend -> Ecommerce
+|--------------------------------------------------------------------------
+*/
 
-// Terms of Service
-Route::get('/terms-of-service', [PageController::class, 'terms'])->name('blog.terms-of-service');
+// Ecommerce
+// Route::match(['head', 'get'], '/', [EcommerceController::class, 'index'])->name('ecommerce.home');
+Route::get('items', [EcommerceController::class, 'index'])->name('item.store');
+Route::get('/item/detail/{slug}', [EcommerceController::class, 'detail'])->name('item.detail');
 
-Route::get('/license', [PageController::class, 'license'])->name('blog.license');
+// Ecommerce -> Category
+Route::get('item/{category:slug}', [EcommerceController::class, 'showByCategory'])->name('category.show');
+Route::get('item/{category:slug}/{subcategory:slug}', [EcommerceController::class, 'showBySubcategory'])->name('subcategory.show');
+Route::get('item/{category:slug}/{subcategory:slug}/{subSubcategory:slug}', [EcommerceController::class, 'showBySubSubcategory'])->name('subSubcategory.show');
 
-// 404
-Route::get('/404', [PageController::class, 'error404'])->name('blog.404');
+// Ecommerce -> Subscription
+Route::post('/new-subscriber', [EcommerceSubscriptionController::class, 'subscriber'])->name('ecommerce.new-subscriber');
 
-// Sitemap
-Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('blog.sitemap');
+/*
+|--------------------------------------------------------------------------
+| Backend -> Global
+|--------------------------------------------------------------------------
+*/
 
+// Dashboard
 Route::get('/dashboard', function () {
     return view('backend.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Blog -> Profile
+// Profile
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Pages
+Route::get('manage-pages', [PageController::class, 'show'])->middleware(['auth', 'verified'])->name('page.manage-pages');
+Route::get('manage-pages/new-page', [PageController::class, 'create'])->middleware(['auth', 'verified'])->name('page.new-page');
+Route::post('manage-pages/new-page/store', [PageController::class, 'store'])->middleware(['auth', 'verified'])->name('page.new-page.store');
+Route::get('manage-pages/edit/{id}', [PageController::class, 'edit'])->middleware(['auth', 'verified'])->name('page.edit');
+Route::put('manage-pages/update/{id}', [PageController::class, 'update'])->middleware(['auth', 'verified'])->name('page.update');
+Route::delete('manage-pages/destroy/{id}', [PageController::class, 'destroy'])->middleware(['auth', 'verified'])->name('page.destroy');
+
+// Settings
+Route::middleware('auth')->group(function () {
+    Route::post('/settings/store', [SettingController::class, 'store'])->name('setting.store');
+    Route::get('/settings', [SettingController::class, 'edit'])->name('setting.edit');
+    Route::put('/settings', [SettingController::class, 'update'])->name('setting.update');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Backend -> Blog
+|--------------------------------------------------------------------------
+*/
 
 // Blog -> Manage Blog
 Route::get('/blog/manage-blog', [BlogController::class, 'show'])->middleware(['auth', 'verified'])->name('blog.manage-blog');
@@ -90,19 +149,72 @@ Route::get('/blog/edit-tag/{id}', [BlogTagController::class, 'edit'])->middlewar
 Route::put('/blog/update-tag/{id}', [BlogTagController::class, 'update'])->middleware(['auth', 'verified'])->name('blog.tag.update');
 Route::delete('/blog/destroy-tag/{id}', [BlogTagController::class, 'destroy'])->middleware(['auth', 'verified'])->name('blog.tag.destroy');
 
-// Pages
-Route::get('blog/manage-pages', [PageController::class, 'show'])->middleware(['auth', 'verified'])->name('blog.page.manage-pages');
-Route::get('blog/manage-pages/new-page', [PageController::class, 'create'])->middleware(['auth', 'verified'])->name('blog.page.new-page');
-Route::post('blog/manage-pages/new-page/store', [PageController::class, 'store'])->middleware(['auth', 'verified'])->name('blog.page.new-page.store');
-Route::get('blog/manage-pages/edit/{id}', [PageController::class, 'edit'])->middleware(['auth', 'verified'])->name('blog.page.edit');
-Route::put('blog/manage-pages/update/{id}', [PageController::class, 'update'])->middleware(['auth', 'verified'])->name('blog.page.update');
-Route::delete('blog/manage-pages/destroy/{id}', [PageController::class, 'destroy'])->middleware(['auth', 'verified'])->name('blog.page.destroy');
+/*
+|--------------------------------------------------------------------------
+| Backend -> Ecommerce
+|--------------------------------------------------------------------------
+*/
 
-// Blog -> Settings
-Route::middleware('auth')->group(function () {
-    Route::post('/blog/settings/store', [SettingController::class, 'store'])->name('blog.setting.store');
-    Route::get('/blog/settings', [SettingController::class, 'edit'])->name('blog.setting.edit');
-    Route::put('/blog/settings', [SettingController::class, 'update'])->name('blog.setting.update');
-});
+// Categories
+Route::get('/ecommerce/categories/manage-categories', [EcommerceCategoryController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-categories');
+Route::get('/ecommerce/categories/new-category', [EcommerceCategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-category');
+Route::post('/ecommerce/categories/new-category/store', [EcommerceCategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.new-category.store');
+Route::get('/ecommerce/categories/edit-category/{id}', [EcommerceCategoryController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.category.edit');
+Route::put('/ecommerce/categories/update-category/{id}', [EcommerceCategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.category.update');
+Route::delete('/categories/destroy-category/{id}', [EcommerceCategoryController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.category.destroy');
+
+Route::get('/ecommerce/categories/manage-subcategories', [EcommerceCategoryController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-subcategories');
+Route::get('/ecommerce/categories/subcategories/new-subcategory', [EcommerceCategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-subcategory');
+Route::post('/ecommerce/categories/subcategories/new-subcategory/store', [EcommerceCategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.new-subcategory.store');
+Route::get('/ecommerce/categories/subcategories/subcategory/edit/{id}', [EcommerceCategoryController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.subcategory.edit');
+Route::put('/ecommerce/categories/subcategories/subcategory/update/{id}', [EcommerceCategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.subcategory.update');
+Route::delete('/ecommerce/categories/subcategories/subcategory/destroy/{id}', [EcommerceCategoryController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.subcategory.destroy');
+
+Route::get('/ecommerce/categories/manage-sub-subcategories', [EcommerceCategoryController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-sub-subcategories');
+Route::get('/ecommerce/categories/sub-subcategories/new-subsubcategory', [EcommerceCategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-sub-subcategory');
+Route::post('/ecommerce/categories/sub-subcategories/new-subsubcategory/store', [EcommerceCategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.new-sub-subcategory.store');
+Route::get('/ecommerce/categories/sub-subcategories/sub-subcategory/edit/{id}', [EcommerceCategoryController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.sub-subcategory.edit');
+Route::put('/ecommerce/categories/sub-subcategories/sub-subcategory/update/{id}', [EcommerceCategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.sub-subcategory.update');
+Route::delete('/ecommerce/categories/sub-subcategories/sub-subcategory/destroy/{id}', [EcommerceCategoryController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.sub-subcategory.destroy');
+
+// Ecommerce Seller
+Route::get('/ecommerce/manage-sellers', [EcommerceSellerController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-sellers');
+Route::get('/ecommerce/manage-seller/new-seller', [EcommerceSellerController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-seller');
+Route::post('/ecommerce/manage-seller/new-seller/store', [EcommerceSellerController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.new-seller.store');
+Route::get('/ecommerce/manage-seller/edit/{id}', [EcommerceSellerController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.seller.edit');
+Route::put('/ecommerce/manage-seller/update/{id}', [EcommerceSellerController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.seller.update');
+Route::delete('/ecommerce/manage-seller/destroy/{id}', [EcommerceSellerController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.seller.destroy');
+
+// Ecommerce
+Route::get('/ecommerce/manage-items', [EcommerceController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-items');
+Route::get('/ecommerce/new-item', [EcommerceController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-item');
+Route::post('/ecommerce/store-item', [EcommerceController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.store-item');
+Route::get('/ecommerce/edit-item/{id}', [EcommerceController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.edit-item');
+Route::put('/ecommerce/update-item/{id}', [EcommerceController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.update-item');
+Route::delete('/ecommerce/destroy-item/{id}', [EcommerceController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.destroy-item');
+
+
+// Streaming Audio
+Route::get('/ecommerce/manage-audios', [EcommerceAudioController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-audios');
+Route::get('/ecommerce/manage-audio/new-audio', [EcommerceAudioController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-audio');
+Route::post('/ecommerce/manage-audio/store-audio', [EcommerceAudioController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.store-audio');
+Route::get('/ecommerce/manage-audio/edit-audio/{id}', [EcommerceAudioController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.edit-audio');
+Route::put('/ecommerce/manage-audio/update-audio/{id}', [EcommerceAudioController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.update-audio');
+Route::delete('/ecommerce/manage-audio/destroy-audio/{id}', [EcommerceAudioController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.destroy-audio');
+
+Route::get('/ecommerce/manage-audio-playlists', [EcommerceAudioController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-audio-playlists');
+Route::get('/ecommerce/manage-audio-playlist/new-audio-playlist', [EcommerceAudioController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-audio-playlist');
+Route::post('/ecommerce/manage-audio-playlist/store-audio-playlist', [EcommerceAudioController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.store-audio-playlist');
+Route::get('/ecommerce/manage-audio-playlist/edit-audio-playlist/{id}', [EcommerceAudioController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.edit-audio-playlist');
+Route::put('/ecommerce/manage-audio-playlist/update-audio-playlist/{id}', [EcommerceAudioController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.update-audio-playlist');
+Route::delete('/ecommerce/manage-audio-playlist/destroy-audio-playlist/{id}', [EcommerceAudioController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.destroy-audio-playlist');
+
+// Subscription
+Route::get('/ecommerce/manage-subscriptions', [EcommerceSubscriptionController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-subscriptions');
+Route::get('/ecommerce/manage-subscriptions/new-subscription', [EcommerceSubscriptionController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-subscription');
+Route::post('/ecommerce/manage-subscriptions/store-subscription', [EcommerceSubscriptionController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.store-subscription');
+Route::get('/ecommerce/manage-subscriptions/edit-subscription/{id}', [EcommerceSubscriptionController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.edit-subscription');
+Route::put('/ecommerce/manage-subscriptions/update-subscription/{id}', [EcommerceSubscriptionController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.update-subscription');
+Route::delete('/ecommerce/manage-subscriptions/destroy-subscription/{id}', [EcommerceSubscriptionController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.destroy-subscription');
 
 require __DIR__.'/auth.php';

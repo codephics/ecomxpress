@@ -1,4 +1,4 @@
-@extends('frontend.blog.skeleton.body')
+@extends('frontend.skeleton.body')
 @section('content')
 		<!-- Breadcrumb -->
 		<section>
@@ -6,7 +6,7 @@
 				<div class="col-12">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="{{ route('blog.home') }}">Home</a></li>
+							<li class="breadcrumb-item"><a href="{{ route('front.home') }}">Home</a></li>
 							<li class="breadcrumb-item active" aria-current="page">More Blogs</li>
 						</ol>
 					</nav>
