@@ -11,6 +11,21 @@
 				<li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a></li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Ecommerce
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<li><a class="dropdown-item" href="{{ route('ecommerce.new-seller') }}">Add Seller</a></li>
+						<li><a class="dropdown-item" href="{{ route('ecommerce.manage-seller') }}">Manage Sellers</a></li>
+						<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item" href="{{ route('ecommerce.new-item') }}">Add Item</a></li>
+						<li><a class="dropdown-item" href="{{ route('ecommerce.manage-item') }}">Manage Item</a></li>
+						<li><a class="dropdown-item" href="{{ route('ecommerce.manage-categories') }}">Manage Categories</a></li>
+						<li><a class="dropdown-item" href="{{ route('ecommerce.manage-subcategories') }}">Manage Subcategories</a></li>
+						<li><a class="dropdown-item" href="{{ route('ecommerce.manage-sub-subcategories') }}">Manage Sub Subcategories</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Blog
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -23,6 +38,8 @@
 					</ul>
 				</li>				
 				<li class="nav-item"><a href="{{ route('page.manage-pages') }}" class="nav-link">Pages</a></li>
+				<li class="nav-item"><a href="{{ route('manage.contact') }}" class="nav-link">Contacts</a></li>
+				<li class="nav-item"><a href="{{ route('manage.subscriber') }}" class="nav-link">Subscribers</a></li>
 				<li class="nav-item"><a href="{{ route('setting.edit') }}" class="nav-link">Settings</a></li>
 				<li class="nav-item"><a href="{{ route('front.home') }}" class="nav-link" target="_blank">Visit Site</a></li>
 				<li class="nav-item dropdown">

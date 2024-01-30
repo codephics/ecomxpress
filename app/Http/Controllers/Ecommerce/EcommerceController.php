@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Ecommerce\Ecommerce;
-use App\Models\Ecommerce\EcommercePage;
-use App\Models\Ecommerce\EcommerceBlog;
-use App\Models\Ecommerce\EcommerceSeller;
+use App\Models\Global\Page;
+use App\Models\Global\Blog;
+use App\Models\Global\Seller;
 
+use App\Models\Ecommerce\Ecommerce;
 use App\Models\Ecommerce\EcommerceCategory;
 use App\Models\Ecommerce\EcommerceSubcategory;
 use App\Models\Ecommerce\EcommerceSubSubcategory;

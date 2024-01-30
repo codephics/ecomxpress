@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\Ecommerce;
+namespace App\Models\Global;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EcommerceSubscription extends Model
+class Contact extends Model
 {
     use HasFactory;
 
@@ -15,6 +15,8 @@ class EcommerceSubscription extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'name',
         'email',
+        'description',
     ];
 }

@@ -9,8 +9,8 @@
         <div class="col-12">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('template.dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('template.manage-sellers') }}">Manage Seller's</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('ecommerce.manage-sellers') }}">Manage Seller's</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Update Seller</li>
                 </ol>
             </nav>
@@ -34,7 +34,7 @@
     </div>
     @endif
 
-    <form class="needs-validation" method="POST" action="{{ route('template.seller.update',$seller->id) }}" enctype="multipart/form-data" novalidate>
+    <form class="needs-validation" method="POST" action="{{ route('ecommerce.seller.update',$seller->id) }}" enctype="multipart/form-data" novalidate>
         @csrf
         @method('PUT')
         <div class="row">
@@ -132,7 +132,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="mb-3">                            
-                            <img src="{{ asset('template/seller/image/' . $seller->image) }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('ecommerce/seller/image/' . $seller->image) }}" class="img-thumbnail" alt="...">
                         </div>
                     </div>
                     <div class="col-sm-12">
@@ -143,7 +143,7 @@
                     </div>
                     <div class="col-sm-12">
                         <div class="mb-3">                            
-                            <img src="{{ asset('template/seller/image/og/' . $seller->og_image) }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('ecommerce/seller/image/og/' . $seller->og_image) }}" class="img-thumbnail" alt="...">
                         </div>
                     </div>
                     <div class="col-sm-12">
@@ -154,7 +154,7 @@
                     </div>
                     <div class="col-sm-12">
                         <div class="mb-3">                            
-                            <img src="{{ asset('template/seller/image/cover/' . $seller->cover) }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('ecommerce/seller/image/cover/' . $seller->cover) }}" class="img-thumbnail" alt="...">
                         </div>
                     </div>
                     <div class="col-sm-12">

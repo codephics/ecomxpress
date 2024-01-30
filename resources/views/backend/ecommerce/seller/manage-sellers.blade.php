@@ -17,7 +17,7 @@
         <div class="col-12">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('template.dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Manage Seller's</li>
                 </ol>
             </nav>
@@ -32,7 +32,7 @@
         <div class="col-lg-2 align-self-center">
             <div class="row">
                 <div class="col-12 col-sm-12">
-                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('template.new-seller') }}">+ Add Seller</a>
+                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('ecommerce.new-seller') }}">+ Add Seller</a>
                 </div>
             </div>
         </div>
@@ -70,7 +70,7 @@
                         <td>{{ $seller->gender }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                              <a href="{{ route('template.seller.edit',$seller->id) }}" class="btn btn-secondary">Edit</a>
+                              <a href="{{ route('ecommerce.seller.edit',$seller->id) }}" class="btn btn-secondary">Edit</a>
 
                               <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#deleteAuthor{{ $seller->id }}">Destroy</button>
 
@@ -85,7 +85,7 @@
                                       <div class="modal-body">
                                         <p>Do you really want to delete. This process cannot be undone.</p>
                                       </div>
-                                      <form method="POST" action="{{ route('template.seller.destroy',$seller->id) }}">
+                                      <form method="POST" action="{{ route('ecommerce.seller.destroy',$seller->id) }}">
                                         @csrf
                                         @method('DELETE')
                                       <div class="modal-footer">

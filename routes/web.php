@@ -9,7 +9,6 @@ use App\Http\Controllers\Ecommerce\EcommerceSellerController;
 use App\Http\Controllers\Ecommerce\EcommerceSiteController;
 use App\Http\Controllers\Ecommerce\EcommerceCategoryController;
 use App\Http\Controllers\Ecommerce\EcommerceAudioController;
-use App\Http\Controllers\Ecommerce\EcommerceSubscriptionController;
 
 // Blog
 use App\Http\Controllers\Blog\BlogController;
@@ -17,6 +16,8 @@ use App\Http\Controllers\Blog\BlogCategoryController;
 use App\Http\Controllers\Blog\BlogTagController;
 
 use App\Http\Controllers\Global\PageController;
+use App\Http\Controllers\Global\ContactController;
+use App\Http\Controllers\Global\SubscriberController;
 use App\Http\Controllers\Global\SettingController;
 use App\Http\Controllers\Global\SitemapController;
 
@@ -28,21 +29,28 @@ use App\Http\Controllers\Global\SitemapController;
 */
 
 // Homepage
-Route::get('/', [PageController::class, 'homepage'])->name('front.home');
+Route::get('', [PageController::class, 'homepage'])->name('front.home');
+
+// Template -> Contact Us
+Route::get('contact-us', [ContactController::class, 'index'])->name('template.contact-us');
+Route::post('contact-us/new-contact', [ContactController::class, 'newContact'])->name('template.front.new-contact');
+
+// Template -> Subscriber
+Route::post('new-subscriber', [TemplateSubscriptionController::class, 'subscriber'])->name('template.new-subscriber');
 
 // Privacy Policy
-Route::get('/privacy-policy', [PageController::class, 'privacy'])->name('privacy-policy');
+Route::get('privacy-policy', [PageController::class, 'privacy'])->name('privacy-policy');
 
 // Terms of Service
-Route::get('/terms-of-service', [PageController::class, 'terms'])->name('terms-of-service');
+Route::get('terms-of-service', [PageController::class, 'terms'])->name('terms-of-service');
 
-Route::get('/license', [PageController::class, 'license'])->name('license');
+Route::get('license', [PageController::class, 'license'])->name('license');
 
 // 404
-Route::get('/404', [PageController::class, 'error404'])->name('404');
+Route::get('404', [PageController::class, 'error404'])->name('404');
 
 // Sitemap
-Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+Route::get('sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 /*
 |--------------------------------------------------------------------------
@@ -50,8 +58,8 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 |--------------------------------------------------------------------------
 */
 
-Route::get('/more-blogs', [PageController::class, 'blogs'])->name('blog.more');
-Route::get('/detail/{slug}', [PageController::class, 'detail'])->name('blog.detail');
+Route::get('more-blogs', [PageController::class, 'blogs'])->name('blog.more');
+Route::get('detail/{slug}', [PageController::class, 'detail'])->name('blog.detail');
 
 /*
 |--------------------------------------------------------------------------
@@ -62,7 +70,7 @@ Route::get('/detail/{slug}', [PageController::class, 'detail'])->name('blog.deta
 // Ecommerce
 // Route::match(['head', 'get'], '/', [EcommerceController::class, 'index'])->name('ecommerce.home');
 Route::get('items', [EcommerceController::class, 'index'])->name('item.store');
-Route::get('/item/detail/{slug}', [EcommerceController::class, 'detail'])->name('item.detail');
+Route::get('item/detail/{slug}', [EcommerceController::class, 'detail'])->name('item.detail');
 
 // Ecommerce -> Category
 Route::get('item/{category:slug}', [EcommerceController::class, 'showByCategory'])->name('category.show');
@@ -70,7 +78,7 @@ Route::get('item/{category:slug}/{subcategory:slug}', [EcommerceController::clas
 Route::get('item/{category:slug}/{subcategory:slug}/{subSubcategory:slug}', [EcommerceController::class, 'showBySubSubcategory'])->name('subSubcategory.show');
 
 // Ecommerce -> Subscription
-Route::post('/new-subscriber', [EcommerceSubscriptionController::class, 'subscriber'])->name('ecommerce.new-subscriber');
+Route::post('new-subscriber', [SubscriberController::class, 'subscriber'])->name('ecommerce.new-subscriber');
 
 /*
 |--------------------------------------------------------------------------
@@ -79,15 +87,15 @@ Route::post('/new-subscriber', [EcommerceSubscriptionController::class, 'subscri
 */
 
 // Dashboard
-Route::get('/dashboard', function () {
+Route::get('dashboard', function () {
     return view('backend.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Profile
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 // Pages
@@ -98,11 +106,28 @@ Route::get('manage-pages/edit/{id}', [PageController::class, 'edit'])->middlewar
 Route::put('manage-pages/update/{id}', [PageController::class, 'update'])->middleware(['auth', 'verified'])->name('page.update');
 Route::delete('manage-pages/destroy/{id}', [PageController::class, 'destroy'])->middleware(['auth', 'verified'])->name('page.destroy');
 
+// Contact
+Route::get('manage-contact', [ContactController::class, 'show'])->middleware(['auth', 'verified'])->name('manage.contact');
+Route::get('manage-contact/new-contact', [ContactController::class, 'create'])->middleware(['auth', 'verified'])->name('new-contact');
+Route::post('manage-contact/new-contact/store', [ContactController::class, 'store'])->middleware(['auth', 'verified'])->name('new-contact.store');
+Route::get('manage-contact/edit/{id}', [ContactController::class, 'edit'])->middleware(['auth', 'verified'])->name('contact.edit');
+Route::get('manage-contact/view/{id}', [ContactController::class, 'view'])->middleware(['auth', 'verified'])->name('contact.view');
+Route::put('manage-contact/update/{id}', [ContactController::class, 'update'])->middleware(['auth', 'verified'])->name('contact.update');
+Route::delete('manage-contact/destroy/{id}', [ContactController::class, 'destroy'])->middleware(['auth', 'verified'])->name('contact.destroy');
+
+// Subscriber
+Route::get('manage-subscriber', [SubscriberController::class, 'show'])->middleware(['auth', 'verified'])->name('manage.subscriber');
+Route::get('manage-subscriber/new-subscription', [SubscriberController::class, 'create'])->middleware(['auth', 'verified'])->name('new-subscription');
+Route::post('manage-subscriber/store-subscription', [SubscriberController::class, 'store'])->middleware(['auth', 'verified'])->name('store-subscription');
+Route::get('manage-subscriber/edit-subscription/{id}', [SubscriberController::class, 'edit'])->middleware(['auth', 'verified'])->name('edit-subscription');
+Route::put('manage-subscriber/update-subscription/{id}', [SubscriberController::class, 'update'])->middleware(['auth', 'verified'])->name('update-subscription');
+Route::delete('manage-subscriber/destroy-subscription/{id}', [SubscriberController::class, 'destroy'])->middleware(['auth', 'verified'])->name('destroy-subscription');
+
 // Settings
 Route::middleware('auth')->group(function () {
-    Route::post('/settings/store', [SettingController::class, 'store'])->name('setting.store');
-    Route::get('/settings', [SettingController::class, 'edit'])->name('setting.edit');
-    Route::put('/settings', [SettingController::class, 'update'])->name('setting.update');
+    Route::post('settings/store', [SettingController::class, 'store'])->name('setting.store');
+    Route::get('settings', [SettingController::class, 'edit'])->name('setting.edit');
+    Route::put('settings', [SettingController::class, 'update'])->name('setting.update');
 });
 
 /*
@@ -112,42 +137,42 @@ Route::middleware('auth')->group(function () {
 */
 
 // Blog -> Manage Blog
-Route::get('/blog/manage-blog', [BlogController::class, 'show'])->middleware(['auth', 'verified'])->name('blog.manage-blog');
-Route::get('/blog/new-blog', [BlogController::class, 'create'])->middleware(['auth', 'verified'])->name('blog.new-blog');
-Route::post('/blog/new-blog/store', [BlogController::class, 'store'])->middleware(['auth', 'verified'])->name('blog.store');
-Route::get('/blog/edit/{id}', [BlogController::class, 'edit'])->middleware(['auth', 'verified'])->name('blog.edit');
-Route::put('/blog/update/{id}', [BlogController::class, 'update'])->middleware(['auth', 'verified'])->name('blog.update');
-Route::delete('/blog/destroy/{id}', [BlogController::class, 'destroy'])->middleware(['auth', 'verified'])->name('blog.destroy');
+Route::get('blog/manage-blog', [BlogController::class, 'show'])->middleware(['auth', 'verified'])->name('blog.manage-blog');
+Route::get('blog/new-blog', [BlogController::class, 'create'])->middleware(['auth', 'verified'])->name('blog.new-blog');
+Route::post('blog/new-blog/store', [BlogController::class, 'store'])->middleware(['auth', 'verified'])->name('blog.store');
+Route::get('blog/edit/{id}', [BlogController::class, 'edit'])->middleware(['auth', 'verified'])->name('blog.edit');
+Route::put('blog/update/{id}', [BlogController::class, 'update'])->middleware(['auth', 'verified'])->name('blog.update');
+Route::delete('blog/destroy/{id}', [BlogController::class, 'destroy'])->middleware(['auth', 'verified'])->name('blog.destroy');
 
 // Blog -> Categories
-Route::get('/blog/categories', [BlogCategoryController::class, 'show'])->middleware(['auth', 'verified'])->name('blog.categories');
-Route::get('/blog/new-category', [BlogCategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('blog.new-category');
-Route::post('/blog/new-category/store', [BlogCategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('blog.new-category.store');
-Route::get('/blog/edit-category/{id}', [BlogCategoryController::class, 'edit'])->middleware(['auth', 'verified'])->name('blog.category.edit');
-Route::put('/blog/update-category/{id}', [BlogCategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('blog.category.update');
-Route::delete('/blog/destroy-category/{id}', [BlogCategoryController::class, 'destroy'])->middleware(['auth', 'verified'])->name('blog.category.destroy');
+Route::get('blog/categories', [BlogCategoryController::class, 'show'])->middleware(['auth', 'verified'])->name('blog.categories');
+Route::get('blog/new-category', [BlogCategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('blog.new-category');
+Route::post('blog/new-category/store', [BlogCategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('blog.new-category.store');
+Route::get('blog/edit-category/{id}', [BlogCategoryController::class, 'edit'])->middleware(['auth', 'verified'])->name('blog.category.edit');
+Route::put('blog/update-category/{id}', [BlogCategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('blog.category.update');
+Route::delete('blog/destroy-category/{id}', [BlogCategoryController::class, 'destroy'])->middleware(['auth', 'verified'])->name('blog.category.destroy');
 
-Route::get('/blog/subcategories', [BlogCategoryController::class, 'show'])->middleware(['auth', 'verified'])->name('blog.subcategories');
-Route::get('/blog/subcategories/new-subcategory', [BlogCategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('blog.new-subcategory');
-Route::post('/blog/subcategories/new-subcategory/store', [BlogCategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('blog.new-subcategory.store');
-Route::get('/blog/subcategories/subcategory/edit/{id}', [BlogCategoryController::class, 'edit'])->middleware(['auth', 'verified'])->name('blog.subcategory.edit');
-Route::put('/blog/subcategories/subcategory/update/{id}', [BlogCategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('blog.subcategory.update');
-Route::delete('/blog/subcategories/subcategory/destroy/{id}', [BlogCategoryController::class, 'destroy'])->middleware(['auth', 'verified'])->name('blog.subcategory.destroy');
+Route::get('blog/subcategories', [BlogCategoryController::class, 'show'])->middleware(['auth', 'verified'])->name('blog.subcategories');
+Route::get('blog/subcategories/new-subcategory', [BlogCategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('blog.new-subcategory');
+Route::post('blog/subcategories/new-subcategory/store', [BlogCategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('blog.new-subcategory.store');
+Route::get('blog/subcategories/subcategory/edit/{id}', [BlogCategoryController::class, 'edit'])->middleware(['auth', 'verified'])->name('blog.subcategory.edit');
+Route::put('blog/subcategories/subcategory/update/{id}', [BlogCategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('blog.subcategory.update');
+Route::delete('blog/subcategories/subcategory/destroy/{id}', [BlogCategoryController::class, 'destroy'])->middleware(['auth', 'verified'])->name('blog.subcategory.destroy');
 
-Route::get('/blog/sub-subcategories', [BlogCategoryController::class, 'show'])->middleware(['auth', 'verified'])->name('blog.sub-subcategories');
-Route::get('/blog/sub-subcategories/new-subsubcategory', [BlogCategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('blog.new-sub-subcategory');
-Route::post('/blog/sub-subcategories/new-subsubcategory/store', [BlogCategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('blog.new-sub-subcategory.store');
-Route::get('/blog/sub-subcategories/sub-subcategory/edit/{id}', [BlogCategoryController::class, 'edit'])->middleware(['auth', 'verified'])->name('blog.sub-subcategory.edit');
-Route::put('/blog/sub-subcategories/sub-subcategory/update/{id}', [BlogCategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('blog.sub-subcategory.update');
-Route::delete('/blog/sub-subcategories/sub-subcategory/destroy/{id}', [BlogCategoryController::class, 'destroy'])->middleware(['auth', 'verified'])->name('blog.sub-subcategory.destroy');
+Route::get('blog/sub-subcategories', [BlogCategoryController::class, 'show'])->middleware(['auth', 'verified'])->name('blog.sub-subcategories');
+Route::get('blog/sub-subcategories/new-subsubcategory', [BlogCategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('blog.new-sub-subcategory');
+Route::post('blog/sub-subcategories/new-subsubcategory/store', [BlogCategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('blog.new-sub-subcategory.store');
+Route::get('blog/sub-subcategories/sub-subcategory/edit/{id}', [BlogCategoryController::class, 'edit'])->middleware(['auth', 'verified'])->name('blog.sub-subcategory.edit');
+Route::put('blog/sub-subcategories/sub-subcategory/update/{id}', [BlogCategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('blog.sub-subcategory.update');
+Route::delete('blog/sub-subcategories/sub-subcategory/destroy/{id}', [BlogCategoryController::class, 'destroy'])->middleware(['auth', 'verified'])->name('blog.sub-subcategory.destroy');
 
 // Blog -> Tag
-Route::get('/blog/tag', [BlogTagController::class, 'show'])->middleware(['auth', 'verified'])->name('blog.tag');
-Route::get('/blog/new-tag', [BlogTagController::class, 'create'])->middleware(['auth', 'verified'])->name('blog.new-tag');
-Route::post('/blog/new-tag/store', [BlogTagController::class, 'store'])->middleware(['auth', 'verified'])->name('blog.new-tag.store');
-Route::get('/blog/edit-tag/{id}', [BlogTagController::class, 'edit'])->middleware(['auth', 'verified'])->name('blog.tag.edit');
-Route::put('/blog/update-tag/{id}', [BlogTagController::class, 'update'])->middleware(['auth', 'verified'])->name('blog.tag.update');
-Route::delete('/blog/destroy-tag/{id}', [BlogTagController::class, 'destroy'])->middleware(['auth', 'verified'])->name('blog.tag.destroy');
+Route::get('blog/tag', [BlogTagController::class, 'show'])->middleware(['auth', 'verified'])->name('blog.tag');
+Route::get('blog/new-tag', [BlogTagController::class, 'create'])->middleware(['auth', 'verified'])->name('blog.new-tag');
+Route::post('blog/new-tag/store', [BlogTagController::class, 'store'])->middleware(['auth', 'verified'])->name('blog.new-tag.store');
+Route::get('blog/edit-tag/{id}', [BlogTagController::class, 'edit'])->middleware(['auth', 'verified'])->name('blog.tag.edit');
+Route::put('blog/update-tag/{id}', [BlogTagController::class, 'update'])->middleware(['auth', 'verified'])->name('blog.tag.update');
+Route::delete('blog/destroy-tag/{id}', [BlogTagController::class, 'destroy'])->middleware(['auth', 'verified'])->name('blog.tag.destroy');
 
 /*
 |--------------------------------------------------------------------------
@@ -156,65 +181,41 @@ Route::delete('/blog/destroy-tag/{id}', [BlogTagController::class, 'destroy'])->
 */
 
 // Categories
-Route::get('/ecommerce/categories/manage-categories', [EcommerceCategoryController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-categories');
-Route::get('/ecommerce/categories/new-category', [EcommerceCategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-category');
-Route::post('/ecommerce/categories/new-category/store', [EcommerceCategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.new-category.store');
-Route::get('/ecommerce/categories/edit-category/{id}', [EcommerceCategoryController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.category.edit');
-Route::put('/ecommerce/categories/update-category/{id}', [EcommerceCategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.category.update');
-Route::delete('/categories/destroy-category/{id}', [EcommerceCategoryController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.category.destroy');
+Route::get('ecommerce/categories/manage-categories', [EcommerceCategoryController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-categories');
+Route::get('ecommerce/categories/new-category', [EcommerceCategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-category');
+Route::post('ecommerce/categories/new-category/store', [EcommerceCategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.new-category.store');
+Route::get('ecommerce/categories/edit-category/{id}', [EcommerceCategoryController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.category.edit');
+Route::put('ecommerce/categories/update-category/{id}', [EcommerceCategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.category.update');
+Route::delete('categories/destroy-category/{id}', [EcommerceCategoryController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.category.destroy');
 
-Route::get('/ecommerce/categories/manage-subcategories', [EcommerceCategoryController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-subcategories');
-Route::get('/ecommerce/categories/subcategories/new-subcategory', [EcommerceCategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-subcategory');
-Route::post('/ecommerce/categories/subcategories/new-subcategory/store', [EcommerceCategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.new-subcategory.store');
-Route::get('/ecommerce/categories/subcategories/subcategory/edit/{id}', [EcommerceCategoryController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.subcategory.edit');
-Route::put('/ecommerce/categories/subcategories/subcategory/update/{id}', [EcommerceCategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.subcategory.update');
-Route::delete('/ecommerce/categories/subcategories/subcategory/destroy/{id}', [EcommerceCategoryController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.subcategory.destroy');
+Route::get('ecommerce/categories/manage-subcategories', [EcommerceCategoryController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-subcategories');
+Route::get('ecommerce/categories/subcategories/new-subcategory', [EcommerceCategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-subcategory');
+Route::post('ecommerce/categories/subcategories/new-subcategory/store', [EcommerceCategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.new-subcategory.store');
+Route::get('ecommerce/categories/subcategories/subcategory/edit/{id}', [EcommerceCategoryController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.subcategory.edit');
+Route::put('ecommerce/categories/subcategories/subcategory/update/{id}', [EcommerceCategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.subcategory.update');
+Route::delete('ecommerce/categories/subcategories/subcategory/destroy/{id}', [EcommerceCategoryController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.subcategory.destroy');
 
-Route::get('/ecommerce/categories/manage-sub-subcategories', [EcommerceCategoryController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-sub-subcategories');
-Route::get('/ecommerce/categories/sub-subcategories/new-subsubcategory', [EcommerceCategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-sub-subcategory');
-Route::post('/ecommerce/categories/sub-subcategories/new-subsubcategory/store', [EcommerceCategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.new-sub-subcategory.store');
-Route::get('/ecommerce/categories/sub-subcategories/sub-subcategory/edit/{id}', [EcommerceCategoryController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.sub-subcategory.edit');
-Route::put('/ecommerce/categories/sub-subcategories/sub-subcategory/update/{id}', [EcommerceCategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.sub-subcategory.update');
-Route::delete('/ecommerce/categories/sub-subcategories/sub-subcategory/destroy/{id}', [EcommerceCategoryController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.sub-subcategory.destroy');
+Route::get('ecommerce/categories/manage-sub-subcategories', [EcommerceCategoryController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-sub-subcategories');
+Route::get('ecommerce/categories/sub-subcategories/new-subsubcategory', [EcommerceCategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-sub-subcategory');
+Route::post('ecommerce/categories/sub-subcategories/new-subsubcategory/store', [EcommerceCategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.new-sub-subcategory.store');
+Route::get('ecommerce/categories/sub-subcategories/sub-subcategory/edit/{id}', [EcommerceCategoryController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.sub-subcategory.edit');
+Route::put('ecommerce/categories/sub-subcategories/sub-subcategory/update/{id}', [EcommerceCategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.sub-subcategory.update');
+Route::delete('ecommerce/categories/sub-subcategories/sub-subcategory/destroy/{id}', [EcommerceCategoryController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.sub-subcategory.destroy');
 
-// Ecommerce Seller
-Route::get('/ecommerce/manage-sellers', [EcommerceSellerController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-sellers');
-Route::get('/ecommerce/manage-seller/new-seller', [EcommerceSellerController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-seller');
-Route::post('/ecommerce/manage-seller/new-seller/store', [EcommerceSellerController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.new-seller.store');
-Route::get('/ecommerce/manage-seller/edit/{id}', [EcommerceSellerController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.seller.edit');
-Route::put('/ecommerce/manage-seller/update/{id}', [EcommerceSellerController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.seller.update');
-Route::delete('/ecommerce/manage-seller/destroy/{id}', [EcommerceSellerController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.seller.destroy');
+// Seller
+Route::get('ecommerce/seller/manage-seller', [EcommerceSellerController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-seller');
+Route::get('ecommerce/seller/manage-seller/new-seller', [EcommerceSellerController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-seller');
+Route::post('ecommerce/seller/manage-seller/new-seller/store', [EcommerceSellerController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.new-seller.store');
+Route::get('ecommerce/seller/manage-seller/edit/{id}', [EcommerceSellerController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.seller.edit');
+Route::put('ecommerce/seller/manage-seller/update/{id}', [EcommerceSellerController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.seller.update');
+Route::delete('ecommerce/seller/manage-seller/destroy/{id}', [EcommerceSellerController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.seller.destroy');
 
 // Ecommerce
-Route::get('/ecommerce/manage-items', [EcommerceController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-items');
-Route::get('/ecommerce/new-item', [EcommerceController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-item');
-Route::post('/ecommerce/store-item', [EcommerceController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.store-item');
-Route::get('/ecommerce/edit-item/{id}', [EcommerceController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.edit-item');
-Route::put('/ecommerce/update-item/{id}', [EcommerceController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.update-item');
-Route::delete('/ecommerce/destroy-item/{id}', [EcommerceController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.destroy-item');
-
-
-// Streaming Audio
-Route::get('/ecommerce/manage-audios', [EcommerceAudioController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-audios');
-Route::get('/ecommerce/manage-audio/new-audio', [EcommerceAudioController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-audio');
-Route::post('/ecommerce/manage-audio/store-audio', [EcommerceAudioController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.store-audio');
-Route::get('/ecommerce/manage-audio/edit-audio/{id}', [EcommerceAudioController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.edit-audio');
-Route::put('/ecommerce/manage-audio/update-audio/{id}', [EcommerceAudioController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.update-audio');
-Route::delete('/ecommerce/manage-audio/destroy-audio/{id}', [EcommerceAudioController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.destroy-audio');
-
-Route::get('/ecommerce/manage-audio-playlists', [EcommerceAudioController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-audio-playlists');
-Route::get('/ecommerce/manage-audio-playlist/new-audio-playlist', [EcommerceAudioController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-audio-playlist');
-Route::post('/ecommerce/manage-audio-playlist/store-audio-playlist', [EcommerceAudioController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.store-audio-playlist');
-Route::get('/ecommerce/manage-audio-playlist/edit-audio-playlist/{id}', [EcommerceAudioController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.edit-audio-playlist');
-Route::put('/ecommerce/manage-audio-playlist/update-audio-playlist/{id}', [EcommerceAudioController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.update-audio-playlist');
-Route::delete('/ecommerce/manage-audio-playlist/destroy-audio-playlist/{id}', [EcommerceAudioController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.destroy-audio-playlist');
-
-// Subscription
-Route::get('/ecommerce/manage-subscriptions', [EcommerceSubscriptionController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-subscriptions');
-Route::get('/ecommerce/manage-subscriptions/new-subscription', [EcommerceSubscriptionController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-subscription');
-Route::post('/ecommerce/manage-subscriptions/store-subscription', [EcommerceSubscriptionController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.store-subscription');
-Route::get('/ecommerce/manage-subscriptions/edit-subscription/{id}', [EcommerceSubscriptionController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.edit-subscription');
-Route::put('/ecommerce/manage-subscriptions/update-subscription/{id}', [EcommerceSubscriptionController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.update-subscription');
-Route::delete('/ecommerce/manage-subscriptions/destroy-subscription/{id}', [EcommerceSubscriptionController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.destroy-subscription');
+Route::get('ecommerce/manage-item', [EcommerceController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-item');
+Route::get('ecommerce/new-item', [EcommerceController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-item');
+Route::post('ecommerce/store-item', [EcommerceController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.store-item');
+Route::get('ecommerce/edit-item/{id}', [EcommerceController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.edit-item');
+Route::put('ecommerce/update-item/{id}', [EcommerceController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.update-item');
+Route::delete('ecommerce/destroy-item/{id}', [EcommerceController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.destroy-item');
 
 require __DIR__.'/auth.php';

@@ -31,7 +31,7 @@ class EcommerceSellerController extends Controller
      */
     public function create()
     {
-        return view('administration.ecommerce.seller.new-seller');
+        return view('backend.ecommerce.seller.new-seller');
     }
 
     /**
@@ -88,7 +88,7 @@ class EcommerceSellerController extends Controller
 
         Session::flash('message', __('New Seller Successfully Added!'));
         
-        return redirect(RouteServiceProvider::EcommerceSeller);
+        return redirect(RouteServiceProvider::Seller);
     }
 
     /**
@@ -98,7 +98,7 @@ class EcommerceSellerController extends Controller
     {
         $sellers = EcommerceSeller::all();
 
-        return view('administration.ecommerce.seller.manage-sellers', ['sellers' => $sellers]);
+        return view('backend.ecommerce.seller.manage-sellers', ['sellers' => $sellers]);
     }
 
     /**
@@ -118,7 +118,7 @@ class EcommerceSellerController extends Controller
     {
         $seller = EcommerceSeller::findOrFail($id);
 
-        return view('administration.ecommerce.seller.edit-seller', ['seller' => $seller]);
+        return view('backend.ecommerce.seller.edit-seller', ['seller' => $seller]);
     }
 
     /**

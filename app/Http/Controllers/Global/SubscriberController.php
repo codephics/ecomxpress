@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Ecommerce;
+namespace App\Http\Controllers\Global;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Ecommerce\EcommerceSubscription;
+use App\Models\Global\Subscriber;
 
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Session;
 
-class EcommerceSubscriptionController extends Controller
+class SubscriberController extends Controller
 {
     public function index()
     {
@@ -39,7 +39,7 @@ class EcommerceSubscriptionController extends Controller
             }
 
             // Create a new subscription
-            $subscription = EcommerceSubscription::create([
+            $subscription = Subscriber::create([
                 'email' => $request->email,
             ]);
 
@@ -74,11 +74,11 @@ class EcommerceSubscriptionController extends Controller
 
             if (!$request->has('email')) {
                 // The email input is null, do not show required message
-                return redirect(RouteServiceProvider::EcommerceSubscription);
+                return redirect(RouteServiceProvider::Subscriber);
             }
 
             // Create a new subscription
-            $subscription = EcommerceSubscription::create([
+            $subscription = Subscriber::create([
                 'email' => $request->email,
             ]);
 
@@ -87,37 +87,37 @@ class EcommerceSubscriptionController extends Controller
             // Send a confirmation email to the subscriber (optional)
 
             // Redirect back with a success message
-            return redirect(RouteServiceProvider::EcommerceSubscription)->with('success', 'You have been subscribed!');
+            return redirect(RouteServiceProvider::Subscriber)->with('success', 'You have been subscribed!');
         } catch (ValidationException $e) {
             // Handle the case when the email is already taken
             if ($e->errorBag['email'][0] == 'The email has already been taken.') {
-                return redirect(RouteServiceProvider::EcommerceSubscription);
+                return redirect(RouteServiceProvider::Subscriber);
             }
             // Handle other validation exceptions if needed
-            return redirect(RouteServiceProvider::EcommerceSubscription)->withErrors($e->errors())->withInput();
+            return redirect(RouteServiceProvider::Subscriber)->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
             // Handle other exceptions if needed
-            return redirect(RouteServiceProvider::EcommerceSubscription)->with('error', 'An error occurred. Please try again.');
+            return redirect(RouteServiceProvider::Subscriber)->with('error', 'An error occurred. Please try again.');
         }
     }
 
     public function show(Request $request)
     {            
-        $subscriptions = EcommerceSubscription::all();
+        $subscriptions = Subscriber::all();
         
         return view('administration.ecommerce.subscription.manage-subscriptions', ['subscriptions' => $subscriptions]);
     }
 
     public function edit($id)
     {
-        $subscription = EcommerceSubscription::findOrFail($id);
+        $subscription = Subscriber::findOrFail($id);
         
         return view('administration.ecommerce.subscription.edit-subscription', ['subscription' => $subscription]);
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
-        $subscription = EcommerceSubscription::find($id);
+        $subscription = Subscriber::find($id);
 
         if ($subscription) {
 
@@ -134,12 +134,12 @@ class EcommerceSubscriptionController extends Controller
 
         Session::flash('update', __('Congratulations! The subscription update operation has been executed successfully.'));
         
-        return redirect(RouteServiceProvider::EcommerceSubscription);
+        return redirect(RouteServiceProvider::Subscriber);
     }
 
     public function destroy(Request $request, $id)
     {
-        EcommerceSubscription::where('id',$id)->delete();
+        Subscriber::where('id',$id)->delete();
 
         Session::flash('delete', __('Congratulations! The contact deletion operation has been successfully executed.'));
         
