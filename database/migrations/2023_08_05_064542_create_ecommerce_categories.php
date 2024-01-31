@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('ecommerce_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('category_name', 199);
-            $table->string('slug', 199);
+            $table->string('category_name', 255);
+            $table->string('slug', 255);
             $table->text('title')->nullable();
             $table->text('description')->nullable();
-            $table->text('meta_title', 70)->nullable();
-            $table->text('meta_description', 170)->nullable();
-            $table->text('facebook_meta_title', 70)->nullable();
-            $table->text('facebook_meta_description', 170)->nullable();
-            $table->text('twitter_meta_title', 70)->nullable();
-            $table->text('twitter_meta_description', 170)->nullable();
+            $table->string('meta_title', 255)->nullable();
+            $table->string('meta_description', 255)->nullable();
+            $table->string('facebook_meta_title', 255)->nullable();
+            $table->string('facebook_meta_description', 255)->nullable();
+            $table->string('twitter_meta_title', 255)->nullable();
+            $table->string('twitter_meta_description', 255)->nullable();
             $table->string('icon', 255)->default('default-icon.png');
             $table->string('icon_alt_text', 255)->nullable();
             $table->string('thumb', 255)->default('default-icon.png');
@@ -31,6 +31,11 @@ return new class extends Migration
             $table->string('cover_alt_text', 255)->nullable();
             $table->string('og_image', 255)->default('default-icon.png');
             $table->string('og_img_alt_text', 255)->nullable();
+            $table->tinyInteger('is_index')->default(0)->nullable();
+            $table->tinyInteger('is_follow')->default(0)->nullable();
+            $table->tinyInteger('is_featured')->default(0)->nullable();
+            $table->tinyInteger('status')->default(0)->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

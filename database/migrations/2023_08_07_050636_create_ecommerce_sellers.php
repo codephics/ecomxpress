@@ -13,21 +13,35 @@ return new class extends Migration
     {
         Schema::create('ecommerce_sellers', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 199);
-            $table->string('slug', 199);
-            $table->string('gender', 100);
-            $table->string('bio', 199)->nullable();
-            $table->string('mobile', 100)->nullable();
-            $table->string('email', 100)->nullable();
-            $table->string('address', 199)->nullable();
-            $table->string('description', 199)->nullable();
-            $table->string('youtube_iframe', 199)->nullable();
-            $table->string('meta_title', 199)->nullable();
-            $table->string('meta_description', 199)->nullable();
-            $table->string('image', 255)->default('default-image.png');
-            $table->string('og_image', 255)->default('default-og-image.png');
+            $table->string('name', 255);
+            $table->string('slug', 255);
+            $table->string('gender', 255);
+            $table->string('bio', 255)->nullable();
+            $table->string('mobile', 255)->nullable();
+            $table->string('email', 255)->nullable();
+            $table->string('address', 255)->nullable();
+            $table->text('description')->nullable();
+            $table->text('youtube_iframe')->nullable();
+            $table->text('header_content')->nullable();
+            $table->string('meta_title', 255)->nullable();
+            $table->string('meta_description', 255)->nullable();
+            $table->string('facebook_meta_title', 255)->nullable();
+            $table->string('facebook_meta_description', 255)->nullable();
+            $table->string('twitter_meta_title', 255)->nullable();
+            $table->string('twitter_meta_description', 255)->nullable();
+            $table->string('icon', 255)->default('default-icon.png');
+            $table->string('icon_alt_text', 255)->nullable();
+            $table->string('thumb', 255)->default('default-thumb.png');
+            $table->string('thumb_alt_text', 255)->nullable();
             $table->string('cover', 255)->default('default-cover.png');
+            $table->string('cover_alt_text', 255)->nullable();
+            $table->string('og_image', 255)->default('default-icon.png');
+            $table->string('og_img_alt_text', 255)->nullable();
+            $table->tinyInteger('is_index')->default(0)->nullable();
+            $table->tinyInteger('is_follow')->default(0)->nullable();
+            $table->tinyInteger('is_featured')->default(0)->nullable();
             $table->tinyInteger('status')->default(0)->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

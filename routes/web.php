@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Ecommerce
-use App\Http\Controllers\Ecommerce\EcommerceController;
+use App\Http\Controllers\Ecommerce\EcommerceItemsController;
 use App\Http\Controllers\Ecommerce\EcommerceSellerController;
 use App\Http\Controllers\Ecommerce\EcommerceSiteController;
 use App\Http\Controllers\Ecommerce\EcommerceCategoryController;
@@ -68,14 +68,14 @@ Route::get('detail/{slug}', [PageController::class, 'detail'])->name('blog.detai
 */
 
 // Ecommerce
-// Route::match(['head', 'get'], '/', [EcommerceController::class, 'index'])->name('ecommerce.home');
-Route::get('items', [EcommerceController::class, 'index'])->name('item.store');
-Route::get('item/detail/{slug}', [EcommerceController::class, 'detail'])->name('item.detail');
+// Route::match(['head', 'get'], '/', [EcommerceItemsController::class, 'index'])->name('ecommerce.home');
+Route::get('items', [EcommerceItemsController::class, 'index'])->name('item.store');
+Route::get('item/detail/{slug}', [EcommerceItemsController::class, 'detail'])->name('item.detail');
 
 // Ecommerce -> Category
-Route::get('item/{category:slug}', [EcommerceController::class, 'showByCategory'])->name('category.show');
-Route::get('item/{category:slug}/{subcategory:slug}', [EcommerceController::class, 'showBySubcategory'])->name('subcategory.show');
-Route::get('item/{category:slug}/{subcategory:slug}/{subSubcategory:slug}', [EcommerceController::class, 'showBySubSubcategory'])->name('subSubcategory.show');
+Route::get('item/{category:slug}', [EcommerceItemsController::class, 'showByCategory'])->name('category.show');
+Route::get('item/{category:slug}/{subcategory:slug}', [EcommerceItemsController::class, 'showBySubcategory'])->name('subcategory.show');
+Route::get('item/{category:slug}/{subcategory:slug}/{subSubcategory:slug}', [EcommerceItemsController::class, 'showBySubSubcategory'])->name('subSubcategory.show');
 
 // Ecommerce -> Subscription
 Route::post('new-subscriber', [SubscriberController::class, 'subscriber'])->name('ecommerce.new-subscriber');
@@ -211,11 +211,11 @@ Route::put('ecommerce/seller/manage-seller/update/{id}', [EcommerceSellerControl
 Route::delete('ecommerce/seller/manage-seller/destroy/{id}', [EcommerceSellerController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.seller.destroy');
 
 // Ecommerce
-Route::get('ecommerce/manage-item', [EcommerceController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-item');
-Route::get('ecommerce/new-item', [EcommerceController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-item');
-Route::post('ecommerce/store-item', [EcommerceController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.store-item');
-Route::get('ecommerce/edit-item/{id}', [EcommerceController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.edit-item');
-Route::put('ecommerce/update-item/{id}', [EcommerceController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.update-item');
-Route::delete('ecommerce/destroy-item/{id}', [EcommerceController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.destroy-item');
+Route::get('ecommerce/manage-item', [EcommerceItemsController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-item');
+Route::get('ecommerce/new-item', [EcommerceItemsController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-item');
+Route::post('ecommerce/store-item', [EcommerceItemsController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.item.store');
+Route::get('ecommerce/edit-item/{id}', [EcommerceItemsController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.item.edit');
+Route::put('ecommerce/update-item/{id}', [EcommerceItemsController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.item.update');
+Route::delete('ecommerce/destroy-item/{id}', [EcommerceItemsController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.item.destroy');
 
 require __DIR__.'/auth.php';

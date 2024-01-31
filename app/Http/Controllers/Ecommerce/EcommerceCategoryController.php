@@ -21,7 +21,7 @@ class EcommerceCategoryController extends Controller
     public function index()
     {
         //
-        return view('administration.ecommerce.categories.manage-category');
+        return view('backend.ecommerce.categories.manage-category');
     }
 
     /**
@@ -31,23 +31,23 @@ class EcommerceCategoryController extends Controller
     {
         if ($request->routeIs('ecommerce.new-category')) {
             
-            return view('administration.ecommerce.categories.new-category');
+            return view('backend.ecommerce.categories.new-category');
 
         } elseif ($request->routeIs('ecommerce.new-subcategory')) {
         
             $categories = EcommerceCategory::select('category_name')->get();
             
-            return view('administration.ecommerce.categories.new-subcategory', ['categories' => $categories]);
+            return view('backend.ecommerce.categories.new-subcategory', ['categories' => $categories]);
 
         } elseif ($request->routeIs('ecommerce.new-sub-subcategory')) {
         
             $subcategories = EcommerceSubcategory::select('subcategory_name')->get();
             
-            return view('administration.ecommerce.categories.new-sub-subcategory', ['subcategories' => $subcategories]);
+            return view('backend.ecommerce.categories.new-sub-subcategory', ['subcategories' => $subcategories]);
         }
         
         // Default view if none of the routes match
-        return view('administration.ecommerce.dashboard');
+        return view('backend.ecommerce.dashboard');
     }
 
     /**
@@ -228,7 +228,7 @@ class EcommerceCategoryController extends Controller
         }
         
         // Default view if none of the routes match
-        return view('administration.ecommerce.dashboard');
+        return view('backend.ecommerce.dashboard');
     }
 
     /**
@@ -240,24 +240,24 @@ class EcommerceCategoryController extends Controller
             
             $categories = EcommerceCategory::all();
             
-            return view('administration.ecommerce.categories.manage-categories', ['categories' => $categories]);
+            return view('backend.ecommerce.categories.manage-categories', ['categories' => $categories]);
 
         } elseif ($request->routeIs('ecommerce.manage-subcategories')) {
             
             $subcategories = EcommerceSubcategory::all();
             
-            return view('administration.ecommerce.categories.manage-subcategories', ['subcategories' => $subcategories]);
+            return view('backend.ecommerce.categories.manage-subcategories', ['subcategories' => $subcategories]);
 
         } elseif ($request->routeIs('ecommerce.manage-sub-subcategories')) {
         
             $sub_subcategories = EcommerceSubSubcategory::all();
             
-            return view('administration.ecommerce.categories.manage-sub-subcategories', ['sub_subcategories' => $sub_subcategories]);
+            return view('backend.ecommerce.categories.manage-sub-subcategories', ['sub_subcategories' => $sub_subcategories]);
 
         }
         
         // Default view if none of the routes match
-        return view('administration.ecommerce.dashboard');
+        return view('backend.ecommerce.dashboard');
     }
 
     /**
@@ -269,7 +269,7 @@ class EcommerceCategoryController extends Controller
 
             $category = EcommerceCategory::findOrFail($id);
             
-            return view('administration.ecommerce.categories.edit-category', ['category' => $category]);
+            return view('backend.ecommerce.categories.edit-category', ['category' => $category]);
 
         } elseif ($request->routeIs('ecommerce.subcategory.edit')) {
 
@@ -277,7 +277,7 @@ class EcommerceCategoryController extends Controller
 
             $subcategory = EcommerceSubcategory::findOrFail($id);
             
-            return view('administration.ecommerce.categories.edit-subcategory', ['categories' => $categories, 'subcategory' => $subcategory]);
+            return view('backend.ecommerce.categories.edit-subcategory', ['categories' => $categories, 'subcategory' => $subcategory]);
 
         } elseif ($request->routeIs('ecommerce.sub-subcategory.edit')) {
 
@@ -285,12 +285,12 @@ class EcommerceCategoryController extends Controller
 
             $sub_subcategory = EcommerceSubSubcategory::findOrFail($id);
             
-            return view('administration.ecommerce.categories.edit-sub-subcategory', ['subcategories' => $subcategories, 'sub_subcategory' => $sub_subcategory]);
+            return view('backend.ecommerce.categories.edit-sub-subcategory', ['subcategories' => $subcategories, 'sub_subcategory' => $sub_subcategory]);
 
         }
         
         // Default view if none of the routes match
-        return view('administration.ecommerce.dashboard');
+        return view('backend.ecommerce.dashboard');
     }
 
     /**
@@ -536,7 +536,7 @@ class EcommerceCategoryController extends Controller
         }
         
         // Default view if none of the routes match
-        return view('administration.ecommerce.dashboard');
+        return view('backend.ecommerce.dashboard');
     }
 
     /**
@@ -570,6 +570,6 @@ class EcommerceCategoryController extends Controller
         }
         
         // Default view if none of the routes match
-        return view('administration.ecommerce.dashboard');
+        return view('backend.ecommerce.dashboard');
     }
 }

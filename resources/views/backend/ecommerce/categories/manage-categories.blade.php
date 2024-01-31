@@ -17,7 +17,7 @@
         <div class="col-12">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('template.dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Manage Categories</li>
                 </ol>
             </nav>
@@ -32,7 +32,7 @@
         <div class="col-lg-2 align-self-center">
             <div class="row">
                 <div class="col-12 col-sm-12">
-                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('template.new-category') }}">+ Add Category</a>
+                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('ecommerce.new-category') }}">+ Add Category</a>
                 </div>
             </div>
         </div>
@@ -63,12 +63,12 @@
                 <tbody>
                     @foreach ($categories as $category)
                     <tr>
-                        <td><img src="{{ asset('template/image/category/icon/' . $category->icon) }}" class="" alt="..." height="42" width="42" /></td>
+                        <td><img src="{{ asset('ecommerce/image/category/icon/' . $category->icon) }}" class="" alt="..." height="42" width="42" /></td>
                         <td>{{ $category->category_name }}</td>
                         <td>{{ $category->slug }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                              <a href="{{ route('template.category.edit',$category->id) }}" class="btn btn-secondary">Edit</a>
+                              <a href="{{ route('ecommerce.category.edit',$category->id) }}" class="btn btn-secondary">Edit</a>
 
                               <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#deleteCategories{{ $category->id }}">Destroy</button>
 
@@ -83,7 +83,7 @@
                                       <div class="modal-body">
                                         <p>Do you really want to delete. This process cannot be undone.</p>
                                       </div>
-                                      <form method="POST" action="{{ route('template.category.destroy',$category->id) }}">
+                                      <form method="POST" action="{{ route('ecommerce.category.destroy',$category->id) }}">
                                         @csrf
                                         @method('DELETE')
                                       <div class="modal-footer">

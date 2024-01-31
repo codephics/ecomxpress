@@ -5,7 +5,7 @@ namespace App\Models\Ecommerce;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ecommerce extends Model
+class EcommerceItem extends Model
 {
     use HasFactory;
 
@@ -24,10 +24,6 @@ class Ecommerce extends Model
         'sale_price',
         'regular_price',
         'commission',
-        'bootstrap_v',
-        'released',
-        'updated',
-        'version',
         'seller_name',
         'seller_email',
         'short_description',
@@ -37,16 +33,19 @@ class Ecommerce extends Model
         'header_content',
         'meta_title',
         'meta_description',
-        'img_alt_text',
-        'og_img_alt_text',
-        'is_index',
-        'is_follow',
+        'facebook_meta_title',
+        'facebook_meta_description',
+        'twitter_meta_title',
+        'twitter_meta_description',
         'order_type',
         'is_featured',
         'live_preview_link',
-        'downloadable_link',
         'image',
-        'og',
+        'img_alt_text',
+        'og_image',
+        'og_img_alt_text',
+        'is_index',
+        'is_follow',
         'file',
         'status',
         'comment',

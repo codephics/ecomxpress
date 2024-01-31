@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Ecommerce\Ecommerce;
 use App\Models\Ecommerce\EcommerceSeller;
 use App\Models\Ecommerce\EcommerceCategory;
 use App\Models\Ecommerce\EcommerceSubcategory;

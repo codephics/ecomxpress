@@ -9,8 +9,8 @@
         <div class="col-12">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('template.dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('template.manage-categories') }}">Manage Categories</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('ecommerce.manage-categories') }}">Manage Categories</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Add Category</li>
                 </ol>
             </nav>
@@ -34,7 +34,7 @@
     </div>
     @endif
 
-    <form class="needs-validation" method="POST" action="{{ route('template.new-category.store') }}" enctype="multipart/form-data" novalidate>
+    <form class="needs-validation" method="POST" action="{{ route('ecommerce.new-category.store') }}" enctype="multipart/form-data" novalidate>
         @csrf
         <div class="row">
             <div class="col-sm-9">

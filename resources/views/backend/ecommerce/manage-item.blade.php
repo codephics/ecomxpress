@@ -17,8 +17,8 @@
         <div class="col-12">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('template.dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Manage Templates</li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Manage Item</li>
                 </ol>
             </nav>
         </div>
@@ -27,12 +27,12 @@
 
     <div class="row">
         <div class="col-md-10">
-            <h1>Manage Templates</h1>
+            <h1>Manage Item</h1>
         </div>
         <div class="col-lg-2 align-self-center">
             <div class="row">
                 <div class="col-12 col-sm-12">
-                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('template.new-template') }}">+ Add Template</a>
+                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('ecommerce.new-item') }}">+ Add Item</a>
                 </div>
             </div>
         </div>
@@ -64,22 +64,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($templates as $template)
+                    @foreach ($items as $item)
                     <tr>
-                        <td><img src="{{ asset('template/image/' . $template->image) }}" class="" alt="..." height="42" width="42" /></td>
-                        <td>{{ $template->name }}</td>
-                        <td>{{ $template->sub_subcategory_name ?: ($template->subcategory_name ?: $template->category_name) }}</td>
-                        <td>{{ $template->seller_name }}</td>
-                        <td>@if($template->is_featured == 1) Yes @else No @endif</td>
-                        <td>@if($template->status == 1) Published @else Draft @endif</td>
+                        <td><img src="{{ asset('template/image/' . $item->image) }}" class="" alt="..." height="42" width="42" /></td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->sub_subcategory_name ?: ($item->subcategory_name ?: $item->category_name) }}</td>
+                        <td>{{ $item->seller_name }}</td>
+                        <td>@if($item->is_featured == 1) Yes @else No @endif</td>
+                        <td>@if($item->status == 1) Published @else Draft @endif</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                              <a href="{{ route('template.edit',$template->id) }}" class="btn btn-secondary">Edit</a>
+                              <a href="{{ route('template.edit',$item->id) }}" class="btn btn-secondary">Edit</a>
 
-                              <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#deleteTemplate{{ $template->id }}">Destroy</button>
+                              <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#deleteTemplate{{ $item->id }}">Destroy</button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="deleteTemplate{{ $template->id }}" tabindex="-1" aria-labelledby="deleteTemplateLabel" aria-hidden="true">
+                                <div class="modal fade" id="deleteTemplate{{ $item->id }}" tabindex="-1" aria-labelledby="deleteTemplateLabel" aria-hidden="true">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
                                       <div class="modal-header">
@@ -89,7 +89,7 @@
                                       <div class="modal-body">
                                         <p>Do you really want to delete. This process cannot be undone.</p>
                                       </div>
-                                      <form method="POST" action="{{ route('template.destroy-template',$template->id) }}">
+                                      <form method="POST" action="{{ route('template.destroy-template',$item->id) }}">
                                         @csrf
                                         @method('DELETE')
                                       <div class="modal-footer">

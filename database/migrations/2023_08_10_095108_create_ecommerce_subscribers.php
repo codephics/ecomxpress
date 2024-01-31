@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ecommerce_subscriptions', function (Blueprint $table) {
+        Schema::create('ecommerce_subscribers', function (Blueprint $table) {
             $table->id();
             $table->string('email', 255)->unique();
             $table->timestamps();
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ecommerce_subscriptions');
+        Schema::dropIfExists('ecommerce_subscribers');
     }
 };

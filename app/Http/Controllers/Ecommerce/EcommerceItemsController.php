@@ -8,7 +8,7 @@ use App\Models\Global\Page;
 use App\Models\Global\Blog;
 use App\Models\Global\Seller;
 
-use App\Models\Ecommerce\Ecommerce;
+use App\Models\Ecommerce\EcommerceItem;
 use App\Models\Ecommerce\EcommerceCategory;
 use App\Models\Ecommerce\EcommerceSubcategory;
 use App\Models\Ecommerce\EcommerceSubSubcategory;
@@ -21,7 +21,7 @@ use Illuminate\Support\Str;
 
 use Session;
 
-class EcommerceController extends Controller
+class EcommerceItemsController extends Controller
 {
     public function index()
     {
@@ -32,7 +32,7 @@ class EcommerceController extends Controller
         $subcategories = EcommerceSubcategory::all();
         $sub_subcategories = EcommerceSubSubcategory::all();
 
-        $items = Ecommerce::take(60)->get();
+        $items = EcommerceItem::take(60)->get();
 
         return view('frontend.ecommerce.ecommerce-store', [
             'page' => $page,
@@ -46,8 +46,8 @@ class EcommerceController extends Controller
 
     public function detail($slug)
     {
-        $page = Ecommerce::where('slug', $slug)->firstOrFail();
-        $relatedItems = Ecommerce::take(4)->get();
+        $page = EcommerceItem::where('slug', $slug)->firstOrFail();
+        $relatedItems = EcommerceItem::take(4)->get();
         $relatedBlog = EcommerceBlog::take(4)->get();
 
         return view('frontend.ecommerce.item-detail', [
@@ -107,7 +107,7 @@ class EcommerceController extends Controller
         $sub_subcategories = EcommerceSubSubcategory::all();
 
         // Retrieve ecommerces with related category
-        $item = Ecommerce::with('category')
+        $item = EcommerceItem::with('category')
             ->whereHas('category', function ($query) {
                 $query->where('slug', request()->segment(4)); // Assuming the slug is the second URL segment
             })
@@ -133,7 +133,7 @@ class EcommerceController extends Controller
         $subcategories = EcommerceSubcategory::all();
         $sub_subcategories = EcommerceSubSubcategory::all();
 
-        $item = Ecommerce::with(['category', 'subcategory'])
+        $item = EcommerceItem::with(['category', 'subcategory'])
             ->where('category_name', $category->category_name)
             ->where('subcategory_name', $subcategory->subcategory_name)
             ->take(60)
@@ -158,7 +158,7 @@ class EcommerceController extends Controller
         $subcategories = EcommerceSubcategory::all();
         $sub_subcategories = EcommerceSubSubcategory::all();
 
-        $item = Ecommerce::with(['category', 'subcategory', 'subSubcategory'])
+        $item = EcommerceItem::with(['category', 'subcategory', 'subSubcategory'])
             ->where('category_name', $category->category_name)
             ->where('subcategory_name', $subcategory->subcategory_name)
             ->where('sub_subcategory_name', $subSubcategory->sub_subcategory_name)
@@ -181,7 +181,7 @@ class EcommerceController extends Controller
         $subcategories = EcommerceSubcategory::all();
         $sub_subcategories = EcommerceSubSubcategory::all();
 
-        return view('administration.ecommerce.new-ecommerce', ['categories' => $categories, 'subcategories' => $subcategories, 'sub_subcategories' => $sub_subcategories]);
+        return view('backend.ecommerce.new-item', ['categories' => $categories, 'subcategories' => $subcategories, 'sub_subcategories' => $sub_subcategories]);
     }
 
     public function store(Request $request): RedirectResponse
@@ -196,7 +196,7 @@ class EcommerceController extends Controller
 
         // dd($request);
 
-        $item = Ecommerce::create([
+        $item = EcommerceItem::create([
             'name' => $request->name,
             'slug' => $request->slug,
             'category_name' => $request->category_name,
@@ -267,26 +267,26 @@ class EcommerceController extends Controller
 
     public function show(Request $itemDetail)
     {
-        $item = Ecommerce::all();
+        $items = EcommerceItem::all();
 
-        return view('administration.ecommerce.manage-ecommerces', ['item' => $item]);
+        return view('backend.ecommerce.manage-item', ['items' => $items]);
     }
 
     public function edit($id)
     {
-        $items = Ecommerce::findOrFail($id);     
+        $items = EcommerceItem::findOrFail($id);     
         $categories = EcommerceCategory::all();
         $subcategories = EcommerceSubcategory::all();
         $sub_subcategories = EcommerceSubSubcategory::all();
 
-        return view('administration.ecommerce.edit-ecommerce', ['items' => $items, 'categories' => $categories,'subcategories' => $subcategories, 'sub_subcategories' => $sub_subcategories]);
+        return view('backend.ecommerce.edit-ecommerce', ['items' => $items, 'categories' => $categories,'subcategories' => $subcategories, 'sub_subcategories' => $sub_subcategories]);
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
         // dd($request);
         // Retrieve the existing record from the database
-        $item = Ecommerce::find($id);
+        $item = EcommerceItem::find($id);
 
         // Make sure the record exists
         if ($item) {
@@ -401,7 +401,7 @@ class EcommerceController extends Controller
      */
     public function destroy($id)
     {
-        Ecommerce::where('id',$id)->delete();
+        EcommerceItem::where('id',$id)->delete();
 
         Session::flash('delete', __('Item Successfully Deleted!'));
         
