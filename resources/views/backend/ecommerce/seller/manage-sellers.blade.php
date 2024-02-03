@@ -18,7 +18,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Manage Seller's</li>
+                    <li class="breadcrumb-item active" aria-current="page">Manage Seller</li>
                 </ol>
             </nav>
         </div>
@@ -27,7 +27,7 @@
 
     <div class="row">
         <div class="col-md-10">
-            <h1>Manage Seller's</h1>
+            <h1>Manage Seller</h1>
         </div>
         <div class="col-lg-2 align-self-center">
             <div class="row">

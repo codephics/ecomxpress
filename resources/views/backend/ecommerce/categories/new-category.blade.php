@@ -41,7 +41,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label for="category_name" class="form-label">Category Name *</label>
+                            <label for="category_name" class="form-label">Category Name</label>
                             <input type="text" class="form-control" name="category_name" id="category_name" placeholder="Name" required />
                             <div class="valid-feedback">
                                 Looks good!
@@ -50,7 +50,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label for="slug" class="form-label">Category Slug *</label>
+                            <label for="slug" class="form-label">Category Slug</label>
                             <input type="text" class="form-control" name="slug" id="slug" placeholder="Slug" required />
                         </div>
                     </div>
@@ -71,6 +71,60 @@
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
                             <textarea class="form-control" id="custom-textarea" name="description" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border border-secondery border-2 opacity-75">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="icon" class="form-label">Icon</label>
+                            <input class="form-control" type="file" name="icon" />
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="icon_alt_text" placeholder="Icon Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="thumb" class="form-label">Thumb</label>
+                            <input class="form-control" type="file" name="thumb" />
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="thumb_alt_text" placeholder="Thumb Alt Text" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="cover" class="form-label">Cover</label>
+                            <input class="form-control" type="file" name="cover" />
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="cover_alt_text" placeholder="Cover Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="og_image" class="form-label">Upload OG</label>
+                            <input class="form-control" type="file" name="og_image" multiple />
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="og_img_alt_text" placeholder="OG Alt Text" />
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border border-secondery border-2 opacity-75">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="youtube_iframe" class="form-label">Youtube Iframe</label>
+                            <textarea class="form-control" name="youtube_iframe" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="header_content" class="form-label">Header Content</label>
+                            <textarea class="form-control" name="header_content" rows="3"></textarea>
                         </div>
                     </div>
                 </div>
@@ -121,38 +175,37 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="mb-3">
-                            <label for="icon" class="form-label">Category Icon *</label>
-                            <input class="form-control" type="file" name="icon" id="icon" />
+                            <label class="form-label" for="content">Content?</label>
                         </div>
                         <div class="mb-3">
-                            <input class="form-control" type="text" name="icon_alt_text" placeholder="Alt Text" />
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="mb-3">
-                            <label for="thumb" class="form-label">Category Thumb *</label>
-                            <input class="form-control" type="file" name="thumb" id="thumb" />
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="thumb_alt_text" placeholder="Alt Text" />
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="mb-3">
-                            <label for="cover" class="form-label">Category Cover *</label>
-                            <input class="form-control" type="file" name="cover" id="cover" />
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="is_index" value="1" id="featuredCheckDefault" />
+                                <label class="form-check-label" for="featuredCheckDefault">Index?</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="is_follow" value="1" id="featuredCheckDefault" />
+                                <label class="form-check-label" for="featuredCheckDefault">Follow?</label>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <input class="form-control" type="text" name="cover_alt_text" placeholder="Alt Text" />
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="is_featured" value="1" id="featuredCheckDefault" />
+                                <label class="form-check-label" for="featuredCheckDefault">
+                                    Featured?
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="mb-3">
-                            <label for="og_image" class="form-label">Category OG</label>
-                            <input class="form-control" type="file" name="og_image" id="og_image" />
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupStatus">Status</label>
+                            <select class="form-select" id="inputGroupStatus" name="status">
+                                <option value="0">Choose...</option>
+                                <option value="1">Publish</option>
+                                <option value="0">Draft</option>
+                            </select>
                         </div>
                         <div class="mb-3">
-                            <input class="form-control" type="text" name="og_img_alt_text" placeholder="Alt Text" />
+                            <label for="comment" class="form-label">Comment</label>
+                            <textarea class="form-control" id="custom-textarea" name="comment" rows="3"></textarea>
                         </div>
                     </div>
                 </div>
@@ -161,8 +214,6 @@
         <div class="row">
             <div class="col-sm-12">
                 <button type="submit" class="btn btn-primary">Publish</button>
-                <button type="submit" class="btn btn-primary">Draft</button>
-                <button type="submit" class="btn btn-secondary">Publish & Add Another</button>
             </div>
         </div>
     </form>

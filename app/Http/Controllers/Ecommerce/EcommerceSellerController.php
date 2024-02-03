@@ -16,63 +16,57 @@ use Session;
 
 class EcommerceSellerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
         return back();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('backend.ecommerce.seller.new-seller');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request): RedirectResponse
     {
-        // $request->validate([
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'slug' => ['required', 'regex:/^[a-z]+$/'],
-        // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ], [
-        //     'slug.regex' => 'The :attribute field must contain only lowercase letters.'
-        // ]);
-
         $seller = EcommerceSeller::create([
             'name' => $request->name,
             'slug' => $request->slug,
             'gender' => $request->gender,
-            'bio' => $request->bio,
             'mobile' => $request->mobile,
             'email' => $request->email,
+            'bio' => $request->bio,
             'address' => $request->address,
-            'description' => $request->description,
             'youtube_iframe' => $request->youtube_iframe,
+            'header_content' => $request->header_content,
             'meta_title' => $request->meta_title,
             'meta_description' => $request->meta_description,
+            'facebook_meta_title' => $request->facebook_meta_title,
+            'facebook_meta_description' => $request->facebook_meta_description,
+            'twitter_meta_title' => $request->twitter_meta_title,
+            'twitter_meta_description' => $request->twitter_meta_description,
+            'icon_alt_text' => $request->icon_alt_text,
+            'thumb_alt_text' => $request->thumb_alt_text,
+            'cover_alt_text' => $request->cover_alt_text,
+            'og_img_alt_text' => $request->og_img_alt_text,
+            'is_index' => $request->is_index,
+            'is_follow' => $request->is_follow,
+            'is_featured' => $request->is_featured,
             'status' => $request->status,
+            'comment' => $request->comment,
         ]);
 
         $seller->save();
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path('ecommerce/seller/image'), $image);
-            $seller->image = $image;
+        if ($request->hasFile('icon')) {
+            $icon = $request->file('icon')->getClientOriginalName();
+            $request->file('icon')->move(public_path('ecommerce/seller/image/icon'), $icon);
+            $seller->icon = $icon;
         }
 
-        if ($request->hasFile('og_image')) {
-            $oGImage = $request->file('og_image')->getClientOriginalName();
-            $request->file('og_image')->move(public_path('ecommerce/seller/image/og'), $oGImage);
-            $seller->og_image = $oGImage;
+        if ($request->hasFile('thumb')) {
+            $thumb = $request->file('thumb')->getClientOriginalName();
+            $request->file('thumb')->move(public_path('ecommerce/seller/image/thumb'), $thumb);
+            $seller->thumb = $thumb;
         }
 
         if ($request->hasFile('cover')) {
@@ -81,18 +75,21 @@ class EcommerceSellerController extends Controller
             $seller->cover = $coverImage;
         }
 
-        if ($request->hasFile('image') || $request->hasFile('og_image') || $request->hasFile('cover')) {
+        if ($request->hasFile('og_image')) {
+            $oGImage = $request->file('og_image')->getClientOriginalName();
+            $request->file('og_image')->move(public_path('ecommerce/seller/image/og'), $oGImage);
+            $seller->og_image = $oGImage;
+        }
+
+        if ($request->hasFile('icon') || $request->hasFile('thumb') || $request->hasFile('cover') || $request->hasFile('og_image')) {
             $seller->save();
         }
 
         Session::flash('message', __('New Seller Successfully Added!'));
         
-        return redirect(RouteServiceProvider::Seller);
+        return redirect(RouteServiceProvider::EcommerceSeller);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Request $sellerDetail)
     {
         $sellers = EcommerceSeller::all();
@@ -100,9 +97,6 @@ class EcommerceSellerController extends Controller
         return view('backend.ecommerce.seller.manage-sellers', ['sellers' => $sellers]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function detail($slug)
     {
         $sellers = EcommerceSeller::where('slug', $slug)->firstOrFail();
@@ -110,9 +104,6 @@ class EcommerceSellerController extends Controller
         return view('frontend.ecommerce.item-detail', ['sellers' => $sellers]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $seller = EcommerceSeller::findOrFail($id);
@@ -120,92 +111,100 @@ class EcommerceSellerController extends Controller
         return view('backend.ecommerce.seller.edit-seller', ['seller' => $seller]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id): RedirectResponse
     {
-        // Retrieve the existing record from the database
         $seller = EcommerceSeller::find($id);
 
-        // Make sure the record exists
         if ($seller) {
-            // Validate and process the new image
-            $newImage = $request->file('image');
 
-            if ($newImage) {
-                // Validate the new image file
+            $newIcon = $request->file('icon');
+
+            if ($newIcon) {
+
                 $validatedData = $request->validate([
-                    // 'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                    // 'icon' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
                 ]);
 
-                // Process the new image file (e.g., move to a specific directory, assign a new filename)
-                $newImageName = $request->image->getClientOriginalName();
-                $request->image->move(public_path('ecommerce/seller/image'), $newImageName);
+                $newIconName = $request->icon->getClientOriginalName();
+                $request->icon->move(public_path('ecommerce/seller/image/icon'), $newIconName);
 
-                // Update the image data in the model
-                $seller->image = $newImageName;
+                $seller->icon = $newIconName;
             }
+            
+            $newThumb = $request->file('thumb');
 
-            // Validate and process the new image
-            $newOGImage = $request->file('og_image');
+            if ($newThumb) {
 
-            if ($newOGImage) {
-                // Validate the new OG Image OG Image
                 $validatedData = $request->validate([
-                    // 'og_image' => 'file|mimes:jpeg,png,jpg,gif|max:2048',
+                    // 'thumb' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
                 ]);
 
-                // Process the new OG Image OG Image (e.g., move to a specific directory, assign a new filename)
-                $oGImage = $request->og_image->getClientOriginalName();
-                $request->og_image->move(public_path('ecommerce/seller/image/og'), $oGImage);
+                $newThumbName = $request->thumb->getClientOriginalName();
+                $request->thumb->move(public_path('ecommerce/seller/image/thumb'), $newThumbName);
 
-                // Update the OG Image data in the model
-                $seller->og_image = $oGImage;
+                $seller->thumb = $newThumbName;
             }
 
-            // Validate and process the new image
             $newCover = $request->file('cover');
 
             if ($newCover) {
-                // Validate the new OG Image OG Image
+
                 $validatedData = $request->validate([
                     // 'cover' => 'file|mimes:jpeg,png,jpg,gif|max:2048',
                 ]);
 
-                // Process the new OG Image OG Image (e.g., move to a specific directory, assign a new filename)
                 $coverImage = $request->cover->getClientOriginalName();
                 $request->cover->move(public_path('ecommerce/seller/image/cover'), $coverImage);
 
-                // Update the OG Image data in the model
                 $seller->cover = $coverImage;
             }
 
-            // Update other fields of the request
+            $newOGImage = $request->file('og_image');
+
+            if ($newOGImage) {
+
+                $validatedData = $request->validate([
+                    // 'og_image' => 'file|mimes:jpeg,png,jpg,gif|max:2048',
+                ]);
+
+                $oGImage = $request->og_image->getClientOriginalName();
+                $request->og_image->move(public_path('ecommerce/seller/image/og'), $oGImage);
+
+                $seller->og_image = $oGImage;
+            }
+
             $seller->name = $request->input('name');
             $seller->slug = $request->input('slug');
             $seller->gender = $request->input('gender');
-            $seller->bio = $request->input('bio');
             $seller->mobile = $request->input('mobile');
             $seller->email = $request->input('email');
+            $seller->bio = $request->input('bio');
             $seller->address = $request->input('address');
-            $seller->description = $request->input('description');
             $seller->youtube_iframe = $request->input('youtube_iframe');
+            $seller->header_content = $request->input('header_content');
             $seller->meta_title = $request->input('meta_title');
             $seller->meta_description = $request->input('meta_description');
-
-            // dd($request);
+            $seller->facebook_meta_title = $request->input('facebook_meta_title');
+            $seller->facebook_meta_description = $request->input('facebook_meta_description');
+            $seller->twitter_meta_title = $request->input('twitter_meta_title');
+            $seller->twitter_meta_description = $request->input('twitter_meta_description');
+            $seller->icon_alt_text = $request->input('icon_alt_text');
+            $seller->thumb_alt_text = $request->input('thumb_alt_text');
+            $seller->cover_alt_text = $request->input('cover_alt_text');
+            $seller->og_img_alt_text = $request->input('og_img_alt_text');
+            $seller->is_index = $request->input('is_index');
+            $seller->is_follow = $request->input('is_follow');
+            $seller->is_featured = $request->input('is_featured');
 
             if (!is_null($request->input('status'))) {
                 $seller->status = $request->input('status');
             }
+            
+            $seller->comment = $request->input('comment');
 
-            // Save the changes
             $seller->save();
 
-            // Perform any additional actions or redirect as needed
         } else {
-            // Handle the case when the record doesn't exist
             Session::flash('update', __('The record does not exist!'));
         }
 
@@ -214,14 +213,11 @@ class EcommerceSellerController extends Controller
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         EcommerceSeller::where('id',$id)->delete();
 
-        Session::flash('delete', __('Successfully Deleted!'));
+        Session::flash('delete', __('Seller Successfully Deleted!'));
         
         return back();
     }

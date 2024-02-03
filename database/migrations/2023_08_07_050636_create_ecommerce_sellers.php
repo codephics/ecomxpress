@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('name', 255);
             $table->string('slug', 255);
             $table->string('gender', 255);
-            $table->string('bio', 255)->nullable();
             $table->string('mobile', 255)->nullable();
             $table->string('email', 255)->nullable();
+            $table->string('bio', 255)->nullable();
             $table->string('address', 255)->nullable();
             $table->text('description')->nullable();
             $table->text('youtube_iframe')->nullable();

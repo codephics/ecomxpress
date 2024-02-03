@@ -17,11 +17,11 @@
 						<li><a class="dropdown-item" href="{{ route('ecommerce.new-seller') }}">Add Seller</a></li>
 						<li><a class="dropdown-item" href="{{ route('ecommerce.manage-seller') }}">Manage Sellers</a></li>
 						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="{{ route('ecommerce.new-item') }}">Add Item</a></li>
-						<li><a class="dropdown-item" href="{{ route('ecommerce.manage-item') }}">Manage Item</a></li>
 						<li><a class="dropdown-item" href="{{ route('ecommerce.manage-categories') }}">Manage Categories</a></li>
 						<li><a class="dropdown-item" href="{{ route('ecommerce.manage-subcategories') }}">Manage Subcategories</a></li>
 						<li><a class="dropdown-item" href="{{ route('ecommerce.manage-sub-subcategories') }}">Manage Sub Subcategories</a></li>
+						<li><a class="dropdown-item" href="{{ route('ecommerce.new-item') }}">Add Item</a></li>
+						<li><a class="dropdown-item" href="{{ route('ecommerce.manage-item') }}">Manage Item</a></li>
 					</ul>
 				</li>
 				<li class="nav-item dropdown">

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('title')->nullable();
             $table->string('category_name', 255);
             $table->string('description', 255)->nullable();
+            $table->text('youtube_iframe')->nullable();
+            $table->text('header_content')->nullable();
             $table->string('meta_title', 255)->nullable();
             $table->string('meta_description', 255)->nullable();
             $table->string('facebook_meta_title', 255)->nullable();

@@ -15,18 +15,11 @@ use Session;
 
 class EcommerceCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
         return view('backend.ecommerce.categories.manage-category');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(Request $request)
     {
         if ($request->routeIs('ecommerce.new-category')) {
@@ -46,33 +39,21 @@ class EcommerceCategoryController extends Controller
             return view('backend.ecommerce.categories.new-sub-subcategory', ['subcategories' => $subcategories]);
         }
         
-        // Default view if none of the routes match
         return view('backend.ecommerce.dashboard');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request): RedirectResponse
     {
 
         if ($request->routeIs('ecommerce.new-category.store')) {
-
-            // $request->validate([
-            //     'name' => ['required', 'string', 'max:255'],
-            //     'slug' => ['required', 'regex:/^[a-z]+$/'],
-            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            // ], [
-            //     'slug.regex' => 'The :attribute field must contain only lowercase letters.'
-            // ]);
-
-            // dd($request);
 
             $category = EcommerceCategory::create([
                 'category_name' => $request->category_name,
                 'slug' => $request->slug,
                 'title' => $request->title,
                 'description' => $request->description,
+                'youtube_iframe' => $request->youtube_iframe,
+                'header_content' => $request->header_content,
                 'meta_title' => $request->meta_title,
                 'meta_description' => $request->meta_description,
                 'facebook_meta_title' => $request->facebook_meta_title,
@@ -83,31 +64,36 @@ class EcommerceCategoryController extends Controller
                 'thumb_alt_text' => $request->thumb_alt_text,
                 'cover_alt_text' => $request->cover_alt_text,
                 'og_img_alt_text' => $request->og_img_alt_text,
+                'is_index' => $request->is_index,
+                'is_follow' => $request->is_follow,
+                'is_featured' => $request->is_featured,
+                'status' => $request->status,
+                'comment' => $request->comment,
             ]);
 
             $category->save();
 
             if ($request->hasFile('icon')) {
                 $icon = $request->file('icon')->getClientOriginalName();
-                $request->file('icon')->move(public_path('ecommerce/image/category/icon'), $icon);
+                $request->file('icon')->move(public_path('ecommerce/category/image/icon'), $icon);
                 $category->icon = $icon;
             }
 
             if ($request->hasFile('thumb')) {
                 $thumb = $request->file('thumb')->getClientOriginalName();
-                $request->file('thumb')->move(public_path('ecommerce/image/category/thumb'), $thumb);
+                $request->file('thumb')->move(public_path('ecommerce/category/image/thumb'), $thumb);
                 $category->thumb = $thumb;
             }
 
             if ($request->hasFile('cover')) {
                 $cover = $request->file('cover')->getClientOriginalName();
-                $request->file('cover')->move(public_path('ecommerce/image/category/cover'), $cover);
+                $request->file('cover')->move(public_path('ecommerce/category/image/cover'), $cover);
                 $category->cover = $cover;
             }
 
             if ($request->hasFile('og_image')) {
                 $oGImage = $request->file('og_image')->getClientOriginalName();
-                $request->file('og_image')->move(public_path('ecommerce/image/category/og'), $oGImage);
+                $request->file('og_image')->move(public_path('ecommerce/category/image/og'), $oGImage);
                 $category->og_image = $oGImage;
             }
 
@@ -121,46 +107,53 @@ class EcommerceCategoryController extends Controller
 
         } elseif ($request->routeIs('ecommerce.new-subcategory.store')) {
             
-            // $request->validate([
-            //     'name' => ['required', 'string', 'max:255'],
-            //     'slug' => ['required', 'regex:/^[a-z]+$/'],
-            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            // ], [
-            //     'slug.regex' => 'The :attribute field must contain only lowercase letters.'
-            // ]);
-
             $subcategory = EcommerceSubCategory::create([
                 'category_name' => $request->category_name,
                 'subcategory_name' => $request->subcategory_name,
                 'slug' => $request->slug,
                 'description' => $request->description,
+                'youtube_iframe' => $request->youtube_iframe,
+                'header_content' => $request->header_content,
                 'meta_title' => $request->meta_title,
                 'meta_description' => $request->meta_description,
+                'facebook_meta_title' => $request->facebook_meta_title,
+                'facebook_meta_description' => $request->facebook_meta_description,
+                'twitter_meta_title' => $request->twitter_meta_title,
+                'twitter_meta_description' => $request->twitter_meta_description,
+                'icon_alt_text' => $request->icon_alt_text,
+                'thumb_alt_text' => $request->thumb_alt_text,
+                'cover_alt_text' => $request->cover_alt_text,
+                'og_img_alt_text' => $request->og_img_alt_text,
+                'is_index' => $request->is_index,
+                'is_follow' => $request->is_follow,
+                'is_featured' => $request->is_featured,
+                'status' => $request->status,
+                'comment' => $request->comment,
             ]);
 
             $subcategory->save();
 
             if ($request->hasFile('icon')) {
                 $icon = $request->file('icon')->getClientOriginalName();
-                $request->file('icon')->move(public_path('ecommerce/image/category/subcategory/icon'), $icon);
+                $request->file('icon')->move(public_path('ecommerce/category/subcategory/image/icon'), $icon);
                 $subcategory->icon = $icon;
             }
 
             if ($request->hasFile('thumb')) {
                 $thumb = $request->file('thumb')->getClientOriginalName();
-                $request->file('thumb')->move(public_path('ecommerce/image/category/subcategory/thumb'), $thumb);
+                $request->file('thumb')->move(public_path('ecommerce/category/subcategory/image/thumb'), $thumb);
                 $subcategory->thumb = $thumb;
             }
 
             if ($request->hasFile('cover')) {
                 $cover = $request->file('cover')->getClientOriginalName();
-                $request->file('cover')->move(public_path('ecommerce/image/category/subcategory/cover'), $cover);
+                $request->file('cover')->move(public_path('ecommerce/category/subcategory/image/cover'), $cover);
                 $subcategory->cover = $cover;
             }
 
             if ($request->hasFile('og_image')) {
                 $oGImage = $request->file('og_image')->getClientOriginalName();
-                $request->file('og_image')->move(public_path('ecommerce/image/category/subcategory/og'), $oGImage);
+                $request->file('og_image')->move(public_path('ecommerce/category/subcategory/image/og'), $oGImage);
                 $subcategory->og_image = $oGImage;
             }
 
@@ -174,46 +167,53 @@ class EcommerceCategoryController extends Controller
 
         } elseif ($request->routeIs('ecommerce.new-sub-subcategory.store')) {
             
-            // $request->validate([
-            //     'name' => ['required', 'string', 'max:255'],
-            //     'slug' => ['required', 'regex:/^[a-z]+$/'],
-            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            // ], [
-            //     'slug.regex' => 'The :attribute field must contain only lowercase letters.'
-            // ]);
-
             $subSubcategory = EcommerceSubSubCategory::create([
                 'sub_subcategory_name' => $request->sub_subcategory_name,
                 'subcategory_name' => $request->subcategory_name,
                 'slug' => $request->slug,
                 'description' => $request->description,
+                'youtube_iframe' => $request->youtube_iframe,
+                'header_content' => $request->header_content,
                 'meta_title' => $request->meta_title,
                 'meta_description' => $request->meta_description,
+                'facebook_meta_title' => $request->facebook_meta_title,
+                'facebook_meta_description' => $request->facebook_meta_description,
+                'twitter_meta_title' => $request->twitter_meta_title,
+                'twitter_meta_description' => $request->twitter_meta_description,
+                'icon_alt_text' => $request->icon_alt_text,
+                'thumb_alt_text' => $request->thumb_alt_text,
+                'cover_alt_text' => $request->cover_alt_text,
+                'og_img_alt_text' => $request->og_img_alt_text,
+                'is_index' => $request->is_index,
+                'is_follow' => $request->is_follow,
+                'is_featured' => $request->is_featured,
+                'status' => $request->status,
+                'comment' => $request->comment,
             ]);
 
             $subSubcategory->save();
 
             if ($request->hasFile('icon')) {
                 $icon = $request->file('icon')->getClientOriginalName();
-                $request->file('icon')->move(public_path('ecommerce/image/category/subcategory/sub-subcategory/icon'), $icon);
+                $request->file('icon')->move(public_path('ecommerce/category/subcategory/sub-subcategory/image/icon'), $icon);
                 $subSubcategory->icon = $icon;
             }
 
             if ($request->hasFile('thumb')) {
                 $thumb = $request->file('thumb')->getClientOriginalName();
-                $request->file('thumb')->move(public_path('ecommerce/image/category/subcategory/sub-subcategory/thumb'), $thumb);
+                $request->file('thumb')->move(public_path('ecommerce/category/subcategory/sub-subcategory/image/thumb'), $thumb);
                 $subSubcategory->thumb = $thumb;
             }
 
             if ($request->hasFile('cover')) {
                 $cover = $request->file('cover')->getClientOriginalName();
-                $request->file('cover')->move(public_path('ecommerce/image/category/subcategory/sub-subcategory/cover'), $cover);
+                $request->file('cover')->move(public_path('ecommerce/category/subcategory/sub-subcategory/image/cover'), $cover);
                 $subSubcategory->cover = $cover;
             }
 
             if ($request->hasFile('og_image')) {
                 $oGImage = $request->file('og_image')->getClientOriginalName();
-                $request->file('og_image')->move(public_path('ecommerce/image/category/subcategory/sub-subcategory/og'), $oGImage);
+                $request->file('og_image')->move(public_path('ecommerce/category/subcategory/sub-subcategory/image/og'), $oGImage);
                 $subSubcategory->og_image = $oGImage;
             }
 
@@ -227,13 +227,9 @@ class EcommerceCategoryController extends Controller
 
         }
         
-        // Default view if none of the routes match
         return view('backend.ecommerce.dashboard');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Request $request)
     {
         if ($request->routeIs('ecommerce.manage-categories')) {
@@ -256,13 +252,9 @@ class EcommerceCategoryController extends Controller
 
         }
         
-        // Default view if none of the routes match
         return view('backend.ecommerce.dashboard');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Request $request, $id)
     {
         if ($request->routeIs('ecommerce.category.edit')) {
@@ -289,13 +281,9 @@ class EcommerceCategoryController extends Controller
 
         }
         
-        // Default view if none of the routes match
         return view('backend.ecommerce.dashboard');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id): RedirectResponse
     {
         if ($request->routeIs('ecommerce.category.update')) {
@@ -311,7 +299,7 @@ class EcommerceCategoryController extends Controller
                     ]);
 
                     $newIconName = $request->icon->getClientOriginalName();
-                    $request->icon->move(public_path('ecommerce/image/category/icon'), $newIconName);
+                    $request->icon->move(public_path('ecommerce/category/image/icon'), $newIconName);
 
                     $category->icon = $newIconName;
                 }
@@ -324,7 +312,7 @@ class EcommerceCategoryController extends Controller
                     ]);
 
                     $newThumbName = $request->thumb->getClientOriginalName();
-                    $request->thumb->move(public_path('ecommerce/image/category/thumb'), $newThumbName);
+                    $request->thumb->move(public_path('ecommerce/category/image/thumb'), $newThumbName);
 
                     $category->thumb = $newThumbName;
                 }
@@ -337,7 +325,7 @@ class EcommerceCategoryController extends Controller
                     ]);
 
                     $newCoverName = $request->cover->getClientOriginalName();
-                    $request->cover->move(public_path('ecommerce/image/category/cover'), $newCoverName);
+                    $request->cover->move(public_path('ecommerce/category/image/cover'), $newCoverName);
 
                     $category->cover = $newCoverName;
                 }
@@ -350,7 +338,7 @@ class EcommerceCategoryController extends Controller
                     ]);
 
                     $newOGName = $request->og_image->getClientOriginalName();
-                    $request->og_image->move(public_path('ecommerce/image/category/og'), $newOGName);
+                    $request->og_image->move(public_path('ecommerce/category/image/og'), $newOGName);
 
                     $category->og_image = $newOGName;
                 }
@@ -359,6 +347,8 @@ class EcommerceCategoryController extends Controller
                 $category->slug = $request->input('slug');
                 $category->title = $request->input('title');
                 $category->description = $request->input('description');
+                $category->youtube_iframe = $request->input('youtube_iframe');
+                $category->header_content = $request->input('header_content');
                 $category->meta_title = $request->input('meta_title');
                 $category->meta_description = $request->input('meta_description');
                 $category->facebook_meta_title = $request->input('facebook_meta_title');
@@ -369,6 +359,15 @@ class EcommerceCategoryController extends Controller
                 $category->thumb_alt_text = $request->input('thumb_alt_text');
                 $category->cover_alt_text = $request->input('cover_alt_text');
                 $category->og_img_alt_text = $request->input('og_img_alt_text');
+                $category->is_index = $request->input('is_index');
+                $category->is_follow = $request->input('is_follow');
+                $category->is_featured = $request->input('is_featured');
+
+                if (!is_null($request->input('status'))) {
+                    $category->status = $request->input('status');
+                }
+            
+                $category->comment = $request->input('comment');
 
                 $category->save();
 
@@ -395,7 +394,7 @@ class EcommerceCategoryController extends Controller
                     ]);
 
                     $newIconName = $request->icon->getClientOriginalName();
-                    $request->icon->move(public_path('ecommerce/image/category/subcategory/icon'), $newIconName);
+                    $request->icon->move(public_path('ecommerce/category/subcategory/image/icon'), $newIconName);
 
                     $subcategory->icon = $newIconName;
                 }
@@ -408,7 +407,7 @@ class EcommerceCategoryController extends Controller
                     ]);
 
                     $newThumbName = $request->thumb->getClientOriginalName();
-                    $request->thumb->move(public_path('ecommerce/image/category/subcategory/thumb'), $newThumbName);
+                    $request->thumb->move(public_path('ecommerce/category/subcategory/image/thumb'), $newThumbName);
 
                     $subcategory->thumb = $newThumbName;
                 }
@@ -421,7 +420,7 @@ class EcommerceCategoryController extends Controller
                     ]);
 
                     $newCoverName = $request->cover->getClientOriginalName();
-                    $request->cover->move(public_path('ecommerce/image/category/subcategory/cover'), $newCoverName);
+                    $request->cover->move(public_path('ecommerce/category/subcategory/image/cover'), $newCoverName);
 
                     $subcategory->cover = $newCoverName;
                 }
@@ -434,7 +433,7 @@ class EcommerceCategoryController extends Controller
                     ]);
 
                     $newOGName = $request->og_image->getClientOriginalName();
-                    $request->og_image->move(public_path('ecommerce/image/category/subcategory/og'), $newOGName);
+                    $request->og_image->move(public_path('ecommerce/category/subcategory/image/og'), $newOGName);
 
                     $subcategory->og_image = $newOGName;
                 }
@@ -443,8 +442,25 @@ class EcommerceCategoryController extends Controller
                 $subcategory->subcategory_name = $request->input('subcategory_name');
                 $subcategory->slug = $request->input('slug');
                 $subcategory->description = $request->input('description');
+                $subcategory->youtube_iframe = $request->input('youtube_iframe');
+                $subcategory->header_content = $request->input('header_content');
                 $subcategory->meta_title = $request->input('meta_title');
                 $subcategory->meta_description = $request->input('meta_description');
+                $subcategory->facebook_meta_title = $request->input('facebook_meta_title');
+                $subcategory->facebook_meta_description = $request->input('facebook_meta_description');
+                $subcategory->twitter_meta_title = $request->input('twitter_meta_title');
+                $subcategory->twitter_meta_description = $request->input('twitter_meta_description');
+                $subcategory->icon_alt_text = $request->input('icon_alt_text');
+                $subcategory->thumb_alt_text = $request->input('thumb_alt_text');
+                $subcategory->cover_alt_text = $request->input('cover_alt_text');
+                $subcategory->og_img_alt_text = $request->input('og_img_alt_text');
+                $subcategory->is_index = $request->input('is_index');
+                $subcategory->is_follow = $request->input('is_follow');
+                $subcategory->is_featured = $request->input('is_featured');
+
+                if (!is_null($request->input('status'))) {
+                    $subcategory->status = $request->input('status');
+                }
 
                 $subcategory->save();
 
@@ -471,7 +487,7 @@ class EcommerceCategoryController extends Controller
                     ]);
 
                     $newIconName = $request->icon->getClientOriginalName();
-                    $request->icon->move(public_path('ecommerce/image/category/subcategory/sub-subcategory/icon'), $newIconName);
+                    $request->icon->move(public_path('ecommerce/category/subcategory/sub-subcategory/image/icon'), $newIconName);
 
                     $sub_subcategory->icon = $newIconName;
                 }
@@ -484,7 +500,7 @@ class EcommerceCategoryController extends Controller
                     ]);
 
                     $newThumbName = $request->thumb->getClientOriginalName();
-                    $request->thumb->move(public_path('ecommerce/image/category/subcategory/sub-subcategory/thumb'), $newThumbName);
+                    $request->thumb->move(public_path('ecommerce/category/subcategory/sub-subcategory/image/thumb'), $newThumbName);
 
                     $sub_subcategory->thumb = $newThumbName;
                 }
@@ -497,7 +513,7 @@ class EcommerceCategoryController extends Controller
                     ]);
 
                     $newCoverName = $request->cover->getClientOriginalName();
-                    $request->cover->move(public_path('ecommerce/image/category/subcategory/sub-subcategory/cover'), $newCoverName);
+                    $request->cover->move(public_path('ecommerce/category/subcategory/sub-subcategory/image/cover'), $newCoverName);
 
                     $sub_subcategory->cover = $newCoverName;
                 }
@@ -510,7 +526,7 @@ class EcommerceCategoryController extends Controller
                     ]);
 
                     $newOGName = $request->og_image->getClientOriginalName();
-                    $request->og_image->move(public_path('ecommerce/image/category/subcategory/sub-subcategory/og'), $newOGName);
+                    $request->og_image->move(public_path('ecommerce/category/subcategory/sub-subcategory/image/og'), $newOGName);
 
                     $sub_subcategory->og_image = $newOGName;
                 }
@@ -519,8 +535,25 @@ class EcommerceCategoryController extends Controller
                 $sub_subcategory->subcategory_name = $request->input('subcategory_name');
                 $sub_subcategory->slug = $request->input('slug');
                 $sub_subcategory->description = $request->input('description');
+                $sub_subcategory->youtube_iframe = $request->input('youtube_iframe');
+                $sub_subcategory->header_content = $request->input('header_content');
                 $sub_subcategory->meta_title = $request->input('meta_title');
                 $sub_subcategory->meta_description = $request->input('meta_description');
+                $sub_subcategory->facebook_meta_title = $request->input('facebook_meta_title');
+                $sub_subcategory->facebook_meta_description = $request->input('facebook_meta_description');
+                $sub_subcategory->twitter_meta_title = $request->input('twitter_meta_title');
+                $sub_subcategory->twitter_meta_description = $request->input('twitter_meta_description');
+                $sub_subcategory->icon_alt_text = $request->input('icon_alt_text');
+                $sub_subcategory->thumb_alt_text = $request->input('thumb_alt_text');
+                $sub_subcategory->cover_alt_text = $request->input('cover_alt_text');
+                $sub_subcategory->og_img_alt_text = $request->input('og_img_alt_text');
+                $sub_subcategory->is_index = $request->input('is_index');
+                $sub_subcategory->is_follow = $request->input('is_follow');
+                $sub_subcategory->is_featured = $request->input('is_featured');
+
+                if (!is_null($request->input('status'))) {
+                    $sub_subcategory->status = $request->input('status');
+                }
 
                 $sub_subcategory->save();
 
@@ -535,13 +568,9 @@ class EcommerceCategoryController extends Controller
             return back();
         }
         
-        // Default view if none of the routes match
         return view('backend.ecommerce.dashboard');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Request $request, $id)
     {
         if ($request->routeIs('ecommerce.category.destroy')) {
@@ -569,7 +598,6 @@ class EcommerceCategoryController extends Controller
             return back();
         }
         
-        // Default view if none of the routes match
         return view('backend.ecommerce.dashboard');
     }
 }

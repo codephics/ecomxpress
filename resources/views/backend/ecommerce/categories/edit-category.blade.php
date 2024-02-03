@@ -9,8 +9,8 @@
         <div class="col-12">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('template.dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('template.manage-categories') }}">Manage Categories</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('ecommerce.manage-categories') }}">Manage Categories</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Edit Category</li>
                 </ol>
             </nav>
@@ -34,7 +34,7 @@
     </div>
     @endif
 
-    <form class="needs-validation" method="POST" action="{{ route('template.category.update',$category->id) }}" enctype="multipart/form-data" novalidate>
+    <form class="needs-validation" method="POST" action="{{ route('ecommerce.category.update',$category->id) }}" enctype="multipart/form-data" novalidate>
         @csrf
         @method('PUT')
         <div class="row">
@@ -42,7 +42,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label for="category_name" class="form-label">Name *</label>
+                            <label for="category_name" class="form-label">Name</label>
                             <input type="text" class="form-control" name="category_name" value="{{ $category->category_name }}" placeholder="Name" required />
                             <div class="valid-feedback">
                                 Looks good!
@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label for="slug" class="form-label">Slug *</label>
+                            <label for="slug" class="form-label">Slug</label>
                             <input type="text" class="form-control" name="slug" value="{{ $category->slug }}" placeholder="Slug" required />
                         </div>
                     </div>
@@ -75,6 +75,58 @@
                         </div>
                     </div>
                 </div>
+
+                <hr class="border border-secondery border-2 opacity-75">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <img src="{{ asset('ecommerce/category/image/icon/' . $category->icon) }}" class="img-thumbnail" alt="...">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="icon_alt_text" value="{{ $category->icon_alt_text }}" placeholder="Icon Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="icon" class="form-label">Icon</label>
+                            <input class="form-control" type="file" name="icon" />
+                        </div>
+                        <div class="mb-3">
+                            <img src="{{ asset('ecommerce/category/image/thumb/' . $category->thumb) }}" class="img-thumbnail" alt="...">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="thumb_alt_text" value="{{ $category->thumb_alt_text }}" placeholder="Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="thumb" class="form-label">Thumb</label>
+                            <input class="form-control" type="file" name="thumb" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <img src="{{ asset('ecommerce/category/image/cover/' . $category->cover) }}" class="img-thumbnail" alt="...">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="cover_alt_text" value="{{ $category->cover_alt_text }}" placeholder="Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="cover" class="form-label">Cover</label>
+                            <input class="form-control" type="file" name="cover" />
+                        </div>
+                        <div class="mb-3">
+                            <img src="{{ asset('ecommerce/category/image/og/' . $category->og_image) }}" class="img-thumbnail" alt="...">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="og_img_alt_text" value="{{ $category->og_img_alt_text }}" placeholder="Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="og_image" class="form-label">Upload OG</label>
+                            <input class="form-control" type="file" name="og_image" multiple />
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border border-secondery border-2 opacity-75">
+
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
@@ -122,50 +174,41 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="mb-3">
-                            <img src="{{ asset('template/image/category/icon/' . $category->icon) }}" class="img-thumbnail" height="85" width="85" alt="...">
+                            <label class="form-label" for="content">Content?</label>
                         </div>
                         <div class="mb-3">
-                            <input class="form-control" type="text" name="icon_alt_text" value="{{ $category->icon_alt_text }}" placeholder="Alt Text" />
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="is_index" value="1" id="featuredCheckDefault" @if($category->is_index == 1) checked @endif>
+                                <label class="form-check-label" for="featuredCheckDefault">Index?</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="is_follow" value="1" id="featuredCheckDefault" @if($category->is_follow == 1) checked @endif>
+                                <label class="form-check-label" for="featuredCheckDefault">Follow?</label>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="icon" class="form-label">Icon *</label>
-                            <input class="form-control" type="file" name="icon" id="icon" />
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="mb-3">
-                            <img src="{{ asset('template/image/category/thumb/' . $category->thumb) }}" class="img-thumbnail" height="85" width="85" alt="...">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="is_featured" value="1" id="featuredCheckDefault" @if($category->is_featured == 1) checked @endif>
+                                <label class="form-check-label" for="featuredCheckDefault">Featured?</label>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <input class="form-control" type="text" name="thumb_alt_text" value="{{ $category->thumb_alt_text }}" placeholder="Alt Text" />
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="inputGroupStatus">Status</label>
+                                <select class="form-select" id="inputGroupStatus" name="status">
+                                    @if($category->status == 1)
+                                    <option value="1">Published</option>
+                                    <option value="0">Draft</option>
+                                    @else
+                                    <option value="0">Draft</option>
+                                    <option value="1">Publish</option>
+                                    @endif
+                                </select>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="thumb" class="form-label">Thumb *</label>
-                            <input class="form-control" type="file" name="thumb" id="thumb" />
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="mb-3">
-                            <img src="{{ asset('template/image/category/cover/' . $category->cover) }}" class="img-thumbnail" height="630" width="630" alt="...">
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="cover_alt_text" value="{{ $category->cover_alt_text }}" placeholder="Alt Text" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="cover" class="form-label">Cover *</label>
-                            <input class="form-control" type="file" name="cover" id="cover" />
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="mb-3">
-                            <img src="{{ asset('template/image/category/og/' . $category->og_image) }}" class="img-thumbnail" height="630" width="630" alt="...">
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="og_img_alt_text" value="{{ $category->og_img_alt_text }}" placeholder="Alt Text" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="og_image" class="form-label">OG Image</label>
-                            <input class="form-control" type="file" name="og_image" id="og_image" />
+                            <label for="comment" class="form-label">Comment</label>
+                            <textarea class="form-control" id="custom-textarea" name="comment" rows="3">{{ $category->comment }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -174,8 +217,6 @@
         <div class="row">
             <div class="col-sm-12">
                 <button type="submit" class="btn btn-primary">Publish</button>
-                <button type="submit" class="btn btn-primary">Draft</button>
-                <button type="submit" class="btn btn-secondary">Publish & Add Another</button>
             </div>
         </div>
     </form>

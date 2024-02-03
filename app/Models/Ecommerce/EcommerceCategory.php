@@ -19,6 +19,8 @@ class EcommerceCategory extends Model
         'slug',
         'title',
         'description',
+        'youtube_iframe',
+        'header_content',
         'meta_title',
         'meta_description',
         'facebook_meta_title',
