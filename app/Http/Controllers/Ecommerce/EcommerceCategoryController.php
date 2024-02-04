@@ -278,7 +278,6 @@ class EcommerceCategoryController extends Controller
             $sub_subcategory = EcommerceSubSubcategory::findOrFail($id);
             
             return view('backend.ecommerce.categories.edit-sub-subcategory', ['subcategories' => $subcategories, 'sub_subcategory' => $sub_subcategory]);
-
         }
         
         return view('backend.ecommerce.dashboard');
@@ -461,6 +460,8 @@ class EcommerceCategoryController extends Controller
                 if (!is_null($request->input('status'))) {
                     $subcategory->status = $request->input('status');
                 }
+                
+                $subcategory->comment = $request->input('comment');
 
                 $subcategory->save();
 
@@ -554,6 +555,8 @@ class EcommerceCategoryController extends Controller
                 if (!is_null($request->input('status'))) {
                     $sub_subcategory->status = $request->input('status');
                 }
+                
+                $sub_subcategory->comment = $request->input('comment');
 
                 $sub_subcategory->save();
 

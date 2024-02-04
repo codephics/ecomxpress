@@ -83,7 +83,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <img src="{{ asset('ecommerce/category/subcategory/sub_subcategory/image/icon/' . $sub_subcategory->icon) }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('ecommerce/category/subcategory/sub-subcategory/image/icon/' . $sub_subcategory->icon) }}" class="img-thumbnail" alt="...">
                         </div>
                         <div class="mb-3">
                             <input class="form-control" type="text" name="icon_alt_text" value="{{ $sub_subcategory->icon_alt_text }}" placeholder="Icon Alt Text" />
@@ -93,7 +93,7 @@
                             <input class="form-control" type="file" name="icon" />
                         </div>
                         <div class="mb-3">
-                            <img src="{{ asset('ecommerce/category/subcategory/sub_subcategory/image/thumb/' . $sub_subcategory->thumb) }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('ecommerce/category/subcategory/sub-subcategory/image/thumb/' . $sub_subcategory->thumb) }}" class="img-thumbnail" alt="...">
                         </div>
                         <div class="mb-3">
                             <input class="form-control" type="text" name="thumb_alt_text" value="{{ $sub_subcategory->thumb_alt_text }}" placeholder="Alt Text" />
@@ -105,7 +105,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <img src="{{ asset('ecommerce/category/subcategory/sub_subcategory/image/cover/' . $sub_subcategory->cover) }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('ecommerce/category/subcategory/sub-subcategory/image/cover/' . $sub_subcategory->cover) }}" class="img-thumbnail" alt="...">
                         </div>
                         <div class="mb-3">
                             <input class="form-control" type="text" name="cover_alt_text" value="{{ $sub_subcategory->cover_alt_text }}" placeholder="Alt Text" />
@@ -115,7 +115,7 @@
                             <input class="form-control" type="file" name="cover" />
                         </div>
                         <div class="mb-3">
-                            <img src="{{ asset('ecommerce/category/subcategory/sub_subcategory/image/og/' . $sub_subcategory->og_image) }}" class="img-thumbnail" alt="...">
+                            <img src="{{ asset('ecommerce/category/subcategory/sub-subcategory/image/og/' . $sub_subcategory->og_image) }}" class="img-thumbnail" alt="...">
                         </div>
                         <div class="mb-3">
                             <input class="form-control" type="text" name="og_img_alt_text" value="{{ $sub_subcategory->og_img_alt_text }}" placeholder="Alt Text" />
@@ -210,7 +210,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="comment" class="form-label">Comment</label>
-                            <textarea class="form-control" id="custom-textarea" name="comment" rows="3">{{ $category->comment }}</textarea>
+                            <textarea class="form-control" id="custom-textarea" name="comment" rows="3">{{ $sub_subcategory->comment }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -218,8 +218,6 @@
         <div class="row">
             <div class="col-sm-12">
                 <button type="submit" class="btn btn-primary">Publish</button>
-                <button type="submit" class="btn btn-primary">Draft</button>
-                <button type="submit" class="btn btn-secondary">Publish & Add Another</button>
             </div>
         </div>
     </form>

@@ -186,16 +186,6 @@ class EcommerceItemsController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        // $request->validate([
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'slug' => ['required', 'regex:/^[a-z]+$/'],
-        // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ], [
-        //     'slug.regex' => 'The :attribute field must contain only lowercase letters.'
-        // ]);
-
-        // dd($request);
-
         $item = EcommerceItem::create([
             'name' => $request->name,
             'slug' => $request->slug,
@@ -215,6 +205,11 @@ class EcommerceItemsController extends Controller
             'short_description' => $request->short_description,
             'long_description' => $request->long_description,
             'change_log' => $request->change_log,
+            'img_alt_text' => $request->img_alt_text,
+            'icon_alt_text' => $request->icon_alt_text,
+            'thumb_alt_text' => $request->thumb_alt_text,
+            'cover_alt_text' => $request->cover_alt_text,
+            'og_img_alt_text' => $request->og_img_alt_text,
             'youtube_iframe' => $request->youtube_iframe,
             'header_content' => $request->header_content,
             'meta_title' => $request->meta_title,
@@ -223,46 +218,62 @@ class EcommerceItemsController extends Controller
             'facebook_meta_description' => $request->facebook_meta_description,
             'twitter_meta_title' => $request->twitter_meta_title,
             'twitter_meta_description' => $request->twitter_meta_description,
-            'img_alt_text' => $request->img_alt_text,
-            'og_img_alt_text' => $request->og_img_alt_text,
-            'is_index' => $request->is_index,
-            'is_follow' => $request->is_follow,
-            'order_type' => $request->order_type,
-            'is_featured' => $request->input('is_featured', 0),
             'live_preview_link' => $request->live_preview_link,
             'admin_link' => $request->admin_link,
             'downloadable_link' => $request->downloadable_link,
+            'order_type' => $request->order_type,
+            'is_featured' => $request->is_featured,
+            'is_index' => $request->is_index,
+            'is_follow' => $request->is_follow,
             'status' => $request->status,
             'comment' => $request->comment,
         ]);
 
         $item->save();
 
-        if ($request->hasFile('image')) {
-            $imageName = $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path('ecommerce/image'), $imageName);
-            $item->image = $imageName;
-        }
-
-        if ($request->hasFile('og')) {
-            $og = $request->file('og')->getClientOriginalName();
-            $request->file('og')->move(public_path('ecommerce/image/og'), $og);
-            $item->og = $og;
-        }
-
         if ($request->hasFile('file')) {
-            $fileName = $request->file('file')->getClientOriginalName();
-            $request->file('file')->move(public_path('ecommerce/file'), $fileName);
-            $item->file = $fileName;
+            $file = $request->file('file')->getClientOriginalName();
+            $request->file('file')->move(public_path('ecommerce/item/file'), $file);
+            $item->file = $file;
         }
 
-        if ($request->hasFile('image') || $request->hasFile('og') || $request->hasFile('file')) {
+        if ($request->hasFile('image')) {
+            $image = $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('ecommerce/item/image'), $image);
+            $item->image = $image;
+        }
+
+        if ($request->hasFile('icon')) {
+            $icon = $request->file('icon')->getClientOriginalName();
+            $request->file('icon')->move(public_path('ecommerce/item/image/icon'), $icon);
+            $item->icon = $icon;
+        }
+
+        if ($request->hasFile('thumb')) {
+            $thumb = $request->file('thumb')->getClientOriginalName();
+            $request->file('thumb')->move(public_path('ecommerce/item/image/thumb'), $thumb);
+            $item->thumb = $thumb;
+        }
+
+        if ($request->hasFile('cover')) {
+            $cover = $request->file('cover')->getClientOriginalName();
+            $request->file('cover')->move(public_path('ecommerce/item/image/cover'), $cover);
+            $item->cover = $cover;
+        }
+
+        if ($request->hasFile('og_image')) {
+            $oGImage = $request->file('og_image')->getClientOriginalName();
+            $request->file('og_image')->move(public_path('ecommerce/item/image/og'), $oGImage);
+            $item->og_image = $oGImage;
+        }
+
+        if ($request->hasFile('image') || $request->hasFile('file') || $request->hasFile('icon') || $request->hasFile('thumb') || $request->hasFile('cover') || $request->hasFile('og_image')) {
             $item->save();
         }
 
         Session::flash('message', __('New Item Successfully Added!'));
         
-        return redirect(RouteServiceProvider::Item);
+        return redirect(RouteServiceProvider::EcommerceItem);
     }
 
     public function show(Request $itemDetail)
@@ -274,78 +285,104 @@ class EcommerceItemsController extends Controller
 
     public function edit($id)
     {
-        $items = EcommerceItem::findOrFail($id);     
+        $item = EcommerceItem::findOrFail($id);     
         $categories = EcommerceCategory::all();
         $subcategories = EcommerceSubcategory::all();
         $sub_subcategories = EcommerceSubSubcategory::all();
 
-        return view('backend.ecommerce.edit-ecommerce', ['items' => $items, 'categories' => $categories,'subcategories' => $subcategories, 'sub_subcategories' => $sub_subcategories]);
+        return view('backend.ecommerce.edit-item', ['item' => $item, 'categories' => $categories,'subcategories' => $subcategories, 'sub_subcategories' => $sub_subcategories]);
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
-        // dd($request);
-        // Retrieve the existing record from the database
         $item = EcommerceItem::find($id);
 
-        // Make sure the record exists
         if ($item) {
-            // Validate and process the new image
+
             $newImage = $request->file('image');
 
             if ($newImage) {
-                // Validate the new image file
                 $validatedData = $request->validate([
                     // 'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
                 ]);
 
-                // Process the new image file (e.g., move to a specific directory, assign a new filename)
                 $newImageName = $request->image->getClientOriginalName();
-                $request->image->move(public_path('ecommerce/image'), $newImageName);
+                $request->image->move(public_path('ecommerce/item/image'), $newImageName);
 
-                // Update the image data in the model
                 $item->image = $newImageName;
             }
 
-            $newImage = $request->file('og_image');
-
-            if ($newImage) {
-                // Validate the new OG file
-                $validatedData = $request->validate([
-                    // 'og' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-                ]);
-
-                // Process the new OG file (e.g., move to a specific directory, assign a new filename)
-                $newImageName = $request->og_image->getClientOriginalName();
-                $request->og_image->move(public_path('ecommerce/image/og'), $newImageName);
-
-                // Update the og data in the model
-                $item->og_image = $newImageName;
-            }
-
-            // Validate and process the new image
             $newFile = $request->file('file');
 
             if ($newFile) {
-                // Validate the new file file
                 $validatedData = $request->validate([
                     // 'file' => 'file|mimes:jpeg,png,jpg,gif|max:2048',
                 ]);
 
-                // Process the new file file (e.g., move to a specific directory, assign a new filename)
                 $newFileName = $request->file->getClientOriginalName();
-                $request->file->move(public_path('ecommerce/file'), $newFileName);
+                $request->file->move(public_path('ecommerce/item/file'), $newFileName);
 
-                // Update the file data in the model
                 $item->file = $newFileName;
             }
 
-            // Update other fields of the request
+            $newIcon = $request->file('icon');
+
+            if ($newIcon) {
+                $validatedData = $request->validate([
+                    // 'icon' => 'icon|mimes:jpeg,png,jpg,gif|max:2048',
+                ]);
+
+                $newIconName = $request->icon->getClientOriginalName();
+                $request->icon->move(public_path('ecommerce/item/image/icon'), $newIconName);
+
+                $item->icon = $newIconName;
+            }
+
+            $newThumb = $request->file('thumb');
+
+            if ($newThumb) {
+                $validatedData = $request->validate([
+                    // 'thumb' => 'thumb|mimes:jpeg,png,jpg,gif|max:2048',
+                ]);
+
+                $newThumbName = $request->thumb->getClientOriginalName();
+                $request->thumb->move(public_path('ecommerce/item/image/thumb'), $newThumbName);
+
+                $item->thumb = $newThumbName;
+            }
+
+            $newCover = $request->file('cover');
+
+            if ($newCover) {
+                $validatedData = $request->validate([
+                    // 'cover' => 'cover|mimes:jpeg,png,jpg,gif|max:2048',
+                ]);
+
+                $newCoverName = $request->cover->getClientOriginalName();
+                $request->cover->move(public_path('ecommerce/item/image/cover'), $newCoverName);
+
+                $item->cover = $newCoverName;
+            }
+
+            $newOG = $request->file('og_image');
+
+            if ($newOG) {
+                $validatedData = $request->validate([
+                    // 'og_image' => 'og|mimes:jpeg,png,jpg,gif|max:2048',
+                ]);
+
+                $newOGName = $request->og_image->getClientOriginalName();
+                $request->og_image->move(public_path('ecommerce/item/image/og'), $newOGName);
+
+                $item->og_image = $newOGName;
+            }
+
             $item->name = $request->input('name');
             $item->slug = $request->input('slug');
             $item->category_name = $request->input('category_name');
             $item->subcategory_name = $request->input('subcategory_name');
             $item->sub_subcategory_name = $request->input('sub_subcategory_name');
+            $item->sku = $request->input('sku');
             $item->sale_price = $request->input('sale_price');
             $item->regular_price = $request->input('regular_price');
             $item->commission = $request->input('commission');
@@ -358,6 +395,11 @@ class EcommerceItemsController extends Controller
             $item->short_description = $request->input('short_description');
             $item->long_description = $request->input('long_description');
             $item->change_log = $request->input('change_log');
+            $item->img_alt_text = $request->input('img_alt_text');
+            $item->icon_alt_text = $request->input('icon_alt_text');
+            $item->thumb_alt_text = $request->input('thumb_alt_text');
+            $item->cover_alt_text = $request->input('cover_alt_text');
+            $item->og_img_alt_text = $request->input('og_img_alt_text');
             $item->youtube_iframe = $request->input('youtube_iframe');
             $item->header_content = $request->input('header_content');
             $item->meta_title = $request->input('meta_title');
@@ -366,28 +408,23 @@ class EcommerceItemsController extends Controller
             $item->facebook_meta_description = $request->input('facebook_meta_description');
             $item->twitter_meta_title = $request->input('twitter_meta_title');
             $item->twitter_meta_description = $request->input('twitter_meta_description');
-            $item->img_alt_text = $request->input('img_alt_text');
-            $item->og_img_alt_text = $request->input('og_img_alt_text');
-            $item->is_index = $request->input('is_index');
-            $item->is_follow = $request->input('is_follow');
-            $item->order_type = $request->input('order_type');
-            $item->is_featured = $request->input('is_featured');
             $item->live_preview_link = $request->input('live_preview_link');
             $item->admin_link = $request->input('admin_link');
             $item->downloadable_link = $request->input('downloadable_link');
+            $item->order_type = $request->input('order_type');
+            $item->is_featured = $request->input('is_featured');
+            $item->is_index = $request->input('is_index');
+            $item->is_follow = $request->input('is_follow');
 
             if (!is_null($request->input('status'))) {
                 $item->status = $request->input('status');
             }
-            
+        
             $item->comment = $request->input('comment');
 
-            // Save the changes
             $item->save();
 
-            // Perform any additional actions or redirect as needed
         } else {
-            // Handle the case when the record doesn't exist
             dd();
         }
 
@@ -396,9 +433,6 @@ class EcommerceItemsController extends Controller
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         EcommerceItem::where('id',$id)->delete();

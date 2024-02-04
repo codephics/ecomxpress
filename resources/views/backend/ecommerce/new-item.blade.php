@@ -59,7 +59,7 @@
                     <div class="col-sm-4">
                         <div class="mb-3">
                             <label for="category_name" class="form-label">Category</label>
-                            <input class="form-control" list="datalistCategory" name="category_name" placeholder="Search Category" required />
+                            <input class="form-control" list="datalistCategory" name="category_name" placeholder="Search Category" />
                             <datalist id="datalistCategory">
                                 @foreach($categories as $category)
                                 <option value="{{ $category->category_name }}"></option>
@@ -70,7 +70,7 @@
                     <div class="col-sm-4">
                         <div class="mb-3">
                             <label for="subcategory_name" class="form-label">Subcategory</label>
-                            <input class="form-control" list="datalistSubCategory" name="subcategory_name" placeholder="Search Subcategory" required />
+                            <input class="form-control" list="datalistSubCategory" name="subcategory_name" placeholder="Search Subcategory" />
                             <datalist id="datalistSubCategory">
                                 @foreach($subcategories as $subcategory)
                                 <option value="{{ $subcategory->subcategory_name }}"></option>
@@ -94,7 +94,7 @@
                     <div class="col-sm-3">
                         <div class="mb-3">
                             <label for="sale_price" class="form-label">SKU</label>
-                            <input type="text" class="form-control" name="sku" placeholder="SKU" required />
+                            <input type="text" class="form-control" name="sku" placeholder="SKU" />
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -120,7 +120,7 @@
                     <div class="col-sm-3">
                         <div class="mb-3">
                             <label for="bootstrap_v" class="form-label">Bootstrap Version</label>
-                            <input type="text" class="form-control" name="bootstrap_v" placeholder="Bootstrap Version" required />
+                            <input type="text" class="form-control" name="bootstrap_v" placeholder="Bootstrap Version" />
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -138,7 +138,7 @@
                     <div class="col-sm-3">
                         <div class="mb-3">
                             <label for="version" class="form-label">Version</label>
-                            <input type="text" class="form-control" name="version" placeholder="Version" required />
+                            <input type="text" class="form-control" name="version" placeholder="Version" />
                         </div>
                     </div>
                 </div>
@@ -146,13 +146,13 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="seller_name" class="form-label">Seller Name</label>
-                            <input type="text" class="form-control" name="seller_name" placeholder="Seller Name" required />
+                            <input type="text" class="form-control" name="seller_name" placeholder="Seller Name" />
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="seller_email" class="form-label">Seller Email</label>
-                            <input type="email" class="form-control" name="seller_email" placeholder="Seller Email" required />
+                            <input type="email" class="form-control" name="seller_email" placeholder="Seller Email" />
                         </div>
                     </div>
                 </div>
@@ -176,17 +176,82 @@
                         </div>
                     </div>
                 </div>
+
+                <hr class="border border-secondery border-2 opacity-75">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image</label>
+                            <input class="form-control" type="file" name="image" />
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="icon_alt_text" placeholder="Icon Alt Text" />
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border border-secondery border-2 opacity-75">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label for="file" class="form-label">File</label>
+                            <input class="form-control" type="file" name="file" multiple />
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border border-secondery border-2 opacity-75">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="icon" class="form-label">Icon</label>
+                            <input class="form-control" type="file" name="icon" />
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="icon_alt_text" placeholder="Icon Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="thumb" class="form-label">Thumb</label>
+                            <input class="form-control" type="file" name="thumb" />
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="thumb_alt_text" placeholder="Thumb Alt Text" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="cover" class="form-label">Cover</label>
+                            <input class="form-control" type="file" name="cover" />
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="cover_alt_text" placeholder="Cover Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="og_image" class="form-label">Upload OG</label>
+                            <input class="form-control" type="file" name="og_image" multiple />
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="og_img_alt_text" placeholder="OG Alt Text" />
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border border-secondery border-2 opacity-75">
+
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="youtube_iframe" class="form-label">Youtube Iframe</label>
-                            <textarea class="form-control" id="youtube_iframe" rows="5" name="youtube_iframe"></textarea>
+                            <textarea class="form-control" name="youtube_iframe" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="header_content" class="form-label">Header Content</label>
-                            <textarea class="form-control" id="header_content" rows="5" name="header_content"></textarea>
+                            <textarea class="form-control" name="header_content" rows="3"></textarea>
                         </div>
                     </div>
                 </div>
@@ -194,13 +259,13 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="meta_title" class="form-label">Meta Title</label>
-                            <textarea class="form-control" id="meta_title" rows="3" name="meta_title"></textarea>
+                            <textarea class="form-control" name="meta_title" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="meta_description" class="form-label">Meta Description</label>
-                            <textarea class="form-control" id="meta_description" rows="3" name="meta_description"></textarea>
+                            <textarea class="form-control" name="meta_description" rows="3"></textarea>
                         </div>
                     </div>
                 </div>
@@ -237,63 +302,38 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="mb-3">
-                            <label for="order_type" class="form-label">Order Type</label>
-                            <input class="form-control" list="datalistOrderType" name="order_type" value="{{ old('order_type', '0') }}" placeholder="Pre-Order" />
-                            <datalist id="datalistOrderType">
-                                <option value="1">Normal</option>
-                                <option value="0">Pre-Order</option>
-                            </datalist>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="mb-3">
-                            <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="is_featured" value="0" id="featuredCheckDefault">
-                                  <label class="form-check-label" for="featuredCheckDefault">Featured?</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="mb-3">
                             <label for="live_preview_link" class="form-label">Live Preview Link</label>
                             <input type="text" class="form-control" name="live_preview_link" placeholder="Live Preview Link" />
                         </div>
-                    </div>
-                    <div class="col-sm-12">
                         <div class="mb-3">
                             <label for="admin_link" class="form-label">Admin Link</label>
                             <input type="text" class="form-control" name="admin_link" placeholder="Admin Link" />
                         </div>
-                    </div>
-                    <div class="col-sm-12">
                         <div class="mb-3">
                             <label for="downloadable_link" class="form-label">Downloadable Link</label>
                             <input type="text" class="form-control" name="downloadable_link" placeholder="Downloadable Link" />
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="inputGroupStatus">Order Type</label>
+                                <select class="form-select" id="inputGroupStatus" name="order_type">
+                                    <option value="0">Choose...</option>
+                                    <option value="1">Normal</option>
+                                    <option value="2">Pre-Order</option>
+                                    <option value="3">Virtual</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="is_featured" value="0" id="featuredCheckDefault">
+                                  <label class="form-check-label" for="featuredCheckDefault">Is Featured?</label>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="mb-3">
-                            <label for="image" class="form-label">Upload Image</label>
-                            <input class="form-control" type="file" name="image" multiple />
-                        </div>
-                        <div class="mb-3">
-                            <label for="img_alt_text" class="form-label">Image</label>
-                            <input type="text" class="form-control" name="img_alt_text" placeholder="Image Alt Text" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="og" class="form-label">OG Image</label>
-                            <input class="form-control" type="file" name="og" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="og_img_alt_text" class="form-label">OG Image Alt Text</label>
-                            <input type="text" class="form-control" name="og_img_alt_text" placeholder="OG Image Alt Text" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="file" class="form-label">Upload File</label>
-                            <input class="form-control" type="file" name="file" multiple />
-                        </div>
                         <div class="mb-3">
                             <label class="form-label" for="content">Content?</label>
                         </div>
@@ -328,8 +368,6 @@
         <div class="row">
             <div class="col-sm-12">
                 <button type="submit" class="btn btn-primary">Publish</button>
-                <button type="submit" class="btn btn-primary">Draft</button>
-                <button type="submit" class="btn btn-secondary">Publish & Add Another</button>
             </div>
         </div>
     </form>

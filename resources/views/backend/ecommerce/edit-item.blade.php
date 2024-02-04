@@ -9,7 +9,7 @@
         <div class="col-12">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('ecommerce.dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('ecommerce.manage-item') }}">Manage Item</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Update Item</li>
                 </ol>
@@ -177,31 +177,100 @@
                         </div>
                     </div>
                 </div>
+
+                <hr class="border border-secondery border-2 opacity-75">
+
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="mb-3">
-                            <label for="youtube_iframe" class="form-label">Youtube Iframe</label>
-                            <textarea class="form-control" id="youtube_iframe" rows="3" name="youtube_iframe">{{ $item->youtube_iframe }}</textarea>
+                            <img src="{{ asset('ecommerce/item/image/' . $item->image) }}" class="img-thumbnail" alt="...">
                         </div>
-                    </div>
-                    <div class="col-sm-6">
                         <div class="mb-3">
-                            <label for="header_content" class="form-label">Header Content</label>
-                            <textarea class="form-control" id="header_content" rows="3" name="header_content">{{ $item->header_content }}</textarea>
+                            <input class="form-control" type="text" name="image_alt_text" value="{{ $item->icon_alt_text }}" placeholder="Image Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image</label>
+                            <input class="form-control" type="file" name="image" />
                         </div>
                     </div>
                 </div>
+
+                <hr class="border border-secondery border-2 opacity-75">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <a href="{{ asset('ecommerce/item/file/' . $item->file) }}" target="_blank">Open</a>
+                        </div>
+                        <div class="mb-3">
+                            <label for="file" class="form-label">File</label>
+                            <input class="form-control" type="file" name="file" multiple />
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border border-secondery border-2 opacity-75">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <img src="{{ asset('ecommerce/item/image/icon/' . $item->icon) }}" class="img-thumbnail" alt="...">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="icon_alt_text" value="{{ $item->icon_alt_text }}" placeholder="Icon Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="icon" class="form-label">Icon</label>
+                            <input class="form-control" type="file" name="icon" />
+                        </div>
+                        <div class="mb-3">
+                            <img src="{{ asset('ecommerce/item/image/thumb/' . $item->thumb) }}" class="img-thumbnail" alt="...">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="thumb_alt_text" value="{{ $item->thumb_alt_text }}" placeholder="Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="thumb" class="form-label">Thumb</label>
+                            <input class="form-control" type="file" name="thumb" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <img src="{{ asset('ecommerce/item/image/cover/' . $item->cover) }}" class="img-thumbnail" alt="...">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="cover_alt_text" value="{{ $item->cover_alt_text }}" placeholder="Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="cover" class="form-label">Cover</label>
+                            <input class="form-control" type="file" name="cover" />
+                        </div>
+                        <div class="mb-3">
+                            <img src="{{ asset('ecommerce/item/image/og/' . $item->og_image) }}" class="img-thumbnail" alt="...">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="og_img_alt_text" value="{{ $item->og_img_alt_text }}" placeholder="Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="og_image" class="form-label">Upload OG</label>
+                            <input class="form-control" type="file" name="og_image" multiple />
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border border-secondery border-2 opacity-75">
+
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="meta_title" class="form-label">Meta Title</label>
-                            <textarea class="form-control" id="meta_title" rows="3" name="meta_title">{{ $item->meta_title }}</textarea>
+                            <textarea class="form-control" name="meta_title" rows="5">{{ $item->meta_title }}</textarea>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="meta_description" class="form-label">Meta Description</label>
-                            <textarea class="form-control" id="meta_description" rows="3" name="meta_description">{{ $item->meta_description }}</textarea>
+                            <textarea class="form-control" name="meta_description" rows="5">{{ $item->meta_description }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -209,13 +278,13 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="facebook_meta_title" class="form-label">Facebook Meta Title</label>
-                            <textarea class="form-control" id="facebook_meta_title" rows="3" name="facebook_meta_title">{{ $item->facebook_meta_title }}</textarea>
+                            <textarea class="form-control" name="facebook_meta_title" rows="5">{{ $item->facebook_meta_title }}</textarea>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="facebook_meta_description" class="form-label">Facebook Meta Description</label>
-                            <textarea class="form-control" id="facebook_meta_description" rows="3" name="facebook_meta_description">{{ $item->facebook_meta_description }}</textarea>
+                            <textarea class="form-control" name="facebook_meta_description" rows="5">{{ $item->facebook_meta_description }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -223,38 +292,18 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="twitter_meta_title" class="form-label">Twitter Meta Title</label>
-                            <textarea class="form-control" id="twitter_meta_title" rows="3" name="twitter_meta_title">{{ $item->twitter_meta_title }}</textarea>
+                            <textarea class="form-control" name="twitter_meta_title" rows="5">{{ $item->twitter_meta_title }}</textarea>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="twitter_meta_description" class="form-label">Twitter Meta Description</label>
-                            <textarea class="form-control" id="twitter_meta_description" rows="3" name="twitter_meta_description">{{ $item->twitter_meta_description }}</textarea>
+                            <textarea class="form-control" name="twitter_meta_description" rows="5">{{ $item->twitter_meta_description }}</textarea>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="mb-3">
-                            <label for="order_type" class="form-label">Order Type</label>
-                            <input class="form-control" list="datalistOrderType" name="order_type" placeholder="@if($item->order_type == 1) Normal @else Pre-Order @endif" />
-                            <datalist id="datalistOrderType">
-                                <option value="1">Normal</option>
-                                <option value="0">Pre-Order</option>
-                            </datalist>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="mb-3">
-                            <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="is_featured" value="1" id="featuredCheckDefault" @if($item->is_featured == 1) checked @endif>
-                                  <label class="form-check-label" for="featuredCheckDefault">Featured?</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="mb-3">
@@ -269,40 +318,31 @@
                             <label for="downloadable_link" class="form-label">Downloadable Link</label>
                             <input type="text" class="form-control" name="downloadable_link" value="{{ $item->downloadable_link }}" placeholder="Downloadable Link" />
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
                         <div class="mb-3">
-                            <label for="image" class="form-label">Live Image</label>
-                            <img src="{{ asset('template/image/' . $item->image) }}" class="img-thumbnail" alt="...">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="inputGroupStatus">Order Type</label>
+                                <select class="form-select" id="inputGroupStatus" name="order_type">
+                                    @if($item->order_type == 1)
+                                    <option value="1">Normal</option>
+                                    <option value="2">Pre-Order</option>
+                                    <option value="3">Virtual</option>
+                                    @elseif($item->order_type == 2)
+                                    <option value="2">Pre-Order</option>
+                                    <option value="1">Normal</option>
+                                    <option value="3">Virtual</option>
+                                    @else($item->order_type == 3)
+                                    <option value="3">Virtual</option>
+                                    <option value="1">Normal</option>
+                                    <option value="2">Pre-Order</option>
+                                    @endif
+                                </select>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="image" class="form-label">Upload Image</label>
-                            <input class="form-control" type="file" name="image" id="image" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="img_alt_text" class="form-label">Image Alt Text</label>
-                            <input type="text" class="form-control" name="img_alt_text" value="{{ $item->img_alt_text }}" placeholder="Image Alt Text" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="og" class="form-label">OG Image</label>
-                            <img src="{{ asset('template/image/og/' . $item->og) }}" class="img-thumbnail" alt="...">
-                        </div>
-                        <div class="mb-3">
-                            <label for="og_image" class="form-label">Upload OG</label>
-                            <input class="form-control" type="file" name="og_image" id="og_image" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="og_img_alt_text" class="form-label">OG Image Alt Text</label>
-                            <input type="text" class="form-control" name="og_img_alt_text" value="{{ $item->og_img_alt_text }}" placeholder="OG Image Alt Text" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="file" class="form-label"><a href="{{ asset('template/file/' . $item->file) }}" target="_blank">Open</a></label>
-                        </div>
-                        <div class="mb-3">
-                            <label for="file" class="form-label">Upload File</label>
-                            <input class="form-control" type="file" name="file" id="file" multiple />
+                            <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="is_featured" value="1" id="featuredCheckDefault" @if($item->is_featured == 1) checked @endif>
+                                  <label class="form-check-label" for="featuredCheckDefault">Featured?</label>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="content">Content?</label>
@@ -346,8 +386,6 @@
         <div class="row">
             <div class="col-sm-12">
                 <button type="submit" class="btn btn-primary">Publish</button>
-                <button type="submit" class="btn btn-primary">Draft</button>
-                <button type="submit" class="btn btn-secondary">Publish & Add Another</button>
             </div>
         </div>
     </form>

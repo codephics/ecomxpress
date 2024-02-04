@@ -23,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
     public const EcommerceCategories = '/ecommerce/categories/manage-categories';
     public const EcommerceSubCategories = '/ecommerce/categories/manage-subcategories';
     public const EcommerceSubSubCategories = '/ecommerce/categories/manage-sub-subcategories';
-    public const EcommerceNew = '/ecommerce/manage-items';
+    public const EcommerceItem = '/ecommerce/manage-items';
     public const EcommerceSeller = 'ecommerce/seller/manage-seller';
     public const EcommerceAudio = '/ecommerce/manage-audios';
     public const EcommerceAudioPlaylist = '/ecommerce/manage-audio-playlists';

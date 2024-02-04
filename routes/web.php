@@ -211,11 +211,11 @@ Route::put('ecommerce/seller/manage-seller/update/{id}', [EcommerceSellerControl
 Route::delete('ecommerce/seller/manage-seller/destroy/{id}', [EcommerceSellerController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.seller.destroy');
 
 // Ecommerce
-Route::get('ecommerce/manage-item', [EcommerceItemsController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-item');
-Route::get('ecommerce/new-item', [EcommerceItemsController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.new-item');
-Route::post('ecommerce/store-item', [EcommerceItemsController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.item.store');
-Route::get('ecommerce/edit-item/{id}', [EcommerceItemsController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.item.edit');
-Route::put('ecommerce/update-item/{id}', [EcommerceItemsController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.item.update');
-Route::delete('ecommerce/destroy-item/{id}', [EcommerceItemsController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.item.destroy');
+Route::get('ecommerce/manage-items', [EcommerceItemsController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-item');
+Route::get('ecommerce/item/new', [EcommerceItemsController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.item.new');
+Route::post('ecommerce/item/store', [EcommerceItemsController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.item.store');
+Route::get('ecommerce/item/edit/{id}', [EcommerceItemsController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.item.edit');
+Route::put('ecommerce/item/update/{id}', [EcommerceItemsController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.item.update');
+Route::delete('ecommerce/item/destroy/{id}', [EcommerceItemsController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.item.destroy');
 
 require __DIR__.'/auth.php';

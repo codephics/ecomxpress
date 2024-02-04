@@ -32,7 +32,7 @@
         <div class="col-lg-2 align-self-center">
             <div class="row">
                 <div class="col-12 col-sm-12">
-                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('ecommerce.new-item') }}">+ Add Item</a>
+                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('ecommerce.item.new') }}">+ Add Item</a>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
                 <tbody>
                     @foreach ($items as $item)
                     <tr>
-                        <td><img src="{{ asset('template/image/' . $item->image) }}" class="" alt="..." height="42" width="42" /></td>
+                        <td><img src="{{ asset('ecommerce/item/image/' . $item->image) }}" class="" alt="..." height="42" width="42" /></td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->sub_subcategory_name ?: ($item->subcategory_name ?: $item->category_name) }}</td>
                         <td>{{ $item->seller_name }}</td>
@@ -74,12 +74,12 @@
                         <td>@if($item->status == 1) Published @else Draft @endif</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                              <a href="{{ route('template.edit',$item->id) }}" class="btn btn-secondary">Edit</a>
+                              <a href="{{ route('ecommerce.item.edit',$item->id) }}" class="btn btn-secondary">Edit</a>
 
-                              <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#deleteTemplate{{ $item->id }}">Destroy</button>
+                              <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#deleteItem{{ $item->id }}">Destroy</button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="deleteTemplate{{ $item->id }}" tabindex="-1" aria-labelledby="deleteTemplateLabel" aria-hidden="true">
+                                <div class="modal fade" id="deleteItem{{ $item->id }}" tabindex="-1" aria-labelledby="deleteItemLabel" aria-hidden="true">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
                                       <div class="modal-header">
@@ -89,7 +89,7 @@
                                       <div class="modal-body">
                                         <p>Do you really want to delete. This process cannot be undone.</p>
                                       </div>
-                                      <form method="POST" action="{{ route('template.destroy-template',$item->id) }}">
+                                      <form method="POST" action="{{ route('ecommerce.item.destroy',$item->id) }}">
                                         @csrf
                                         @method('DELETE')
                                       <div class="modal-footer">
