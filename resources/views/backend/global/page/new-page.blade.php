@@ -10,7 +10,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('blog.page.manage-pages') }}">Manage Pages</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('page.manage-pages') }}">Manage Pages</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Add Page</li>
                 </ol>
             </nav>
@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <form class="needs-validation" method="POST" action="{{ route('blog.page.new-page.store') }}" enctype="multipart/form-data" novalidate>
+    <form class="needs-validation" method="POST" action="{{ route('page.store') }}" enctype="multipart/form-data" novalidate>
         @csrf
         <div class="row">
             <div class="col-sm-9">
@@ -63,41 +63,6 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4">
-                        <div class="mb-3">
-                            <label for="category_name" class="form-label">Category</label>
-                            <input class="form-control" list="datalistCategory" name="category_name" placeholder="Category" />
-                            <datalist id="datalistCategory">
-                                @foreach($categories as $category)
-                                <option value="{{ $category->category_name }}"></option>
-                                @endforeach
-                            </datalist>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="mb-3">
-                            <label for="subcategory_name" class="form-label">Sub Category</label>
-                            <input class="form-control" list="datalistSubcategory" name="subcategory_name" id="subcategory_name" placeholder="Sub Category" />
-                            <datalist id="datalistSubcategory">
-                                @foreach($subcategories as $subcategory)
-                                <option value="{{ $subcategory->subcategory_name }}"></option>
-                                @endforeach
-                            </datalist>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="mb-3">
-                            <label for="sub_subcategory_name" class="form-label">Sub Subcategory</label>
-                            <input class="form-control" list="datalistSubSubcategory" name="sub_subcategory_name" placeholder="Sub Subcategory" />
-                            <datalist id="datalistSubSubcategory">
-                                @foreach($sub_subcategories as $sub_subcategory)
-                                <option value="{{ $sub_subcategory->sub_subcategory_name }}"></option>
-                                @endforeach
-                            </datalist>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-sm-12">
                         <div class="mb-3">
                             <label for="short_description" class="form-label">Short Description</label>
@@ -113,17 +78,57 @@
                         </div>
                     </div>
                 </div>
+
+                <hr class="border border-secondery border-2 opacity-75">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="icon" class="form-label">Icon</label>
+                            <input class="form-control" type="file" name="icon" />
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="icon_alt_text" placeholder="Icon Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="thumb" class="form-label">Thumb</label>
+                            <input class="form-control" type="file" name="thumb" />
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="thumb_alt_text" placeholder="Thumb Alt Text" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="cover" class="form-label">Cover</label>
+                            <input class="form-control" type="file" name="cover" />
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="cover_alt_text" placeholder="Cover Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="og_image" class="form-label">Upload OG</label>
+                            <input class="form-control" type="file" name="og_image" multiple />
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="og_img_alt_text" placeholder="OG Alt Text" />
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border border-secondery border-2 opacity-75">
+
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="youtube_iframe" class="form-label">Youtube Iframe</label>
-                            <textarea class="form-control" rows="5" name="youtube_iframe"></textarea>
+                            <textarea class="form-control" name="youtube_iframe" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="header_content" class="form-label">Header Content</label>
-                            <textarea class="form-control" rows="5" name="header_content"></textarea>
+                            <textarea class="form-control" name="header_content" rows="3"></textarea>
                         </div>
                     </div>
                 </div>
@@ -131,13 +136,13 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="meta_title" class="form-label">Meta Title</label>
-                            <textarea class="form-control" id="meta_title" rows="3" name="meta_title"></textarea>
+                            <textarea class="form-control" name="meta_title" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="meta_description" class="form-label">Meta Description</label>
-                            <textarea class="form-control" id="meta_description" rows="3" name="meta_description"></textarea>
+                            <textarea class="form-control" name="meta_description" rows="3"></textarea>
                         </div>
                     </div>
                 </div>
@@ -173,34 +178,6 @@
             <div class="col-sm-3">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="mb-3">
-                            <label for="thumb" class="form-label">Thumb</label>
-                            <input class="form-control" type="file" name="thumb" />
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="thumb_alt_text" placeholder="Thumb Alt Text" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="breadcrumb_image" class="form-label">Breadcrumb Image</label>
-                            <input class="form-control" type="file" name="breadcrumb_image" />
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="breadcrumb_alt_text" placeholder="Breadcrumb Alt Text" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="cover_image" class="form-label">Cover Image</label>
-                            <input class="form-control" type="file" name="cover_image" />
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="cover_alt_text" placeholder="Cover Alt Text" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="og_image" class="form-label">Upload OG</label>
-                            <input class="form-control" type="file" name="og_image" multiple />
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="og_img_alt_text" placeholder="OG Alt Text" />
-                        </div>
                         <div class="mb-3">
                             <label class="form-label" for="content">Content?</label>
                         </div>
@@ -240,7 +217,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <button type="submit" class="btn btn-primary" disabled>Publish</button>
+                <button type="submit" class="btn btn-primary">Publish</button>
             </div>
         </div>
     </form>

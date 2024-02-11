@@ -123,15 +123,7 @@ class PageController extends Controller
 
     public function create(Request $request)
     {
-        $categories = BlogCategory::all();
-        $subcategories = BlogSubcategory::all();
-        $sub_subcategories = BlogSubSubcategory::all();
-
-        return view('backend.global.page.new-page', [
-            'categories' => $categories, 
-            'subcategories' => $subcategories, 
-            'sub_subcategories' => $sub_subcategories,
-        ]);
+        return view('backend.global.page.new-page');
     }
 
     public function store(Request $request): RedirectResponse
@@ -143,9 +135,6 @@ class PageController extends Controller
             'title' => $request->title,
             'slug' => $request->slug,
             'keywords' => $keywords,
-            'category_name' => $request->category_name,
-            'subcategory_name' => $request->subcategory_name,
-            'sub_subcategory_name' => $request->sub_subcategory_name,
             'short_description' => $request->short_description,
             'long_description' => $request->long_description,
             'youtube_iframe' => $request->youtube_iframe,
@@ -156,8 +145,8 @@ class PageController extends Controller
             'facebook_meta_description' => $request->facebook_meta_description,
             'twitter_meta_title' => $request->twitter_meta_title,
             'twitter_meta_description' => $request->twitter_meta_description,
+            'icon_alt_text' => $request->icon_alt_text,
             'thumb_alt_text' => $request->thumb_alt_text,
-            'breadcrumb_alt_text' => $request->breadcrumb_alt_text,
             'cover_alt_text' => $request->cover_alt_text,
             'og_img_alt_text' => $request->og_img_alt_text,
             'is_index' => $request->is_index,
@@ -169,37 +158,37 @@ class PageController extends Controller
 
         $page->save();
 
+        if ($request->hasFile('icon')) {
+            $icon = $request->file('icon')->getClientOriginalName();
+            $request->file('icon')->move(public_path('global/page/image/icon'), $icon);
+            $page->icon = $icon;
+        }
+
         if ($request->hasFile('thumb')) {
             $thumb = $request->file('thumb')->getClientOriginalName();
-            $request->file('thumb')->move(public_path('blog/image/page/thumb'), $thumb);
+            $request->file('thumb')->move(public_path('global/page/image/thumb'), $thumb);
             $page->thumb = $thumb;
         }
 
-        if ($request->hasFile('breadcrumb_image')) {
-            $breadcrumbImage = $request->file('breadcrumb_image')->getClientOriginalName();
-            $request->file('breadcrumb_image')->move(public_path('blog/image/page/breadcrumb'), $breadcrumbImage);
-            $page->breadcrumb_image = $breadcrumbImage;
-        }
-
-        if ($request->hasFile('cover_image')) {
-            $coverImage = $request->file('cover_image')->getClientOriginalName();
-            $request->file('cover_image')->move(public_path('blog/image/page/cover'), $coverImage);
-            $page->cover_image = $coverImage;
+        if ($request->hasFile('cover')) {
+            $cover = $request->file('cover')->getClientOriginalName();
+            $request->file('cover')->move(public_path('global/page/image/cover'), $cover);
+            $page->cover = $cover;
         }
 
         if ($request->hasFile('og_image')) {
             $oGImage = $request->file('og_image')->getClientOriginalName();
-            $request->file('og_image')->move(public_path('blog/image/page/og'), $oGImage);
+            $request->file('og_image')->move(public_path('global/page/image/og'), $oGImage);
             $page->og_image = $oGImage;
         }
 
-        if ($request->hasFile('thumb') || $request->hasFile('breadcrumb_image') || $request->hasFile('cover_image') || $request->hasFile('og_image')) {
+        if ($request->hasFile('icon') || $request->hasFile('thumb') || $request->hasFile('cover') || $request->hasFile('og_image')) {
             $page->save();
         }
 
         Session::flash('message', __('New Page Successfully Created!'));
         
-        return redirect(RouteServiceProvider::Page);
+        return redirect(RouteServiceProvider::ManagePages);
     }
 
     public function show(Request $request)
@@ -226,47 +215,60 @@ class PageController extends Controller
 
     public function update(Request $request, $id): RedirectResponse
     {
-        $page = page::find($id);
+        $page = Page::find($id);
 
         if ($page) {
-            $thumb = $request->file('thumb');
 
-            if ($thumb) {
+            $newIcon = $request->file('icon');
 
-                $thumbName = $request->thumb->getClientOriginalName();
-                $request->thumb->move(public_path('blog/image/page/thumb'), $thumbName);
+            if ($newIcon) {
+                $validatedData = $request->validate([
+                    // 'icon' => 'icon|mimes:jpeg,png,jpg,gif|max:2048',
+                ]);
 
-                $page->thumb = $thumbName;
+                $newIconName = $request->icon->getClientOriginalName();
+                $request->icon->move(public_path('global/page/image/icon'), $newIconName);
+
+                $page->icon = $newIconName;
             }
 
-            $breadcrumb = $request->file('breadcrumb_image');
+            $newThumb = $request->file('thumb');
 
-            if ($breadcrumb) {
+            if ($newThumb) {
+                $validatedData = $request->validate([
+                    // 'thumb' => 'thumb|mimes:jpeg,png,jpg,gif|max:2048',
+                ]);
 
-                $breadcrumbName = $request->breadcrumb_image->getClientOriginalName();
-                $request->breadcrumb_image->move(public_path('blog/image/page/breadcrumb'), $breadcrumbName);
+                $newThumbName = $request->thumb->getClientOriginalName();
+                $request->thumb->move(public_path('global/page/image/thumb'), $newThumbName);
 
-                $page->breadcrumb_image = $breadcrumbName;
+                $page->thumb = $newThumbName;
             }
 
-            $cover = $request->file('cover_image');
+            $newCover = $request->file('cover');
 
-            if ($cover) {
+            if ($newCover) {
+                $validatedData = $request->validate([
+                    // 'cover' => 'cover|mimes:jpeg,png,jpg,gif|max:2048',
+                ]);
 
-                $coverName = $request->cover_image->getClientOriginalName();
-                $request->cover_image->move(public_path('blog/image/page/cover'), $coverName);
+                $newCoverName = $request->cover->getClientOriginalName();
+                $request->cover->move(public_path('global/page/image/cover'), $newCoverName);
 
-                $page->cover_image = $coverName;
+                $page->cover = $newCoverName;
             }
 
-            $og = $request->file('og_image');
+            $newOG = $request->file('og_image');
 
-            if ($og) {
+            if ($newOG) {
+                $validatedData = $request->validate([
+                    // 'og_image' => 'og|mimes:jpeg,png,jpg,gif|max:2048',
+                ]);
 
-                $ogImageName = $request->og_image->getClientOriginalName();
-                $request->og_image->move(public_path('blog/image/page/og'), $ogImageName);
+                $newOGName = $request->og_image->getClientOriginalName();
+                $request->og_image->move(public_path('global/page/image/og'), $newOGName);
 
-                $page->og_image = $ogImageName;
+                $page->og_image = $newOGName;
             }
 
             $keywords = implode(', ', (array) $request->keywords);
@@ -275,9 +277,6 @@ class PageController extends Controller
             $page->title = $request->input('title');
             $page->slug = $request->input('slug');            
             $page->keywords = $keywords;
-            $page->category_name = $request->input('category_name');
-            $page->subcategory_name = $request->input('subcategory_name');
-            $page->sub_subcategory_name = $request->input('sub_subcategory_name');
             $page->short_description = $request->input('short_description');
             $page->long_description = $request->input('long_description');
             $page->youtube_iframe = $request->input('youtube_iframe');
@@ -288,8 +287,8 @@ class PageController extends Controller
             $page->facebook_meta_description = $request->input('facebook_meta_description');
             $page->twitter_meta_title = $request->input('twitter_meta_title');
             $page->twitter_meta_description = $request->input('twitter_meta_description');
+            $page->icon_alt_text = $request->input('icon_alt_text');
             $page->thumb_alt_text = $request->input('thumb_alt_text');
-            $page->breadcrumb_alt_text = $request->input('breadcrumb_alt_text');
             $page->cover_alt_text = $request->input('cover_alt_text');
             $page->og_img_alt_text = $request->input('og_img_alt_text');
             $page->is_index = $request->input('is_index');
@@ -298,7 +297,7 @@ class PageController extends Controller
 
             if (!is_null($request->input('status'))) {
                 $page->status = $request->input('status');
-            }                        
+            }
             
             $page->comment = $request->input('comment');
 
@@ -313,7 +312,7 @@ class PageController extends Controller
 
         Session::flash('update', __('Page Successfully Updated!'));
         
-        return redirect(RouteServiceProvider::Page);
+        return redirect(RouteServiceProvider::ManagePages);
     }
 
     public function destroy(Request $request, $id)

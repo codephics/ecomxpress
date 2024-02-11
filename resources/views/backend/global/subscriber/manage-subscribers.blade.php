@@ -18,7 +18,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Manage Pages</li>
+                    <li class="breadcrumb-item active" aria-current="page">Manage Subscribers</li>
                 </ol>
             </nav>
         </div>
@@ -27,26 +27,16 @@
 
     <div class="row">
         <div class="col-md-10">
-            <h1>Manage Pages</h1>
+            <h1>Manage Subscribers</h1>
         </div>
         <div class="col-lg-2 align-self-center">
             <div class="row">
                 <div class="col-12 col-sm-12">
-                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('page.new') }}">+ Add Page</a>
+                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('subscriber.new') }}">+ Add Subscriber</a>
                 </div>
             </div>
         </div>
     </div>
-
-    @if(session()->has('message'))
-    <div class="row">
-        <div class="col-md-12">
-            <div class="alert alert-success" role="alert">
-                {{ session('message') }}
-            </div>
-        </div>
-    </div>
-    @endif
 
     @if(session()->has('success'))
     <div class="row">
@@ -80,28 +70,22 @@
             <table id="example" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
-                        <th>SN</th>
-                        <th>Name</th>
-                        <th>Title</th>
-                        <th>Status</th>
+                        <th>Email</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pages as $index => $page)
+                    @foreach ($subscribers as $subscriber)
                     <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $page->name }}</td>
-                        <td>{{ $page->title }}</td>
-                        <td>@if($page->status == 1) Live @else Draft @endif</td>
+                        <td>{{ $subscriber->email }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                              <a href="{{ route('page.edit',$page->id) }}" class="btn btn-light">Edit</a>
+                              <a href="{{ route('subscriber.edit',$subscriber->id) }}" class="btn btn-secondary">Edit</a>
 
-                              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#deletepage{{ $page->id }}">Destroy</button>
+                              <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#deletesubscriber{{ $subscriber->id }}">Destroy</button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="deletepage{{ $page->id }}" tabindex="-1" aria-labelledby="deletepageLabel" aria-hidden="true">
+                                <div class="modal fade" id="deletesubscriber{{ $subscriber->id }}" tabindex="-1" aria-labelledby="deletesubscriberLabel" aria-hidden="true">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
                                       <div class="modal-header">
@@ -111,7 +95,7 @@
                                       <div class="modal-body">
                                         <p>Do you really want to delete. This process cannot be undone.</p>
                                       </div>
-                                      <form method="POST" action="{{ route('page.destroy',$page->id) }}">
+                                      <form method="POST" action="{{ route('subscriber.destroy',$subscriber->id) }}">
                                         @csrf
                                         @method('DELETE')
                                       <div class="modal-footer">
@@ -129,10 +113,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>SN</th>
-                        <th>Name</th>
-                        <th>Title</th>
-                        <th>Status</th>
+                        <th>Email</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>

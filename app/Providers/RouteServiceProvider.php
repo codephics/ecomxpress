@@ -25,9 +25,11 @@ class RouteServiceProvider extends ServiceProvider
     public const EcommerceSubSubCategories = '/ecommerce/categories/manage-sub-subcategories';
     public const EcommerceItem = '/ecommerce/manage-items';
     public const EcommerceSeller = 'ecommerce/seller/manage-seller';
-    public const EcommerceAudio = '/ecommerce/manage-audios';
-    public const EcommerceAudioPlaylist = '/ecommerce/manage-audio-playlists';
-    public const EcommerceSubscription = '/ecommerce/manage-subscriptions';
+
+    public const ManagePages = 'manage-pages';
+    public const ManageContacts = 'manage-contacts';
+    public const ManageSubscribers = 'manage-subscribers';
+    public const ManageSettings = 'settings';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

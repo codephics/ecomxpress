@@ -9,7 +9,7 @@
                 <div class="col-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('front.home') }}">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">{{ $page->name }}</li>
                         </ol>
                     </nav>
@@ -21,7 +21,7 @@
         <!-- Content -->
         <section>
 			<div class="my-5 text-center">
-				<img class="d-block mx-auto mb-2" src="{{ asset('contact/boxed-logo.png') }}" alt="" width="72" height="57" />
+				<img class="d-block mx-auto mb-2" src="{{ asset('global/boxed-logo.png') }}" alt="" width="72" height="57" />
 				<h1>Contact Us</h1>
 				<div class="col-lg-6 mx-auto">
 					<p>if you have any questions or need more information about our services, please don't hesitate to contact us. Our team is always ready to assist you and provide you with the support you need. You can reach out to us by phone, email, or through our contact form. We look forward to hearing from you!</p>
@@ -31,7 +31,7 @@
 			<div class="row">
 				<div class="col"></div>
 				<div class="col-md-4 col-lg-5 bg-white">
-					<form class="row g-3 float-end needs-validation" method="POST" action="{{ route('front.new-contact') }}" novalidate>
+					<form class="row g-3 float-end needs-validation" method="POST" action="{{ route('contact-us.new') }}" novalidate>
 						@csrf
 						<div class="row g-3">
 							<div class="col-sm-12">

@@ -15,11 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name', 255);
             $table->string('title', 255);
-            $table->string('slug', 255);
+            $table->string('slug', 255)->unique();
             $table->text('keywords')->nullable();
-            $table->string('category_name', 255)->nullable();
-            $table->string('subcategory_name', 255)->nullable();
-            $table->string('sub_subcategory_name', 255)->nullable();
             $table->text('short_description')->nullable();
             $table->text('long_description')->nullable();
             $table->text('youtube_iframe')->nullable();
@@ -30,13 +27,13 @@ return new class extends Migration
             $table->string('facebook_meta_description', 255)->nullable();
             $table->string('twitter_meta_title', 255)->nullable();
             $table->string('twitter_meta_description', 255)->nullable();
+            $table->string('icon', 255)->default('default-icon.png');
+            $table->string('icon_alt_text', 255)->nullable();
             $table->string('thumb', 255)->default('default-thumb.png');
             $table->string('thumb_alt_text', 255)->nullable();
-            $table->string('breadcrumb_image', 255)->default('default-breadcrumb.png');
-            $table->string('breadcrumb_alt_text', 255)->nullable();
-            $table->string('cover_image', 255)->default('default-cover.png');
+            $table->string('cover', 255)->default('default-cover.png');
             $table->string('cover_alt_text', 255)->nullable();
-            $table->string('og_image', 255)->default('default-og.png');
+            $table->string('og_image', 255)->default('default-icon.png');
             $table->string('og_img_alt_text', 255)->nullable();
             $table->tinyInteger('is_index')->default(0)->nullable();
             $table->tinyInteger('is_follow')->default(0)->nullable();
@@ -49,37 +46,42 @@ return new class extends Migration
         DB::table('pages')->insert([
             [
                 'name' => 'Homepage',
-                'title' => '',
+                'title' => 'Homepage',
                 'slug' => 'homepage',
             ],
             [
+                'name' => 'Shop',
+                'title' => 'Shop',
+                'slug' => 'shop',
+            ],
+            [
                 'name' => 'Privacy Policy',
-                'title' => '',
+                'title' => 'Privacy Policy',
                 'slug' => 'privacy-policy',
             ],
             [
                 'name' => 'Terms of Service',
-                'title' => '',
+                'title' => 'Terms of Service',
                 'slug' => 'terms-of-service',
             ],
             [
                 'name' => 'License',
-                'title' => '',
+                'title' => 'License',
                 'slug' => 'license',
             ],
             [
                 'name' => 'About Us',
-                'title' => '',
+                'title' => 'About Us',
                 'slug' => 'about-us',
             ],
             [
                 'name' => 'Contact Us',
-                'title' => '',
+                'title' => 'Contact Us',
                 'slug' => 'contact-us',
             ],
             [
                 'name' => 'More Blogs',
-                'title' => '',
+                'title' => 'More Blogs',
                 'slug' => 'more-blogs',
             ],
         ]);

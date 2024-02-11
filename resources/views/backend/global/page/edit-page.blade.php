@@ -74,41 +74,6 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4">
-                        <div class="mb-3">
-                            <label for="category_name" class="form-label">Category</label>
-                            <input class="form-control" list="datalistCategory" name="category_name" value="{{ $page->category_name }}" placeholder="Category" />
-                            <datalist id="datalistCategory">
-                                @foreach($categories as $category)
-                                <option value="{{ $category->category_name }}"></option>
-                                @endforeach
-                            </datalist>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="mb-3">
-                            <label for="subcategory_name" class="form-label">Subcategory</label>
-                            <input class="form-control" list="datalistSubcategory" name="subcategory_name" value="{{ $page->subcategory_name }}" id="subcategory_name" placeholder="Subcategory" />
-                            <datalist id="datalistSubcategory">
-                                @foreach($subcategories as $subcategory)
-                                <option value="{{ $subcategory->subcategory_name }}"></option>
-                                @endforeach
-                            </datalist>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="mb-3">
-                            <label for="sub_subcategory_name" class="form-label">Sub Subcategory</label>
-                            <input class="form-control" list="datalistSubSubcategory" name="sub_subcategory_name" value="{{ $page->sub_subcategory_name }}" placeholder="Sub Subcategory" />
-                            <datalist id="datalistSubSubcategory">
-                                @foreach($sub_subcategories as $sub_subcategory)
-                                <option value="{{ $sub_subcategory->sub_subcategory_name }}"></option>
-                                @endforeach
-                            </datalist>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-sm-12">
                         <div class="mb-3">
                             <label for="short_description" class="form-label">Short Description</label>
@@ -124,6 +89,58 @@
                         </div>
                     </div>
                 </div>
+
+                <hr class="border border-secondery border-2 opacity-75">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <img src="{{ asset('global/page/image/icon/' . $page->icon) }}" class="img-thumbnail" alt="...">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="icon_alt_text" value="{{ $page->icon_alt_text }}" placeholder="Icon Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="icon" class="form-label">Icon</label>
+                            <input class="form-control" type="file" name="icon" />
+                        </div>
+                        <div class="mb-3">
+                            <img src="{{ asset('global/page/image/thumb/' . $page->thumb) }}" class="img-thumbnail" alt="...">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="thumb_alt_text" value="{{ $page->thumb_alt_text }}" placeholder="Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="thumb" class="form-label">Thumb</label>
+                            <input class="form-control" type="file" name="thumb" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <img src="{{ asset('global/page/image/cover/' . $page->cover) }}" class="img-thumbnail" alt="...">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="cover_alt_text" value="{{ $page->cover_alt_text }}" placeholder="Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="cover" class="form-label">Cover</label>
+                            <input class="form-control" type="file" name="cover" />
+                        </div>
+                        <div class="mb-3">
+                            <img src="{{ asset('global/page/image/og/' . $page->og_image) }}" class="img-thumbnail" alt="...">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="og_img_alt_text" value="{{ $page->og_img_alt_text }}" placeholder="Alt Text" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="og_image" class="form-label">Upload OG</label>
+                            <input class="form-control" type="file" name="og_image" multiple />
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border border-secondery border-2 opacity-75">
+
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
@@ -185,46 +202,6 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="mb-3">
-                            <img src="{{ asset('blog/image/page/thumb/' . $page->thumb) }}" class="img-thumbnail" alt="...">
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="thumb_alt_text" value="{{ $page->thumb_alt_text }}" placeholder="Alt Text" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="fthumb" class="form-label">Thumb</label>
-                            <input class="form-control" type="file" name="thumb" />
-                        </div>
-                        <div class="mb-3">
-                            <img src="{{ asset('blog/image/page/breadcrumb/' . $page->breadcrumb_image) }}" class="img-thumbnail" alt="...">
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="breadcrumb_alt_text" value="{{ $page->breadcrumb_alt_text }}" placeholder="Alt Text" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="breadcrumb_image" class="form-label">Breadcrumb</label>
-                            <input class="form-control" type="file" name="breadcrumb_image" />
-                        </div>
-                        <div class="mb-3">
-                            <img src="{{ asset('blog/image/page/cover/' . $page->cover_image) }}" class="img-thumbnail" alt="...">
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="cover_alt_text" value="{{ $page->cover_alt_text }}" placeholder="Alt Text" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="cover_image" class="form-label">Cover</label>
-                            <input class="form-control" type="file" name="cover_image" />
-                        </div>
-                        <div class="mb-3">
-                            <img src="{{ asset('blog/image/page/og/' . $page->og_image) }}" class="img-thumbnail" alt="...">
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-control" type="text" name="og_img_alt_text" value="{{ $page->og_img_alt_text }}" placeholder="Alt Text" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="og_image" class="form-label">Upload OG</label>
-                            <input class="form-control" type="file" name="og_image" multiple />
-                        </div>
-                        <div class="mb-3">
                             <label class="form-label" for="content">Content?</label>
                         </div>
                         <div class="mb-3">
@@ -267,7 +244,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <button type="submit" class="btn btn-primary" disabled>Publish</button>
+                <button type="submit" class="btn btn-primary">Publish</button>
             </div>
         </div>
     </form>

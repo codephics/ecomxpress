@@ -16,6 +16,7 @@ use App\Http\Controllers\Blog\BlogCategoryController;
 use App\Http\Controllers\Blog\BlogTagController;
 
 use App\Http\Controllers\Global\PageController;
+use App\Http\Controllers\Global\AboutController;
 use App\Http\Controllers\Global\ContactController;
 use App\Http\Controllers\Global\SubscriberController;
 use App\Http\Controllers\Global\SettingController;
@@ -29,14 +30,7 @@ use App\Http\Controllers\Global\SitemapController;
 */
 
 // Homepage
-Route::get('', [PageController::class, 'homepage'])->name('front.home');
-
-// Template -> Contact Us
-Route::get('contact-us', [ContactController::class, 'index'])->name('template.contact-us');
-Route::post('contact-us/new-contact', [ContactController::class, 'newContact'])->name('template.front.new-contact');
-
-// Template -> Subscriber
-Route::post('new-subscriber', [TemplateSubscriptionController::class, 'subscriber'])->name('template.new-subscriber');
+Route::get('/', [PageController::class, 'homepage'])->name('front.home');
 
 // Privacy Policy
 Route::get('privacy-policy', [PageController::class, 'privacy'])->name('privacy-policy');
@@ -54,12 +48,39 @@ Route::get('sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 /*
 |--------------------------------------------------------------------------
-| Frontend -> Blog
+| Frontend -> Global -> Blog
 |--------------------------------------------------------------------------
 */
 
 Route::get('more-blogs', [PageController::class, 'blogs'])->name('blog.more');
 Route::get('detail/{slug}', [PageController::class, 'detail'])->name('blog.detail');
+
+/*
+|--------------------------------------------------------------------------
+| Frontend -> Global -> Subscriber
+|--------------------------------------------------------------------------
+*/
+
+Route::post('subscriber/new', [SubscriberController::class, 'subscriber'])->name('subscriber.new');
+
+/*
+|--------------------------------------------------------------------------
+| Frontend -> Global -> About
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/about/overview', [AboutController::class, 'overview'])->name('about.overview');
+Route::get('/about/brand', [AboutController::class, 'brand'])->name('about.brand');
+Route::get('/about/license', [AboutController::class, 'license'])->name('about.license');
+
+/*
+|--------------------------------------------------------------------------
+| Frontend -> Global -> Contact
+|--------------------------------------------------------------------------
+*/
+
+Route::get('contact-us', [ContactController::class, 'index'])->name('contact-us');
+Route::post('contact-us/new', [ContactController::class, 'newContact'])->name('contact-us.new');
 
 /*
 |--------------------------------------------------------------------------
@@ -69,7 +90,7 @@ Route::get('detail/{slug}', [PageController::class, 'detail'])->name('blog.detai
 
 // Ecommerce
 // Route::match(['head', 'get'], '/', [EcommerceItemsController::class, 'index'])->name('ecommerce.home');
-Route::get('items', [EcommerceItemsController::class, 'index'])->name('item.store');
+Route::get('shop', [EcommerceItemsController::class, 'index'])->name('item.shop');
 Route::get('item/detail/{slug}', [EcommerceItemsController::class, 'detail'])->name('item.detail');
 
 // Ecommerce -> Category
@@ -77,7 +98,7 @@ Route::get('item/{category:slug}', [EcommerceItemsController::class, 'showByCate
 Route::get('item/{category:slug}/{subcategory:slug}', [EcommerceItemsController::class, 'showBySubcategory'])->name('subcategory.show');
 Route::get('item/{category:slug}/{subcategory:slug}/{subSubcategory:slug}', [EcommerceItemsController::class, 'showBySubSubcategory'])->name('subSubcategory.show');
 
-// Ecommerce -> Subscription
+// Ecommerce -> Subscriber
 Route::post('new-subscriber', [SubscriberController::class, 'subscriber'])->name('ecommerce.new-subscriber');
 
 /*
@@ -100,28 +121,28 @@ Route::middleware('auth')->group(function () {
 
 // Pages
 Route::get('manage-pages', [PageController::class, 'show'])->middleware(['auth', 'verified'])->name('page.manage-pages');
-Route::get('manage-pages/new-page', [PageController::class, 'create'])->middleware(['auth', 'verified'])->name('page.new-page');
-Route::post('manage-pages/new-page/store', [PageController::class, 'store'])->middleware(['auth', 'verified'])->name('page.new-page.store');
-Route::get('manage-pages/edit/{id}', [PageController::class, 'edit'])->middleware(['auth', 'verified'])->name('page.edit');
-Route::put('manage-pages/update/{id}', [PageController::class, 'update'])->middleware(['auth', 'verified'])->name('page.update');
-Route::delete('manage-pages/destroy/{id}', [PageController::class, 'destroy'])->middleware(['auth', 'verified'])->name('page.destroy');
+Route::get('manage-pages/page/new', [PageController::class, 'create'])->middleware(['auth', 'verified'])->name('page.new');
+Route::post('manage-pages/page/store', [PageController::class, 'store'])->middleware(['auth', 'verified'])->name('page.store');
+Route::get('manage-pages/page/edit/{id}', [PageController::class, 'edit'])->middleware(['auth', 'verified'])->name('page.edit');
+Route::put('manage-pages/page/update/{id}', [PageController::class, 'update'])->middleware(['auth', 'verified'])->name('page.update');
+Route::delete('manage-pages/page/destroy/{id}', [PageController::class, 'destroy'])->middleware(['auth', 'verified'])->name('page.destroy');
 
 // Contact
-Route::get('manage-contact', [ContactController::class, 'show'])->middleware(['auth', 'verified'])->name('manage.contact');
-Route::get('manage-contact/new-contact', [ContactController::class, 'create'])->middleware(['auth', 'verified'])->name('new-contact');
-Route::post('manage-contact/new-contact/store', [ContactController::class, 'store'])->middleware(['auth', 'verified'])->name('new-contact.store');
+Route::get('manage-contacts', [ContactController::class, 'show'])->middleware(['auth', 'verified'])->name('manage.contacts');
+Route::get('manage-contact/contact/new', [ContactController::class, 'create'])->middleware(['auth', 'verified'])->name('contact.new');
+Route::post('manage-contact/contact/store', [ContactController::class, 'store'])->middleware(['auth', 'verified'])->name('contact.store');
 Route::get('manage-contact/edit/{id}', [ContactController::class, 'edit'])->middleware(['auth', 'verified'])->name('contact.edit');
 Route::get('manage-contact/view/{id}', [ContactController::class, 'view'])->middleware(['auth', 'verified'])->name('contact.view');
 Route::put('manage-contact/update/{id}', [ContactController::class, 'update'])->middleware(['auth', 'verified'])->name('contact.update');
 Route::delete('manage-contact/destroy/{id}', [ContactController::class, 'destroy'])->middleware(['auth', 'verified'])->name('contact.destroy');
 
 // Subscriber
-Route::get('manage-subscriber', [SubscriberController::class, 'show'])->middleware(['auth', 'verified'])->name('manage.subscriber');
-Route::get('manage-subscriber/new-subscription', [SubscriberController::class, 'create'])->middleware(['auth', 'verified'])->name('new-subscription');
-Route::post('manage-subscriber/store-subscription', [SubscriberController::class, 'store'])->middleware(['auth', 'verified'])->name('store-subscription');
-Route::get('manage-subscriber/edit-subscription/{id}', [SubscriberController::class, 'edit'])->middleware(['auth', 'verified'])->name('edit-subscription');
-Route::put('manage-subscriber/update-subscription/{id}', [SubscriberController::class, 'update'])->middleware(['auth', 'verified'])->name('update-subscription');
-Route::delete('manage-subscriber/destroy-subscription/{id}', [SubscriberController::class, 'destroy'])->middleware(['auth', 'verified'])->name('destroy-subscription');
+Route::get('manage-subscribers', [SubscriberController::class, 'show'])->middleware(['auth', 'verified'])->name('manage.subscribers');
+Route::get('manage-subscriber/subscriber/new', [SubscriberController::class, 'create'])->middleware(['auth', 'verified'])->name('subscriber.new');
+Route::post('manage-subscriber/subscriber/store', [SubscriberController::class, 'store'])->middleware(['auth', 'verified'])->name('subscriber.store');
+Route::get('manage-subscriber/subscriber/edit/{id}', [SubscriberController::class, 'edit'])->middleware(['auth', 'verified'])->name('subscriber.edit');
+Route::put('manage-subscriber/subscriber/update/{id}', [SubscriberController::class, 'update'])->middleware(['auth', 'verified'])->name('subscriber.update');
+Route::delete('manage-subscriber/subscriber/destroy/{id}', [SubscriberController::class, 'destroy'])->middleware(['auth', 'verified'])->name('subscriber.destroy');
 
 // Settings
 Route::middleware('auth')->group(function () {
@@ -210,7 +231,7 @@ Route::get('ecommerce/seller/manage-seller/edit/{id}', [EcommerceSellerControlle
 Route::put('ecommerce/seller/manage-seller/update/{id}', [EcommerceSellerController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.seller.update');
 Route::delete('ecommerce/seller/manage-seller/destroy/{id}', [EcommerceSellerController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.seller.destroy');
 
-// Ecommerce
+// Ecommerce Item
 Route::get('ecommerce/manage-items', [EcommerceItemsController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-item');
 Route::get('ecommerce/item/new', [EcommerceItemsController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.item.new');
 Route::post('ecommerce/item/store', [EcommerceItemsController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.item.store');

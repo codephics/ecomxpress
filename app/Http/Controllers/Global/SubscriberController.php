@@ -20,121 +20,113 @@ class SubscriberController extends Controller
 
     public function create(Request $request)
     {
-        return view('administration.ecommerce.subscription.new-subscription');
+        return view('backend.global.subscriber.new-subscriber');
     }
 
     public function subscriber(Request $request): RedirectResponse
     {
-        // dd($request);
-
         try {
             // Validate the request
             $request->validate([
-                'email' => 'nullable|email|unique:template_subscriptions,email',
+                'email' => 'nullable|email|unique:subscribers,email',
             ]);
 
             if (!$request->has('email')) {
-                // The email input is null, do not show required message
+
                 return back();
             }
 
-            // Create a new subscription
-            $subscription = Subscriber::create([
+            $subscriber = Subscriber::create([
                 'email' => $request->email,
             ]);
 
-            $subscription->save();
+            $subscriber->save();
 
-            // Send a confirmation email to the subscriber (optional)
-
-            // Redirect back with a success message
             return back()->with('success', 'You have been subscribed!');
+
         } catch (ValidationException $e) {
-            // Handle the case when the email is already taken
+
             if ($e->errorBag['email'][0] == 'The email has already been taken.') {
                 return back();
             }
-            // Handle other validation exceptions if needed
+
             return back()->withErrors($e->errors())->withInput();
+
         } catch (\Exception $e) {
-            // Handle other exceptions if needed
+
             return back()->with('error', 'An error occurred (We think, the email has already been taken.). Please try again.');
         }
     }
 
     public function store(Request $request): RedirectResponse
     {
-        // dd($request);
-
         try {
-            // Validate the request
+
             $request->validate([
-                'email' => 'nullable|email|unique:ecommerce_subscriptions,email',
+                'email' => 'nullable|email|unique:subscribers,email',
             ]);
 
             if (!$request->has('email')) {
-                // The email input is null, do not show required message
-                return redirect(RouteServiceProvider::Subscriber);
+
+                return redirect(RouteServiceProvider::ManageSubscribers);
             }
 
-            // Create a new subscription
-            $subscription = Subscriber::create([
+            $subscriber = Subscriber::create([
                 'email' => $request->email,
             ]);
 
-            $subscription->save();
+            $subscriber->save();
 
-            // Send a confirmation email to the subscriber (optional)
+            return redirect(RouteServiceProvider::ManageSubscribers)->with('success', 'You have been subscribed!');
 
-            // Redirect back with a success message
-            return redirect(RouteServiceProvider::Subscriber)->with('success', 'You have been subscribed!');
         } catch (ValidationException $e) {
-            // Handle the case when the email is already taken
+
             if ($e->errorBag['email'][0] == 'The email has already been taken.') {
-                return redirect(RouteServiceProvider::Subscriber);
+                return redirect(RouteServiceProvider::ManageSubscribers);
             }
-            // Handle other validation exceptions if needed
-            return redirect(RouteServiceProvider::Subscriber)->withErrors($e->errors())->withInput();
+
+            return redirect(RouteServiceProvider::ManageSubscribers)->withErrors($e->errors())->withInput();
+
         } catch (\Exception $e) {
-            // Handle other exceptions if needed
-            return redirect(RouteServiceProvider::Subscriber)->with('error', 'An error occurred. Please try again.');
+
+            return redirect(RouteServiceProvider::ManageSubscribers)->with('error', 'An error occurred. Please try again.');
         }
     }
 
     public function show(Request $request)
     {            
-        $subscriptions = Subscriber::all();
+        $subscribers = Subscriber::all();
         
-        return view('administration.ecommerce.subscription.manage-subscriptions', ['subscriptions' => $subscriptions]);
+        return view('backend.global.subscriber.manage-subscribers', ['subscribers' => $subscribers]);
     }
 
     public function edit($id)
     {
-        $subscription = Subscriber::findOrFail($id);
+        $subscriber = Subscriber::findOrFail($id);
         
-        return view('administration.ecommerce.subscription.edit-subscription', ['subscription' => $subscription]);
+        return view('backend.global.subscriber.edit-subscriber', ['subscriber' => $subscriber]);
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
-        $subscription = Subscriber::find($id);
+        $subscriber = Subscriber::find($id);
 
-        if ($subscription) {
+        if ($subscriber) {
 
-            $subscription->email = $request->input('email');
+            $subscriber->email = $request->input('email');
 
-            $subscription->save();
+            $subscriber->save();
 
         } else {
-            // Handle the case when the record doesn't exist
+
             Session::flash('update', __('An issue has arisen! Please return and update once more.'));
 
             return back();
         }
 
-        Session::flash('update', __('Congratulations! The subscription update operation has been executed successfully.'));
+        Session::flash('update', __('Congratulations! The subscriber update operation has been executed successfully.'));
         
-        return redirect(RouteServiceProvider::Subscriber);
+        return redirect(RouteServiceProvider::ManageSubscribers);
     }
 
     public function destroy(Request $request, $id)

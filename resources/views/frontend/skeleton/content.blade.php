@@ -52,47 +52,94 @@
     }
 </style>
 @endsection @section('content')
-<!-- Featured -->
-<section class="py-5 text-center container">
-    <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">{{ \Illuminate\Support\Str::limit($page->title, 100, '...') }}</h1>
-            <p class="lead text-muted">{!! $page->short_description !!}</p>
-            <p>
-                <a href="{{ route('blog.more') }}" class="btn btn-primary my-2">Explore More Blogs</a>
-                <a href="https://codephics.com/solution/detail/blogforge-10" class="btn btn-secondary my-2">Download Now!</a>
-            </p>
+<section>
+    <!-- Header Banner -->
+    <div class="row align-items-center p-5 mb-4 bg-light rounded-3">
+        <!-- <div class="col-10 col-sm-8 col-lg-6">
+            <img src="" alt="" width="700" height="500" class="d-block mx-lg-auto img-fluid"  loading="lazy">
+        </div> -->
+        <div class="col-lg-8">
+            <h1 class="display-5 fw-bold lh-1 mb-3">{{ \Illuminate\Support\Str::limit($page->name, 100, '...') }}</h1>
+            <p class="fs-4">Revolutionize your blogging journey with BlogForge 10! A cutting-edge, SEO-optimized Laravel 10 and PHP 8.2 application. Crafted with HTML5, CSS3, and Bootstrap 5.2, BlogForge 10 provides an intuitive admin panel for adding, editing, and featuring blogs. Manage categories, tags, comments, and social links securely. Download now and embark on a new era of dynamic blogging.</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a class="btn btn-primary btn-lg px-4 me-md-2" href="{{ route('item.shop') }}">Explore Items</a>
+                <a class="btn btn-outline-secondary btn-lg px-4" href="{{ route('blog.more') }}">Read Blogs</a>
+            </div>
         </div>
     </div>
+    <!-- Header Banner End -->
 </section>
-<!-- End Featured -->
 
-<!-- All Blogs -->
+<!-- HR -->
+<div class="mt-3 border-top border-start-0 border-bottom-0 border-end-0"></div>
+
+<div class="mt-3"></div>
+
+<!-- Related Blogs -->
 <section>
-    <div class="album py-5 bg-light">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            @foreach($blogs as $blog)
-            <div class="col">
-                <div class="card shadow-sm">
-                    <a href="{{ route('blog.detail',$blog->slug) }}"><img src="{{ asset('blog/image/featured/' . $blog->featured_image) }}" class="img-fluid rounded-start" width="100%" height="225" alt="..." /></a>
+    <div class="row border-top-0 border-start-0 border-bottom-0 border-end-0">
+        <div class="col-lg-10">
+            <h4 class="display-6">Unlocking Knowledge on our Blog</h4>
 
-                    <div class="card-body">
-                        <strong class="d-inline-block mb-2 text-primary">{{ $blog->tags }}</strong>
-                        <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">{{ \Illuminate\Support\Str::limit($blog->title, 45, '...') }}</a>
-                        <p class="card-text"></p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-outline-secondary" href="{{ route('blog.detail',$blog->slug) }}">Read</a>
-                            </div>
-                            <small class="mb-1 text-muted">{{ $blog->created_at->format('M d, Y') }}</small>
-                        </div>
-                    </div>
+            <p>Embark on a journey through our blog, where valuable insights await your exploration. Uncover the foundational aspects of SEO, delving into a comprehensive beginner's guide that unveils essential strategies and tips. Elevate your online presence by mastering the art of optimizing your website for search engines with our expertly curated content.</p>
+        </div>
+        <div class="col-lg-2 align-self-center">
+            <div class="row">
+                <div class="col-12 col-sm-12">
+                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('blog.more') }}">Read Blogs</a>
                 </div>
             </div>
-            @endforeach
         </div>
     </div>
+
+    <div class="mt-3"></div>
+
+    <div class="row">
+        @foreach ($blogs as $blog)
+        <div class="col-lg-6">
+            <article>
+                <figure>
+                    <div class="card shadow mb-5 rounded-3 no-border-card">
+                        <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                            <img src="{{ asset('blog/image/featured/' . $blog->featured_image) }}" class="card-img-top" alt="...">
+                        </a>
+                        <figcaption>
+                            <div class="card-body">
+                                <p class="card-title lead">
+                                    <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                                        {{ \Illuminate\Support\Str::limit($blog->title, 60, '...') }}
+                                    </a>
+                                    <small>{{ $blog->created_at->format('M d, Y') }}</small>
+                                    <p class="card-text">{!! \Illuminate\Support\Str::limit($blog->short_description, 100, '...') !!}</p>
+                                    <p class="card-text">
+                                        <small><i>by</i> {{ $blog->seller_name }}</small><br>
+                                        <!-- <small><i>in</i> <a href="{{ url('/' . $blog->slug) }}" target="_blank" class="link-dark">{{ $blog->category_name }}</a></small> -->
+                                    </p>
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
+                                    <a href="{{ route('blog.detail',$blog->slug) }}" target="_self" type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Read Blog">Read</a>
+                                </div>
+                            </div>
+                        </figcaption>
+                    </div>
+                </figure>
+            </article>
+        </div>
+        @endforeach
+    </div>
 </section>
-<!-- End Blogs -->
+<!-- End Related Blogs -->
+
+<section>
+    <aside>
+        <div class="row">
+            <div class="col-12">
+                <p class="text-center">Have questions or suggestions? <a href="{{ route('contact-us') }}">Contact Us</a></p>
+            </div>
+        </div>
+    </aside>
+</section>
 
 @endsection

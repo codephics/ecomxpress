@@ -88,7 +88,7 @@ class SettingController extends Controller
 
         Session::flash('message', __('Setting Successfully Updated!'));
         
-        return redirect(RouteServiceProvider::Setting);
+        return redirect(RouteServiceProvider::ManageSettings);
     }
 
     public function edit()
@@ -202,6 +202,6 @@ class SettingController extends Controller
 
         Session::flash('update', __('Settings Successfully Updated!'));
         
-        return redirect(RouteServiceProvider::Setting);
+        return redirect(RouteServiceProvider::ManageSettings);
     }
 }

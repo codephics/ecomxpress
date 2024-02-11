@@ -25,7 +25,7 @@ class EcommerceItemsController extends Controller
 {
     public function index()
     {
-        $page = EcommercePage::where('slug', 'solution')->firstOrFail();
+        $page = Page::where('slug', 'shop')->firstOrFail();
         $breadcrumbs = $this->generateBreadcrumbs(request()->getPathInfo());
         
         $categories = EcommerceCategory::all();
@@ -34,7 +34,7 @@ class EcommerceItemsController extends Controller
 
         $items = EcommerceItem::take(60)->get();
 
-        return view('frontend.ecommerce.ecommerce-store', [
+        return view('frontend.ecommerce.shop', [
             'page' => $page,
             'breadcrumbs' => $breadcrumbs,
             'items' => $items,

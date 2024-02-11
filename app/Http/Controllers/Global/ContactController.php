@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Global\Contact;
 use App\Models\Global\Page;
+use App\Models\Global\Setting;
 
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
@@ -16,9 +17,13 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $page = TemplatePage::where('slug', 'contact-us')->firstOrFail();
+        $page = Page::where('slug', 'contact-us')->firstOrFail();
+        $setting = Setting::first();
 
-        return view('frontend.template.contact-us', ['page' => $page]);
+        return view('frontend.global.contact-us', [
+            'page' => $page,
+            'setting' => $setting
+        ]);
     }
 
     public function newContact(Request $request)
@@ -42,7 +47,7 @@ class ContactController extends Controller
 
     public function create(Request $request)
     {
-        return view('administration.template.contact.new-contact');
+        return view('backend.global.contact.new-contact');
     }
 
     public function store(Request $request): RedirectResponse
@@ -61,28 +66,28 @@ class ContactController extends Controller
 
         Session::flash('success', __('Your thoughts have been successfully transmitted. You will hear from us within 3-5 business days.'));
         
-        return redirect(RouteServiceProvider::Contact);
+        return redirect(RouteServiceProvider::ManageContacts);
     }
 
     public function show(Request $request)
     {            
         $contacts = Contact::all();
         
-        return view('administration.template.contact.manage-contacts', ['contacts' => $contacts]);
+        return view('backend.global.contact.manage-contacts', ['contacts' => $contacts]);
     }
 
     public function view($id)
     {
         $contact = Contact::findOrFail($id);
         
-        return view('administration.template.contact.view-contact', ['contact' => $contact]);
+        return view('backend.global.contact.view-contact', ['contact' => $contact]);
     }
 
     public function edit($id)
     {
         $contact = Contact::findOrFail($id);
         
-        return view('administration.template.contact.edit-contact', ['contact' => $contact]);
+        return view('backend.global.contact.edit-contact', ['contact' => $contact]);
     }
 
     public function update(Request $request, $id): RedirectResponse

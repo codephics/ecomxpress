@@ -38,8 +38,8 @@
 					</ul>
 				</li>				
 				<li class="nav-item"><a href="{{ route('page.manage-pages') }}" class="nav-link">Pages</a></li>
-				<li class="nav-item"><a href="{{ route('manage.contact') }}" class="nav-link">Contacts</a></li>
-				<li class="nav-item"><a href="{{ route('manage.subscriber') }}" class="nav-link">Subscribers</a></li>
+				<li class="nav-item"><a href="{{ route('manage.contacts') }}" class="nav-link">Contacts</a></li>
+				<li class="nav-item"><a href="{{ route('manage.subscribers') }}" class="nav-link">Subscribers</a></li>
 				<li class="nav-item"><a href="{{ route('setting.edit') }}" class="nav-link">Settings</a></li>
 				<li class="nav-item"><a href="{{ route('front.home') }}" class="nav-link" target="_blank">Visit Site</a></li>
 				<li class="nav-item dropdown">
