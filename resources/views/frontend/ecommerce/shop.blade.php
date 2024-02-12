@@ -74,13 +74,13 @@
                 <div class="right-side">
                     <!-- Additional sections under right side -->
                     <div class="mb-3">
-                    	<img src="{{ asset('item/image/category/cover/' . $page->cover) }}" class="card-img-top" alt="{{ $page->cover_alt_text }}">
+                    	<img src="{{ asset('ecommerce/category/image/cover/' . $page->cover) }}" class="card-img-top" alt="{{ $page->cover_alt_text }}">
                     </div>
                     <div class="mb-3">
 	                    <nav aria-label="breadcrumb">
 						    <ol class="breadcrumb">
-	                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-	                            <li class="breadcrumb-item"><a href="{{ route('store') }}">Store</a></li>
+	                            <li class="breadcrumb-item"><a href="{{ route('front.home') }}">Home</a></li>
+	                            <li class="breadcrumb-item"><a href="{{ route('item.shop') }}">Shop</a></li>
 						        @foreach ($breadcrumbs as $breadcrumb)
 						            <li class="breadcrumb-item"><a href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['name'] }}</a></li>
 						        @endforeach
@@ -97,7 +97,7 @@
 									<figure>
 										<div class="card shadow mb-5 rounded-3 no-border-card">
 											<a href="{{ route('item.detail', $item->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-												<img src="{{ asset('item/image/' . $item->image) }}" class="card-img-top" alt="...">
+												<img src="{{ asset('ecommerce/item/image/' . $item->image) }}" class="card-img-top" alt="...">
 											</a>
 											<figcaption>
 												<div class="card-body">	

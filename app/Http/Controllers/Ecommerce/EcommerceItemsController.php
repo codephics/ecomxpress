@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Ecommerce;
 use App\Http\Controllers\Controller;
 
 use App\Models\Global\Page;
-use App\Models\Global\Blog;
-use App\Models\Global\Seller;
+use App\Models\Global\Setting;
+use App\Models\Blog\Blog;
 
 use App\Models\Ecommerce\EcommerceItem;
 use App\Models\Ecommerce\EcommerceCategory;
@@ -26,6 +26,7 @@ class EcommerceItemsController extends Controller
     public function index()
     {
         $page = Page::where('slug', 'shop')->firstOrFail();
+        $setting = Setting::first();
         $breadcrumbs = $this->generateBreadcrumbs(request()->getPathInfo());
         
         $categories = EcommerceCategory::all();
@@ -36,6 +37,7 @@ class EcommerceItemsController extends Controller
 
         return view('frontend.ecommerce.shop', [
             'page' => $page,
+            'setting' => $setting,
             'breadcrumbs' => $breadcrumbs,
             'items' => $items,
             'categories' => $categories,
@@ -47,14 +49,16 @@ class EcommerceItemsController extends Controller
     public function detail($slug)
     {
         $page = EcommerceItem::where('slug', $slug)->firstOrFail();
+        $setting = Setting::first();
         $relatedItems = EcommerceItem::take(4)->get();
-        $relatedBlog = EcommerceBlog::take(4)->get();
+        $relatedBlog = Blog::take(4)->get();
 
         return view('frontend.ecommerce.item-detail', [
-                'page' => $page,
-                'relatedItems' => $relatedItems,
-                'relatedBlog' => $relatedBlog
-            ]);
+            'page' => $page,
+            'setting' => $setting,
+            'relatedItems' => $relatedItems,
+            'relatedBlog' => $relatedBlog
+        ]);
     }
 
     public function generateBreadcrumbs($url)
@@ -100,6 +104,7 @@ class EcommerceItemsController extends Controller
     public function showByCategory(EcommerceCategory $category)
     {
         $page = EcommerceCategory::where('slug', $category->slug)->firstOrFail();
+        $setting = Setting::first();
         $breadcrumbs = $this->generateBreadcrumbs(request()->getPathInfo());
 
         $categories = EcommerceCategory::all();
@@ -107,17 +112,18 @@ class EcommerceItemsController extends Controller
         $sub_subcategories = EcommerceSubSubcategory::all();
 
         // Retrieve ecommerces with related category
-        $item = EcommerceItem::with('category')
+        $items = EcommerceItem::with('category')
             ->whereHas('category', function ($query) {
                 $query->where('slug', request()->segment(4)); // Assuming the slug is the second URL segment
             })
             ->take(60)
             ->get();
 
-        return view('frontend.ecommerce.ecommerce-store', [
+        return view('frontend.ecommerce.shop', [
             'page' => $page,
+            'setting' => $setting,
             'breadcrumbs' => $breadcrumbs,
-            'item' => $item,
+            'items' => $items,
             'categories' => $categories,
             'subcategories' => $subcategories,
             'sub_subcategories' => $sub_subcategories,
@@ -127,22 +133,24 @@ class EcommerceItemsController extends Controller
     public function showBySubcategory(EcommerceCategory $category, EcommerceSubcategory $subcategory)
     {
         $page = EcommerceSubcategory::where('slug', $subcategory->slug)->firstOrFail();
+        $setting = Setting::first();
         $breadcrumbs = $this->generateBreadcrumbs(request()->getPathInfo());
 
         $categories = EcommerceCategory::all();
         $subcategories = EcommerceSubcategory::all();
         $sub_subcategories = EcommerceSubSubcategory::all();
 
-        $item = EcommerceItem::with(['category', 'subcategory'])
+        $items = EcommerceItem::with(['category', 'subcategory'])
             ->where('category_name', $category->category_name)
             ->where('subcategory_name', $subcategory->subcategory_name)
             ->take(60)
             ->get();
 
-        return view('frontend.ecommerce.ecommerce-store', [
+        return view('frontend.ecommerce.shop', [
             'page' => $page,
+            'setting' => $setting,
             'breadcrumbs' => $breadcrumbs,
-            'item' => $item,
+            'items' => $items,
             'categories' => $categories,
             'subcategories' => $subcategories,
             'sub_subcategories' => $sub_subcategories,
@@ -152,23 +160,25 @@ class EcommerceItemsController extends Controller
     public function showBySubSubcategory(EcommerceCategory $category, EcommerceSubcategory $subcategory, EcommerceSubSubcategory $subSubcategory)
     {
         $page = EcommerceSubSubcategory::where('slug', $subSubcategory->slug)->firstOrFail();
+        $setting = Setting::first();
         $breadcrumbs = $this->generateBreadcrumbs(request()->getPathInfo());
 
         $categories = EcommerceCategory::all();
         $subcategories = EcommerceSubcategory::all();
         $sub_subcategories = EcommerceSubSubcategory::all();
 
-        $item = EcommerceItem::with(['category', 'subcategory', 'subSubcategory'])
+        $items = EcommerceItem::with(['category', 'subcategory', 'subSubcategory'])
             ->where('category_name', $category->category_name)
             ->where('subcategory_name', $subcategory->subcategory_name)
             ->where('sub_subcategory_name', $subSubcategory->sub_subcategory_name)
             ->take(60)
             ->get();
 
-        return view('frontend.ecommerce.ecommerce-store', [
+        return view('frontend.ecommerce.shop', [
             'page' => $page,
+            'setting' => $setting,
             'breadcrumbs' => $breadcrumbs,
-            'item' => $item,
+            'items' => $items,
             'categories' => $categories,
             'subcategories' => $subcategories,
             'sub_subcategories' => $sub_subcategories,

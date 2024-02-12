@@ -49,6 +49,17 @@ class PageController extends Controller
         ]);
     }
 
+    public function shop()
+    {
+        $page = Page::where('slug', 'shop')->firstOrFail();
+        $setting = Setting::first();
+
+        return view('frontend.global.about.shop', [
+            'page' => $page,
+            'setting' => $setting,
+        ]);
+    }
+
     public function blogs()
     {
         $page = Page::where('slug', 'more-blogs')->firstOrFail();
@@ -76,6 +87,39 @@ class PageController extends Controller
             'relatedBlog' => $relatedBlog
         ]);
     }
+
+    public function overview()
+    {
+        $page = Page::where('slug', 'overview')->firstOrFail();
+        $setting = Setting::first();
+
+        return view('frontend.global.about.overview', [
+            'page' => $page,
+            'setting' => $setting,
+        ]);
+    }
+    
+    public function brand()
+    {
+        $page = Page::where('slug', 'brand')->firstOrFail();
+        $setting = Setting::first();
+
+        return view('frontend.global.about.brand', [
+            'page' => $page,
+            'setting' => $setting,
+        ]);
+    }
+    
+    public function license()
+    {
+        $page = Page::where('slug', 'license')->firstOrFail();
+        $setting = Setting::first();
+        
+        return view('frontend.global.about.license', [
+            'page' => $page,
+            'setting' => $setting,
+        ]);
+    }
     
     public function privacy()
     {
@@ -94,17 +138,6 @@ class PageController extends Controller
         $setting = Setting::first();
         
         return view('frontend.global.terms-of-service', [
-            'page' => $page,
-            'setting' => $setting,
-        ]);
-    }
-    
-    public function license()
-    {
-        $page = Page::where('slug', 'license')->firstOrFail();
-        $setting = Setting::first();
-        
-        return view('frontend.global.license', [
             'page' => $page,
             'setting' => $setting,
         ]);

@@ -38,8 +38,6 @@ Route::get('privacy-policy', [PageController::class, 'privacy'])->name('privacy-
 // Terms of Service
 Route::get('terms-of-service', [PageController::class, 'terms'])->name('terms-of-service');
 
-Route::get('license', [PageController::class, 'license'])->name('license');
-
 // 404
 Route::get('404', [PageController::class, 'error404'])->name('404');
 
@@ -69,9 +67,9 @@ Route::post('subscriber/new', [SubscriberController::class, 'subscriber'])->name
 |--------------------------------------------------------------------------
 */
 
-Route::get('/about/overview', [AboutController::class, 'overview'])->name('about.overview');
-Route::get('/about/brand', [AboutController::class, 'brand'])->name('about.brand');
-Route::get('/about/license', [AboutController::class, 'license'])->name('about.license');
+Route::get('/about/overview', [PageController::class, 'overview'])->name('about.overview');
+Route::get('/about/brand', [PageController::class, 'brand'])->name('about.brand');
+Route::get('/about/license', [PageController::class, 'license'])->name('about.license');
 
 /*
 |--------------------------------------------------------------------------

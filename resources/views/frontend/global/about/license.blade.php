@@ -1,4 +1,4 @@
-@extends('frontend.template.skeleton.body')
+@extends('frontend.skeleton.body')
 @section('content')
 		<!-- Breadcrumb -->
 		<section>
@@ -6,7 +6,7 @@
 				<div class="col-12">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="{{ route('template.home') }}">Home</a></li>
+							<li class="breadcrumb-item"><a href="{{ route('front.home') }}">Home</a></li>
 							<li class="breadcrumb-item active" aria-current="page">About Us</li>
 							<li class="breadcrumb-item active" aria-current="page">{{ $page->name }}</li>
 						</ol>
@@ -32,7 +32,7 @@
 		<section>
 			<div class="row">
 				<div class="col-12">
-					<p>Have questions or suggestions? <a href="{{ route('template.contact-us') }}">Contact Us</a></p>
+					<p>Have questions or suggestions? <a href="{{ route('contact-us') }}">Contact Us</a></p>
 				</div>
 			</div>
 		</section>

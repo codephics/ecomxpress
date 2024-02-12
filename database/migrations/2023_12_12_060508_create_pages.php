@@ -65,14 +65,24 @@ return new class extends Migration
                 'slug' => 'terms-of-service',
             ],
             [
-                'name' => 'License',
-                'title' => 'License',
-                'slug' => 'license',
-            ],
-            [
                 'name' => 'About Us',
                 'title' => 'About Us',
                 'slug' => 'about-us',
+            ],
+            [
+                'name' => 'Overview',
+                'title' => 'Overview',
+                'slug' => 'overview',
+            ],
+            [
+                'name' => 'Brand',
+                'title' => 'Brand',
+                'slug' => 'brand',
+            ],
+            [
+                'name' => 'License',
+                'title' => 'License',
+                'slug' => 'license',
             ],
             [
                 'name' => 'Contact Us',

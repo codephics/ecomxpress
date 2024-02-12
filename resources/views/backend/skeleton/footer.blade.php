@@ -5,7 +5,7 @@
 					<nav class="nav">
 						<a class="nav-link" href="{{ route('privacy-policy') }}">Privacy Policy</a>
 						<a class="nav-link" href="{{ route('terms-of-service') }}">Terms of Service</a>
-						<a class="nav-link" href="{{ route('license') }}">Licenses</a>
+						<a class="nav-link" href="{{ route('about.license') }}">Licenses</a>
 					</nav>
 				</div>
 			</div>
