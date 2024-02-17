@@ -15,6 +15,7 @@ use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\Blog\BlogCategoryController;
 use App\Http\Controllers\Blog\BlogTagController;
 
+use App\Http\Controllers\Global\SliderController;
 use App\Http\Controllers\Global\PageController;
 use App\Http\Controllers\Global\AboutController;
 use App\Http\Controllers\Global\ContactController;
@@ -116,6 +117,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Slider
+Route::get('manage-sliders', [SliderController::class, 'show'])->middleware(['auth', 'verified'])->name('manage.sliders');
+Route::get('manage-slider/slider/new', [SliderController::class, 'create'])->middleware(['auth', 'verified'])->name('slider.new');
+Route::post('manage-slider/slider/store', [SliderController::class, 'store'])->middleware(['auth', 'verified'])->name('slider.store');
+Route::get('manage-slider/edit/{id}', [SliderController::class, 'edit'])->middleware(['auth', 'verified'])->name('slider.edit');
+Route::put('manage-slider/update/{id}', [SliderController::class, 'update'])->middleware(['auth', 'verified'])->name('slider.update');
+Route::delete('manage-slider/destroy/{id}', [SliderController::class, 'destroy'])->middleware(['auth', 'verified'])->name('slider.destroy');
 
 // Pages
 Route::get('manage-pages', [PageController::class, 'show'])->middleware(['auth', 'verified'])->name('page.manage-pages');

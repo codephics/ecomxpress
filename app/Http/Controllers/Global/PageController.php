@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Global;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\Ecommerce\EcommerceItem;
 
 use App\Models\Blog\Blog;
 use App\Models\Blog\BlogCategory;
 use App\Models\Blog\BlogSubcategory;
 use App\Models\Blog\BlogSubSubcategory;
 
+use App\Models\Global\Slider;
 use App\Models\Global\Page;
 use App\Models\Global\Setting;
 
@@ -39,12 +41,16 @@ class PageController extends Controller
     public function homepage()
     {
         $page = Page::where('slug', 'homepage')->firstOrFail();
+        $slider = Slider::firstOrFail();
         $setting = Setting::first();
+        $items = EcommerceItem::all();
         $blogs = Blog::take(36)->get();
 
         return view('frontend.skeleton.content', [
             'page' => $page,
+            'slider' => $slider,
             'setting' => $setting,
+            'items' => $items,
             'blogs' => $blogs
         ]);
     }

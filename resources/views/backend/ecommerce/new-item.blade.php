@@ -59,7 +59,7 @@
                     <div class="col-sm-4">
                         <div class="mb-3">
                             <label for="category_name" class="form-label">Category</label>
-                            <input class="form-control" list="datalistCategory" name="category_name" placeholder="Search Category" />
+                            <input class="form-control" list="datalistCategory" name="category_name" placeholder="Search Category" required />
                             <datalist id="datalistCategory">
                                 @foreach($categories as $category)
                                 <option value="{{ $category->category_name }}"></option>

@@ -36,7 +36,8 @@
 						<li><a class="dropdown-item" href="{{ route('blog.sub-subcategories') }}">Manage Sub Subcategories</a></li>
 						<li><a class="dropdown-item" href="{{ route('blog.tag') }}">Manage Tags</a></li>
 					</ul>
-				</li>				
+				</li>
+				<li class="nav-item"><a href="{{ route('manage.sliders') }}" class="nav-link">Sliders</a></li>
 				<li class="nav-item"><a href="{{ route('page.manage-pages') }}" class="nav-link">Pages</a></li>
 				<li class="nav-item"><a href="{{ route('manage.contacts') }}" class="nav-link">Contacts</a></li>
 				<li class="nav-item"><a href="{{ route('manage.subscribers') }}" class="nav-link">Subscribers</a></li>

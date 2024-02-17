@@ -26,6 +26,7 @@ class RouteServiceProvider extends ServiceProvider
     public const EcommerceItem = '/ecommerce/manage-items';
     public const EcommerceSeller = 'ecommerce/seller/manage-seller';
 
+    public const ManageSliders = 'manage-sliders';
     public const ManagePages = 'manage-pages';
     public const ManageContacts = 'manage-contacts';
     public const ManageSubscribers = 'manage-subscribers';
