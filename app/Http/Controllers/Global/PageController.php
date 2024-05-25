@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Global;
 use App\Http\Controllers\Controller;
 
 use App\Models\Ecommerce\EcommerceItem;
+use App\Models\Ecommerce\EcommerceCategory;
 
 use App\Models\Blog\Blog;
 use App\Models\Blog\BlogCategory;
@@ -41,14 +42,16 @@ class PageController extends Controller
     public function homepage()
     {
         $page = Page::where('slug', 'homepage')->firstOrFail();
-        $slider = Slider::firstOrFail();
+        $sliders = Slider::all();
+        $categories = EcommerceCategory::all();
         $setting = Setting::first();
         $items = EcommerceItem::all();
         $blogs = Blog::take(36)->get();
 
         return view('frontend.skeleton.content', [
             'page' => $page,
-            'slider' => $slider,
+            'sliders' => $sliders,
+            'categories' => $categories,
             'setting' => $setting,
             'items' => $items,
             'blogs' => $blogs

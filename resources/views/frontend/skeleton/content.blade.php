@@ -54,7 +54,28 @@
 @endsection @section('content')
 <!-- Featured Header -->
 <section>
-    <div class="row align-items-center p-5 mb-4 bg-light rounded-3">
+    <div class="row align-items-center mb-4">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @foreach($sliders as $slider)
+                <div class="carousel-item active">
+                    <a href="{{ $slider->button_link_1 }}">
+                        <img src="{{ asset('global/slider/image/'.$slider->image) }}" class="d-block w-100" alt="{{ $slider->image_alt_text }}">
+                    </a>
+                </div>
+                @endforeach
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <!-- <div class="row align-items-center p-5 mb-4 bg-light rounded-3">
         <div class="col-md-4">
             <h1 class="display-5 fw-bold lh-1 mb-3">{{ \Illuminate\Support\Str::limit($setting->title, 100, '...') }}</h1>
             <p>{!! $setting->about_in_short !!}</p>
@@ -71,7 +92,7 @@
                             @foreach($items as $item)
                             <div class="col">
                                 <div class="card">
-                                  <img src="{{ asset('global/slider/image/2-500x300.png') }}" class="card-img-top" alt="...">
+                                  <img src="{{ asset('ecommerce/item/image/'.$item->image) }}" class="card-img-top" alt="...">
                                   <div class="card-body">
                                     <h5 class="card-title">{{ $item->name }}</h5>
                                   </div>
@@ -109,7 +130,7 @@
                 </button>
             </div>
         </div>
-    </div>
+    </div> -->
 </section>
 
 <!-- HR -->
@@ -136,93 +157,14 @@
     <div class="mt-3"></div>
 
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-      <div class="col">
-        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-1.jpg');">
-          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-            <a class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short title, long jacket</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-2.jpg');">
-          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-            <a class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Much longer title that wraps to multiple lines</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-3.jpg');">
-          <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-            <a class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Another longer title belongs here</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="mt-3"></div>
-
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-grid gap-2">
-                <a href="#" class="btn btn-outline-secondary btn-lg">Go somewhere</a>
+        @foreach($categories as $category)
+            <div class="card ms-3" style="width: 9rem;">
+              <img src="{{ asset('ecommerce/category/image/thumb/'.$category->thumb) }}" class="card-img-top" alt="{{ $category->thumb_alt_text }}">
+              <div class="card-body">
+                <a href="{{ url('item/'.$category->slug) }}" class="card-link">{{ $category->category_name }}</a>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-grid gap-2">
-                <a href="#" class="btn btn-outline-secondary btn-lg">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-grid gap-2">
-                <a href="#" class="btn btn-outline-secondary btn-lg">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="mt-3"></div>
-
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-grid gap-2">
-                <a href="#" class="btn btn-outline-secondary btn-lg">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-grid gap-2">
-                <a href="#" class="btn btn-outline-secondary btn-lg">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-grid gap-2">
-                <a href="#" class="btn btn-outline-secondary btn-lg">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-      </div>
+        @endforeach
     </div>
 </section>
 

@@ -22,6 +22,10 @@ return new class extends Migration
             $table->string('sale_price', 255)->nullable();
             $table->string('regular_price', 255)->nullable();
             $table->string('commission', 255)->nullable();
+            $table->string('bootstrap_v', 255)->nullable();
+            $table->string('released', 255)->nullable();
+            $table->string('updated', 255)->nullable();
+            $table->string('version', 255)->nullable();
             $table->string('seller_name', 255)->nullable();
             $table->string('seller_email', 255)->nullable();
             $table->text('short_description')->nullable();
@@ -38,8 +42,16 @@ return new class extends Migration
             $table->tinyInteger('order_type')->default(0)->nullable();
             $table->tinyInteger('is_featured')->default(0)->nullable();
             $table->text('live_preview_link')->nullable();
+            $table->text('admin_link')->nullable();
+            $table->text('downloadable_link')->nullable();
             $table->string('image', 255)->default('default.png');
             $table->string('img_alt_text', 255)->nullable();
+            $table->string('icon', 255)->default('default.png');
+            $table->string('icon_alt_text', 255)->nullable();
+            $table->string('thumb', 255)->default('default.png');
+            $table->string('thumb_alt_text', 255)->nullable();
+            $table->string('cover', 255)->default('default.png');
+            $table->string('cover_alt_text', 255)->nullable();
             $table->string('og_image', 255)->default('default-og.png');
             $table->string('og_img_alt_text', 255)->nullable();
             $table->tinyInteger('is_index')->default(0)->nullable();

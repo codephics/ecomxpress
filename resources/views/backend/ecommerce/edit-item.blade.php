@@ -121,7 +121,7 @@
                     <div class="col-sm-3">
                         <div class="mb-3">
                             <label for="bootstrap_v" class="form-label">Bootstrap Version</label>
-                            <input type="text" class="form-control" name="bootstrap_v" value="{{ $item->bootstrap_v }}" placeholder="Bootstrap Version" required />
+                            <input type="text" class="form-control" name="bootstrap_v" value="{{ $item->bootstrap_v }}" placeholder="Bootstrap Version" />
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -139,7 +139,7 @@
                     <div class="col-sm-3">
                         <div class="mb-3">
                             <label for="version" class="form-label">Version</label>
-                            <input type="text" class="form-control" name="version" value="{{ $item->version }}" placeholder="Version" required />
+                            <input type="text" class="form-control" name="version" value="{{ $item->version }}" placeholder="Version" />
                         </div>
                     </div>
                 </div>
@@ -147,13 +147,13 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="seller_name" class="form-label">Seller Name</label>
-                            <input type="text" class="form-control" name="seller_name" value="{{ $item->seller_name }}" placeholder="Seller Name" required />
+                            <input type="text" class="form-control" name="seller_name" value="{{ $item->seller_name }}" placeholder="Seller Name" />
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="seller_email" class="form-label">Seller Email</label>
-                            <input type="email" class="form-control" name="seller_email" value="{{ $item->seller_email }}" placeholder="Seller Email" required />
+                            <input type="email" class="form-control" name="seller_email" value="{{ $item->seller_email }}" placeholder="Seller Email" />
                         </div>
                     </div>
                 </div>

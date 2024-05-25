@@ -186,7 +186,7 @@
                             <input class="form-control" type="file" name="image" />
                         </div>
                         <div class="mb-3">
-                            <input class="form-control" type="text" name="icon_alt_text" placeholder="Icon Alt Text" />
+                            <input class="form-control" type="text" name="img_alt_text" placeholder="Icon Alt Text" />
                         </div>
                     </div>
                 </div>
