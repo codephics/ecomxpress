@@ -114,7 +114,7 @@ class EcommerceItemsController extends Controller
         // Retrieve ecommerces with related category
         $items = EcommerceItem::with('category')
             ->whereHas('category', function ($query) {
-                $query->where('slug', request()->segment(4)); // Assuming the slug is the second URL segment
+                $query->where('slug', request()->segment(2)); // Assuming the slug is the second URL segment
             })
             ->take(60)
             ->get();
@@ -143,6 +143,9 @@ class EcommerceItemsController extends Controller
         $items = EcommerceItem::with(['category', 'subcategory'])
             ->where('category_name', $category->category_name)
             ->where('subcategory_name', $subcategory->subcategory_name)
+            ->whereHas('subcategory', function ($query) use ($subcategory) {
+                $query->where('slug', request()->segment(3)); // Assuming the slug is the second URL segment
+            })
             ->take(60)
             ->get();
 
@@ -167,12 +170,23 @@ class EcommerceItemsController extends Controller
         $subcategories = EcommerceSubcategory::all();
         $sub_subcategories = EcommerceSubSubcategory::all();
 
+        // $items = EcommerceItem::with(['category', 'subcategory', 'subSubcategory'])
+        //     ->where('category_name', $category->category_name)
+        //     ->where('subcategory_name', $subcategory->subcategory_name)
+        //     ->where('sub_subcategory_name', $subSubcategory->sub_subcategory_name)
+        //     ->take(60)
+        //     ->get();
+
+        // Retrieve ecommerces with related category
         $items = EcommerceItem::with(['category', 'subcategory', 'subSubcategory'])
-            ->where('category_name', $category->category_name)
-            ->where('subcategory_name', $subcategory->subcategory_name)
-            ->where('sub_subcategory_name', $subSubcategory->sub_subcategory_name)
-            ->take(60)
-            ->get();
+                ->where('category_name', $category->category_name)
+                ->where('subcategory_name', $subcategory->subcategory_name)
+                ->whereHas('subSubcategory', function ($query) use ($subSubcategory) {
+                    $query->where('slug', request()->segment(4)); // Assuming the slug is the second URL segment
+                })
+                ->take(60)
+                ->get();
+
 
         return view('frontend.ecommerce.shop', [
             'page' => $page,

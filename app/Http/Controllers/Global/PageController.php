@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Ecommerce\EcommerceItem;
 use App\Models\Ecommerce\EcommerceCategory;
+use App\Models\Ecommerce\EcommerceSubcategory;
+use App\Models\Ecommerce\EcommerceSubSubcategory;
 
 use App\Models\Blog\Blog;
 use App\Models\Blog\BlogCategory;
@@ -44,16 +46,22 @@ class PageController extends Controller
         $page = Page::where('slug', 'homepage')->firstOrFail();
         $sliders = Slider::all();
         $categories = EcommerceCategory::all();
+        $subcategories = EcommerceSubcategory::all();
+        $sub_subcategories = EcommerceSubSubcategory::all();
         $setting = Setting::first();
         $items = EcommerceItem::all();
-        $blogs = Blog::take(36)->get();
+        $featured_items = EcommerceItem::where('is_featured', 1)->get();
+        $blogs = Blog::where('is_featured', 1)->get();
 
         return view('frontend.skeleton.content', [
             'page' => $page,
             'sliders' => $sliders,
             'categories' => $categories,
+            'subcategories' => $subcategories,
+            'sub_subcategories' => $sub_subcategories,
             'setting' => $setting,
             'items' => $items,
+            'featured_items' => $featured_items,
             'blogs' => $blogs
         ]);
     }

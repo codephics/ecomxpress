@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 // Ecommerce
 use App\Http\Controllers\Ecommerce\EcommerceItemsController;
+use App\Http\Controllers\Ecommerce\EcommerceOrderController;
 use App\Http\Controllers\Ecommerce\EcommerceSellerController;
 use App\Http\Controllers\Ecommerce\EcommerceSiteController;
 use App\Http\Controllers\Ecommerce\EcommerceCategoryController;
@@ -245,5 +246,13 @@ Route::post('ecommerce/item/store', [EcommerceItemsController::class, 'store'])-
 Route::get('ecommerce/item/edit/{id}', [EcommerceItemsController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.item.edit');
 Route::put('ecommerce/item/update/{id}', [EcommerceItemsController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.item.update');
 Route::delete('ecommerce/item/destroy/{id}', [EcommerceItemsController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.item.destroy');
+
+// Ecommerce Order
+Route::get('ecommerce/manage-leads', [EcommerceLeadController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-lead');
+Route::get('ecommerce/lead/new', [EcommerceLeadController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.lead.new');
+Route::post('ecommerce/lead/store', [EcommerceLeadController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.lead.store');
+Route::get('ecommerce/lead/edit/{id}', [EcommerceLeadController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.lead.edit');
+Route::put('ecommerce/lead/update/{id}', [EcommerceLeadController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.lead.update');
+Route::delete('ecommerce/lead/destroy/{id}', [EcommerceLeadController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.lead.destroy');
 
 require __DIR__.'/auth.php';

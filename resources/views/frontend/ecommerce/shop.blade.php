@@ -88,11 +88,12 @@
 						</nav>
                     </div>
                     <div class="mb-3">
+                    	<img src="{{ asset('global/page/image/cover/' . $page->cover) }}" class="img-fluid mb-3" alt="{{ $page->cover_alt_text }}">
                         <h1 class="fs-3">{{ $page->title }}</h1>
-						<p>{!! $page->description !!}</p>
+						<p>{!! $page->short_description !!}</p>
 						<div class="row">
 							@foreach ($items as $item)
-							<div class="col-md-6">
+							<div class="col-md-3">
 								<article>
 									<figure>
 										<div class="card shadow mb-5 rounded-3 no-border-card">

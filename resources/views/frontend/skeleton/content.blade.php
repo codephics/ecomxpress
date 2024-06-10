@@ -54,94 +54,54 @@
 @endsection @section('content')
 <!-- Featured Header -->
 <section>
-    <div class="row align-items-center mb-4">
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                @foreach($sliders as $slider)
-                <div class="carousel-item active">
-                    <a href="{{ $slider->button_link_1 }}">
-                        <img src="{{ asset('global/slider/image/'.$slider->image) }}" class="d-block w-100" alt="{{ $slider->image_alt_text }}">
-                    </a>
-                </div>
-                @endforeach
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
-    <!-- <div class="row align-items-center p-5 mb-4 bg-light rounded-3">
-        <div class="col-md-4">
-            <h1 class="display-5 fw-bold lh-1 mb-3">{{ \Illuminate\Support\Str::limit($setting->title, 100, '...') }}</h1>
-            <p>{!! $setting->about_in_short !!}</p>
+    <div class="row featurette">
+        <div class="col-md-7 mb-3">
+            <h1 class="featurette-heading fw-normal lh-1">{{ \Illuminate\Support\Str::limit($setting->title, 100, '...') }}</h1>
+            <p class="lead">{!! $setting->about_in_short !!}</p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                 <a class="btn btn-primary btn-lg px-4 me-md-2" href="{{ route('item.shop') }}">Explore Items</a>
                 <a class="btn btn-outline-secondary btn-lg px-4" href="{{ route('blog.more') }}">Read Blogs</a>
             </div>
         </div>
-        <div class="col-md-8 mt-3">
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="true">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row row-cols-1 row-cols-md-3 g-4">
-                            @foreach($items as $item)
-                            <div class="col">
-                                <div class="card">
-                                  <img src="{{ asset('ecommerce/item/image/'.$item->image) }}" class="card-img-top" alt="...">
-                                  <div class="card-body">
-                                    <h5 class="card-title">{{ $item->name }}</h5>
-                                  </div>
-                                  <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">{{ $item->category_name }}</li>
-                                    <li class="list-group-item">
-                                        @if($item->sale_price)
-
-                                        <span class="fw-bold fs-5 text-success">৳ {{ $item->sale_price }}</span> | <span class="list-group-item fw-bold text-decoration-line-through text-muted">৳ {{ $item->regular_price }}</span>
-
-                                        @elseif($item->regular_price)
-
-                                        <span class="fw-bold fs-5 text-success">৳ {{ $item->regular_price }}</span>
-
-                                        @else
-
-                                        <span>Free</span>
-
-                                        @endif
-                                    </li>
-                                  </ul>
-                                </div>
+        <div class="col-md-5">
+            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                @foreach($featured_items as $item)
+                <div class="carousel-item active">
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-md-5">
+                                <a href="{{ route('item.detail', $item->slug) }}">
+                                    <img src="{{ asset('ecommerce/item/image/' . $item->image) }}" class="d-block"  width="500" height="500" alt="{{ $item->img_alt_text }}">
+                                </a>
                             </div>
-                            @endforeach
                         </div>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                @endforeach
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
             </div>
         </div>
-    </div> -->
+    </div>
 </section>
 
 <!-- HR -->
-<div class="mt-3 border-top border-start-0 border-bottom-0 border-end-0"></div>
+<hr class="featurette-divider">
 
 <div class="mt-3"></div>
 <!-- Categories -->
 <section>
     <div class="row border-top-0 border-start-0 border-bottom-0 border-end-0">
         <div class="col-lg-10">
-            <h4 class="display-6">Browse Categories</h4>
+            <h2 class="display-6">Browse Categories</h2>
 
             <p>Embark on a journey through our blog, where valuable insights await your exploration. Uncover the foundational aspects of SEO, delving into a comprehensive beginner's guide that unveils essential strategies and tips. Elevate your online presence by mastering the art of optimizing your website for search engines with our expertly curated content.</p>
         </div>
@@ -158,12 +118,36 @@
 
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
         @foreach($categories as $category)
-            <div class="card ms-3" style="width: 9rem;">
-              <img src="{{ asset('ecommerce/category/image/thumb/'.$category->thumb) }}" class="card-img-top" alt="{{ $category->thumb_alt_text }}">
-              <div class="card-body">
-                <a href="{{ url('item/'.$category->slug) }}" class="card-link">{{ $category->category_name }}</a>
-              </div>
-            </div>
+        <div class="card ms-3 border-0" style="width: 8rem;">
+            <a href="{{ url('item/'.$category->slug) }}" class="card-link">
+                <figure class="figure">
+                    <img src="{{ asset('ecommerce/category/image/thumb/'.$category->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $category->thumb_alt_text }}">
+                    <figcaption class="figure-caption">{{ $category->category_name }}</figcaption>
+                </figure>
+            </a>
+        </div>
+        @endforeach
+
+        @foreach($subcategories as $subcategory)
+        <div class="card ms-3 border-0" style="width: 8rem;">
+            <a href="{{ url('item/'.$category->slug) }}" class="card-link">
+                <figure class="figure">
+                        <img src="{{ asset('ecommerce/category/subcategory/image/thumb/'.$subcategory->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $subcategory->thumb_alt_text }}">
+                    <figcaption class="figure-caption">{{ $subcategory->subcategory_name }}</figcaption>
+                </figure>
+            </a>
+        </div>
+        @endforeach
+
+        @foreach($sub_subcategories as $sub_subcategory)
+        <div class="card ms-3 border-0" style="width: 8rem;">
+            <a href="{{ url('item/'.$category->slug) }}" class="card-link">
+                <figure class="figure">
+                        <img src="{{ asset('ecommerce/category/subcategory/sub-subcategory/image/thumb/'.$sub_subcategory->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $sub_subcategory->thumb_alt_text }}">
+                    <figcaption class="figure-caption">{{ $sub_subcategory->sub_subcategory_name }}</figcaption>
+                </figure>
+            </a>
+        </div>
         @endforeach
     </div>
 </section>
@@ -176,7 +160,7 @@
 <section>
     <div class="row border-top-0 border-start-0 border-bottom-0 border-end-0">
         <div class="col-lg-10">
-            <h4 class="display-6">Browse Items</h4>
+            <h3 class="display-6">Browse Featured Items</h3>
 
             <p>Embark on a journey through our blog, where valuable insights await your exploration. Uncover the foundational aspects of SEO, delving into a comprehensive beginner's guide that unveils essential strategies and tips. Elevate your online presence by mastering the art of optimizing your website for search engines with our expertly curated content.</p>
         </div>
@@ -192,22 +176,139 @@
     <div class="mt-3"></div>
 
     <div class="row">
-        <div class="card" style="width: 18rem;">
-          <img src="{{ asset('global/slider/image/2-500x300.png') }}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Category</li>
-            <li class="list-group-item">
-                <span> ৳ 0.00</span>
-                <span> | ৳ 0.00</span>
-            </li>
-          </ul>
-          <div class="card-body">
-            <a href="#" class="card-link">Easy Buy</a>
-          </div>
+        @foreach($featured_items as $item)
+        <div class="col-md-3">
+            <article>
+                <figure>
+                    <div class="card h-100 shadow mb-5 rounded-3 no-border-card">
+                        <a href="{{ route('item.detail', $item->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                            <img src="{{ asset('ecommerce/item/image/' . $item->image) }}" class="card-img-top" alt="{{ $item->img_alt_text }}">
+                        </a>
+                        <figcaption>
+                            <div class="card-body"> 
+                                <ul class="d-flex list-unstyled mt-auto">
+                                  <li class="me-auto">
+                                    <a href="{{ route('item.detail', $item->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">{{ \Illuminate\Support\Str::limit($item->name, 40, '...') }}</a>
+                                  </li>
+                                  <li class="d-flex align-items-center">
+                                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
+                                    <small>
+                                        @if($item->sale_price)
+
+                                        <span class="fw-bold fs-5 text-success">৳ {{ $item->sale_price }}</span> | <span class="list-group-item fw-bold text-decoration-line-through text-muted">৳ {{ $item->regular_price }}</span>
+
+                                        @elseif($item->regular_price)
+
+                                        <span class="fw-bold fs-5 text-success">৳ {{ $item->regular_price }}</span>
+
+                                        @else
+
+                                        <span>Free</span>
+
+                                        @endif
+                                    </small>
+                                  </li>
+                                </ul>
+                                <ul class="d-flex list-unstyled mt-auto">
+                                  <li class="me-auto">
+                                    <small>
+                                        @if ($item->category_name)
+                                            @if ($item->category)
+                                                <a href="{{ route('category.show', ['category' => $item->category->slug]) }}" class="link-dark">
+                                                    {{ $item->category_name }}
+                                                </a>
+                                            @endif
+                                        @elseif ($item->subcategory_name)
+                                            @if ($item->subcategory)
+                                                <a href="{{ route('subcategory.show', [
+                                                                'category' => $item->subcategory->category->slug,
+                                                                'subcategory' => $item->subcategory->slug,
+                                                            ]) }}" class="link-dark">
+                                                    {{ $item->subcategory_name }}
+                                                </a>
+                                            @endif
+                                        @elseif ($item->sub_subcategory_name)
+                                            @if ($item->sub_subcategory)
+                                                <a href="{{ route('subSubcategory.show', [
+                                                                'category' => $item->subcategory->category->slug,
+                                                                'subcategory' => $item->subcategory->slug,
+                                                                'subSubcategory' => $item->sub_subcategory->slug,
+                                                            ]) }}" class="link-dark">
+                                                    {{ $item->sub_subcategory_name }}
+                                                </a>
+                                            @endif
+                                        @endif
+                                    </small>
+                                  </li>
+                                  <li class="d-flex align-items-center">
+                                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
+                                    <small>{{ $item->seller_name }}</small>
+                                  </li>
+                                </ul>
+                                <ul class="d-flex list-unstyled mt-auto">
+                                    <li class="me-auto">
+                                        <a type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#confirmNow" data-bs-whatever="@mdo">Confirm Order</a>
+
+                                        <div class="modal fade" id="confirmNow" tabindex="-1" aria-labelledby="confirmNowLabel" aria-hidden="true">
+                                          <div class="modal-dialog">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <span class="modal-title fs-5" id="exampleModalLabel">Confirm Now</span>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                              </div>
+                                              <div class="modal-body">
+                                                <form class="needs-validation" method="POST" action="{{ route('ecommerce.lead.store') }}">
+                                                @csrf
+                                                  <div class="mb-3">
+                                                    <label for="recipient-name" class="col-form-label">Name: <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" name="name" placeholder="Name" required>
+                                                    <div class="invalid-feedback">
+                                                        Valid Name is required.
+                                                    </div>
+                                                  </div>
+                                                  <div class="mb-3">
+                                                    <label for="recipient-email" class="col-form-label">Email (optional):</label>
+                                                    <input type="email" class="form-control" name="email" placeholder="Email (optional)" required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter a valid email address.
+                                                    </div>
+                                                  </div>
+                                                  <div class="mb-3">
+                                                    <label for="recipient-mobile" class="col-form-label">Mobile: <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" name="mobile" placeholder="Mobile" required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter a valid mobile number.
+                                                    </div>
+                                                  </div>
+                                                  <div class="mb-3">
+                                                    <label for="message-text" class="col-form-label">Address: <span class="text-danger">*</span></label>
+                                                    <textarea class="form-control" name="address" placeholder="address" required></textarea>
+                                                    <div class="invalid-feedback">
+                                                        Please enter address.
+                                                    </div>
+                                                  </div>
+                                                  <div class="mb-3">
+                                                    <label for="message-text" class="col-form-label">Order Note (optional):</label>
+                                                    <textarea class="form-control" name="note" placeholder="Order Note (optional)"></textarea>
+                                                  </div>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Confim Order</button>
+                                              </div>
+                                            </form>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </figcaption>
+                    </div>
+                </figure>
+            </article>
         </div>
+        @endforeach
     </div>
 </section>
 
@@ -246,22 +347,18 @@
                         </a>
                         <figcaption>
                             <div class="card-body">
-                                <p class="card-title lead">
-                                    <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                                        {{ \Illuminate\Support\Str::limit($blog->title, 60, '...') }}
-                                    </a>
+                                <ul class="d-flex list-unstyled mt-auto">
+                                  <li class="me-auto">
+                                    <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">{{ \Illuminate\Support\Str::limit($blog->title, 60, '...') }}</a>
                                     <small>{{ $blog->created_at->format('M d, Y') }}</small>
-                                    <p class="card-text">{!! \Illuminate\Support\Str::limit($blog->short_description, 100, '...') !!}</p>
-                                    <p class="card-text">
-                                        <small><i>by</i> {{ $blog->seller_name }}</small><br>
-                                        <!-- <small><i>in</i> <a href="{{ url('/' . $blog->slug) }}" target="_blank" class="link-dark">{{ $blog->category_name }}</a></small> -->
-                                    </p>
-                                </p>
-                            </div>
-                            <div class="card-body">
-                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
-                                    <a href="{{ route('blog.detail',$blog->slug) }}" target="_self" type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Read Blog">Read</a>
-                                </div>
+                                  </li>
+                                  <li class="d-flex align-items-center">
+                                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
+                                    <small>
+                                        <span><a href="{{ route('blog.detail',$blog->slug) }}" target="_self" type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Read Blog">Read</a></span>
+                                    </small>
+                                  </li>
+                                </ul>
                             </div>
                         </figcaption>
                     </div>

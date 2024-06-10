@@ -6,7 +6,7 @@
 				<div class="col-12">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="{{ route('blog.home') }}">Home</a></li>
+							<li class="breadcrumb-item"><a href="{{ route('front.home') }}">Home</a></li>
 							<li class="breadcrumb-item active" aria-current="page">{{ \Illuminate\Support\Str::limit($blog->title, 100, '...') }}</li>
 						</ol>
 					</nav>
@@ -59,23 +59,33 @@
 		    <div class="album py-5 bg-light">
 		        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
 		            @foreach($relatedBlog as $blog)
-		            <div class="col">
-		                <div class="card shadow-sm">
-		                    <a href="{{ route('blog.detail',$blog->slug) }}"><img src="{{ asset('blog/image/featured/' . $blog->featured_image) }}" class="img-fluid rounded-start" width="100%" height="225" alt="..." /></a>
-
-		                    <div class="card-body">
-		                        <strong class="d-inline-block mb-2 text-primary">{{ $blog->tags }}</strong>
-		                        <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">{{ \Illuminate\Support\Str::limit($blog->title, 100, '...') }}</a>
-		                        <p class="card-text"></p>
-		                        <div class="d-flex justify-content-between align-items-center">
-		                            <div class="btn-group">
-		                                <a type="button" class="btn btn-sm btn-outline-secondary" href="{{ route('blog.detail',$blog->slug) }}">Read</a>
-		                            </div>
-		                            <small class="mb-1 text-muted">{{ $blog->created_at->format('M d, Y') }}</small>
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
+		            <div class="col-lg-6">
+			            <article>
+			                <figure>
+			                    <div class="card shadow mb-5 rounded-3 no-border-card">
+			                        <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+			                            <img src="{{ asset('blog/image/featured/' . $blog->featured_image) }}" class="card-img-top" alt="...">
+			                        </a>
+			                        <figcaption>
+			                            <div class="card-body">
+			                                <ul class="d-flex list-unstyled mt-auto">
+			                                  <li class="me-auto">
+			                                    <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">{{ \Illuminate\Support\Str::limit($blog->title, 60, '...') }}</a>
+			                                    <small>{{ $blog->created_at->format('M d, Y') }}</small>
+			                                  </li>
+			                                  <li class="d-flex align-items-center">
+			                                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
+			                                    <small>
+			                                        <span><a href="{{ route('blog.detail',$blog->slug) }}" target="_self" type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Read Blog">Read</a></span>
+			                                    </small>
+			                                  </li>
+			                                </ul>
+			                            </div>
+			                        </figcaption>
+			                    </div>
+			                </figure>
+			            </article>
+			        </div>
 		            @endforeach
 		        </div>
 		    </div>
