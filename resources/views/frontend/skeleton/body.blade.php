@@ -43,9 +43,19 @@
 							{{ session('success') }}
 							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 						</div>
+					    @elseif(session()->has('message'))
+						<div class="alert alert-warning alert-dismissible fade show" role="alert">
+							{{ session('message') }}
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+					    @elseif(session()->has('update'))
+						<div class="alert alert-warning alert-dismissible fade show" role="alert">
+							{{ session('update') }}
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
 					    @elseif(session()->has('delete'))
 						<div class="alert alert-warning alert-dismissible fade show" role="alert">
-							{{ session('error') }}
+							{{ session('delete') }}
 							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 						</div>
 					    @elseif(session()->has('error'))

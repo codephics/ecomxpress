@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 // Ecommerce
 use App\Http\Controllers\Ecommerce\EcommerceItemsController;
-use App\Http\Controllers\Ecommerce\EcommerceOrderController;
+use App\Http\Controllers\Ecommerce\EcommerceLeadController;
 use App\Http\Controllers\Ecommerce\EcommerceSellerController;
 use App\Http\Controllers\Ecommerce\EcommerceSiteController;
 use App\Http\Controllers\Ecommerce\EcommerceCategoryController;
@@ -248,9 +248,10 @@ Route::put('ecommerce/item/update/{id}', [EcommerceItemsController::class, 'upda
 Route::delete('ecommerce/item/destroy/{id}', [EcommerceItemsController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.item.destroy');
 
 // Ecommerce Order
-Route::get('ecommerce/manage-leads', [EcommerceLeadController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-lead');
+Route::get('ecommerce/manage-lead', [EcommerceLeadController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-lead');
 Route::get('ecommerce/lead/new', [EcommerceLeadController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.lead.new');
-Route::post('ecommerce/lead/store', [EcommerceLeadController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.lead.store');
+Route::post('ecommerce/lead/store/front', [EcommerceLeadController::class, 'storeFront'])->middleware(['auth', 'verified'])->name('ecommerce.lead.store.front');
+Route::post('ecommerce/lead/store', [EcommerceLeadController::class, 'storeBack'])->middleware(['auth', 'verified'])->name('ecommerce.lead.store');
 Route::get('ecommerce/lead/edit/{id}', [EcommerceLeadController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.lead.edit');
 Route::put('ecommerce/lead/update/{id}', [EcommerceLeadController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.lead.update');
 Route::delete('ecommerce/lead/destroy/{id}', [EcommerceLeadController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.lead.destroy');

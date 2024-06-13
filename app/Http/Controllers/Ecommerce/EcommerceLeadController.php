@@ -23,10 +23,29 @@ class EcommerceLeadController extends Controller
 
     public function create()
     {
-        return view('backend.ecommerce.new-lead');
+        return view('backend.ecommerce.lead.new-lead');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function storeFront(Request $request): RedirectResponse
+    {
+        $lead = EcommerceLead::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'address' => $request->address,
+            'note' => $request->note,
+            'status' => $request->status,
+            'comment' => $request->comment,
+        ]);
+
+        $lead->save();
+
+        Session::flash('success', __('Your Order Placed Successfully!'));
+        
+        return redirect('/');
+    }
+
+    public function storeBack(Request $request): RedirectResponse
     {
         $lead = EcommerceLead::create([
             'name' => $request->name,
@@ -49,14 +68,14 @@ class EcommerceLeadController extends Controller
     {
         $leads = EcommerceLead::all();
 
-        return view('backend.ecommerce.manage-lead', ['leads' => $leads]);
+        return view('backend.ecommerce.lead.manage-lead', ['leads' => $leads]);
     }
 
     public function edit($id)
     {
         $lead = EcommerceLead::findOrFail($id);
 
-        return view('backend.ecommerce.edit-lead', ['lead' => $lead]);
+        return view('backend.ecommerce.lead.edit-lead', ['lead' => $lead]);
     }
 
     public function update(Request $request, $id): RedirectResponse
@@ -80,7 +99,7 @@ class EcommerceLeadController extends Controller
             $lead->save();
 
         } else {
-            dd();
+            return back();
         }
 
         Session::flash('update', __('Lead Successfully Updated!'));

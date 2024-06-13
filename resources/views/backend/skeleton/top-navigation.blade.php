@@ -23,8 +23,8 @@
 						<li><a class="dropdown-item" href="{{ route('ecommerce.item.new') }}">Add Item</a></li>
 						<li><a class="dropdown-item" href="{{ route('ecommerce.manage-item') }}">Manage Item</a></li>
 						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="{{ route('ecommerce.order.new') }}">Add Order</a></li>
-						<li><a class="dropdown-item" href="{{ route('ecommerce.manage-order') }}">Manage Order</a></li>
+						<li><a class="dropdown-item" href="{{ route('ecommerce.lead.new') }}">Add Lead</a></li>
+						<li><a class="dropdown-item" href="{{ route('ecommerce.manage-lead') }}">Manage Lead</a></li>
 					</ul>
 				</li>
 				<li class="nav-item dropdown">
