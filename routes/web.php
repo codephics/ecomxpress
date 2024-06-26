@@ -52,8 +52,8 @@ Route::get('sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 |--------------------------------------------------------------------------
 */
 
-Route::get('more-blogs', [PageController::class, 'blogs'])->name('blog.more');
-Route::get('detail/{slug}', [PageController::class, 'detail'])->name('blog.detail');
+Route::get('blog/more-blogs', [PageController::class, 'blogs'])->name('blog.more');
+Route::get('blog/detail/{slug}', [PageController::class, 'detail'])->name('blog.detail');
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +61,7 @@ Route::get('detail/{slug}', [PageController::class, 'detail'])->name('blog.detai
 |--------------------------------------------------------------------------
 */
 
-Route::post('subscriber/new', [SubscriberController::class, 'subscriber'])->name('subscriber.new');
+Route::post('subscriber/new', [SubscriberController::class, 'subscriber'])->name('subscriber.new.front');
 
 /*
 |--------------------------------------------------------------------------

@@ -190,8 +190,10 @@
                         </a>
 
                         <figcaption>
-                          <div class="card-body">
-                            <h5 class="card-title">{{ \Illuminate\Support\Str::limit($item->name, 40, '...') }}</h5>
+                          <div class="card-body">                            
+                            <a href="{{ route('item.detail', $item->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                                <h5 class="card-title">{{ \Illuminate\Support\Str::limit($item->name, 40, '...') }}</h5>
+                            </a>
                           </div>
                           <ul class="list-group list-group-flush">
                             <li class="list-group-item">

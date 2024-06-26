@@ -7,7 +7,7 @@
 				</div>
 				
 				<div class="col-md-4 align-self-center">
-					<form class="row g-3 float-end needs-validation" method="POST" action="{{ route('subscriber.new') }}" novalidate>
+					<form class="row g-3 float-end needs-validation" method="POST" action="{{ route('subscriber.new.front') }}" novalidate>
 						@csrf
 						<div class="col-auto">
 							<label for="staticEmail2" class="visually-hidden"></label>
