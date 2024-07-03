@@ -10,8 +10,8 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('ecommerce.manage-lead') }}">Manage Leads</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Add Lead</li>
+                    <li class="breadcrumb-item"><a href="{{ route('ecommerce.manage-pre-order') }}">Manage Pre-Orders</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Add Pre-Order</li>
                 </ol>
             </nav>
         </div>
@@ -20,7 +20,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h1>Add Lead</h1>
+            <h1>Add Pre-Order</h1>
         </div>
     </div>
 
@@ -34,7 +34,7 @@
     </div>
     @endif
 
-    <form class="needs-validation" method="POST" action="{{ route('ecommerce.lead.store') }}" enctype="multipart/form-data" novalidate>
+    <form class="needs-validation" method="POST" action="{{ route('ecommerce.pre-order.store') }}" enctype="multipart/form-data" novalidate>
         @csrf
         <div class="row">
             <div class="col-sm-9">

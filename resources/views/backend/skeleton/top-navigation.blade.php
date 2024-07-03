@@ -23,6 +23,9 @@
 						<li><a class="dropdown-item" href="{{ route('ecommerce.item.new') }}">Add Item</a></li>
 						<li><a class="dropdown-item" href="{{ route('ecommerce.manage-item') }}">Manage Item</a></li>
 						<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item" href="{{ route('ecommerce.pre-order.new') }}">Add Pre-Orders</a></li>
+						<li><a class="dropdown-item" href="{{ route('ecommerce.pre-order.manage') }}">Manage Pre-Orders</a></li>
+						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item" href="{{ route('ecommerce.lead.new') }}">Add Lead</a></li>
 						<li><a class="dropdown-item" href="{{ route('ecommerce.manage-lead') }}">Manage Lead</a></li>
 					</ul>

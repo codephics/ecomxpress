@@ -68,13 +68,13 @@
                     <div class="col-sm-12">
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
-                            <textarea id="custom-textarea" name="address">{{ $lead->address }}</textarea>
+                            <textarea class="form-control" name="address">{{ $lead->address }}</textarea>
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="mb-3">
                             <label for="note" class="form-label">Note</label>
-                            <textarea id="custom-textarea" name="note">{{ $lead->note }}</textarea>
+                            <textarea class="form-control" name="note">{{ $lead->note }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -83,39 +83,38 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="mb-3">
-                            <label for="live_preview_link" class="form-label">Live Preview Link</label>
-                            <input type="text" class="form-control" placeholder="Live Preview Link" />
+                            <label for="order_link" class="form-label">Order Link</label>
+                            <input type="text" class="form-control" placeholder="Order Link" disabled />
                         </div>
                         <div class="mb-3">
                             <div class="input-group mb-3">
-                                <label class="input-group-text" for="inputGroupStatus">Order Type</label>
-                                <select class="form-select" id="inputGroupStatus" name="order_type">
-                                    @if($lead->order_type == 1)
-                                    <option value="1">Normal</option>
-                                    <option value="2">Pre-Order</option>
-                                    <option value="3">Virtual</option>
-                                    @elseif($lead->order_type == 2)
-                                    <option value="2">Pre-Order</option>
-                                    <option value="1">Normal</option>
-                                    <option value="3">Virtual</option>
-                                    @else($lead->order_type == 3)
-                                    <option value="3">Virtual</option>
-                                    <option value="1">Normal</option>
-                                    <option value="2">Pre-Order</option>
-                                    @endif
-                                </select>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="input-group mb-3">
-                                <label class="input-group-text" for="inputGroupStatus">Status</label>
+                                <label class="input-group-text" for="inputGroupStatus">Order Status</label>
                                 <select class="form-select" id="inputGroupStatus" name="status">
                                     @if($lead->status == 1)
-                                    <option value="1">Published</option>
-                                    <option value="0">Draft</option>
+                                    <option value="1">Pending</option>
+                                    <option value="2">Confirmed</option>
+                                    <option value="3">Delivered</option>
+                                    <option value="4">Recieved</option>
+                                    @elseif($lead->status == NULL)
+                                    <option value="1">Pending</option>
+                                    <option value="2">Confirmed</option>
+                                    <option value="3">Delivered</option>
+                                    <option value="4">Recieved</option>
+                                    @elseif($lead->status == 2)
+                                    <option value="2">Confirmed</option>
+                                    <option value="1">Pending</option>
+                                    <option value="3">Delivered</option>
+                                    <option value="4">Recieved</option>
+                                    @elseif($lead->status == 3)
+                                    <option value="3">Delivered</option>
+                                    <option value="1">Pending</option>
+                                    <option value="2">Confirmed</option>
+                                    <option value="4">Recieved</option>
                                     @else
-                                    <option value="0">Draft</option>
-                                    <option value="1">Publish</option>
+                                    <option value="4">Recieved</option>
+                                    <option value="1">Pending</option>
+                                    <option value="2">Confirmed</option>
+                                    <option value="3">Delivered</option>
                                     @endif
                                 </select>
                             </div>

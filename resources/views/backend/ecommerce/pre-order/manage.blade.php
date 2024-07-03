@@ -18,7 +18,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Manage Lead</li>
+                    <li class="breadcrumb-item active" aria-current="page">Manage Pre-Order</li>
                 </ol>
             </nav>
         </div>
@@ -27,12 +27,12 @@
 
     <div class="row">
         <div class="col-md-10">
-            <h1>Manage Lead</h1>
+            <h1>Manage Pre-Order</h1>
         </div>
         <div class="col-lg-2 align-self-center">
             <div class="row">
                 <div class="col-12 col-sm-12">
-                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('ecommerce.lead.new') }}">+ Add Lead</a>
+                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('ecommerce.pre-order.new') }}">+ Add Pre-Order</a>
                 </div>
             </div>
         </div>
@@ -65,22 +65,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($leads as $index => $lead)
+                    @foreach ($preOrders as $index => $preOrder)
                     <tr>
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ $lead->name }}</td>
-                        <td>{{ $lead->email }}</td>
-                        <td>{{ $lead->mobile }}</td>
-                        <td>{!! $lead->address !!}</td>
-                        <td>{!! $lead->note !!}</td>
+                        <td>{{ $preOrder->name }}</td>
+                        <td>{{ $preOrder->email }}</td>
+                        <td>{{ $preOrder->mobile }}</td>
+                        <td>{!! $preOrder->address !!}</td>
+                        <td>{!! $preOrder->note !!}</td>
                         <td>
-                            @if($lead->status == 1)
+                            @if($preOrder->status == 1)
                             Pending 
-                            @elseif($lead->status == NULL)
+                            @elseif($preOrder->status == NULL)
                             Pending 
-                            @elseif($lead->status == 2)
+                            @elseif($preOrder->status == 2)
                             Confirmed
-                            @elseif($lead->status == 3)
+                            @elseif($preOrder->status == 3)
                             Delivered
                             @else 
                             Recieved 
@@ -88,13 +88,13 @@
                         </td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                              <a href="{{ route('ecommerce.lead.view',$lead->id) }}" class="btn btn-info">View</a>
-                              <a href="{{ route('ecommerce.lead.edit',$lead->id) }}" class="btn btn-secondary">Edit</a>
+                              <a href="{{ route('ecommerce.pre-order.view',$preOrder->id) }}" class="btn btn-info">View</a>
+                              <a href="{{ route('ecommerce.pre-order.edit',$preOrder->id) }}" class="btn btn-secondary">Edit</a>
 
-                              <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#deleteItem{{ $lead->id }}">Destroy</button>
+                              <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#deleteItem{{ $preOrder->id }}">Destroy</button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="deleteItem{{ $lead->id }}" tabindex="-1" aria-labelledby="deleteItemLabel" aria-hidden="true">
+                                <div class="modal fade" id="deleteItem{{ $preOrder->id }}" tabindex="-1" aria-labelledby="deleteItemLabel" aria-hidden="true">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
                                       <div class="modal-header">
@@ -104,7 +104,7 @@
                                       <div class="modal-body">
                                         <p>Do you really want to delete. This process cannot be undone.</p>
                                       </div>
-                                      <form method="POST" action="{{ route('ecommerce.lead.destroy',$lead->id) }}">
+                                      <form method="POST" action="{{ route('ecommerce.pre-order.destroy',$preOrder->id) }}">
                                         @csrf
                                         @method('DELETE')
                                       <div class="modal-footer">

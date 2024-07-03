@@ -19,6 +19,9 @@ class SettingController extends Controller
             'title' => $request->title,
             'tagline' => $request->tagline,
             'about_in_short' => $request->about_in_short,
+            'address' => $request->address,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
             'facebook_url' => $request->facebook_url,
             'twitter_url' => $request->twitter_url,
             'instagram_url' => $request->instagram_url,
@@ -166,6 +169,9 @@ class SettingController extends Controller
             $setting->title = $request->input('title');
             $setting->tagline = $request->input('tagline');
             $setting->about_in_short = $request->input('about_in_short');
+            $setting->address = $request->input('address');
+            $setting->email = $request->input('email');
+            $setting->mobile = $request->input('mobile');
             $setting->facebook_url = $request->input('facebook_url');
             $setting->twitter_url = $request->input('twitter_url');
             $setting->instagram_url = $request->input('instagram_url');

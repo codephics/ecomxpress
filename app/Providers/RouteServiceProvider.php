@@ -17,6 +17,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+    public const EcommercePreOrder = 'ecommerce/manage-pre-order';
+
     public const HOME = '/dashboard';
 
     public const EcommerceHome = '/';

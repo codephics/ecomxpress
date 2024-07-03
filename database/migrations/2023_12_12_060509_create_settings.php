@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('title', 255)->nullable();
             $table->string('tagline', 255)->nullable();
             $table->text('about_in_short')->nullable();
+            $table->string('address')->nullable();
+            $table->string('email')->nullable();
+            $table->string('mobile')->nullable();
             $table->string('facebook_url')->nullable();
             $table->string('twitter_url')->nullable();
             $table->string('instagram_url')->nullable();

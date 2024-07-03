@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\Global\Setting;
 use App\Models\Ecommerce\EcommerceLead;
 
 use App\Providers\RouteServiceProvider;
@@ -42,7 +43,18 @@ class EcommerceLeadController extends Controller
 
         Session::flash('success', __('Your Order Placed Successfully!'));
         
-        return redirect('/');
+        return view('frontend.ecommerce.lead.view-invoice');
+    }
+
+    public function invoice($id)
+    {
+        $setting = Setting::first();
+        $lead = EcommerceLead::findOrFail($id);
+        
+        return view('backend.ecommerce.lead.view-lead', [
+            'setting' => $setting,
+            'lead' => $lead
+        ]);
     }
 
     public function storeBack(Request $request): RedirectResponse
@@ -76,6 +88,17 @@ class EcommerceLeadController extends Controller
         $lead = EcommerceLead::findOrFail($id);
 
         return view('backend.ecommerce.lead.edit-lead', ['lead' => $lead]);
+    }
+
+    public function view($id)
+    {
+        $setting = Setting::first();
+        $lead = EcommerceLead::findOrFail($id);
+        
+        return view('backend.ecommerce.lead.view-lead', [
+            'setting' => $setting,
+            'lead' => $lead
+        ]);
     }
 
     public function update(Request $request, $id): RedirectResponse

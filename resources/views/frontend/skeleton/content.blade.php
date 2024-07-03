@@ -188,179 +188,190 @@
                         <a href="{{ route('item.detail', $item->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                             <img src="{{ asset('ecommerce/item/image/' . $item->image) }}" class="card-img-top" alt="{{ $item->img_alt_text }}" />
                         </a>
-
                         <figcaption>
-                          <div class="card-body">                            
-                            <a href="{{ route('item.detail', $item->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                                <h5 class="card-title">{{ \Illuminate\Support\Str::limit($item->name, 40, '...') }}</h5>
-                            </a>
-                          </div>
-                          <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <small>
-                                    @if ($item->category_name) @if ($item->category)
-                                    <a href="{{ route('category.show', ['category' => $item->category->slug]) }}" class="link-dark">
-                                        {{ $item->category_name }}
-                                    </a>
-                                    @endif @elseif ($item->subcategory_name) @if ($item->subcategory)
-                                    <a
-                                        href="{{ route('subcategory.show', [
-                                                        'category' => $item->subcategory->category->slug,
-                                                        'subcategory' => $item->subcategory->slug,
-                                                    ]) }}"
-                                        class="link-dark"
-                                    >
-                                        {{ $item->subcategory_name }}
-                                    </a>
-                                    @endif @elseif ($item->sub_subcategory_name) @if ($item->sub_subcategory)
-                                    <a
-                                        href="{{ route('subSubcategory.show', [
-                                                        'category' => $item->subcategory->category->slug,
-                                                        'subcategory' => $item->subcategory->slug,
-                                                        'subSubcategory' => $item->sub_subcategory->slug,
-                                                    ]) }}"
-                                        class="link-dark"
-                                    >
-                                        {{ $item->sub_subcategory_name }}
-                                    </a>
-                                    @endif @endif
-                                </small>
-                            </li>
-                            <li class="list-group-item">
-                                <small>
-                                    @if($item->sale_price)
-
-                                    <span class="fw-bold fs-5 text-success">৳ {{ $item->sale_price }}</span> | <span class="fw-bold text-decoration-line-through text-muted">৳ {{ $item->regular_price }}</span>
-
-                                    @elseif($item->regular_price)
-
-                                    <span class="fw-bold fs-5 text-success">৳ {{ $item->regular_price }}</span>
-
-                                    @else
-
-                                    <span>Free</span>
-
-                                    @endif
-                                </small>
-                            </li>
-                          </ul>
-                          <div class="card-body">
-                            <a type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#confirmNow" data-bs-whatever="@mdo">Confirm Order</a>
-                                <div class="modal fade" id="confirmNow" tabindex="-1" aria-labelledby="confirmNowLabel" aria-hidden="true">
+                            <div class="card-body">
+                                <a href="{{ route('item.detail', $item->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                                    <h5 class="card-title">{{ \Illuminate\Support\Str::limit($item->name, 40, '...') }}</h5>
+                                </a>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <small>
+                                        @if ($item->category_name) @if ($item->category)
+                                        <a href="{{ route('category.show', ['category' => $item->category->slug]) }}" class="link-dark">
+                                            {{ $item->category_name }}
+                                        </a>
+                                        @endif @elseif ($item->subcategory_name) @if ($item->subcategory)
+                                        <a
+                                            href="{{ route('subcategory.show', [
+                                                    'category' => $item->subcategory->category->slug,
+                                                    'subcategory' => $item->subcategory->slug,
+                                                ]) }}"
+                                            class="link-dark"
+                                        >
+                                            {{ $item->subcategory_name }}
+                                        </a>
+                                        @endif @elseif ($item->sub_subcategory_name) @if ($item->sub_subcategory)
+                                        <a
+                                            href="{{ route('subSubcategory.show', [
+                                                    'category' => $item->subcategory->category->slug,
+                                                    'subcategory' => $item->subcategory->slug,
+                                                    'subSubcategory' => $item->sub_subcategory->slug,
+                                                ]) }}"
+                                            class="link-dark"
+                                        >
+                                            {{ $item->sub_subcategory_name }}
+                                        </a>
+                                        @endif @endif
+                                    </small>
+                                </li>
+                                <li class="list-group-item">
+                                    <small>
+                                        @if($item->sale_price)
+                                        <span class="fw-bold fs-5 text-success">{{ $item->sale_price }}৳</span>/
+                                        <span class="fw-bold text-decoration-line-through text-muted">{{ $item->regular_price }}৳</span>
+                                        @elseif($item->regular_price)
+                                        <span class="fw-bold fs-5 text-success">{{ $item->regular_price }}৳</span>
+                                        @else
+                                        <span>Free</span>
+                                        @endif
+                                    </small>
+                                </li>
+                            </ul>
+                            <div class="card-body">
+                                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#confirmNow-{{ $item->id }}" data-sale-price="{{ $item->sale_price ?? $item->regular_price ?? 0 }}">
+                                    Confirm Order
+                                </button>
+                                <div class="modal fade" id="confirmNow-{{ $item->id }}" tabindex="-1" aria-labelledby="confirmNowLabel-{{ $item->id }}" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <span class="modal-title fs-5" id="exampleModalLabel">Confirm Now</span>
+                                                <span class="modal-title fs-5" id="confirmNowLabel-{{ $item->id }}">Confirm Now</span>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="needs-validation" method="POST" action="{{ route('ecommerce.lead.store.front') }}">
+                                                <form class="needs-validation" id="orderForm-{{ $item->id }}" method="POST" action="{{ route('ecommerce.pre-order.confirm') }}">
                                                     @csrf
                                                     <div class="mb-3">
-                                                        <label for="recipient-name" class="col-form-label">Name: <span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" name="name" placeholder="Name" required />
+                                                        <label for="name-{{ $item->id }}" class="col-form-label">Name: <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" name="name" id="name-{{ $item->id }}" placeholder="Name" required />
                                                         <div class="invalid-feedback">
                                                             Valid Name is required.
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="recipient-email" class="col-form-label">Email (optional):</label>
-                                                        <input type="email" class="form-control" name="email" placeholder="Email (optional)" required />
+                                                        <label for="email-{{ $item->id }}" class="col-form-label">Email (optional):</label>
+                                                        <input type="email" class="form-control" name="email" id="email-{{ $item->id }}" placeholder="Email (optional)" />
                                                         <div class="invalid-feedback">
                                                             Please enter a valid email address.
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="recipient-mobile" class="col-form-label">Mobile: <span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" name="mobile" placeholder="Mobile" required />
+                                                        <label for="mobile-{{ $item->id }}" class="col-form-label">Mobile: <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" name="mobile" id="mobile-{{ $item->id }}" placeholder="Mobile" required />
                                                         <div class="invalid-feedback">
                                                             Please enter a valid mobile number.
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label">Address: <span class="text-danger">*</span></label>
-                                                        <textarea class="form-control" name="address" placeholder="address" required></textarea>
+                                                        <label for="address-{{ $item->id }}" class="col-form-label">Address:</label>
+                                                        <textarea class="form-control" name="address" id="address-{{ $item->id }}" placeholder="address"></textarea>
                                                         <div class="invalid-feedback">
                                                             Please enter address.
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label">Order Note (optional):</label>
-                                                        <textarea class="form-control" name="note" placeholder="Order Note (optional)"></textarea>
+                                                        <label for="quantity-{{ $item->id }}" class="col-form-label">Quantity: <span class="text-danger">*</span></label>
+                                                        <input type="number" class="form-control" id="quantity-{{ $item->id }}" name="quantity" value="1" min="1" placeholder="Quantity" required />
+                                                        <div class="invalid-feedback">
+                                                            Please enter a valid quantity.
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="col-form-label">Shipping Method</label>
+                                                        <div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input shipping-method" type="checkbox" id="insideDhaka-{{ $item->id }}" name="shipping_method" value="50" />
+                                                                <label class="form-check-label" for="insideDhaka-{{ $item->id }}">Inside Dhaka (50৳)</label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input shipping-method" type="checkbox" id="outsideDhaka-{{ $item->id }}" name="shipping_method" value="100" />
+                                                                <label class="form-check-label" for="outsideDhaka-{{ $item->id }}">Outside Dhaka (100৳)</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="col-form-label">Product</label>
+                                                        <div class="d-flex align-items-center">
+                                                            <div></div>
+                                                        </div>
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <img src="{{ asset('ecommerce/item/image/' . $item->image) }}" class="img-thumbnail me-2" alt="{{ $item->img_alt_text }}" style="width: 50px;" />
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="mb-0">{{ \Illuminate\Support\Str::limit($item->name, 15, '...') }}</p>
+                                                                        </td>
+                                                                        <td>
+                                                                            @if($item->sale_price)
+                                                                            <span class="fw-bold fs-5 text-success">{{ $item->sale_price }}৳</span>/
+                                                                            <span class="fw-bold text-decoration-line-through text-muted">{{ $item->regular_price }}৳</span>
+                                                                            @elseif($item->regular_price)
+                                                                            <span class="fw-bold fs-5 text-success">{{ $item->regular_price }}৳</span>
+                                                                            @else
+                                                                            <span>Free</span>
+                                                                            @endif
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <label class="col-form-label">Sub Total</label>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p id="subTotal-{{ $item->id }}">৳ 0.00</p>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label class="col-form-label">Delivery Charge</label></td>
+                                                                        <td><p id="deliveryCharge-{{ $item->id }}">৳ 0.00</p></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label class="col-form-label">Total</label></td>
+                                                                        <td><p id="total-{{ $item->id }}">৳ 0.00</p></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="orderNote-{{ $item->id }}" class="col-form-label">Order Note (optional):</label>
+                                                        <textarea class="form-control" id="orderNote-{{ $item->id }}" name="note" placeholder="Order Note (optional)"></textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <span>
+                                                            <font color="red"><b>Delivery charges may vary based on weight. Consequently, the total amount may change. We will notify you of the final total charge.</b></font>
+                                                        </span>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Confim Now</button>
+                                                        <button type="submit" class="btn btn-primary">Confirm Now</button>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                          </div>
-                        </figcaption>
-                    </div>
-                </figure>
-            </article>
-        </div>
-        @endforeach
-    </div>
-</section>
-
-<!-- HR -->
-<div class="mt-3 border-top border-start-0 border-bottom-0 border-end-0"></div>
-
-<div class="mt-3"></div>
-
-<!-- Blogs -->
-<section>
-    <div class="row border-top-0 border-start-0 border-bottom-0 border-end-0">
-        <div class="col-lg-10">
-            <h4 class="display-6">Unlocking Knowledge on our Blog</h4>
-
-            <p>
-                Embark on a journey through our blog, where valuable insights await your exploration. Uncover the foundational aspects of SEO, delving into a comprehensive beginner's guide that unveils essential strategies and tips. Elevate
-                your online presence by mastering the art of optimizing your website for search engines with our expertly curated content.
-            </p>
-        </div>
-        <div class="col-lg-2 align-self-center">
-            <div class="row">
-                <div class="col-12 col-sm-12">
-                    <a type="button" class="btn btn-secondary float-end" href="{{ route('blog.more') }}">Read Blogs</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="mt-3"></div>
-
-    <div class="row">
-        @foreach ($blogs as $blog)
-        <div class="col-lg-6">
-            <article>
-                <figure>
-                    <div class="card shadow mb-5 rounded-3 no-border-card">
-                        <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                            <img src="{{ asset('blog/image/featured/' . $blog->featured_image) }}" class="card-img-top" alt="..." />
-                        </a>
-                        <figcaption>
-                            <div class="card-body">
-                                <ul class="d-flex list-unstyled mt-auto">
-                                    <li class="me-auto">
-                                        <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                                            {{ \Illuminate\Support\Str::limit($blog->title, 60, '...') }}
-                                        </a>
-                                        <small>{{ $blog->created_at->format('M d, Y') }}</small>
-                                    </li>
-                                    <li class="d-flex align-items-center">
-                                        <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3" /></svg>
-                                        <small>
-                                            <span>
-                                                <a href="{{ route('blog.detail',$blog->slug) }}" target="_self" type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Read Blog">Read</a>
-                                            </span>
-                                        </small>
-                                    </li>
-                                </ul>
                             </div>
                         </figcaption>
                     </div>
@@ -382,4 +393,44 @@
     </aside>
 </section>
 
-@endsection
+@section('custom-scripts')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('[id^="confirmNow-"]').forEach(function (modalElement) {
+            modalElement.addEventListener('show.bs.modal', function (event) {
+                let modalId = modalElement.id.split('-')[1];
+                let quantityInput = document.querySelector(`#quantity-${modalId}`);
+                let insideDhakaCheckbox = document.querySelector(`#insideDhaka-${modalId}`);
+                let outsideDhakaCheckbox = document.querySelector(`#outsideDhaka-${modalId}`);
+                let subTotalElement = document.querySelector(`#subTotal-${modalId}`);
+                let deliveryChargeElement = document.querySelector(`#deliveryCharge-${modalId}`);
+                let totalElement = document.querySelector(`#total-${modalId}`);
+                let salePrice = parseFloat(event.relatedTarget.getAttribute('data-sale-price'));
+
+                function calculateTotal() {
+                    let quantity = parseInt(quantityInput.value);
+                    let deliveryCharge = 0;
+                    if (insideDhakaCheckbox.checked) {
+                        deliveryCharge = parseInt(insideDhakaCheckbox.value);
+                    }
+                    if (outsideDhakaCheckbox.checked) {
+                        deliveryCharge = parseInt(outsideDhakaCheckbox.value);
+                    }
+                    let subTotal = salePrice * quantity;
+                    let total = subTotal + deliveryCharge;
+                    subTotalElement.textContent = `৳ ${subTotal.toFixed(2)}`;
+                    deliveryChargeElement.textContent = `৳ ${deliveryCharge.toFixed(2)}`;
+                    totalElement.textContent = `৳ ${total.toFixed(2)}`;
+                }
+
+                quantityInput.addEventListener('input', calculateTotal);
+                insideDhakaCheckbox.addEventListener('change', calculateTotal);
+                outsideDhakaCheckbox.addEventListener('change', calculateTotal);
+
+                calculateTotal();
+            });
+        });
+    });
+</script>
+@endsection @endsection

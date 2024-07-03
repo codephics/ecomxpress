@@ -65,10 +65,35 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" name="address"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" name="email" value="{{ $page->email }}" placeholder="Enter Email" />
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="mobile" class="form-label">Mobile</label>
+                            <input type="text" class="form-control" name="mobile" value="{{ $page->mobile }}" placeholder="Enter Mobile" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="facebook_url" class="form-label">Facebook</label>
-                            <input type="text" class="form-control" name="facebook_url" value="{{ $page->facebook_url }}" placeholder="Enter Full LinkedIn URL" />
+                            <input type="text" class="form-control" name="facebook_url" value="{{ $page->facebook_url }}" placeholder="Enter Full Facebook URL" />
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
