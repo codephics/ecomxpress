@@ -10,7 +10,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('ecommerce.manage-lead') }}">Manage Pre-Orders</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('ecommerce.pre-order.manage') }}">Manage Pre-Orders</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Update Pre-Order</li>
                 </ol>
             </nav>
@@ -23,16 +23,6 @@
             <h1>Update Pre-Order</h1>
         </div>
     </div>
-
-    @if(session()->has('update'))
-    <div class="row">
-        <div class="col-md-12">
-            <div class="alert alert-success" role="alert">
-                {{ session('update') }}
-            </div>
-        </div>
-    </div>
-    @endif
 
     <form class="needs-validation" method="POST" action="{{ route('ecommerce.pre-order.update',$preOrder->id) }}" enctype="multipart/form-data" novalidate>
         @csrf
@@ -51,16 +41,81 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label for="mobile" class="form-label">Mobile</label>
-                            <input type="text" class="form-control" name="mobile" value="{{ $preOrder->mobile }}" placeholder="Mobile" required />
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" value="{{ $preOrder->email }}" placeholder="Email" />
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" value="{{ $preOrder->email }}" placeholder="Email" />
+                            <label for="mobile" class="form-label">Mobile</label>
+                            <input type="text" class="form-control" name="mobile" value="{{ $preOrder->mobile }}" placeholder="Mobile" required />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="product_select" class="form-label">Product Name</label>
+                            <select class="form-control" name="product_name" required>
+                                <option value="">Select a product</option>
+                                <option value="product1" data-price="100">Product 1 - $100</option>
+                                <option value="product2" data-price="200">Product 2 - $200</option>
+                                <option value="product3" data-price="300">Product 3 - $300</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">Quantity</label>
+                            <input type="number" class="form-control" name="quantity" value="1" min="1" placeholder="Quantity" required />
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="shipping_method" class="form-label">Shipping Method</label>
+                            <div class="mt-2">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="shipping_method" id="insideDhaka" value="50" required>
+                                    <label class="form-check-label" for="insideDhaka">Inside Dhaka - ৳50</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="shipping_method" id="outsideDhaka" value="100" required>
+                                    <label class="form-check-label" for="outsideDhaka">Outside Dhaka - ৳100</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td width="75%">
+                                                <label class="col-form-label">Sub Total</label>
+                                            </td>
+                                            <td width="25%">
+                                                <p id="subTotal">৳ 0.00</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="75%"><label class="col-form-label">Delivery Charge</label></td>
+                                            <td width="25%"><p id="deliveryCharge">৳ 0.00</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="75%"><label class="col-form-label">Total</label></td>
+                                            <td width="25%"><p id="total">৳ 0.00</p></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -73,8 +128,8 @@
                     </div>
                     <div class="col-sm-12">
                         <div class="mb-3">
-                            <label for="note" class="form-label">Note</label>
-                            <textarea class="form-control" name="note">{{ $preOrder->note }}</textarea>
+                            <label for="order_note" class="form-label">Order Note</label>
+                            <textarea class="form-control" name="order_note">{{ $preOrder->order_note }}</textarea>
                         </div>
                     </div>
                 </div>

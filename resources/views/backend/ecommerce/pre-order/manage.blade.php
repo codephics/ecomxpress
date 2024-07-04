@@ -56,9 +56,11 @@
                     <tr>
                         <th>SN</th>
                         <th>Name</th>
-                        <th>Email</th>
                         <th>Mobile</th>
                         <th>Address</th>
+                        <th>ProductName</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
                         <th>Note</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -69,10 +71,12 @@
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $preOrder->name }}</td>
-                        <td>{{ $preOrder->email }}</td>
                         <td>{{ $preOrder->mobile }}</td>
-                        <td>{!! $preOrder->address !!}</td>
-                        <td>{!! $preOrder->note !!}</td>
+                        <td>{{ $preOrder->address }}</td>
+                        <td>{{ $preOrder->product_name }}</td>
+                        <td>{{ $preOrder->quantity }}</td>
+                        <td>{{ $preOrder->total }}</td>
+                        <td>{{ \Illuminate\Support\Str::limit($preOrder->note, 50, '...') }}</td>
                         <td>
                             @if($preOrder->status == 1)
                             Pending 
@@ -124,9 +128,11 @@
                     <tr>
                         <th>SN</th>
                         <th>Name</th>
-                        <th>Email</th>
                         <th>Mobile</th>
                         <th>Address</th>
+                        <th>ProductName</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
                         <th>Note</th>
                         <th>Status</th>
                         <th>Action</th>

@@ -309,13 +309,13 @@
                                                             <table class="table">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td>
+                                                                        <td width="25%">
                                                                             <img src="{{ asset('ecommerce/item/image/' . $item->image) }}" class="img-thumbnail me-2" alt="{{ $item->img_alt_text }}" style="width: 50px;" />
                                                                         </td>
-                                                                        <td>
-                                                                            <p class="mb-0">{{ \Illuminate\Support\Str::limit($item->name, 15, '...') }}</p>
+                                                                        <td width="50%">
+                                                                            <p class="mb-0">{{ \Illuminate\Support\Str::limit($item->name, 40, '...') }}</p>
                                                                         </td>
-                                                                        <td>
+                                                                        <td width="25%">
                                                                             @if($item->sale_price)
                                                                             <span class="fw-bold fs-5 text-success">{{ $item->sale_price }}৳</span>/
                                                                             <span class="fw-bold text-decoration-line-through text-muted">{{ $item->regular_price }}৳</span>
@@ -335,20 +335,20 @@
                                                             <table class="table">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td>
+                                                                        <td width="75%">
                                                                             <label class="col-form-label">Sub Total</label>
                                                                         </td>
-                                                                        <td>
+                                                                        <td width="25%">
                                                                             <p id="subTotal-{{ $item->id }}">৳ 0.00</p>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td><label class="col-form-label">Delivery Charge</label></td>
-                                                                        <td><p id="deliveryCharge-{{ $item->id }}">৳ 0.00</p></td>
+                                                                        <td width="75%"><label class="col-form-label">Delivery Charge</label></td>
+                                                                        <td width="25%"><p id="deliveryCharge-{{ $item->id }}">৳ 0.00</p></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td><label class="col-form-label">Total</label></td>
-                                                                        <td><p id="total-{{ $item->id }}">৳ 0.00</p></td>
+                                                                        <td width="75%"><label class="col-form-label">Total</label></td>
+                                                                        <td width="25%"><p id="total-{{ $item->id }}">৳ 0.00</p></td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>

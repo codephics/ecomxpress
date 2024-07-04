@@ -101,7 +101,7 @@ class EcommercePreOrderController extends Controller
     {
         $preOrder = EcommercePreOrder::findOrFail($id);
 
-        return view('backend.ecommerce.pre-order.edit', ['lead' => $preOrder]);
+        return view('backend.ecommerce.pre-order.edit', ['preOrder' => $preOrder]);
     }
 
     public function view($id)
@@ -111,7 +111,7 @@ class EcommercePreOrderController extends Controller
         
         return view('backend.ecommerce.pre-order.view', [
             'setting' => $setting,
-            'lead' => $preOrder
+            'preOrder' => $preOrder
         ]);
     }
 

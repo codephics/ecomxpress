@@ -11,7 +11,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('ecommerce.manage-lead') }}">Manage Pre-Orders</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('ecommerce.pre-order.manage') }}">Manage Pre-Orders</a></li>
                     <li class="breadcrumb-item active" aria-current="page">View Pre-Order</li>
                 </ol>
             </nav>
@@ -29,7 +29,7 @@
         <div class="container my-5">
             <div class="card">
                 <div class="card-header text-center">
-                    <h2>Customer Invoice</h2>
+                    <h2>Customer Pre-Order Invoice</h2>
                 </div>
                 <div class="card-body">
                     <div class="row mb-4">
@@ -46,7 +46,7 @@
                             <h5>To:</h5>
                             <address>
                                 <strong>{{ $preOrder->name }}</strong><br>
-                                {!! $preOrder->address !!}<br>
+                                {{ $preOrder->address }}<br>
                                 Email: {{ $preOrder->email }}<br>
                                 Mobile: {{ $preOrder->mobile }}
                             </address>
@@ -65,7 +65,7 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
+                                <th>Product Name</th>
                                 <th class="text-end">Quantity</th>
                                 <th class="text-end">Unit Price</th>
                                 <th class="text-end">Total</th>
@@ -74,29 +74,22 @@
                             <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Product Name 1</td>
-                                <td class="text-end">2</td>
-                                <td class="text-end">$50.00</td>
-                                <td class="text-end">$100.00</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Product Name 2</td>
-                                <td class="text-end">1</td>
-                                <td class="text-end">$150.00</td>
-                                <td class="text-end">$150.00</td>
+                                <td>{{ $preOrder->product_name }}</td>
+                                <td class="text-end">{{ $preOrder->quantity }}</td>
+                                <td class="text-end">{{ $preOrder->product_price }}</td>
+                                <td class="text-end">{{ $preOrder->total }}</td>
                             </tr>
                             <tr>
                                 <td colspan="4" class="text-end"><strong>Subtotal</strong></td>
-                                <td class="text-end">$250.00</td>
+                                <td class="text-end">{{ $preOrder->sub_total }}</td>
                             </tr>
                             <tr>
                                 <td colspan="4" class="text-end"><strong>Tax (10%)</strong></td>
-                                <td class="text-end">$25.00</td>
+                                <td class="text-end">0.00</td>
                             </tr>
                             <tr>
                                 <td colspan="4" class="text-end"><strong>Total</strong></td>
-                                <td class="text-end"><strong>$275.00</strong></td>
+                                <td class="text-end"><strong>{{ $preOrder->total }}</strong></td>
                             </tr>
                             </tbody>
                         </table>
@@ -120,7 +113,7 @@
 
         // Header
         doc.autoTable({
-            head: [['Customer Purchase Invoice']],
+            head: [['Customer Pre-Order Invoice']],
             body: [],
             theme: 'plain',
             styles: { halign: 'center', fontSize: 16, fontStyle: 'bold' },
