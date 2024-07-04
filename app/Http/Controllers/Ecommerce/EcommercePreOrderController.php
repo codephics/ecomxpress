@@ -50,18 +50,30 @@ class EcommercePreOrderController extends Controller
 
         Session::flash('success', __('Your Order Placed Successfully!'));
         
-        return view('frontend.ecommerce.pre-order.view');
+        return redirect()->route('ecommerce.pre-order.invoice.id', ['id' => $preOrder->id]);
     }
 
-    public function invoice($id)
+    public function viewInvoice($id)
     {
         $setting = Setting::first();
-        $preOrder = EcommercePreOrder::findOrFail($id);
+        $page = EcommercePreOrder::findOrFail($id);
         
-        return view('backend.ecommerce.pre-order.view', [
+        return view('frontend.ecommerce.pre-order.view', [
             'setting' => $setting,
-            'lead' => $preOrder
+            'page' => $page
         ]);
+    }
+
+    public function downloadInvoice($id)
+    {
+        // Retrieve order details
+        $preOrder = EcommercePreOrder::findOrFail($id);
+
+        // Generate PDF
+        $pdf = PDF::loadView('frontend.ecommerce.pre-order.invoice', compact('preOrder'));
+
+        // Download PDF
+        return $pdf->download('invoice.pdf');
     }
 
     public function store(Request $request): RedirectResponse

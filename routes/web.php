@@ -252,7 +252,8 @@ Route::delete('ecommerce/item/destroy/{id}', [EcommerceItemsController::class, '
 Route::get('ecommerce/manage-pre-order', [EcommercePreOrderController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.manage');
 Route::get('ecommerce/pre-order/new', [EcommercePreOrderController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.new');
 Route::post('ecommerce/pre-order/confirm', [EcommercePreOrderController::class, 'confirm'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.confirm');
-Route::get('ecommerce/pre-order/invoice', [EcommercePreOrderController::class, 'invoice'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.invoice');
+Route::get('ecommerce/pre-order/{id}', [EcommercePreOrderController::class, 'viewInvoice'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.invoice.id');
+Route::get('ecommerce/pre-order/{id}/invoice', [EcommercePreOrderController::class, 'downloadInvoice'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.invoice');
 Route::post('ecommerce/pre-order/store', [EcommercePreOrderController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.store');
 Route::get('ecommerce/pre-order/edit/{id}', [EcommercePreOrderController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.edit');
 Route::get('ecommerce/pre-order/view/{id}', [EcommercePreOrderController::class, 'view'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.view');

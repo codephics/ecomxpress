@@ -1,4 +1,4 @@
-@extends('frontend.skeleton.body') @section('custom-head')
+@extends('frontend.skeleton.body') @section('content')
 
 <main class="container p-3 py-5">
     <!-- Breadcrumb -->
@@ -41,16 +41,16 @@
                         <div class="col-sm-6 text-sm-end">
                             <h5>To:</h5>
                             <address>
-                                <strong>{{ $lead->name }}</strong><br>
-                                {!! $lead->address !!}<br>
-                                Email: {{ $lead->email }}<br>
-                                Mobile: {{ $lead->mobile }}
+                                <strong>{{ $preOrder->name }}</strong><br>
+                                {{ $preOrder->address }}<br>
+                                Email: {{ $preOrder->email }}<br>
+                                Mobile: {{ $preOrder->mobile }}
                             </address>
                         </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col-sm-6">
-                            <h5>Invoice Date: {{ $lead->created_at }}</h5>
+                            <h5>Invoice Date: {{ $preOrder->created_at }}</h5>
                         </div>
                         <div class="col-sm-6 text-sm-end">
                             <h5>Invoice #123456</h5>
