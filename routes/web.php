@@ -99,6 +99,11 @@ Route::get('item/{category:slug}', [EcommerceItemsController::class, 'showByCate
 Route::get('item/{category:slug}/{subcategory:slug}', [EcommerceItemsController::class, 'showBySubcategory'])->name('subcategory.show');
 Route::get('item/{category:slug}/{subcategory:slug}/{subSubcategory:slug}', [EcommerceItemsController::class, 'showBySubSubcategory'])->name('subSubcategory.show');
 
+// Ecommerce Pre Order
+Route::get('ecommerce/pre-order/new', [EcommercePreOrderController::class, 'create'])->name('ecommerce.pre-order.new');
+Route::post('ecommerce/pre-order/confirm', [EcommercePreOrderController::class, 'confirm'])->name('ecommerce.pre-order.confirm');
+Route::get('ecommerce/pre-order/{uuid}', [EcommercePreOrderController::class, 'viewInvoice'])->name('ecommerce.pre-order.invoice.id');
+
 // Ecommerce -> Subscriber
 Route::post('new-subscriber', [SubscriberController::class, 'subscriber'])->name('ecommerce.new-subscriber');
 
@@ -248,22 +253,20 @@ Route::get('ecommerce/item/edit/{id}', [EcommerceItemsController::class, 'edit']
 Route::put('ecommerce/item/update/{id}', [EcommerceItemsController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.item.update');
 Route::delete('ecommerce/item/destroy/{id}', [EcommerceItemsController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.item.destroy');
 
-// Ecommerce Pre Order
+// Ecommerce Pre Order > Back
 Route::get('ecommerce/manage-pre-order', [EcommercePreOrderController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.manage');
-Route::get('ecommerce/pre-order/new', [EcommercePreOrderController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.new');
-Route::post('ecommerce/pre-order/confirm', [EcommercePreOrderController::class, 'confirm'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.confirm');
-Route::get('ecommerce/pre-order/{uuid}', [EcommercePreOrderController::class, 'viewInvoice'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.invoice.id');
 Route::post('ecommerce/pre-order/store', [EcommercePreOrderController::class, 'store'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.store');
 Route::get('ecommerce/pre-order/edit/{id}', [EcommercePreOrderController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.edit');
 Route::get('ecommerce/pre-order/view/{id}', [EcommercePreOrderController::class, 'view'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.view');
 Route::put('ecommerce/pre-order/update/{id}', [EcommercePreOrderController::class, 'update'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.update');
 Route::delete('ecommerce/pre-order/destroy/{id}', [EcommercePreOrderController::class, 'destroy'])->middleware(['auth', 'verified'])->name('ecommerce.pre-order.destroy');
 
-// Ecommerce Lead
+// Ecommerce Lead > Front
+Route::get('ecommerce/lead/new', [EcommerceLeadController::class, 'create'])->name('ecommerce.lead.new');
+Route::post('ecommerce/confirm-pre-order', [EcommerceLeadController::class, 'storeFront'])->name('ecommerce.lead.store.front');
+Route::get('ecommerce/new-pre-order/invoice', [EcommerceLeadController::class, 'invoice'])->name('ecommerce.lead.store.front.invoice');
+// Ecommerce Lead > Back
 Route::get('ecommerce/manage-lead', [EcommerceLeadController::class, 'show'])->middleware(['auth', 'verified'])->name('ecommerce.manage-lead');
-Route::get('ecommerce/lead/new', [EcommerceLeadController::class, 'create'])->middleware(['auth', 'verified'])->name('ecommerce.lead.new');
-Route::post('ecommerce/confirm-pre-order', [EcommerceLeadController::class, 'storeFront'])->middleware(['auth', 'verified'])->name('ecommerce.lead.store.front');
-Route::get('ecommerce/new-pre-order/invoice', [EcommerceLeadController::class, 'invoice'])->middleware(['auth', 'verified'])->name('ecommerce.lead.store.front.invoice');
 Route::post('ecommerce/lead/store', [EcommerceLeadController::class, 'storeBack'])->middleware(['auth', 'verified'])->name('ecommerce.lead.store');
 Route::get('ecommerce/lead/edit/{id}', [EcommerceLeadController::class, 'edit'])->middleware(['auth', 'verified'])->name('ecommerce.lead.edit');
 Route::get('ecommerce/lead/view/{id}', [EcommerceLeadController::class, 'view'])->middleware(['auth', 'verified'])->name('ecommerce.lead.view');
