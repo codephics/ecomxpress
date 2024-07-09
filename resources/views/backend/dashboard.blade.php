@@ -24,13 +24,25 @@
                 <div class="row g-5">
                     <div class="col-md-6">
                         <p>
-                            🚀 Elevate Your Blogging Experience with BlogForge10! Simplify tasks, from creation to publication, with a streamlined workflow. Enjoy cross-platform compatibility for on-the-go management. Our robust security
-                            ensures data protection, while optimized performance guarantees a seamless user experience. Gain insights with comprehensive analytics and customize your blog with themes and layouts. Join savvy developers and
-                            revolutionize your blogging game. 🌐✨
+                            Experience a seamless and efficient e-commerce platform tailored to meet all your online business needs. Our solution, built with cutting-edge technology and <b>optimized for search engines</b>, ensures you have everything you need to manage and grow your online store effortlessly.
+
+                            <ul>
+                                <li><b>Manage Products:</b> Easily add, update, and delete products.</li>
+                                <li><b>Categories:</b> Organize your products into categories for better navigation.</li>
+                                <li><b>Seller Management:</b> Handle multiple sellers efficiently.</li>
+                                <li><b>Lead Management:</b> Track and convert potential customers.</li>
+                                <li><b>Blog:</b> Share updates, news, and stories with your audience.</li>
+                                <li><b>Blog Categories & Tags:</b> Categorize and tag your blog posts for better reach.</li>
+                                <li><b>Slider:</b> Showcase featured products and promotions.</li>
+                                <li><b>Pages:</b> Create and manage static pages like About Us, Contact Us, and more.</li>
+                                <li><b>Contact Query:</b> Handle customer inquiries effectively.</li>
+                                <li><b>Subscriber Lead:</b> Manage your email subscribers.</li>
+                                <li><b>Settings:</b> Customize your store settings to fit your needs.</li>
+                                <li><b>User Profile:</b> Allow users to manage their accounts and orders.</li>
+                            </ul>
                         </p>
                         <ul class="icon-list ps-0">
-                            <li class="d-flex align-items-start mb-1"><a href="https://codephics.com" rel="noopener" target="_blank">codephics.com</a></li>
-                            <li class="text-muted d-flex align-items-start mb-1">Explore More!</li>
+                            <li class="text-muted d-flex align-items-start mb-1"><a href="https://codephics.com" target="_blank">Explore More!</a></li>
                         </ul>
                     </div>
 

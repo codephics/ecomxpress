@@ -24,7 +24,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row mb-4">
-                            <div class="col-sm-6 text-start">
+                            <div class="col-sm-9 text-start">
                                 <h5>From:</h5>
                                 <address id="fromAddress">
                                     <strong>{{ $setting->title }}</strong><br>
@@ -33,7 +33,7 @@
                                     Mobile: {{ $setting->mobile }}
                                 </address>
                             </div>
-                            <div class="col-sm-6 text-end">
+                            <div class="col-sm-3">
                                 <h5>To:</h5>
                                 <address id="toAddress">
                                     <strong>{{ $page->name }}</strong><br>

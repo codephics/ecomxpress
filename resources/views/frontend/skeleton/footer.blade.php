@@ -37,7 +37,7 @@
 				<div class="col-8">
 					<details class="mb-3">
 						<summary>{{ now()->format('Y') }} © Codephics. All Rights Reserved.</summary>
-						<p>All content and graphics on this web site are the property of Codephics.</p>
+						<p>All content and graphics on this website are the property of <a href="https://codephics.com">codephics.com</a></p>
 					</details>
 					<nav class="nav">
 						<a href="https://twitter.com/codephics" title="Twitter" target="_blank" rel="nofollow" class="link-dark"><i class="fa-brands fa-twitter ms-2"></i></a>

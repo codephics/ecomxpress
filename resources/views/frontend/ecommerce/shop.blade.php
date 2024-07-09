@@ -92,130 +92,213 @@
                         <h1 class="fs-3">{{ $page->title }}</h1>
 						<p>{!! $page->short_description !!}</p>
 						<div class="row">
-							@foreach ($items as $item)
-							<div class="col-md-4">
-								<article>
+							@foreach($items as $item)
+					        <div class="col-md-3">
+					            <article>
 					                <figure>
 					                    <div class="card" style="width: 18rem;">
 					                        <a href="{{ route('item.detail', $item->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
 					                            <img src="{{ asset('ecommerce/item/image/' . $item->image) }}" class="card-img-top" alt="{{ $item->img_alt_text }}" />
 					                        </a>
-
 					                        <figcaption>
-					                          <div class="card-body">
-					                          	<a href="{{ route('item.detail', $item->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-					                          		<h5 class="card-title">{{ \Illuminate\Support\Str::limit($item->name, 40, '...') }}</h5>
-					                          	</a>
-					                          </div>
-					                          <ul class="list-group list-group-flush">
-					                            <li class="list-group-item">
-					                                <small>
-					                                    @if ($item->category_name) @if ($item->category)
-					                                    <a href="{{ route('category.show', ['category' => $item->category->slug]) }}" class="link-dark">
-					                                        {{ $item->category_name }}
-					                                    </a>
-					                                    @endif @elseif ($item->subcategory_name) @if ($item->subcategory)
-					                                    <a
-					                                        href="{{ route('subcategory.show', [
-					                                                        'category' => $item->subcategory->category->slug,
-					                                                        'subcategory' => $item->subcategory->slug,
-					                                                    ]) }}"
-					                                        class="link-dark"
-					                                    >
-					                                        {{ $item->subcategory_name }}
-					                                    </a>
-					                                    @endif @elseif ($item->sub_subcategory_name) @if ($item->sub_subcategory)
-					                                    <a
-					                                        href="{{ route('subSubcategory.show', [
-					                                                        'category' => $item->subcategory->category->slug,
-					                                                        'subcategory' => $item->subcategory->slug,
-					                                                        'subSubcategory' => $item->sub_subcategory->slug,
-					                                                    ]) }}"
-					                                        class="link-dark"
-					                                    >
-					                                        {{ $item->sub_subcategory_name }}
-					                                    </a>
-					                                    @endif @endif
-					                                </small>
-					                            </li>
-					                            <li class="list-group-item">
-					                                <small>
-					                                    @if($item->sale_price)
-
-					                                    <span class="fw-bold fs-5 text-success">৳ {{ $item->sale_price }}</span> | <span class="fw-bold text-decoration-line-through text-muted">৳ {{ $item->regular_price }}</span>
-
-					                                    @elseif($item->regular_price)
-
-					                                    <span class="fw-bold fs-5 text-success">৳ {{ $item->regular_price }}</span>
-
-					                                    @else
-
-					                                    <span>Free</span>
-
-					                                    @endif
-					                                </small>
-					                            </li>
-					                          </ul>
-					                          <div class="card-body">
-					                            <a type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#confirmNow" data-bs-whatever="@mdo">Confirm Order</a>
-					                                <div class="modal fade" id="confirmNow" tabindex="-1" aria-labelledby="confirmNowLabel" aria-hidden="true">
+					                            <div class="card-body">
+					                                <a href="{{ route('item.detail', $item->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+					                                    <h5 class="card-title">{{ \Illuminate\Support\Str::limit($item->name, 40, '...') }}</h5>
+					                                </a>
+					                            </div>
+					                            <ul class="list-group list-group-flush">
+					                                <li class="list-group-item">
+					                                    <small>
+					                                        @if ($item->category_name) @if ($item->category)
+					                                        <a href="{{ route('category.show', ['category' => $item->category->slug]) }}" class="link-dark">
+					                                            {{ $item->category_name }}
+					                                        </a>
+					                                        @endif @elseif ($item->subcategory_name) @if ($item->subcategory)
+					                                        <a
+					                                            href="{{ route('subcategory.show', [
+					                                                    'category' => $item->subcategory->category->slug,
+					                                                    'subcategory' => $item->subcategory->slug,
+					                                                ]) }}"
+					                                            class="link-dark"
+					                                        >
+					                                            {{ $item->subcategory_name }}
+					                                        </a>
+					                                        @endif @elseif ($item->sub_subcategory_name) @if ($item->sub_subcategory)
+					                                        <a
+					                                            href="{{ route('subSubcategory.show', [
+					                                                    'category' => $item->subcategory->category->slug,
+					                                                    'subcategory' => $item->subcategory->slug,
+					                                                    'subSubcategory' => $item->sub_subcategory->slug,
+					                                                ]) }}"
+					                                            class="link-dark"
+					                                        >
+					                                            {{ $item->sub_subcategory_name }}
+					                                        </a>
+					                                        @endif @endif
+					                                    </small>
+					                                </li>
+					                                <li class="list-group-item">
+					                                    <small>
+					                                        @if($item->sale_price)
+					                                        <span class="fw-bold fs-5 text-success">{{ $item->sale_price }}৳</span>/
+					                                        <span class="fw-bold text-decoration-line-through text-muted">{{ $item->regular_price }}৳</span>
+					                                        @elseif($item->regular_price)
+					                                        <span class="fw-bold fs-5 text-success">{{ $item->regular_price }}৳</span>
+					                                        @else
+					                                        <span>Free</span>
+					                                        @endif
+					                                    </small>
+					                                </li>
+					                            </ul>
+					                            <div class="card-body">
+					                                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#confirmNow-{{ $item->uuid }}" data-sale-price="{{ $item->sale_price ?? $item->regular_price ?? 0 }}">
+					                                    Confirm Order
+					                                </button>
+					                                <div class="modal fade" id="confirmNow-{{ $item->uuid }}" tabindex="-1" aria-labelledby="confirmNowLabel-{{ $item->uuid }}" aria-hidden="true">
 					                                    <div class="modal-dialog">
 					                                        <div class="modal-content">
 					                                            <div class="modal-header">
-					                                                <span class="modal-title fs-5" id="exampleModalLabel">Confirm Now</span>
+					                                                <span class="modal-title fs-5" id="confirmNowLabel-{{ $item->uuid }}">Confirm Now</span>
 					                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					                                            </div>
 					                                            <div class="modal-body">
-					                                                <form class="needs-validation" method="POST" action="{{ route('ecommerce.lead.store.front') }}">
+					                                                <form class="needs-validation" id="orderForm-{{ $item->uuid }}" method="POST" action="{{ route('ecommerce.pre-order.confirm') }}">
 					                                                    @csrf
+					                                                    <input type="hidden" name="product_name" value="{{ $item->name }}">
+					                                                    <input type="hidden" name="product_price" value="{{ $item->sale_price ?? $item->regular_price }}">
+					                                                    <input type="hidden" name="sub_total" id="hiddenSubTotal-{{ $item->uuid }}">
+					                                                    <input type="hidden" name="delivery_charge" id="hiddenDeliveryCharge-{{ $item->uuid }}">
+					                                                    <input type="hidden" name="total" id="hiddenTotal-{{ $item->uuid }}">
 					                                                    <div class="mb-3">
-					                                                        <label for="recipient-name" class="col-form-label">Name: <span class="text-danger">*</span></label>
-					                                                        <input type="text" class="form-control" name="name" placeholder="Name" required />
+					                                                        <label for="name-{{ $item->uuid }}" class="col-form-label">Name: <span class="text-danger">*</span></label>
+					                                                        <input type="text" class="form-control" name="name" id="name-{{ $item->uuid }}" placeholder="Name" required />
 					                                                        <div class="invalid-feedback">
 					                                                            Valid Name is required.
 					                                                        </div>
 					                                                    </div>
 					                                                    <div class="mb-3">
-					                                                        <label for="recipient-email" class="col-form-label">Email (optional):</label>
-					                                                        <input type="email" class="form-control" name="email" placeholder="Email (optional)" required />
+					                                                        <label for="email-{{ $item->uuid }}" class="col-form-label">Email (optional):</label>
+					                                                        <input type="email" class="form-control" name="email" id="email-{{ $item->uuid }}" placeholder="Email (optional)" />
 					                                                        <div class="invalid-feedback">
 					                                                            Please enter a valid email address.
 					                                                        </div>
 					                                                    </div>
 					                                                    <div class="mb-3">
-					                                                        <label for="recipient-mobile" class="col-form-label">Mobile: <span class="text-danger">*</span></label>
-					                                                        <input type="text" class="form-control" name="mobile" placeholder="Mobile" required />
+					                                                        <label for="mobile-{{ $item->uuid }}" class="col-form-label">Mobile: <span class="text-danger">*</span></label>
+					                                                        <input type="text" class="form-control" name="mobile" id="mobile-{{ $item->uuid }}" placeholder="Mobile" required />
 					                                                        <div class="invalid-feedback">
 					                                                            Please enter a valid mobile number.
 					                                                        </div>
 					                                                    </div>
 					                                                    <div class="mb-3">
-					                                                        <label for="message-text" class="col-form-label">Address: <span class="text-danger">*</span></label>
-					                                                        <textarea class="form-control" name="address" placeholder="address" required></textarea>
+					                                                        <label for="address-{{ $item->uuid }}" class="col-form-label">Address:</label>
+					                                                        <textarea class="form-control" name="address" id="address-{{ $item->uuid }}" placeholder="address"></textarea>
 					                                                        <div class="invalid-feedback">
 					                                                            Please enter address.
 					                                                        </div>
 					                                                    </div>
 					                                                    <div class="mb-3">
-					                                                        <label for="message-text" class="col-form-label">Order Note (optional):</label>
-					                                                        <textarea class="form-control" name="note" placeholder="Order Note (optional)"></textarea>
+					                                                        <label for="quantity-{{ $item->uuid }}" class="col-form-label">Quantity: <span class="text-danger">*</span></label>
+					                                                        <input type="number" class="form-control" id="quantity-{{ $item->uuid }}" name="quantity" value="1" min="1" placeholder="Quantity" required />
+					                                                        <div class="invalid-feedback">
+					                                                            Please enter a valid quantity.
+					                                                        </div>
+					                                                    </div>
+					                                                    <div class="mb-3">
+					                                                        <label class="col-form-label">Shipping Method</label>
+					                                                        <div>
+					                                                            <div class="form-check">
+					                                                                <input class="form-check-input shipping-method" type="checkbox" id="insideDhaka-{{ $item->uuid }}" name="shipping_method" value="50" />
+					                                                                <label class="form-check-label" for="insideDhaka-{{ $item->uuid }}">Inside Dhaka (50৳)</label>
+					                                                            </div>
+					                                                            <div class="form-check">
+					                                                                <input class="form-check-input shipping-method" type="checkbox" id="outsideDhaka-{{ $item->uuid }}" name="shipping_method" value="100" />
+					                                                                <label class="form-check-label" for="outsideDhaka-{{ $item->uuid }}">Outside Dhaka (100৳)</label>
+					                                                            </div>
+					                                                        </div>
+					                                                        <div id="shipping-method-error" class="invalid-feedback">
+					                                                            Please select a shipping method.
+					                                                        </div>
+					                                                    </div>
+					                                                    <div class="mb-3">
+					                                                        <label class="col-form-label">Product</label>
+					                                                        <div class="d-flex align-items-center">
+					                                                            <div></div>
+					                                                        </div>
+					                                                        <div class="table-responsive">
+					                                                            <table class="table">
+					                                                                <tbody>
+					                                                                    <tr>
+					                                                                        <td width="25%">
+					                                                                            <img src="{{ asset('ecommerce/item/image/' . $item->image) }}" class="img-thumbnail me-2" alt="{{ $item->img_alt_text }}" style="width: 50px;" />
+					                                                                        </td>
+					                                                                        <td width="50%">
+					                                                                            <p class="mb-0">{{ \Illuminate\Support\Str::limit($item->name, 40, '...') }}</p>
+					                                                                        </td>
+					                                                                        <td width="25%">
+					                                                                            @if($item->sale_price)
+					                                                                            <span class="fw-bold fs-5 text-success">{{ $item->sale_price }}৳</span>/
+					                                                                            <span class="fw-bold text-decoration-line-through text-muted">{{ $item->regular_price }}৳</span>
+					                                                                            @elseif($item->regular_price)
+					                                                                            <span class="fw-bold fs-5 text-success">{{ $item->regular_price }}৳</span>
+					                                                                            @else
+					                                                                            <span>Free</span>
+					                                                                            @endif
+					                                                                        </td>
+					                                                                    </tr>
+					                                                                </tbody>
+					                                                            </table>
+					                                                        </div>
+					                                                    </div>
+					                                                    <div class="mb-3">
+					                                                        <div class="table-responsive">
+					                                                            <table class="table">
+					                                                                <tbody>
+					                                                                    <tr>
+					                                                                        <td width="75%">
+					                                                                            <label class="col-form-label">Sub Total</label>
+					                                                                        </td>
+					                                                                        <td width="25%">
+					                                                                            <p id="subTotal-{{ $item->uuid }}">৳ 0.00</p>
+					                                                                        </td>
+					                                                                    </tr>
+					                                                                    <tr>
+					                                                                        <td width="75%"><label class="col-form-label">Delivery Charge</label></td>
+					                                                                        <td width="25%"><p id="deliveryCharge-{{ $item->uuid }}">৳ 0.00</p></td>
+					                                                                    </tr>
+					                                                                    <tr>
+					                                                                        <td width="75%"><label class="col-form-label">Total</label></td>
+					                                                                        <td width="25%"><p id="total-{{ $item->uuid }}">৳ 0.00</p></td>
+					                                                                    </tr>
+					                                                                </tbody>
+					                                                            </table>
+					                                                        </div>
+					                                                    </div>
+					                                                    <div class="mb-3">
+					                                                        <label for="orderNote-{{ $item->uuid }}" class="col-form-label">Order Note (optional):</label>
+					                                                        <textarea class="form-control" id="orderNote-{{ $item->uuid }}" name="order_note" placeholder="Order Note (optional)"></textarea>
+					                                                    </div>
+					                                                    <div class="mb-3">
+					                                                        <span>
+					                                                            <font color="red"><b>Delivery charges may vary based on weight. Consequently, the total amount may change. We will notify you of the final total charge.</b></font>
+					                                                        </span>
 					                                                    </div>
 					                                                    <div class="modal-footer">
 					                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					                                                        <button type="submit" class="btn btn-primary">Confim Now</button>
+					                                                        <button type="submit" class="btn btn-primary">Confirm Now</button>
 					                                                    </div>
 					                                                </form>
 					                                            </div>
 					                                        </div>
 					                                    </div>
 					                                </div>
-					                          </div>
+					                            </div>
 					                        </figcaption>
 					                    </div>
 					                </figure>
 					            </article>
-							</div>
-							@endforeach
+					        </div>
+					        @endforeach
 						</div>
                     </div>
                 </div>
@@ -232,5 +315,86 @@
             </div>
         </section>
         <!-- End Questions or Suggestions -->
-		
-		@endsection
+
+@section('custom-scripts')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector('form'); // Change this to the correct form selector
+    const shippingMethods = document.querySelectorAll('.shipping-method');
+    const errorDiv = document.getElementById('shipping-method-error');
+
+    form.addEventListener('submit', function(event) {
+        let oneChecked = false;
+        shippingMethods.forEach(function(method) {
+            if (method.checked) {
+                oneChecked = true;
+            }
+        });
+
+        if (!oneChecked) {
+            event.preventDefault();
+            errorDiv.style.display = 'block';
+        } else {
+            errorDiv.style.display = 'none';
+        }
+    });
+});
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('[id^="confirmNow-"]').forEach(function (modalElement) {
+            modalElement.addEventListener('show.bs.modal', function (event) {
+                let modalId = modalElement.id.split('-')[1];
+                let quantityInput = document.querySelector(`#quantity-${modalId}`);
+                let insideDhakaCheckbox = document.querySelector(`#insideDhaka-${modalId}`);
+                let outsideDhakaCheckbox = document.querySelector(`#outsideDhaka-${modalId}`);
+                let subTotalElement = document.querySelector(`#subTotal-${modalId}`);
+                let deliveryChargeElement = document.querySelector(`#deliveryCharge-${modalId}`);
+                let totalElement = document.querySelector(`#total-${modalId}`);
+                let hiddenSubTotalInput = document.querySelector(`#hiddenSubTotal-${modalId}`);
+                let hiddenDeliveryChargeInput = document.querySelector(`#hiddenDeliveryCharge-${modalId}`);
+                let hiddenTotalInput = document.querySelector(`#hiddenTotal-${modalId}`);
+                let salePrice = parseFloat(event.relatedTarget.getAttribute('data-sale-price'));
+
+                function calculateTotal() {
+                    let quantity = parseInt(quantityInput.value);
+                    let deliveryCharge = 0;
+                    if (insideDhakaCheckbox.checked) {
+                        deliveryCharge = parseInt(insideDhakaCheckbox.value);
+                    }
+                    if (outsideDhakaCheckbox.checked) {
+                        deliveryCharge = parseInt(outsideDhakaCheckbox.value);
+                    }
+                    let subTotal = salePrice * quantity;
+                    let total = subTotal + deliveryCharge;
+
+                    // Update the displayed values
+                    subTotalElement.textContent = `৳ ${subTotal.toFixed(2)}`;
+                    deliveryChargeElement.textContent = `৳ ${deliveryCharge.toFixed(2)}`;
+                    totalElement.textContent = `৳ ${total.toFixed(2)}`;
+
+                    // Update the hidden input values
+                    hiddenSubTotalInput.value = subTotal.toFixed(2);
+                    hiddenDeliveryChargeInput.value = deliveryCharge.toFixed(2);
+                    hiddenTotalInput.value = total.toFixed(2);
+                }
+
+                quantityInput.addEventListener('input', calculateTotal);
+                insideDhakaCheckbox.addEventListener('change', calculateTotal);
+                outsideDhakaCheckbox.addEventListener('change', calculateTotal);
+
+                // Check at least one checkbox is selected before form submission
+                document.querySelector(`#orderForm-${modalId}`).addEventListener('submit', function (event) {
+                    if (!insideDhakaCheckbox.checked && !outsideDhakaCheckbox.checked) {
+                        event.preventDefault(); // Prevent form submission
+                        alert('Please select a shipping method.'); // Show an alert or handle validation message
+                    }
+                });
+
+                calculateTotal();
+            });
+        });
+    });
+</script>
+@endsection @endsection
