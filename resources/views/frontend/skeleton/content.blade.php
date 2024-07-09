@@ -60,7 +60,7 @@
             <p class="lead">{!! $setting->about_in_short !!}</p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                 <a class="btn btn-primary btn-lg px-4 me-md-2" href="{{ route('item.shop') }}">Explore Items</a>
-                <a class="btn btn-outline-secondary btn-lg px-4" href="{{ route('blog.more') }}">Read More Blogs</a>
+                <a class="btn btn-outline-secondary btn-lg px-4" href="{{ route('blog.more') }}">Read Blogs</a>
             </div>
         </div>
         <div class="col-md-3">
