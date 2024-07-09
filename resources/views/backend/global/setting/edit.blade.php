@@ -68,7 +68,7 @@
                     <div class="col-sm-12">
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
-                            <textarea class="form-control" name="address"></textarea>
+                            <textarea class="form-control" name="address">{{ $page->address }}</textarea>
                         </div>
                     </div>
                 </div>
