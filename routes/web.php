@@ -99,7 +99,7 @@ Route::get('item/{category:slug}', [EcommerceItemsController::class, 'showByCate
 Route::get('item/{category:slug}/{subcategory:slug}', [EcommerceItemsController::class, 'showBySubcategory'])->name('subcategory.show');
 Route::get('item/{category:slug}/{subcategory:slug}/{subSubcategory:slug}', [EcommerceItemsController::class, 'showBySubSubcategory'])->name('subSubcategory.show');
 
-// Ecommerce Pre Order
+// Ecommerce Pre-Order
 Route::get('ecommerce/pre-order/new', [EcommercePreOrderController::class, 'create'])->name('ecommerce.pre-order.new');
 Route::post('ecommerce/pre-order/confirm', [EcommercePreOrderController::class, 'confirm'])->name('ecommerce.pre-order.confirm');
 Route::get('ecommerce/pre-order/{uuid}', [EcommercePreOrderController::class, 'viewInvoice'])->name('ecommerce.pre-order.invoice.id');
