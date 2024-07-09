@@ -146,13 +146,23 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="seller_name" class="form-label">Seller Name</label>
-                            <input type="text" class="form-control" name="seller_name" placeholder="Seller Name" />
+                            <input class="form-control" list="datalistSellerName" name="seller_name" placeholder="Search Seller Name" />
+                            <datalist id="datalistSellerName">
+                                @foreach($sellers as $seller)
+                                <option value="{{ $seller->seller_name }}"></option>
+                                @endforeach
+                            </datalist>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="seller_email" class="form-label">Seller Email</label>
-                            <input type="email" class="form-control" name="seller_email" placeholder="Seller Email" />
+                            <input class="form-control" list="datalistSellerEmail" name="seller_email" placeholder="Search Seller Email" />
+                            <datalist id="datalistSellerEmail">
+                                @foreach($sellers as $seller)
+                                <option value="{{ $seller->seller_email }}"></option>
+                                @endforeach
+                            </datalist>
                         </div>
                     </div>
                 </div>

@@ -29,11 +29,14 @@ class EcommercePreOrderController extends Controller
 
     public function confirm(Request $request): RedirectResponse
     {
+        $uuid = Str::uuid();
+        
         $preOrder = EcommercePreOrder::create([
+            'uuid' => $uuid,
             'name' => $request->name,
             'email' => $request->email,
             'mobile' => $request->mobile,
-            'address' => $request->aaddressddress,
+            'address' => $request->address,
             'quantity' => $request->quantity,
             'shipping_method' => $request->shipping_method,
             'product_name' => $request->product_name,
@@ -50,30 +53,18 @@ class EcommercePreOrderController extends Controller
 
         Session::flash('success', __('Your Order Placed Successfully!'));
         
-        return redirect()->route('ecommerce.pre-order.invoice.id', ['id' => $preOrder->id]);
+        return redirect()->route('ecommerce.pre-order.invoice.id', ['uuid' => $preOrder->uuid]);
     }
 
-    public function viewInvoice($id)
+    public function viewInvoice($uuid)
     {
         $setting = Setting::first();
-        $page = EcommercePreOrder::findOrFail($id);
+        $page = EcommercePreOrder::where('uuid', $uuid)->firstOrFail();
         
         return view('frontend.ecommerce.pre-order.view', [
             'setting' => $setting,
             'page' => $page
         ]);
-    }
-
-    public function downloadInvoice($id)
-    {
-        // Retrieve order details
-        $preOrder = EcommercePreOrder::findOrFail($id);
-
-        // Generate PDF
-        $pdf = PDF::loadView('frontend.ecommerce.pre-order.invoice', compact('preOrder'));
-
-        // Download PDF
-        return $pdf->download('invoice.pdf');
     }
 
     public function store(Request $request): RedirectResponse
@@ -82,7 +73,7 @@ class EcommercePreOrderController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'mobile' => $request->mobile,
-            'address' => $request->aaddressddress,
+            'address' => $request->address,
             'quantity' => $request->quantity,
             'shipping_method' => $request->shipping_method,
             'product_name' => $request->product_name,

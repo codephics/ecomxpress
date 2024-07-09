@@ -239,50 +239,55 @@
                                 </li>
                             </ul>
                             <div class="card-body">
-                                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#confirmNow-{{ $item->id }}" data-sale-price="{{ $item->sale_price ?? $item->regular_price ?? 0 }}">
+                                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#confirmNow-{{ $item->uuid }}" data-sale-price="{{ $item->sale_price ?? $item->regular_price ?? 0 }}">
                                     Confirm Order
                                 </button>
-                                <div class="modal fade" id="confirmNow-{{ $item->id }}" tabindex="-1" aria-labelledby="confirmNowLabel-{{ $item->id }}" aria-hidden="true">
+                                <div class="modal fade" id="confirmNow-{{ $item->uuid }}" tabindex="-1" aria-labelledby="confirmNowLabel-{{ $item->uuid }}" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <span class="modal-title fs-5" id="confirmNowLabel-{{ $item->id }}">Confirm Now</span>
+                                                <span class="modal-title fs-5" id="confirmNowLabel-{{ $item->uuid }}">Confirm Now</span>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="needs-validation" id="orderForm-{{ $item->id }}" method="POST" action="{{ route('ecommerce.pre-order.confirm') }}">
+                                                <form class="needs-validation" id="orderForm-{{ $item->uuid }}" method="POST" action="{{ route('ecommerce.pre-order.confirm') }}">
                                                     @csrf
+                                                    <input type="hidden" name="product_name" value="{{ $item->name }}">
+                                                    <input type="hidden" name="product_price" value="{{ $item->sale_price ?? $item->regular_price }}">
+                                                    <input type="hidden" name="sub_total" id="hiddenSubTotal-{{ $item->uuid }}">
+                                                    <input type="hidden" name="delivery_charge" id="hiddenDeliveryCharge-{{ $item->uuid }}">
+                                                    <input type="hidden" name="total" id="hiddenTotal-{{ $item->uuid }}">
                                                     <div class="mb-3">
-                                                        <label for="name-{{ $item->id }}" class="col-form-label">Name: <span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" name="name" id="name-{{ $item->id }}" placeholder="Name" required />
+                                                        <label for="name-{{ $item->uuid }}" class="col-form-label">Name: <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" name="name" id="name-{{ $item->uuid }}" placeholder="Name" required />
                                                         <div class="invalid-feedback">
                                                             Valid Name is required.
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="email-{{ $item->id }}" class="col-form-label">Email (optional):</label>
-                                                        <input type="email" class="form-control" name="email" id="email-{{ $item->id }}" placeholder="Email (optional)" />
+                                                        <label for="email-{{ $item->uuid }}" class="col-form-label">Email (optional):</label>
+                                                        <input type="email" class="form-control" name="email" id="email-{{ $item->uuid }}" placeholder="Email (optional)" />
                                                         <div class="invalid-feedback">
                                                             Please enter a valid email address.
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="mobile-{{ $item->id }}" class="col-form-label">Mobile: <span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" name="mobile" id="mobile-{{ $item->id }}" placeholder="Mobile" required />
+                                                        <label for="mobile-{{ $item->uuid }}" class="col-form-label">Mobile: <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" name="mobile" id="mobile-{{ $item->uuid }}" placeholder="Mobile" required />
                                                         <div class="invalid-feedback">
                                                             Please enter a valid mobile number.
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="address-{{ $item->id }}" class="col-form-label">Address:</label>
-                                                        <textarea class="form-control" name="address" id="address-{{ $item->id }}" placeholder="address"></textarea>
+                                                        <label for="address-{{ $item->uuid }}" class="col-form-label">Address:</label>
+                                                        <textarea class="form-control" name="address" id="address-{{ $item->uuid }}" placeholder="address"></textarea>
                                                         <div class="invalid-feedback">
                                                             Please enter address.
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="quantity-{{ $item->id }}" class="col-form-label">Quantity: <span class="text-danger">*</span></label>
-                                                        <input type="number" class="form-control" id="quantity-{{ $item->id }}" name="quantity" value="1" min="1" placeholder="Quantity" required />
+                                                        <label for="quantity-{{ $item->uuid }}" class="col-form-label">Quantity: <span class="text-danger">*</span></label>
+                                                        <input type="number" class="form-control" id="quantity-{{ $item->uuid }}" name="quantity" value="1" min="1" placeholder="Quantity" required />
                                                         <div class="invalid-feedback">
                                                             Please enter a valid quantity.
                                                         </div>
@@ -291,13 +296,16 @@
                                                         <label class="col-form-label">Shipping Method</label>
                                                         <div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input shipping-method" type="checkbox" id="insideDhaka-{{ $item->id }}" name="shipping_method" value="50" />
-                                                                <label class="form-check-label" for="insideDhaka-{{ $item->id }}">Inside Dhaka (50৳)</label>
+                                                                <input class="form-check-input shipping-method" type="checkbox" id="insideDhaka-{{ $item->uuid }}" name="shipping_method" value="50" />
+                                                                <label class="form-check-label" for="insideDhaka-{{ $item->uuid }}">Inside Dhaka (50৳)</label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input shipping-method" type="checkbox" id="outsideDhaka-{{ $item->id }}" name="shipping_method" value="100" />
-                                                                <label class="form-check-label" for="outsideDhaka-{{ $item->id }}">Outside Dhaka (100৳)</label>
+                                                                <input class="form-check-input shipping-method" type="checkbox" id="outsideDhaka-{{ $item->uuid }}" name="shipping_method" value="100" />
+                                                                <label class="form-check-label" for="outsideDhaka-{{ $item->uuid }}">Outside Dhaka (100৳)</label>
                                                             </div>
+                                                        </div>
+                                                        <div id="shipping-method-error" class="invalid-feedback">
+                                                            Please select a shipping method.
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
@@ -339,24 +347,24 @@
                                                                             <label class="col-form-label">Sub Total</label>
                                                                         </td>
                                                                         <td width="25%">
-                                                                            <p id="subTotal-{{ $item->id }}">৳ 0.00</p>
+                                                                            <p id="subTotal-{{ $item->uuid }}">৳ 0.00</p>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td width="75%"><label class="col-form-label">Delivery Charge</label></td>
-                                                                        <td width="25%"><p id="deliveryCharge-{{ $item->id }}">৳ 0.00</p></td>
+                                                                        <td width="25%"><p id="deliveryCharge-{{ $item->uuid }}">৳ 0.00</p></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td width="75%"><label class="col-form-label">Total</label></td>
-                                                                        <td width="25%"><p id="total-{{ $item->id }}">৳ 0.00</p></td>
+                                                                        <td width="25%"><p id="total-{{ $item->uuid }}">৳ 0.00</p></td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="orderNote-{{ $item->id }}" class="col-form-label">Order Note (optional):</label>
-                                                        <textarea class="form-control" id="orderNote-{{ $item->id }}" name="note" placeholder="Order Note (optional)"></textarea>
+                                                        <label for="orderNote-{{ $item->uuid }}" class="col-form-label">Order Note (optional):</label>
+                                                        <textarea class="form-control" id="orderNote-{{ $item->uuid }}" name="order_note" placeholder="Order Note (optional)"></textarea>
                                                     </div>
                                                     <div class="mb-3">
                                                         <span>
@@ -396,6 +404,29 @@
 @section('custom-scripts')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector('form'); // Change this to the correct form selector
+    const shippingMethods = document.querySelectorAll('.shipping-method');
+    const errorDiv = document.getElementById('shipping-method-error');
+
+    form.addEventListener('submit', function(event) {
+        let oneChecked = false;
+        shippingMethods.forEach(function(method) {
+            if (method.checked) {
+                oneChecked = true;
+            }
+        });
+
+        if (!oneChecked) {
+            event.preventDefault();
+            errorDiv.style.display = 'block';
+        } else {
+            errorDiv.style.display = 'none';
+        }
+    });
+});
+</script>
+<script>
     document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('[id^="confirmNow-"]').forEach(function (modalElement) {
             modalElement.addEventListener('show.bs.modal', function (event) {
@@ -406,6 +437,9 @@
                 let subTotalElement = document.querySelector(`#subTotal-${modalId}`);
                 let deliveryChargeElement = document.querySelector(`#deliveryCharge-${modalId}`);
                 let totalElement = document.querySelector(`#total-${modalId}`);
+                let hiddenSubTotalInput = document.querySelector(`#hiddenSubTotal-${modalId}`);
+                let hiddenDeliveryChargeInput = document.querySelector(`#hiddenDeliveryCharge-${modalId}`);
+                let hiddenTotalInput = document.querySelector(`#hiddenTotal-${modalId}`);
                 let salePrice = parseFloat(event.relatedTarget.getAttribute('data-sale-price'));
 
                 function calculateTotal() {
@@ -419,14 +453,29 @@
                     }
                     let subTotal = salePrice * quantity;
                     let total = subTotal + deliveryCharge;
+
+                    // Update the displayed values
                     subTotalElement.textContent = `৳ ${subTotal.toFixed(2)}`;
                     deliveryChargeElement.textContent = `৳ ${deliveryCharge.toFixed(2)}`;
                     totalElement.textContent = `৳ ${total.toFixed(2)}`;
+
+                    // Update the hidden input values
+                    hiddenSubTotalInput.value = subTotal.toFixed(2);
+                    hiddenDeliveryChargeInput.value = deliveryCharge.toFixed(2);
+                    hiddenTotalInput.value = total.toFixed(2);
                 }
 
                 quantityInput.addEventListener('input', calculateTotal);
                 insideDhakaCheckbox.addEventListener('change', calculateTotal);
                 outsideDhakaCheckbox.addEventListener('change', calculateTotal);
+
+                // Check at least one checkbox is selected before form submission
+                document.querySelector(`#orderForm-${modalId}`).addEventListener('submit', function (event) {
+                    if (!insideDhakaCheckbox.checked && !outsideDhakaCheckbox.checked) {
+                        event.preventDefault(); // Prevent form submission
+                        alert('Please select a shipping method.'); // Show an alert or handle validation message
+                    }
+                });
 
                 calculateTotal();
             });

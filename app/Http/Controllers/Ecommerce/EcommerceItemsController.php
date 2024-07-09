@@ -9,6 +9,7 @@ use App\Models\Global\Setting;
 use App\Models\Blog\Blog;
 
 use App\Models\Ecommerce\EcommerceItem;
+use App\Models\Ecommerce\EcommerceSeller;
 use App\Models\Ecommerce\EcommerceCategory;
 use App\Models\Ecommerce\EcommerceSubcategory;
 use App\Models\Ecommerce\EcommerceSubSubcategory;
@@ -204,8 +205,14 @@ class EcommerceItemsController extends Controller
         $categories = EcommerceCategory::all();
         $subcategories = EcommerceSubcategory::all();
         $sub_subcategories = EcommerceSubSubcategory::all();
+        $sellers = EcommerceSeller::all();
 
-        return view('backend.ecommerce.new-item', ['categories' => $categories, 'subcategories' => $subcategories, 'sub_subcategories' => $sub_subcategories]);
+        return view('backend.ecommerce.new-item', [
+            'categories' => $categories, 
+            'subcategories' => $subcategories, 
+            'sub_subcategories' => $sub_subcategories,
+            'sellers' => $sellers            
+        ]);
     }
 
     public function store(Request $request): RedirectResponse
