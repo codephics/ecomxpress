@@ -103,7 +103,7 @@
 <section>
     <div class="row border-top-0 border-start-0 border-bottom-0 border-end-0">
         <div class="col-lg-10">
-            <h2 class="display-6">Browse Categories</h2>
+            <h2 class="display-6">Categories</h2>
 
             <p>
                 Embark on a journey through our blog, where valuable insights await your exploration. Uncover the foundational aspects of SEO, delving into a comprehensive beginner's guide that unveils essential strategies and tips. Elevate
