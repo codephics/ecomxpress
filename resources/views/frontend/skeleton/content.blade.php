@@ -56,8 +56,8 @@
 <section>
     <div class="row featurette">
         <div class="col-md-9 mb-3">
-            <h1 class="featurette-heading fw-normal lh-1">{{ \Illuminate\Support\Str::limit($setting->title, 100, '...') }}</h1>
-            <p class="lead">{!! $setting->about_in_short !!}</p>
+            <h1 class="featurette-heading fw-normal lh-1">{{ \Illuminate\Support\Str::limit($page->title, 100, '...') }}</h1>
+            <p class="lead">{!! $page->short_description !!}</p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                 <a class="btn btn-primary btn-lg px-4 me-md-2" href="{{ route('item.shop') }}">Explore Items</a>
                 <a class="btn btn-outline-secondary btn-lg px-4" href="{{ route('blog.more') }}">Read Blogs</a>
