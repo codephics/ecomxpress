@@ -92,12 +92,12 @@ Route::post('contact-us/new', [ContactController::class, 'newContact'])->name('c
 // Ecommerce
 // Route::match(['head', 'get'], '/', [EcommerceItemsController::class, 'index'])->name('ecommerce.home');
 Route::get('shop', [EcommerceItemsController::class, 'index'])->name('item.shop');
-Route::get('item/detail/{slug}', [EcommerceItemsController::class, 'detail'])->name('item.detail');
+Route::get('shop/detail/{slug}', [EcommerceItemsController::class, 'detail'])->name('item.detail');
 
 // Ecommerce -> Category
-Route::get('item/{category:slug}', [EcommerceItemsController::class, 'showByCategory'])->name('category.show');
-Route::get('item/{category:slug}/{subcategory:slug}', [EcommerceItemsController::class, 'showBySubcategory'])->name('subcategory.show');
-Route::get('item/{category:slug}/{subcategory:slug}/{subSubcategory:slug}', [EcommerceItemsController::class, 'showBySubSubcategory'])->name('subSubcategory.show');
+Route::get('shop/{category:slug}', [EcommerceItemsController::class, 'showByCategory'])->name('category.show');
+Route::get('shop/{category:slug}/{subcategory:slug}', [EcommerceItemsController::class, 'showBySubcategory'])->name('subcategory.show');
+Route::get('shop/{category:slug}/{subcategory:slug}/{subSubcategory:slug}', [EcommerceItemsController::class, 'showBySubSubcategory'])->name('subSubcategory.show');
 
 // Ecommerce Pre-Order
 Route::get('ecommerce/pre-order/new', [EcommercePreOrderController::class, 'create'])->name('ecommerce.pre-order.new');

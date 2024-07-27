@@ -50,8 +50,8 @@ class PageController extends Controller
         $sub_subcategories = EcommerceSubSubcategory::all();
         $setting = Setting::first();
         $items = EcommerceItem::all();
-        $featured_items = EcommerceItem::where('is_featured', 1)->get();
-        $blogs = Blog::where('is_featured', 1)->get();
+        $featured_items = EcommerceItem::where(['is_featured' => 1, 'status' => 1])->get();
+        $featured_blogs = Blog::where(['is_featured' => 1, 'status' => 1])->get();
 
         return view('frontend.skeleton.content', [
             'page' => $page,
@@ -62,7 +62,7 @@ class PageController extends Controller
             'setting' => $setting,
             'items' => $items,
             'featured_items' => $featured_items,
-            'blogs' => $blogs
+            'featured_blogs' => $featured_blogs
         ]);
     }
 

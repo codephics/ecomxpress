@@ -60,7 +60,7 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="slug" class="form-label">Slug</label>
-                            <input type="text" class="form-control" name="slug" value="{{ $page->slug }}" placeholder="Slug" />
+                            <input type="text" class="form-control" name="slug" value="{{ $page->slug }}" placeholder="Slug" disabled />
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -91,6 +91,14 @@
                 </div>
 
                 <hr class="border border-secondery border-2 opacity-75">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <h1>Update Images</h1>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-sm-6">
@@ -140,6 +148,77 @@
                 </div>
 
                 <hr class="border border-secondery border-2 opacity-75">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <h1>Update Sections</h1>
+                        </div>
+                    </div>
+                </div>
+
+                @if($page->slug == 'homepage')
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="cat_title" class="form-label">Category Title</label>
+                            <input type="text" class="form-control" name="cat_title" value="{{ $page->name }}" placeholder="Category Title" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="cat_description" class="form-label">Category Description</label>
+                            <textarea class="form-control" rows="3" name="cat_description" placeholder="Category Description">{{ $page->header_content }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="featured_title" class="form-label">Featured Title</label>
+                            <input type="text" class="form-control" name="featured_title" value="{{ $page->name }}" placeholder="Featured Title" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="featured_description" class="form-label">Featured Description</label>
+                            <textarea class="form-control" rows="3" name="featured_description" placeholder="Featured Description">{{ $page->header_content }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="blog_title" class="form-label">Blog Title</label>
+                            <input type="text" class="form-control" name="blog_title" value="{{ $page->name }}" placeholder="Blog Title" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="blog_description" class="form-label">Blog Description</label>
+                            <textarea class="form-control" rows="3" name="blog_description" placeholder="Blog Description">{{ $page->header_content }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="subscriber_title" class="form-label">Subscriber Title</label>
+                            <input type="text" class="form-control" name="subscriber_title" value="{{ $page->name }}" placeholder="Subscriber Title" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="subscriber_description" class="form-label">Subscriber Description</label>
+                            <textarea class="form-control" rows="3" name="subscriber_description" placeholder="Subscriber Description">{{ $page->header_content }}</textarea>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+                <hr class="border border-secondery border-2 opacity-75">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <h1>Update Meta SEO</h1>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-sm-6">

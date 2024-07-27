@@ -152,7 +152,7 @@
 					                            </ul>
 					                            <div class="card-body">
 					                                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#confirmNow-{{ $item->uuid }}" data-sale-price="{{ $item->sale_price ?? $item->regular_price ?? 0 }}">
-					                                    Confirm Order
+					                                    Pre Order
 					                                </button>
 					                                <div class="modal fade" id="confirmNow-{{ $item->uuid }}" tabindex="-1" aria-labelledby="confirmNowLabel-{{ $item->uuid }}" aria-hidden="true">
 					                                    <div class="modal-dialog">

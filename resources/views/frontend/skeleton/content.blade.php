@@ -63,7 +63,7 @@
                 <a class="btn btn-outline-secondary btn-lg px-4" href="{{ route('blog.more') }}">Read Blogs</a>
             </div>
         </div>
-        <div class="col-md-3">
+        <!-- <div class="col-md-3">
             <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     @foreach($featured_items as $item)
@@ -91,7 +91,7 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
 
@@ -113,7 +113,7 @@
         <div class="col-lg-2 align-self-center">
             <div class="row">
                 <div class="col-12 col-sm-12">
-                    <a type="button" class="btn btn-secondary float-end" href="{{ route('item.shop') }}">All Categories</a>
+                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('item.shop') }}">All Categories</a>
                 </div>
             </div>
         </div>
@@ -124,7 +124,7 @@
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
         @foreach($categories as $category)
         <div class="card ms-3 border-0" style="width: 8rem;">
-            <a href="{{ url('item/'.$category->slug) }}" class="card-link">
+            <a href="{{ url('shop/'.$category->slug) }}" class="card-link">
                 <figure class="figure">
                     <img src="{{ asset('ecommerce/category/image/thumb/'.$category->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $category->thumb_alt_text }}" />
                     <figcaption class="figure-caption">{{ $category->category_name }}</figcaption>
@@ -133,7 +133,7 @@
         </div>
         @endforeach @foreach($subcategories as $subcategory)
         <div class="card ms-3 border-0" style="width: 8rem;">
-            <a href="{{ url('item/'.$category->slug) }}" class="card-link">
+            <a href="{{ url('shop/'.$category->slug) }}" class="card-link">
                 <figure class="figure">
                     <img src="{{ asset('ecommerce/category/subcategory/image/thumb/'.$subcategory->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $subcategory->thumb_alt_text }}" />
                     <figcaption class="figure-caption">{{ $subcategory->subcategory_name }}</figcaption>
@@ -142,7 +142,7 @@
         </div>
         @endforeach @foreach($sub_subcategories as $sub_subcategory)
         <div class="card ms-3 border-0" style="width: 8rem;">
-            <a href="{{ url('item/'.$category->slug) }}" class="card-link">
+            <a href="{{ url('shop/'.$category->slug) }}" class="card-link">
                 <figure class="figure">
                     <img src="{{ asset('ecommerce/category/subcategory/sub-subcategory/image/thumb/'.$sub_subcategory->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $sub_subcategory->thumb_alt_text }}" />
                     <figcaption class="figure-caption">{{ $sub_subcategory->sub_subcategory_name }}</figcaption>
@@ -157,7 +157,7 @@
 <div class="mt-3 border-top border-start-0 border-bottom-0 border-end-0"></div>
 
 <div class="mt-3"></div>
-
+<!-- Featured Items -->
 <section>
     <div class="row border-top-0 border-start-0 border-bottom-0 border-end-0">
         <div class="col-lg-10">
@@ -171,7 +171,7 @@
         <div class="col-lg-2 align-self-center">
             <div class="row">
                 <div class="col-12 col-sm-12">
-                    <a type="button" class="btn btn-secondary float-end" href="{{ route('item.shop') }}">All Items</a>
+                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('item.shop') }}">All Items</a>
                 </div>
             </div>
         </div>
@@ -240,7 +240,7 @@
                             </ul>
                             <div class="card-body">
                                 <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#confirmNow-{{ $item->uuid }}" data-sale-price="{{ $item->sale_price ?? $item->regular_price ?? 0 }}">
-                                    Confirm Order
+                                    Pre Order
                                 </button>
                                 <div class="modal fade" id="confirmNow-{{ $item->uuid }}" tabindex="-1" aria-labelledby="confirmNowLabel-{{ $item->uuid }}" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -381,6 +381,67 @@
                                     </div>
                                 </div>
                             </div>
+                        </figcaption>
+                    </div>
+                </figure>
+            </article>
+        </div>
+        @endforeach
+    </div>
+</section>
+<!-- End Featured Items -->
+
+<!-- HR -->
+<div class="mt-3 border-top border-start-0 border-bottom-0 border-end-0"></div>
+
+<div class="mt-3"></div>
+
+<!-- Related Blogs -->
+<section>
+    <div class="row border-top-0 border-start-0 border-bottom-0 border-end-0">
+        <div class="col-lg-10">
+            <h4 class="display-6">Unlocking Knowledge on our Blog</h4>
+
+            <p>
+                Embark on a journey through our blog, where valuable insights await your exploration. Uncover the foundational aspects of SEO, delving into a comprehensive beginner's guide that unveils essential strategies and tips. Elevate
+                your online presence by mastering the art of optimizing your website for search engines with our expertly curated content.
+            </p>
+        </div>
+        <div class="col-lg-2 align-self-center">
+            <div class="row">
+                <div class="col-12 col-sm-12">
+                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('blog.more') }}">Read Blogs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3"></div>
+
+    <div class="row">
+        @foreach ($featured_blogs as $blog)
+        <div class="col-lg-6">
+            <article>
+                <figure>
+                    <div class="card shadow mb-5 rounded-3 no-border-card">
+                        <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                            <img src="{{ asset('blog/image/featured/' . $blog->featured_image) }}" class="card-img-top" alt="..." />
+                        </a>
+                        <figcaption>
+                            <div class="card-body">
+                                <div class="card-title lead">
+                                    <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                                        {{ \Illuminate\Support\Str::limit($blog->title, 160, '...') }}
+                                    </a>
+                                    <span class="blog-post-meta">{{ $blog->created_at->format('M d, Y') }}</span>
+                                    <p class="card-text">{!! \Illuminate\Support\Str::limit($blog->short_description, 100, '...') !!}</p>
+                                </div>
+                            </div>
+                            <!-- <div class="card-body">
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
+                                    <a href="{{ route('blog.detail',$blog->slug) }}" target="_self" type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Read Blog">Read</a>
+                                </div>
+                            </div> -->
                         </figcaption>
                     </div>
                 </figure>

@@ -31,7 +31,7 @@
 		        </small>
 		        <div class="d-grid mt-3 gap-2">
 		            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-		                <a type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#confirmNow" data-bs-whatever="@mdo">Confirm Order <i class="fa-solid fa-shopping-cart"></i></a>
+		                <a type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#confirmNow" data-bs-whatever="@mdo">Pre Order <i class="fa-solid fa-shopping-cart"></i></a>
 		                <div class="modal fade" id="confirmNow" tabindex="-1" aria-labelledby="confirmNowLabel" aria-hidden="true">
 		                    <div class="modal-dialog">
 		                        <div class="modal-content">
@@ -184,9 +184,6 @@
 	                                  </li>
 	                                  <li class="d-flex align-items-center">
 	                                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
-	                                    <small>
-	                                        <span><a href="{{ route('blog.detail',$blog->slug) }}" target="_self" type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Read Blog">Read</a></span>
-	                                    </small>
 	                                  </li>
 	                                </ul>
 	                            </div>

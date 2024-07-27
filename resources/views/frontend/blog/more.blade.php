@@ -38,9 +38,6 @@
 					                                  </li>
 					                                  <li class="d-flex align-items-center">
 					                                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
-					                                    <small>
-					                                        <span><a href="{{ route('blog.detail',$blog->slug) }}" target="_self" type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Read Blog">Read</a></span>
-					                                    </small>
 					                                  </li>
 					                                </ul>
 					                            </div>

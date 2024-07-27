@@ -56,7 +56,7 @@
 
 			<div class="mt-3"></div>
 
-		    <div class="album py-5 bg-light">
+		    <div class="album py-5">
 		        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
 		            @foreach($relatedBlog as $blog)
 		            <div class="col-lg-6">
@@ -75,9 +75,6 @@
 			                                  </li>
 			                                  <li class="d-flex align-items-center">
 			                                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
-			                                    <small>
-			                                        <span><a href="{{ route('blog.detail',$blog->slug) }}" target="_self" type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Read Blog">Read</a></span>
-			                                    </small>
 			                                  </li>
 			                                </ul>
 			                            </div>

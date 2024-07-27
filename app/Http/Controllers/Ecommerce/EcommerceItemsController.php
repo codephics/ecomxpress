@@ -52,12 +52,14 @@ class EcommerceItemsController extends Controller
         $page = EcommerceItem::where('slug', $slug)->firstOrFail();
         $setting = Setting::first();
         $relatedItems = EcommerceItem::take(4)->get();
+        $seller = EcommerceSeller::first();
         $relatedBlog = Blog::take(4)->get();
 
         return view('frontend.ecommerce.item-detail', [
             'page' => $page,
             'setting' => $setting,
             'relatedItems' => $relatedItems,
+            'seller' => $seller,
             'relatedBlog' => $relatedBlog
         ]);
     }
