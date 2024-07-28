@@ -44,7 +44,7 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="heading" class="form-label">Heading</label>
-                            <input type="text" class="form-control" name="heading" value="{{ $slider->heading }}" placeholder="Heading" required />
+                            <input type="text" class="form-control" name="heading" value="{{ $slider->heading }}" placeholder="Heading" />
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -61,9 +61,17 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="button_text_1" class="form-label">Button Text 1</label>
-                            <input type="text" class="form-control" name="button_text_1" value="{{ $slider->button_text_1 }}" placeholder="Button Text" required />
+                            <input type="text" class="form-control" name="button_text_1" value="{{ $slider->button_text_1 }}" placeholder="Button Text" />
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="button_link_1" class="form-label">Button Link 1</label>
+                            <input type="text" class="form-control" name="button_link_1" value="{{ $slider->button_link_1 }}" placeholder="Button Link" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="button_text_2" class="form-label">Button Text 2</label>
@@ -71,14 +79,6 @@
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="mb-3">
-                            <label for="button_link_1" class="form-label">Button Link 1</label>
-                            <input type="text" class="form-control" name="button_link_1" value="{{ $slider->button_link_1 }}" placeholder="Button Link" required />
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -118,11 +118,11 @@
                             <label class="input-group-text" for="inputGroupStatus">Status</label>
                             <select class="form-select" id="inputGroupStatus" name="status">
                                 @if($slider->status == 1)
-                                <option value="1">Live</option>
-                                <option value="0">Draft</option>
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
                                 @else
-                                <option value="0">Draft</option>
-                                <option value="1">Live</option>
+                                <option value="0">Inactive</option>
+                                <option value="1">Active</option>
                                 @endif
                             </select>
                         </div>

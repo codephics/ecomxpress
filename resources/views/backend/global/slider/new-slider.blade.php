@@ -32,13 +32,13 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="heading" class="form-label">Heading</label>
-                            <input type="text" class="form-control" name="heading" placeholder="Heading" required />
+                            <input type="text" class="form-control" name="heading" placeholder="Heading" />
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="subheading" class="form-label">Subheading</label>
-                            <input type="text" class="form-control" name="subheading" placeholder="Subheading" required />
+                            <input type="text" class="form-control" name="subheading" placeholder="Subheading" />
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -49,13 +49,13 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="button_text_1" class="form-label">Button Text 1</label>
-                            <input type="text" class="form-control" name="button_text_1" placeholder="Button Text" required />
+                            <input type="text" class="form-control" name="button_text_1" placeholder="Button Text" />
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="button_link_1" class="form-label">Button Link 1</label>
-                            <input type="text" class="form-control" name="button_link_1" placeholder="Button Link" required />
+                            <input type="text" class="form-control" name="button_link_1" placeholder="Button Link" />
                         </div>
                     </div>
                 </div>
@@ -103,8 +103,8 @@
                             <label class="input-group-text" for="inputGroupStatus">Status</label>
                             <select class="form-select" id="inputGroupStatus" name="status">
                                 <option value="0">Choose...</option>
-                                <option value="1">Publish</option>
-                                <option value="0">Draft</option>
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
                             </select>
                         </div>
                         <div class="mb-3">

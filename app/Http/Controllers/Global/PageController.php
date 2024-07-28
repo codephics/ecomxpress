@@ -44,7 +44,7 @@ class PageController extends Controller
     public function homepage()
     {
         $page = Page::where('slug', 'homepage')->firstOrFail();
-        $sliders = Slider::all();
+        $sliders = Slider::where('status', 1)->get();
         $categories = EcommerceCategory::all();
         $subcategories = EcommerceSubcategory::all();
         $sub_subcategories = EcommerceSubSubcategory::all();

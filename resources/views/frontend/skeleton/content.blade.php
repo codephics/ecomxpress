@@ -52,10 +52,11 @@
     }
 </style>
 @endsection @section('content')
+
 <!-- Featured Header -->
 <section>
     <div class="row featurette">
-        <div class="col-md-9 mb-3">
+        <div class="col-md-8 mb-3">
             <h1 class="featurette-heading fw-normal lh-1">{{ \Illuminate\Support\Str::limit($page->title, 100, '...') }}</h1>
             <p class="lead">{!! $page->short_description !!}</p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
@@ -63,35 +64,43 @@
                 <a class="btn btn-outline-secondary btn-lg px-4" href="{{ route('blog.more') }}">Read Blogs</a>
             </div>
         </div>
-        <!-- <div class="col-md-3">
-            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="col-md-4">
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
                 <div class="carousel-inner">
-                    @foreach($featured_items as $item)
+                    @foreach($sliders as $slider)
                     <div class="carousel-item active">
-                        <div class="card mb-3 border border-0">
-                            <div class="row no-gutters">
-                                <div class="col-md-5">
-                                    <div class="card" style="width: 18rem;">
-                                        <a href="{{ route('item.detail', $item->slug) }}">
-                                            <img src="{{ asset('ecommerce/item/image/' . $item->image) }}" class="img-fluid" alt="{{ $item->img_alt_text }}" />
-                                        </a>
-                                    </div>
-                                </div>
+                        <img src="{{ asset('global/slider/image/' . $slider->image) }}" class="d-block w-100" alt="{{ $slider->image_alt_text }}" />
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{ $slider->heading }}</h5>
+                            <p>{{ $slider->subheading }}</p>
+                            <p>{!! $slider->detail !!}</p>
+                            <div>
+                                @if($slider->button_text_1)
+                                <a class="btn btn-primary btn-sm px-4 me-md-2" href="{{ $slider->button_link_1 }}">{{ $slider->button_text_1 }}</a>
+                                @endif
+                                @if($slider->button_text_2)
+                                <a class="btn btn-outline-secondary btn-sm px-4" href="{{ $slider->button_link_2 }}">{{ $slider->button_text_2 }}</a>
+                                @endif
                             </div>
                         </div>
                     </div>
                     @endforeach
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-        </div> -->
+        </div>
     </div>
 </section>
 
@@ -252,11 +261,11 @@
                                             <div class="modal-body">
                                                 <form class="needs-validation" id="orderForm-{{ $item->uuid }}" method="POST" action="{{ route('ecommerce.pre-order.confirm') }}">
                                                     @csrf
-                                                    <input type="hidden" name="product_name" value="{{ $item->name }}">
-                                                    <input type="hidden" name="product_price" value="{{ $item->sale_price ?? $item->regular_price }}">
-                                                    <input type="hidden" name="sub_total" id="hiddenSubTotal-{{ $item->uuid }}">
-                                                    <input type="hidden" name="delivery_charge" id="hiddenDeliveryCharge-{{ $item->uuid }}">
-                                                    <input type="hidden" name="total" id="hiddenTotal-{{ $item->uuid }}">
+                                                    <input type="hidden" name="product_name" value="{{ $item->name }}" />
+                                                    <input type="hidden" name="product_price" value="{{ $item->sale_price ?? $item->regular_price }}" />
+                                                    <input type="hidden" name="sub_total" id="hiddenSubTotal-{{ $item->uuid }}" />
+                                                    <input type="hidden" name="delivery_charge" id="hiddenDeliveryCharge-{{ $item->uuid }}" />
+                                                    <input type="hidden" name="total" id="hiddenTotal-{{ $item->uuid }}" />
                                                     <div class="mb-3">
                                                         <label for="name-{{ $item->uuid }}" class="col-form-label">Name: <span class="text-danger">*</span></label>
                                                         <input type="text" class="form-control" name="name" id="name-{{ $item->uuid }}" placeholder="Name" required />
@@ -465,27 +474,27 @@
 @section('custom-scripts')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector('form'); // Change this to the correct form selector
-    const shippingMethods = document.querySelectorAll('.shipping-method');
-    const errorDiv = document.getElementById('shipping-method-error');
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector('form'); // Change this to the correct form selector
+        const shippingMethods = document.querySelectorAll('.shipping-method');
+        const errorDiv = document.getElementById('shipping-method-error');
 
-    form.addEventListener('submit', function(event) {
-        let oneChecked = false;
-        shippingMethods.forEach(function(method) {
-            if (method.checked) {
-                oneChecked = true;
+        form.addEventListener('submit', function(event) {
+            let oneChecked = false;
+            shippingMethods.forEach(function(method) {
+                if (method.checked) {
+                    oneChecked = true;
+                }
+            });
+
+            if (!oneChecked) {
+                event.preventDefault();
+                errorDiv.style.display = 'block';
+            } else {
+                errorDiv.style.display = 'none';
             }
         });
-
-        if (!oneChecked) {
-            event.preventDefault();
-            errorDiv.style.display = 'block';
-        } else {
-            errorDiv.style.display = 'none';
-        }
     });
-});
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {

@@ -67,7 +67,7 @@
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $slider->heading }}</td>
                         <td>{{ $slider->subheading }}</td>
-                        <td>@if($slider->status == 1) Live @else Draft @endif</td>
+                        <td>@if($slider->status == 1) Active @else Inactive @endif</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                               <a href="{{ route('slider.edit',$slider->id) }}" class="btn btn-secondary">Edit</a>
