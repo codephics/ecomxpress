@@ -76,7 +76,7 @@
                         <td>{{ $preOrder->product_name }}</td>
                         <td>{{ $preOrder->quantity }}</td>
                         <td>{{ $preOrder->total }}</td>
-                        <td>{{ \Illuminate\Support\Str::limit($preOrder->note, 50, '...') }}</td>
+                        <td>{{ $preOrder->order_note }}</td>
                         <td>
                             @if($preOrder->status == 1)
                             Pending 

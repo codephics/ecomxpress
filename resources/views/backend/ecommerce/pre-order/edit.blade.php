@@ -55,13 +55,13 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label for="product_select" class="form-label">Product Name</label>
-                            <select class="form-control" name="product_name" required>
-                                <option value="">Select a product</option>
-                                <option value="product1" data-price="100">Product 1 - $100</option>
-                                <option value="product2" data-price="200">Product 2 - $200</option>
-                                <option value="product3" data-price="300">Product 3 - $300</option>
-                            </select>
+                            <label for="product_name" class="form-label">Item</label>
+                            <input class="form-control" list="datalistItem" name="product_name" value="{{ $preOrder->product_name }}" placeholder="Search Item" required />
+                            <datalist id="datalistItem">
+                                @foreach($items as $item)
+                                <option value="{{ $item->name }}"></option>
+                                @endforeach
+                            </datalist>
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="quantity" class="form-label">Quantity</label>
-                            <input type="number" class="form-control" name="quantity" value="1" min="1" placeholder="Quantity" required />
+                            <input type="number" class="form-control" name="quantity" value="{{ $preOrder->quantity }}" placeholder="Quantity" required />
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -80,11 +80,11 @@
                             <label for="shipping_method" class="form-label">Shipping Method</label>
                             <div class="mt-2">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="shipping_method" id="insideDhaka" value="50" required>
+                                    <input class="form-check-input" type="radio" name="shipping_method" id="insideDhaka" value="50" @if($preOrder->shipping_method == 50.00) checked @endif>
                                     <label class="form-check-label" for="insideDhaka">Inside Dhaka - ৳50</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="shipping_method" id="outsideDhaka" value="100" required>
+                                    <input class="form-check-input" type="radio" name="shipping_method" id="outsideDhaka" value="100" @if($preOrder->shipping_method == 100.00) checked @endif>
                                     <label class="form-check-label" for="outsideDhaka">Outside Dhaka - ৳100</label>
                                 </div>
                             </div>
@@ -102,16 +102,29 @@
                                                 <label class="col-form-label">Sub Total</label>
                                             </td>
                                             <td width="25%">
-                                                <p id="subTotal">৳ 0.00</p>
+                                                <input type="number" class="form-control" name="sub_total" value="{{ $preOrder->sub_total }}" placeholder="{{ $preOrder->sub_total }}" required />
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td width="75%"><label class="col-form-label">Delivery Charge</label></td>
-                                            <td width="25%"><p id="deliveryCharge">৳ 0.00</p></td>
+                                            <td width="25%">
+                                                <input type="number" class="form-control" name="delivery_charge" value="{{ $preOrder->delivery_charge }}" placeholder="{{ $preOrder->delivery_charge }}" required />
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td width="75%"><label class="col-form-label">Total</label></td>
-                                            <td width="25%"><p id="total">৳ 0.00</p></td>
+                                            <td width="25%">
+                                                <input type="number" class="form-control" name="total" value="{{ $preOrder->total }}" placeholder="{{ $preOrder->total }}" required />
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -138,8 +151,8 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="mb-3">
-                            <label for="order_link" class="form-label">Order Link</label>
-                            <input type="text" class="form-control" placeholder="Order Link" disabled />
+                            <label for="uuid" class="form-label">Invoice</label>
+                            <input type="text" class="form-control" value="{{ $preOrder->uuid }}" />
                         </div>
                         <div class="mb-3">
                             <div class="input-group mb-3">

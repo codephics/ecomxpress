@@ -318,12 +318,19 @@ class EcommerceItemsController extends Controller
 
     public function edit($id)
     {
-        $item = EcommerceItem::findOrFail($id);     
+        $item = EcommerceItem::findOrFail($id);
         $categories = EcommerceCategory::all();
         $subcategories = EcommerceSubcategory::all();
         $sub_subcategories = EcommerceSubSubcategory::all();
+        $sellers = EcommerceSeller::all();
 
-        return view('backend.ecommerce.edit-item', ['item' => $item, 'categories' => $categories,'subcategories' => $subcategories, 'sub_subcategories' => $sub_subcategories]);
+        return view('backend.ecommerce.edit-item', [
+            'item' => $item,
+            'categories' => $categories,
+            'subcategories' => $subcategories,
+            'sub_subcategories' => $sub_subcategories,
+            'sellers' => $sellers,
+        ]);
     }
 
     public function update(Request $request, $id): RedirectResponse

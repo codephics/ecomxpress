@@ -131,59 +131,33 @@
     <div class="mt-3"></div>
 
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-        @php
-            // Combine all categories into a single collection
-            $combinedItems = $categories->concat($subcategories)->concat($sub_subcategories);
-            $count = $combinedItems->count();
-
-            // Determine column class based on the count
-            $colClass = 'col-md-12'; // Default for one item
-            if ($count == 2) {
-                $colClass = 'col-md-6';
-            } elseif ($count == 3) {
-                $colClass = 'col-md-4';
-            } elseif ($count >= 4) {
-                $colClass = 'col-md-3';
-            }
-        @endphp
-
         @foreach($categories as $category)
-            <div class="{{ $colClass }}">
-                <div class="card ms-3 border-0">
-                    <a href="{{ url('shop/'.$category->slug) }}" class="card-link">
-                        <figure class="figure">
-                            <img src="{{ asset('ecommerce/category/image/thumb/'.$category->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $category->thumb_alt_text }}" />
-                            <figcaption class="figure-caption">{{ $category->category_name }}</figcaption>
-                        </figure>
-                    </a>
-                </div>
-            </div>
-        @endforeach
-
-        @foreach($subcategories as $subcategory)
-            <div class="{{ $colClass }}">
-                <div class="card ms-3 border-0">
-                    <a href="{{ url('shop',['category' => $category->slug, 'subcategory' => $subcategory->slug]) }}" class="card-link">
-                        <figure class="figure">
-                            <img src="{{ asset('ecommerce/category/subcategory/image/thumb/'.$subcategory->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $subcategory->thumb_alt_text }}" />
-                            <figcaption class="figure-caption">{{ $subcategory->subcategory_name }}</figcaption>
-                        </figure>
-                    </a>
-                </div>
-            </div>
-        @endforeach
-
-        @foreach($sub_subcategories as $sub_subcategory)
-            <div class="{{ $colClass }}">
-                <div class="card ms-3 border-0">
-                    <a href="{{ url('shop/',['category' => $category->slug, 'subcategory' => $subcategory->slug, 'sub-subcategory' => $sub_subcategory->slug]) }}" class="card-link">
-                        <figure class="figure">
-                            <img src="{{ asset('ecommerce/category/subcategory/sub-subcategory/image/thumb/'.$sub_subcategory->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $sub_subcategory->thumb_alt_text }}" />
-                            <figcaption class="figure-caption">{{ $sub_subcategory->sub_subcategory_name }}</figcaption>
-                        </figure>
-                    </a>
-                </div>
-            </div>
+        <div class="card ms-3 border-0" style="width: 8rem;">
+            <a href="{{ url('shop/'.$category->slug) }}" class="card-link">
+                <figure class="figure">
+                    <img src="{{ asset('ecommerce/category/image/thumb/'.$category->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $category->thumb_alt_text }}" />
+                    <figcaption class="figure-caption">{{ $category->category_name }}</figcaption>
+                </figure>
+            </a>
+        </div>
+        @endforeach @foreach($subcategories as $subcategory)
+        <div class="card ms-3 border-0" style="width: 8rem;">
+            <a href="{{ url('shop/'.$category->slug) }}" class="card-link">
+                <figure class="figure">
+                    <img src="{{ asset('ecommerce/category/subcategory/image/thumb/'.$subcategory->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $subcategory->thumb_alt_text }}" />
+                    <figcaption class="figure-caption">{{ $subcategory->subcategory_name }}</figcaption>
+                </figure>
+            </a>
+        </div>
+        @endforeach @foreach($sub_subcategories as $sub_subcategory)
+        <div class="card ms-3 border-0" style="width: 8rem;">
+            <a href="{{ url('shop/'.$category->slug) }}" class="card-link">
+                <figure class="figure">
+                    <img src="{{ asset('ecommerce/category/subcategory/sub-subcategory/image/thumb/'.$sub_subcategory->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $sub_subcategory->thumb_alt_text }}" />
+                    <figcaption class="figure-caption">{{ $sub_subcategory->sub_subcategory_name }}</figcaption>
+                </figure>
+            </a>
+        </div>
         @endforeach
     </div>
 </section>
@@ -215,22 +189,11 @@
     <div class="mt-3"></div>
 
     <div class="row">
-        @php
-            $count = $featured_items->count();
-            $colClass = 'col-md-12';
-            if ($count == 2) {
-                $colClass = 'col-md-6';
-            } elseif ($count == 3) {
-                $colClass = 'col-md-4';
-            } elseif ($count == 4) {
-                $colClass = 'col-md-3';
-            }
-        @endphp
         @foreach($featured_items as $item)
-        <div class="{{ $colClass }}">
+        <div class="col-md-3">
             <article>
                 <figure>
-                    <div class="card">
+                    <div class="card" style="width: 18rem;">
                         <a href="{{ route('item.detail', $item->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                             <img src="{{ asset('ecommerce/item/image/' . $item->image) }}" class="card-img-top" alt="{{ $item->img_alt_text }}" />
                         </a>
@@ -243,32 +206,32 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
                                     <small>
-                                        @if ($item->category_name) 
-                                        @if ($item->category)
+                                        @if ($item->category_name) @if ($item->category)
                                         <a href="{{ route('category.show', ['category' => $item->category->slug]) }}" class="link-dark">
                                             {{ $item->category_name }}
                                         </a>
-                                        @endif 
-                                        @elseif ($item->subcategory_name) 
-                                        @if ($item->subcategory)
-                                        <a href="{{ route('subcategory.show', [
-                                                'category' => $item->subcategory->category->slug,
-                                                'subcategory' => $item->subcategory->slug,
-                                            ]) }}" class="link-dark">
+                                        @endif @elseif ($item->subcategory_name) @if ($item->subcategory)
+                                        <a
+                                            href="{{ route('subcategory.show', [
+                                                    'category' => $item->subcategory->category->slug,
+                                                    'subcategory' => $item->subcategory->slug,
+                                                ]) }}"
+                                            class="link-dark"
+                                        >
                                             {{ $item->subcategory_name }}
                                         </a>
-                                        @endif 
-                                        @elseif ($item->sub_subcategory_name) 
-                                        @if ($item->sub_subcategory)
-                                        <a href="{{ route('subSubcategory.show', [
-                                                'category' => $item->subcategory->category->slug,
-                                                'subcategory' => $item->subcategory->slug,
-                                                'subSubcategory' => $item->sub_subcategory->slug,
-                                            ]) }}" class="link-dark">
+                                        @endif @elseif ($item->sub_subcategory_name) @if ($item->sub_subcategory)
+                                        <a
+                                            href="{{ route('subSubcategory.show', [
+                                                    'category' => $item->subcategory->category->slug,
+                                                    'subcategory' => $item->subcategory->slug,
+                                                    'subSubcategory' => $item->sub_subcategory->slug,
+                                                ]) }}"
+                                            class="link-dark"
+                                        >
                                             {{ $item->sub_subcategory_name }}
                                         </a>
-                                        @endif 
-                                        @endif
+                                        @endif @endif
                                     </small>
                                 </li>
                                 <li class="list-group-item">
@@ -285,7 +248,7 @@
                                 </li>
                             </ul>
                             <div class="card-body">
-                                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#confirmNow-{{ $item->uuid }}" data-sale-price="{{ $item->sale_price ?? $item->regular_price ?? 0 }}" data-item-name="{{ $item->name }}" data-item-image="{{ asset('ecommerce/item/image/' . $item->image) }}">
+                                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#confirmNow-{{ $item->uuid }}" data-sale-price="{{ $item->sale_price ?? $item->regular_price ?? 0 }}">
                                     Pre Order
                                 </button>
                                 <div class="modal fade" id="confirmNow-{{ $item->uuid }}" tabindex="-1" aria-labelledby="confirmNowLabel-{{ $item->uuid }}" aria-hidden="true">
@@ -298,11 +261,11 @@
                                             <div class="modal-body">
                                                 <form class="needs-validation" id="orderForm-{{ $item->uuid }}" method="POST" action="{{ route('ecommerce.pre-order.confirm') }}">
                                                     @csrf
-                                                    <input type="hidden" name="product_name" id="hiddenItemName-{{ $item->uuid }}">
-                                                    <input type="hidden" name="product_price" id="hiddenItemPrice-{{ $item->uuid }}">
-                                                    <input type="hidden" name="sub_total" id="hiddenSubTotal-{{ $item->uuid }}">
-                                                    <input type="hidden" name="delivery_charge" id="hiddenDeliveryCharge-{{ $item->uuid }}">
-                                                    <input type="hidden" name="total" id="hiddenTotal-{{ $item->uuid }}">
+                                                    <input type="hidden" name="product_name" value="{{ $item->name }}" />
+                                                    <input type="hidden" name="product_price" value="{{ $item->sale_price ?? $item->regular_price }}" />
+                                                    <input type="hidden" name="sub_total" id="hiddenSubTotal-{{ $item->uuid }}" />
+                                                    <input type="hidden" name="delivery_charge" id="hiddenDeliveryCharge-{{ $item->uuid }}" />
+                                                    <input type="hidden" name="total" id="hiddenTotal-{{ $item->uuid }}" />
                                                     <div class="mb-3">
                                                         <label for="name-{{ $item->uuid }}" class="col-form-label">Name: <span class="text-danger">*</span></label>
                                                         <input type="text" class="form-control" name="name" id="name-{{ $item->uuid }}" placeholder="Name" required />
@@ -342,15 +305,15 @@
                                                         <label class="col-form-label">Shipping Method</label>
                                                         <div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input shipping-method" type="radio" id="insideDhaka-{{ $item->uuid }}" name="shipping_method" value="50" />
+                                                                <input class="form-check-input shipping-method" type="checkbox" id="insideDhaka-{{ $item->uuid }}" name="shipping_method" value="50" />
                                                                 <label class="form-check-label" for="insideDhaka-{{ $item->uuid }}">Inside Dhaka (50৳)</label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input shipping-method" type="radio" id="outsideDhaka-{{ $item->uuid }}" name="shipping_method" value="100" />
+                                                                <input class="form-check-input shipping-method" type="checkbox" id="outsideDhaka-{{ $item->uuid }}" name="shipping_method" value="100" />
                                                                 <label class="form-check-label" for="outsideDhaka-{{ $item->uuid }}">Outside Dhaka (100৳)</label>
                                                             </div>
                                                         </div>
-                                                        <div id="shipping-method-error-{{ $item->uuid }}" class="invalid-feedback">
+                                                        <div id="shipping-method-error" class="invalid-feedback">
                                                             Please select a shipping method.
                                                         </div>
                                                     </div>
@@ -364,13 +327,20 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <td width="25%">
-                                                                            <img src="{{ asset('ecommerce/item/image/' . $item->image) }}" id="modal-image-{{ $item->uuid }}" class="img-thumbnail me-2" alt="{{ $item->img_alt_text }}" style="width: 50px;" />
+                                                                            <img src="{{ asset('ecommerce/item/image/' . $item->image) }}" class="img-thumbnail me-2" alt="{{ $item->img_alt_text }}" style="width: 50px;" />
                                                                         </td>
                                                                         <td width="50%">
-                                                                            <p id="modal-name-{{ $item->uuid }}" class="mb-0">{{ \Illuminate\Support\Str::limit($item->name, 40, '...') }}</p>
+                                                                            <p class="mb-0">{{ \Illuminate\Support\Str::limit($item->name, 40, '...') }}</p>
                                                                         </td>
                                                                         <td width="25%">
-                                                                            <span id="modal-price-{{ $item->uuid }}" class="mb-0">{{ $item->sale_price ?? $item->regular_price }}৳</span>
+                                                                            @if($item->sale_price)
+                                                                            <span class="fw-bold fs-5 text-success">{{ $item->sale_price }}৳</span>/
+                                                                            <span class="fw-bold text-decoration-line-through text-muted">{{ $item->regular_price }}৳</span>
+                                                                            @elseif($item->regular_price)
+                                                                            <span class="fw-bold fs-5 text-success">{{ $item->regular_price }}৳</span>
+                                                                            @else
+                                                                            <span>Free</span>
+                                                                            @endif
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
@@ -386,16 +356,16 @@
                                                                             <label class="col-form-label">Sub Total</label>
                                                                         </td>
                                                                         <td width="25%">
-                                                                            <div id="modal-subtotal-{{ $item->uuid }}">0৳</div>
+                                                                            <p id="subTotal-{{ $item->uuid }}">৳ 0.00</p>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td width="75%"><label class="col-form-label">Delivery Charge</label></td>
-                                                                        <td width="25%"><div id="modal-delivery-charge-{{ $item->uuid }}">0৳</div></td>
+                                                                        <td width="25%"><p id="deliveryCharge-{{ $item->uuid }}">৳ 0.00</p></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td width="75%"><label class="col-form-label">Total</label></td>
-                                                                        <td width="25%"><div id="modal-total-{{ $item->uuid }}">0৳</div></td>
+                                                                        <td width="25%"><p id="total-{{ $item->uuid }}">৳ 0.00</p></td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -412,7 +382,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Confirm Order</button>
+                                                        <button type="submit" class="btn btn-primary">Confirm Now</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -427,9 +397,8 @@
         </div>
         @endforeach
     </div>
-
 </section>
-<!-- End Featured Item -->
+<!-- End Featured Items -->
 
 <!-- HR -->
 <div class="mt-3 border-top border-start-0 border-bottom-0 border-end-0"></div>
@@ -459,19 +428,8 @@
     <div class="mt-3"></div>
 
     <div class="row">
-        @php
-            $count = $featured_blogs->count();
-            $blogColClass = 'col-md-12';
-            if ($count == 2) {
-                $blogColClass = 'col-md-6';
-            } elseif ($count == 3) {
-                $blogColClass = 'col-md-4';
-            } elseif ($count == 4) {
-                $blogColClass = 'col-md-3';
-            }
-        @endphp
         @foreach ($featured_blogs as $blog)
-        <div class="{{ $blogColClass }}">
+        <div class="col-lg-6">
             <article>
                 <figure>
                     <div class="card shadow mb-5 rounded-3 no-border-card">
@@ -540,67 +498,56 @@
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('button[data-bs-toggle="modal"]').forEach(function (button) {
-            button.addEventListener('click', function () {
-                var targetModalId = this.getAttribute('data-bs-target');
-                var modal = document.querySelector(targetModalId);
+        document.querySelectorAll('[id^="confirmNow-"]').forEach(function (modalElement) {
+            modalElement.addEventListener('show.bs.modal', function (event) {
+                let modalId = modalElement.id.split('-')[1];
+                let quantityInput = document.querySelector(`#quantity-${modalId}`);
+                let insideDhakaCheckbox = document.querySelector(`#insideDhaka-${modalId}`);
+                let outsideDhakaCheckbox = document.querySelector(`#outsideDhaka-${modalId}`);
+                let subTotalElement = document.querySelector(`#subTotal-${modalId}`);
+                let deliveryChargeElement = document.querySelector(`#deliveryCharge-${modalId}`);
+                let totalElement = document.querySelector(`#total-${modalId}`);
+                let hiddenSubTotalInput = document.querySelector(`#hiddenSubTotal-${modalId}`);
+                let hiddenDeliveryChargeInput = document.querySelector(`#hiddenDeliveryCharge-${modalId}`);
+                let hiddenTotalInput = document.querySelector(`#hiddenTotal-${modalId}`);
+                let salePrice = parseFloat(event.relatedTarget.getAttribute('data-sale-price'));
 
-                var itemPrice = this.getAttribute('data-sale-price');
-                var itemName = this.getAttribute('data-item-name');
-                var itemImage = this.getAttribute('data-item-image');
+                function calculateTotal() {
+                    let quantity = parseInt(quantityInput.value);
+                    let deliveryCharge = 0;
+                    if (insideDhakaCheckbox.checked) {
+                        deliveryCharge = parseInt(insideDhakaCheckbox.value);
+                    }
+                    if (outsideDhakaCheckbox.checked) {
+                        deliveryCharge = parseInt(outsideDhakaCheckbox.value);
+                    }
+                    let subTotal = salePrice * quantity;
+                    let total = subTotal + deliveryCharge;
 
-                var modalName = modal.querySelector('[id^="modal-name-"]');
-                var modalImage = modal.querySelector('[id^="modal-image-"]');
-                var modalPrice = modal.querySelector('[id^="modal-price-"]');
-                var modalSubtotal = modal.querySelector('[id^="modal-subtotal-"]');
-                var modalDeliveryCharge = modal.querySelector('[id^="modal-delivery-charge-"]');
-                var modalTotal = modal.querySelector('[id^="modal-total-"]');
+                    // Update the displayed values
+                    subTotalElement.textContent = `৳ ${subTotal.toFixed(2)}`;
+                    deliveryChargeElement.textContent = `৳ ${deliveryCharge.toFixed(2)}`;
+                    totalElement.textContent = `৳ ${total.toFixed(2)}`;
 
-                modalName.textContent = itemName;
-                modalImage.setAttribute('src', itemImage);
-                modalPrice.textContent = itemPrice + '৳';
-                modalSubtotal.textContent = itemPrice + '৳';
-                modalDeliveryCharge.textContent = '0৳';
-                modalTotal.textContent = itemPrice + '৳';
-
-                var quantityInput = modal.querySelector('input[name="quantity"]');
-                var deliveryChargeInputs = modal.querySelectorAll('.shipping-method');
-
-                quantityInput.addEventListener('input', updateTotals);
-                deliveryChargeInputs.forEach(function (input) {
-                    input.addEventListener('change', updateTotals);
-                });
-
-                function updateTotals() {
-                    var quantity = quantityInput.value;
-                    var itemSubtotal = quantity * itemPrice;
-                    var deliveryCharge = 0;
-
-                    deliveryChargeInputs.forEach(function (input) {
-                        if (input.checked) {
-                            deliveryCharge = parseInt(input.value, 10);
-                        }
-                    });
-
-                    var total = itemSubtotal + deliveryCharge;
-
-                    modalSubtotal.textContent = itemSubtotal + '৳';
-                    modalDeliveryCharge.textContent = deliveryCharge + '৳';
-                    modalTotal.textContent = total + '৳';
-
-                    modal.querySelector('[id^="hiddenItemName-"]').value = itemName;
-                    modal.querySelector('[id^="hiddenItemPrice-"]').value = itemPrice;
-                    modal.querySelector('[id^="hiddenSubTotal-"]').value = itemSubtotal;
-                    modal.querySelector('[id^="hiddenDeliveryCharge-"]').value = deliveryCharge;
-                    modal.querySelector('[id^="hiddenTotal-"]').value = total;
+                    // Update the hidden input values
+                    hiddenSubTotalInput.value = subTotal.toFixed(2);
+                    hiddenDeliveryChargeInput.value = deliveryCharge.toFixed(2);
+                    hiddenTotalInput.value = total.toFixed(2);
                 }
 
-                modal.addEventListener('hidden.bs.modal', function () {
-                    quantityInput.removeEventListener('input', updateTotals);
-                    deliveryChargeInputs.forEach(function (input) {
-                        input.removeEventListener('change', updateTotals);
-                    });
+                quantityInput.addEventListener('input', calculateTotal);
+                insideDhakaCheckbox.addEventListener('change', calculateTotal);
+                outsideDhakaCheckbox.addEventListener('change', calculateTotal);
+
+                // Check at least one checkbox is selected before form submission
+                document.querySelector(`#orderForm-${modalId}`).addEventListener('submit', function (event) {
+                    if (!insideDhakaCheckbox.checked && !outsideDhakaCheckbox.checked) {
+                        event.preventDefault(); // Prevent form submission
+                        alert('Please select a shipping method.'); // Show an alert or handle validation message
+                    }
                 });
+
+                calculateTotal();
             });
         });
     });

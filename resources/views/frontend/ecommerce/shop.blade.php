@@ -92,11 +92,20 @@
                         <h1 class="fs-3">{{ $page->title }}</h1>
 						<p>{!! $page->short_description !!}</p>
 						<div class="row">
-							@foreach($items as $item)
-					        <div class="col-md-3">
+							@php
+					            $count = $items->count();
+					            $colClass = 'col-md-12';
+					            if ($count == 2) {
+					                $colClass = 'col-md-6';
+					            } elseif ($count == 3) {
+					                $colClass = 'col-md-4';
+					            }
+					        @endphp
+					        @foreach($items as $item)
+					        <div class="{{ $colClass }}">
 					            <article>
 					                <figure>
-					                    <div class="card" style="width: 18rem;">
+					                    <div class="card">
 					                        <a href="{{ route('item.detail', $item->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
 					                            <img src="{{ asset('ecommerce/item/image/' . $item->image) }}" class="card-img-top" alt="{{ $item->img_alt_text }}" />
 					                        </a>
@@ -109,32 +118,32 @@
 					                            <ul class="list-group list-group-flush">
 					                                <li class="list-group-item">
 					                                    <small>
-					                                        @if ($item->category_name) @if ($item->category)
+					                                        @if ($item->category_name) 
+					                                        @if ($item->category)
 					                                        <a href="{{ route('category.show', ['category' => $item->category->slug]) }}" class="link-dark">
 					                                            {{ $item->category_name }}
 					                                        </a>
-					                                        @endif @elseif ($item->subcategory_name) @if ($item->subcategory)
-					                                        <a
-					                                            href="{{ route('subcategory.show', [
-					                                                    'category' => $item->subcategory->category->slug,
-					                                                    'subcategory' => $item->subcategory->slug,
-					                                                ]) }}"
-					                                            class="link-dark"
-					                                        >
+					                                        @endif 
+					                                        @elseif ($item->subcategory_name) 
+					                                        @if ($item->subcategory)
+					                                        <a href="{{ route('subcategory.show', [
+					                                                'category' => $item->subcategory->category->slug,
+					                                                'subcategory' => $item->subcategory->slug,
+					                                            ]) }}" class="link-dark">
 					                                            {{ $item->subcategory_name }}
 					                                        </a>
-					                                        @endif @elseif ($item->sub_subcategory_name) @if ($item->sub_subcategory)
-					                                        <a
-					                                            href="{{ route('subSubcategory.show', [
-					                                                    'category' => $item->subcategory->category->slug,
-					                                                    'subcategory' => $item->subcategory->slug,
-					                                                    'subSubcategory' => $item->sub_subcategory->slug,
-					                                                ]) }}"
-					                                            class="link-dark"
-					                                        >
+					                                        @endif 
+					                                        @elseif ($item->sub_subcategory_name) 
+					                                        @if ($item->sub_subcategory)
+					                                        <a href="{{ route('subSubcategory.show', [
+					                                                'category' => $item->subcategory->category->slug,
+					                                                'subcategory' => $item->subcategory->slug,
+					                                                'subSubcategory' => $item->sub_subcategory->slug,
+					                                            ]) }}" class="link-dark">
 					                                            {{ $item->sub_subcategory_name }}
 					                                        </a>
-					                                        @endif @endif
+					                                        @endif 
+					                                        @endif
 					                                    </small>
 					                                </li>
 					                                <li class="list-group-item">
@@ -151,7 +160,7 @@
 					                                </li>
 					                            </ul>
 					                            <div class="card-body">
-					                                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#confirmNow-{{ $item->uuid }}" data-sale-price="{{ $item->sale_price ?? $item->regular_price ?? 0 }}">
+					                                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#confirmNow-{{ $item->uuid }}" data-sale-price="{{ $item->sale_price ?? $item->regular_price ?? 0 }}" data-item-name="{{ $item->name }}" data-item-image="{{ asset('ecommerce/item/image/' . $item->image) }}">
 					                                    Pre Order
 					                                </button>
 					                                <div class="modal fade" id="confirmNow-{{ $item->uuid }}" tabindex="-1" aria-labelledby="confirmNowLabel-{{ $item->uuid }}" aria-hidden="true">
@@ -164,8 +173,8 @@
 					                                            <div class="modal-body">
 					                                                <form class="needs-validation" id="orderForm-{{ $item->uuid }}" method="POST" action="{{ route('ecommerce.pre-order.confirm') }}">
 					                                                    @csrf
-					                                                    <input type="hidden" name="product_name" value="{{ $item->name }}">
-					                                                    <input type="hidden" name="product_price" value="{{ $item->sale_price ?? $item->regular_price }}">
+					                                                    <input type="hidden" name="product_name" id="hiddenItemName-{{ $item->uuid }}">
+					                                                    <input type="hidden" name="product_price" id="hiddenItemPrice-{{ $item->uuid }}">
 					                                                    <input type="hidden" name="sub_total" id="hiddenSubTotal-{{ $item->uuid }}">
 					                                                    <input type="hidden" name="delivery_charge" id="hiddenDeliveryCharge-{{ $item->uuid }}">
 					                                                    <input type="hidden" name="total" id="hiddenTotal-{{ $item->uuid }}">
@@ -208,15 +217,15 @@
 					                                                        <label class="col-form-label">Shipping Method</label>
 					                                                        <div>
 					                                                            <div class="form-check">
-					                                                                <input class="form-check-input shipping-method" type="checkbox" id="insideDhaka-{{ $item->uuid }}" name="shipping_method" value="50" />
+					                                                                <input class="form-check-input shipping-method" type="radio" id="insideDhaka-{{ $item->uuid }}" name="shipping_method" value="50" />
 					                                                                <label class="form-check-label" for="insideDhaka-{{ $item->uuid }}">Inside Dhaka (50৳)</label>
 					                                                            </div>
 					                                                            <div class="form-check">
-					                                                                <input class="form-check-input shipping-method" type="checkbox" id="outsideDhaka-{{ $item->uuid }}" name="shipping_method" value="100" />
+					                                                                <input class="form-check-input shipping-method" type="radio" id="outsideDhaka-{{ $item->uuid }}" name="shipping_method" value="100" />
 					                                                                <label class="form-check-label" for="outsideDhaka-{{ $item->uuid }}">Outside Dhaka (100৳)</label>
 					                                                            </div>
 					                                                        </div>
-					                                                        <div id="shipping-method-error" class="invalid-feedback">
+					                                                        <div id="shipping-method-error-{{ $item->uuid }}" class="invalid-feedback">
 					                                                            Please select a shipping method.
 					                                                        </div>
 					                                                    </div>
@@ -230,20 +239,13 @@
 					                                                                <tbody>
 					                                                                    <tr>
 					                                                                        <td width="25%">
-					                                                                            <img src="{{ asset('ecommerce/item/image/' . $item->image) }}" class="img-thumbnail me-2" alt="{{ $item->img_alt_text }}" style="width: 50px;" />
+					                                                                            <img src="{{ asset('ecommerce/item/image/' . $item->image) }}" id="modal-image-{{ $item->uuid }}" class="img-thumbnail me-2" alt="{{ $item->img_alt_text }}" style="width: 50px;" />
 					                                                                        </td>
 					                                                                        <td width="50%">
-					                                                                            <p class="mb-0">{{ \Illuminate\Support\Str::limit($item->name, 40, '...') }}</p>
+					                                                                            <p id="modal-name-{{ $item->uuid }}" class="mb-0">{{ \Illuminate\Support\Str::limit($item->name, 40, '...') }}</p>
 					                                                                        </td>
 					                                                                        <td width="25%">
-					                                                                            @if($item->sale_price)
-					                                                                            <span class="fw-bold fs-5 text-success">{{ $item->sale_price }}৳</span>/
-					                                                                            <span class="fw-bold text-decoration-line-through text-muted">{{ $item->regular_price }}৳</span>
-					                                                                            @elseif($item->regular_price)
-					                                                                            <span class="fw-bold fs-5 text-success">{{ $item->regular_price }}৳</span>
-					                                                                            @else
-					                                                                            <span>Free</span>
-					                                                                            @endif
+					                                                                            <span id="modal-price-{{ $item->uuid }}" class="mb-0">{{ $item->sale_price ?? $item->regular_price }}৳</span>
 					                                                                        </td>
 					                                                                    </tr>
 					                                                                </tbody>
@@ -259,16 +261,16 @@
 					                                                                            <label class="col-form-label">Sub Total</label>
 					                                                                        </td>
 					                                                                        <td width="25%">
-					                                                                            <p id="subTotal-{{ $item->uuid }}">৳ 0.00</p>
+					                                                                            <div id="modal-subtotal-{{ $item->uuid }}">0৳</div>
 					                                                                        </td>
 					                                                                    </tr>
 					                                                                    <tr>
 					                                                                        <td width="75%"><label class="col-form-label">Delivery Charge</label></td>
-					                                                                        <td width="25%"><p id="deliveryCharge-{{ $item->uuid }}">৳ 0.00</p></td>
+					                                                                        <td width="25%"><div id="modal-delivery-charge-{{ $item->uuid }}">0৳</div></td>
 					                                                                    </tr>
 					                                                                    <tr>
 					                                                                        <td width="75%"><label class="col-form-label">Total</label></td>
-					                                                                        <td width="25%"><p id="total-{{ $item->uuid }}">৳ 0.00</p></td>
+					                                                                        <td width="25%"><div id="modal-total-{{ $item->uuid }}">0৳</div></td>
 					                                                                    </tr>
 					                                                                </tbody>
 					                                                            </table>
@@ -285,7 +287,7 @@
 					                                                    </div>
 					                                                    <div class="modal-footer">
 					                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					                                                        <button type="submit" class="btn btn-primary">Confirm Now</button>
+					                                                        <button type="submit" class="btn btn-primary">Confirm Order</button>
 					                                                    </div>
 					                                                </form>
 					                                            </div>

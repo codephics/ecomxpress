@@ -15,7 +15,7 @@
 						Ecommerce
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<li><a class="dropdown-item" href="{{ route('ecommerce.pre-order.new') }}">Add Pre-Order</a></li>
+						<!-- <li><a class="dropdown-item" href="{{ route('ecommerce.pre-order.new') }}">Add Pre-Order</a></li> -->
 						<li><a class="dropdown-item" href="{{ route('ecommerce.pre-order.manage') }}">Manage Pre-Orders</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item" href="{{ route('ecommerce.item.new') }}">Add Item</a></li>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Global\Setting;
 use App\Models\Ecommerce\EcommercePreOrder;
+use App\Models\Ecommerce\EcommerceItem;
 
 use App\Providers\RouteServiceProvider;
 
@@ -48,6 +49,8 @@ class EcommercePreOrderController extends Controller
             'status' => $request->status,
             'comment' => $request->comment,
         ]);
+
+        // dd($preOrder);
 
         $preOrder->save();
 
@@ -103,8 +106,12 @@ class EcommercePreOrderController extends Controller
     public function edit($id)
     {
         $preOrder = EcommercePreOrder::findOrFail($id);
+        $items = EcommerceItem::all();
 
-        return view('backend.ecommerce.pre-order.edit', ['preOrder' => $preOrder]);
+        return view('backend.ecommerce.pre-order.edit', [
+            'preOrder' => $preOrder,
+            'items' => $items
+        ]);
     }
 
     public function view($id)
