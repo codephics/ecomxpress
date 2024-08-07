@@ -40,7 +40,7 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="title" class="form-label">Email *</label>
-                            <input type="email" class="form-control" name="email" value="{{ $subscriber->email }}" placeholder="Title" required />
+                            <input type="email" class="form-control" name="email" value="{{ $subscriber->email }}" placeholder="Email" required />
                             <div class="valid-feedback">
                                 Looks good!
                             </div>

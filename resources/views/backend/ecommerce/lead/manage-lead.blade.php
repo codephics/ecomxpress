@@ -88,7 +88,7 @@
                         </td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                              <a href="{{ route('ecommerce.lead.view',$lead->id) }}" class="btn btn-info">View</a>
+                              <!-- <a href="{{ route('ecommerce.lead.view',$lead->id) }}" class="btn btn-info">View</a> -->
                               <a href="{{ route('ecommerce.lead.edit',$lead->id) }}" class="btn btn-secondary">Edit</a>
 
                               <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#deleteItem{{ $lead->id }}">Destroy</button>

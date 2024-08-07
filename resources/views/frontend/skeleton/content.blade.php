@@ -470,35 +470,33 @@
                 $blogColClass = 'col-md-3';
             }
         @endphp
-        @foreach ($featured_blogs as $blog)
-        <div class="{{ $blogColClass }}">
-            <article>
-                <figure>
-                    <div class="card shadow mb-5 rounded-3 no-border-card">
-                        <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                            <img src="{{ asset('blog/image/featured/' . $blog->featured_image) }}" class="card-img-top" alt="..." />
-                        </a>
-                        <figcaption>
-                            <div class="card-body">
-                                <div class="card-title lead">
-                                    <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                                        {{ \Illuminate\Support\Str::limit($blog->title, 160, '...') }}
-                                    </a>
-                                    <span class="blog-post-meta">{{ $blog->created_at->format('M d, Y') }}</span>
-                                    <p class="card-text">{!! \Illuminate\Support\Str::limit($blog->short_description, 100, '...') !!}</p>
+        @foreach($featured_blogs as $blog)
+            <div class="col-lg-6">
+                <article>
+                    <figure>
+                        <div class="card shadow mb-5 rounded-3 no-border-card">
+                            <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                                <img src="{{ asset('blog/image/featured/' . $blog->featured_image) }}" class="card-img-top" alt="...">
+                            </a>
+                            <figcaption>
+                                <div class="card-body">
+                                    <ul class="d-flex list-unstyled mt-auto">
+                                      <li class="me-auto">
+                                        <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">{{ \Illuminate\Support\Str::limit($blog->title, 60, '...') }}</a>
+                                        <small>{{ $blog->created_at->format('M d, Y') }}</small>
+                                      </li>
+                                      <li class="d-flex align-items-center">
+                                        <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
+                                      </li>
+                                    </ul>
                                 </div>
-                            </div>
-                            <!-- <div class="card-body">
-                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
-                                    <a href="{{ route('blog.detail',$blog->slug) }}" target="_self" type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Read Blog">Read</a>
-                                </div>
-                            </div> -->
-                        </figcaption>
-                    </div>
-                </figure>
-            </article>
+                            </figcaption>
+                        </div>
+                    </figure>
+                </article>
+            </div>
+            @endforeach
         </div>
-        @endforeach
     </div>
 </section>
 <!-- End Related Blogs -->

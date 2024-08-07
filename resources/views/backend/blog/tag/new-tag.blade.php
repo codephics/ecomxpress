@@ -81,13 +81,13 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="meta_title" class="form-label">Meta Title</label>
-                            <textarea class="form-control" name="meta_title" rows="4"></textarea>
+                            <textarea class="form-control" name="meta_title" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="meta_description" class="form-label">Meta Description</label>
-                            <textarea class="form-control" name="meta_description" rows="4"></textarea>
+                            <textarea class="form-control" name="meta_description" rows="3"></textarea>
                         </div>
                     </div>
                 </div>
@@ -95,13 +95,13 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="facebook_meta_title" class="form-label">Facebook Meta Title</label>
-                            <textarea class="form-control" name="facebook_meta_title" rows="4"></textarea>
+                            <textarea class="form-control" name="facebook_meta_title" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="facebook_meta_description" class="form-label">Facebook Meta Description</label>
-                            <textarea class="form-control" name="facebook_meta_description" rows="4"></textarea>
+                            <textarea class="form-control" name="facebook_meta_description" rows="3"></textarea>
                         </div>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="twitter_meta_title" class="form-label">Twitter Meta Title</label>
-                            <textarea class="form-control" name="twitter_meta_title" rows="4"></textarea>
+                            <textarea class="form-control" name="twitter_meta_title" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -190,7 +190,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <button type="submit" class="btn btn-primary" disabled>Publish</button>
+                <button type="submit" class="btn btn-primary">Publish</button>
             </div>
         </div>
     </form>

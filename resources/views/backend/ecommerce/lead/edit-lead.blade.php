@@ -125,7 +125,7 @@
                     <div class="col-sm-12">
                         <div class="mb-3">
                             <label for="comment" class="form-label">Comment</label>
-                            <textarea class="form-control" id="custom-textarea" name="comment" rows="3">{{ $lead->comment }}</textarea>
+                            <textarea class="form-control" id="custom-textarea" name="comment" rows="3">{!! $lead->comment !!}</textarea>
                         </div>
                     </div>
                 </div>

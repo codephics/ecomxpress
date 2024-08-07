@@ -74,6 +74,7 @@
                         <td>@if($item->status == 1) Published @else Draft @endif</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                              <a href="{{ route('item.detail', $item->slug) }}" class="btn btn-light" target="_blank">View</a>
                               <a href="{{ route('ecommerce.item.edit',$item->id) }}" class="btn btn-secondary">Edit</a>
 
                               <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#deleteItem{{ $item->id }}">Destroy</button>
