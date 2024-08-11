@@ -60,7 +60,7 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="slug" class="form-label">Slug</label>
-                            <input type="text" class="form-control" name="slug" value="{{ $page->slug }}" placeholder="Slug" disabled />
+                            <input type="text" class="form-control" name="slug" value="{{ $page->slug }}" placeholder="Slug" readonly />
                         </div>
                     </div>
                     <div class="col-sm-6">
