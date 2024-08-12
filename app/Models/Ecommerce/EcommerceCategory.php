@@ -44,7 +44,7 @@ class EcommerceCategory extends Model
 
     public function subcategories()
     {
-        return $this->hasMany(EcommerceSubcategory::class, 'category_name', 'category_name');
+        return $this->hasMany(EcommerceSubcategory::class, 'category_id', 'id');
     }
 
 }

@@ -106,11 +106,14 @@ class EcommerceCategoryController extends Controller
             return redirect(RouteServiceProvider::EcommerceCategories);
 
         } elseif ($request->routeIs('ecommerce.new-subcategory.store')) {
+
+            $category = EcommerceCategory::where('category_name', $request->input('category_name'))->firstOrFail();
             
-            $subcategory = EcommerceSubCategory::create([
+            $subcategory = EcommerceSubcategory::create([
                 'category_name' => $request->category_name,
                 'subcategory_name' => $request->subcategory_name,
                 'slug' => $request->slug,
+                'category_id' => $category->id,
                 'description' => $request->description,
                 'youtube_iframe' => $request->youtube_iframe,
                 'header_content' => $request->header_content,
@@ -166,10 +169,13 @@ class EcommerceCategoryController extends Controller
             return redirect(RouteServiceProvider::EcommerceSubCategories);
 
         } elseif ($request->routeIs('ecommerce.new-sub-subcategory.store')) {
+
+            $subcategory = EcommerceSubcategory::where('subcategory_name', $request->input('subcategory_name'))->firstOrFail();
             
-            $subSubcategory = EcommerceSubSubCategory::create([
+            $subSubcategory = EcommerceSubSubcategory::create([
                 'sub_subcategory_name' => $request->sub_subcategory_name,
                 'subcategory_name' => $request->subcategory_name,
+                'subcategory_id' => $subcategory->id,
                 'slug' => $request->slug,
                 'description' => $request->description,
                 'youtube_iframe' => $request->youtube_iframe,
@@ -382,7 +388,7 @@ class EcommerceCategoryController extends Controller
 
         } elseif ($request->routeIs('ecommerce.subcategory.update')) {
 
-            $subcategory = EcommerceSubCategory::find($id);
+            $subcategory = EcommerceSubcategory::find($id);
 
             if ($subcategory) {
                 $newIcon = $request->file('icon');

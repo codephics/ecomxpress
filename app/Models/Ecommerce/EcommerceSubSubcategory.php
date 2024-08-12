@@ -17,9 +17,9 @@ class EcommerceSubSubcategory extends Model
     protected $fillable = [
         'sub_subcategory_name',
         'subcategory_name',
+        'subcategory_id',
         'slug',
         'title',
-        'category_name',
         'description',
         'meta_title',
         'meta_description',
@@ -44,7 +44,7 @@ class EcommerceSubSubcategory extends Model
 
     public function templates()
     {
-        return $this->hasMany(Ecommerce::class, 'sub_subcategory_name', 'sub_subcategory_name');
+        return $this->hasMany(Ecommerce::class, 'sub_subcategory_id', 'id');
     }
 
 

@@ -19,6 +19,7 @@ class EcommerceSubcategory extends Model
         'slug',
         'title',
         'category_name',
+        'category_id',
         'description',
         'meta_title',
         'meta_description',
@@ -43,7 +44,7 @@ class EcommerceSubcategory extends Model
 
     public function subSubcategories()
     {
-        return $this->hasMany(EcommerceSubSubcategory::class, 'subcategory_name', 'subcategory_name');
+        return $this->hasMany(EcommerceSubSubcategory::class, 'subcategory_id', 'id');
     }
 
 }
