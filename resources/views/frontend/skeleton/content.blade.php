@@ -144,48 +144,48 @@
                 $colClass = 'col-md-6';
             } elseif ($count == 3) {
                 $colClass = 'col-md-4';
-            } elseif ($count >= 4) {
+            } elseif ($count == 4) {
                 $colClass = 'col-md-3';
             }
         @endphp
 
         @foreach($categories as $category)
-            <div class="{{ $colClass }}">
-                <div class="card ms-3 border-0">
-                    <a href="{{ url('shop/'.$category->slug) }}" class="card-link">
-                        <figure class="figure">
-                            <img src="{{ asset('ecommerce/category/image/thumb/'.$category->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $category->thumb_alt_text }}" />
-                            <figcaption class="figure-caption">{{ $category->category_name }}</figcaption>
-                        </figure>
-                    </a>
-                </div>
+        <div class="{{ $colClass }}">
+            <div class="card ms-3 border-0">
+                <a href="{{ url('shop/'.$category->slug) }}" class="card-link">
+                    <figure class="figure">
+                        <img src="{{ asset('ecommerce/category/image/thumb/'.$category->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $category->thumb_alt_text }}" />
+                        <figcaption class="figure-caption">{{ $category->category_name }}</figcaption>
+                    </figure>
+                </a>
             </div>
+        </div>
         @endforeach
 
         @foreach($subcategories as $subcategory)
-            <div class="{{ $colClass }}">
-                <div class="card ms-3 border-0">
-                    <a href="{{ url('shop',['category' => $category->slug, 'subcategory' => $subcategory->slug]) }}" class="card-link">
-                        <figure class="figure">
-                            <img src="{{ asset('ecommerce/category/subcategory/image/thumb/'.$subcategory->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $subcategory->thumb_alt_text }}" />
-                            <figcaption class="figure-caption">{{ $subcategory->subcategory_name }}</figcaption>
-                        </figure>
-                    </a>
-                </div>
+        <div class="{{ $colClass }}">
+            <div class="card ms-3 border-0">
+                <a href="{{ url('shop',['category' => $category->slug, 'subcategory' => $subcategory->slug]) }}" class="card-link">
+                    <figure class="figure">
+                        <img src="{{ asset('ecommerce/category/subcategory/image/thumb/'.$subcategory->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $subcategory->thumb_alt_text }}" />
+                        <figcaption class="figure-caption">{{ $subcategory->subcategory_name }}</figcaption>
+                    </figure>
+                </a>
             </div>
+        </div>
         @endforeach
 
         @foreach($sub_subcategories as $sub_subcategory)
-            <div class="{{ $colClass }}">
-                <div class="card ms-3 border-0">
-                    <a href="{{ url('shop/',['category' => $category->slug, 'subcategory' => $subcategory->slug, 'sub-subcategory' => $sub_subcategory->slug]) }}" class="card-link">
-                        <figure class="figure">
-                            <img src="{{ asset('ecommerce/category/subcategory/sub-subcategory/image/thumb/'.$sub_subcategory->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $sub_subcategory->thumb_alt_text }}" />
-                            <figcaption class="figure-caption">{{ $sub_subcategory->sub_subcategory_name }}</figcaption>
-                        </figure>
-                    </a>
-                </div>
+        <div class="{{ $colClass }}">
+            <div class="card ms-3 border-0">
+                <a href="{{ url('shop',['category' => $category->slug, 'subcategory' => $subcategory->slug, 'sub-subcategory' => $sub_subcategory->slug]) }}" class="card-link">
+                    <figure class="figure">
+                        <img src="{{ asset('ecommerce/category/subcategory/sub-subcategory/image/thumb/'.$sub_subcategory->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $sub_subcategory->thumb_alt_text }}" />
+                        <figcaption class="figure-caption">{{ $sub_subcategory->sub_subcategory_name }}</figcaption>
+                    </figure>
+                </a>
             </div>
+        </div>
         @endforeach
     </div>
 </section>
