@@ -74,7 +74,9 @@
                 <div class="carousel-inner">
                     @foreach($sliders as $slider)
                     <div class="carousel-item active">
-                        <img src="{{ asset('global/slider/image/' . $slider->image) }}" class="d-block w-100" alt="{{ $slider->image_alt_text }}" />
+                        <a href="{{ $slider->button_link_1 }}">
+                            <img src="{{ asset('global/slider/image/' . $slider->image) }}" class="d-block w-100" alt="{{ $slider->image_alt_text }}" />
+                        </a>
                         <div class="carousel-caption d-none d-md-block">
                             <h5>{{ $slider->heading }}</h5>
                             <p>{{ $slider->subheading }}</p>
