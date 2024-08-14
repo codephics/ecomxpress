@@ -21,7 +21,7 @@
 			<div class="row">
 				<div class="col-12">
 					<article>
-						{!! $setting->long_description !!}
+						{!! $page->long_description !!}
 					</article>
 				</div>
 			</div>
