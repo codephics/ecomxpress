@@ -2,52 +2,42 @@
 
 <!-- Featured Header -->
 <section>
-    <div class="row featurette">
-        <div class="col-md-8 mb-3">
-            <h1 class="featurette-heading fw-normal lh-1">{{ \Illuminate\Support\Str::limit($page->title, 100, '...') }}</h1>
-            <p class="lead">{!! $page->short_description !!}</p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <a class="btn btn-primary btn-lg px-4 me-md-2" href="{{ route('item.shop') }}">Explore Items</a>
-                <a class="btn btn-outline-secondary btn-lg px-4" href="{{ route('blog.more') }}">Read Blogs</a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+    <div class="row flex-lg-row-reverse align-items-center">
+        <div class="col-10 col-sm-8 col-lg-6">
+            <div id="dynamicCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    @foreach($sliders as $slider)
-                    <div class="carousel-item active">
-                        <a href="{{ $slider->button_link_1 }}">
-                            <img src="{{ asset('global/slider/image/' . $slider->image) }}" class="d-block w-100" alt="{{ $slider->image_alt_text }}" />
-                        </a>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>{{ $slider->heading }}</h5>
-                            <p>{{ $slider->subheading }}</p>
-                            <p>{!! $slider->detail !!}</p>
-                            <div>
-                                @if($slider->button_text_1)
-                                <a class="btn btn-primary btn-sm px-4 me-md-2" href="{{ $slider->button_link_1 }}">{{ $slider->button_text_1 }}</a>
-                                @endif
-                                @if($slider->button_text_2)
-                                <a class="btn btn-outline-secondary btn-sm px-4" href="{{ $slider->button_link_2 }}">{{ $slider->button_text_2 }}</a>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
+                    @foreach($sliders as $index => $slider)
+                        <button type="button" data-bs-target="#dynamicCarousel" data-bs-slide-to="{{ $index }}" class="{{ $loop->first ? 'active' : '' }}" aria-current="{{ $loop->first ? 'true' : '' }}" aria-label="Slide {{ $index + 1 }}"></button>
                     @endforeach
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <div class="carousel-inner">
+                    @foreach($sliders as $index => $slider)
+                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                            <img src="{{ asset('global/slider/image/' . $slider->image) }}" class="d-block w-100" alt="{{ $slider->image_alt_text }}">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>{{ $slider->heading }}</h5>
+                                <p>{{ $slider->subheading }}</p>
+                                <p>{!! $slider->detail !!}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#dynamicCarousel" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#dynamicCarousel" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold lh-1 mb-3">{{ \Illuminate\Support\Str::limit($page->title, 100, '...') }}</h1>
+            <p class="lead">{!! $page->short_description !!}</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a href="{{ route('item.shop') }}" class="btn btn-primary btn-lg px-4 me-md-2">Explore Items</a>
+                <a href="{{ route('blog.more') }}" class="btn btn-outline-secondary btn-lg px-4">Read Blogs</a>
             </div>
         </div>
     </div>

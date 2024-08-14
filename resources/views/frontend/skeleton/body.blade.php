@@ -33,7 +33,7 @@
 		@include('frontend.skeleton.navigation', ['page' => $page])
 		<!-- End Navigation -->
 
-		<main class="container p-3 py-5">
+		<main class="container p-1 py-3">
 			<!-- Alert -->
 			<section>
 				<div class="row">
