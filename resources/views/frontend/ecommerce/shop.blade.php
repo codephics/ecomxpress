@@ -74,7 +74,7 @@
                 <div class="right-side">
                     <!-- Additional sections under right side -->
                     <div class="mb-3">
-                        <img src="{{ asset('ecommerce/category/image/cover/' . $page->cover) }}" class="card-img-top" alt="{{ $page->cover_alt_text }}">
+                        <img src="{{ asset('global/page/image/cover/' . $page->cover) }}" class="card-img-top" alt="{{ $page->cover_alt_text }}">
                     </div>
                     <div class="mb-3">
 	                    <nav aria-label="breadcrumb">

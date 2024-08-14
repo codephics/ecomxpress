@@ -132,10 +132,20 @@
 		                    Description
 		                </button>
 		            </li>
+		            @if($page->change_log)
+		            <li class="nav-item" role="presentation">
+		                <button class="nav-link mb-3" id="pills-changelog-tab" data-bs-toggle="pill" data-bs-target="#pills-changelog" type="button" role="tab" aria-controls="pills-changelog" aria-selected="true">
+		                    Change Log
+		                </button>
+		            </li>
+		            @endif
 		        </ul>
 		        <div class="tab-content" id="pills-tabContent">
 		            <div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
 		                {!! $page->long_description !!}
+		            </div>
+		            <div class="tab-pane fade show" id="pills-changelog" role="tabpanel" aria-labelledby="pills-changelog-tab">
+		                {!! $page->change_log !!}
 		            </div>
 		        </div>
 		    </div>
