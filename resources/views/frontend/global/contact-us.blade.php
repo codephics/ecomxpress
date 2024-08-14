@@ -21,10 +21,10 @@
         <!-- Content -->
         <section>
 			<div class="my-5 text-center">
-				<img class="d-block mx-auto mb-2" src="{{ asset('global/boxed-logo.png') }}" alt="" width="72" height="57" />
-				<h1>Contact Us</h1>
+				<img class="d-block mx-auto mb-2" src="{{ asset('global/page/image/thumb/' . $page->thumb) }}" alt="" width="72" height="57" />
+				<h1>{{ $page->title }}</h1>
 				<div class="col-lg-6 mx-auto">
-					<p>if you have any questions or need more information about our services, please don't hesitate to contact us. Our team is always ready to assist you and provide you with the support you need. You can reach out to us by phone, email, or through our contact form. We look forward to hearing from you!</p>
+					<p>{!! $page->short_description !!}</p>
 				</div>
 			</div>
 
