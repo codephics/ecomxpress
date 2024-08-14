@@ -99,6 +99,8 @@
 					                $colClass = 'col-md-6';
 					            } elseif ($count == 3) {
 					                $colClass = 'col-md-4';
+					            } elseif ($count == 4) {
+					                $colClass = 'col-md-3';
 					            }
 					        @endphp
 					        @foreach($items as $item)
@@ -321,80 +323,91 @@
 @section('custom-scripts')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector('form'); // Change this to the correct form selector
-    const shippingMethods = document.querySelectorAll('.shipping-method');
-    const errorDiv = document.getElementById('shipping-method-error');
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector('form'); // Change this to the correct form selector
+        const shippingMethods = document.querySelectorAll('.shipping-method');
+        const errorDiv = document.getElementById('shipping-method-error');
 
-    form.addEventListener('submit', function(event) {
-        let oneChecked = false;
-        shippingMethods.forEach(function(method) {
-            if (method.checked) {
-                oneChecked = true;
+        form.addEventListener('submit', function(event) {
+            let oneChecked = false;
+            shippingMethods.forEach(function(method) {
+                if (method.checked) {
+                    oneChecked = true;
+                }
+            });
+
+            if (!oneChecked) {
+                event.preventDefault();
+                errorDiv.style.display = 'block';
+            } else {
+                errorDiv.style.display = 'none';
             }
         });
-
-        if (!oneChecked) {
-            event.preventDefault();
-            errorDiv.style.display = 'block';
-        } else {
-            errorDiv.style.display = 'none';
-        }
     });
-});
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('[id^="confirmNow-"]').forEach(function (modalElement) {
-            modalElement.addEventListener('show.bs.modal', function (event) {
-                let modalId = modalElement.id.split('-')[1];
-                let quantityInput = document.querySelector(`#quantity-${modalId}`);
-                let insideDhakaCheckbox = document.querySelector(`#insideDhaka-${modalId}`);
-                let outsideDhakaCheckbox = document.querySelector(`#outsideDhaka-${modalId}`);
-                let subTotalElement = document.querySelector(`#subTotal-${modalId}`);
-                let deliveryChargeElement = document.querySelector(`#deliveryCharge-${modalId}`);
-                let totalElement = document.querySelector(`#total-${modalId}`);
-                let hiddenSubTotalInput = document.querySelector(`#hiddenSubTotal-${modalId}`);
-                let hiddenDeliveryChargeInput = document.querySelector(`#hiddenDeliveryCharge-${modalId}`);
-                let hiddenTotalInput = document.querySelector(`#hiddenTotal-${modalId}`);
-                let salePrice = parseFloat(event.relatedTarget.getAttribute('data-sale-price'));
+        document.querySelectorAll('button[data-bs-toggle="modal"]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var targetModalId = this.getAttribute('data-bs-target');
+                var modal = document.querySelector(targetModalId);
 
-                function calculateTotal() {
-                    let quantity = parseInt(quantityInput.value);
-                    let deliveryCharge = 0;
-                    if (insideDhakaCheckbox.checked) {
-                        deliveryCharge = parseInt(insideDhakaCheckbox.value);
-                    }
-                    if (outsideDhakaCheckbox.checked) {
-                        deliveryCharge = parseInt(outsideDhakaCheckbox.value);
-                    }
-                    let subTotal = salePrice * quantity;
-                    let total = subTotal + deliveryCharge;
+                var itemPrice = this.getAttribute('data-sale-price');
+                var itemName = this.getAttribute('data-item-name');
+                var itemImage = this.getAttribute('data-item-image');
 
-                    // Update the displayed values
-                    subTotalElement.textContent = `৳ ${subTotal.toFixed(2)}`;
-                    deliveryChargeElement.textContent = `৳ ${deliveryCharge.toFixed(2)}`;
-                    totalElement.textContent = `৳ ${total.toFixed(2)}`;
+                var modalName = modal.querySelector('[id^="modal-name-"]');
+                var modalImage = modal.querySelector('[id^="modal-image-"]');
+                var modalPrice = modal.querySelector('[id^="modal-price-"]');
+                var modalSubtotal = modal.querySelector('[id^="modal-subtotal-"]');
+                var modalDeliveryCharge = modal.querySelector('[id^="modal-delivery-charge-"]');
+                var modalTotal = modal.querySelector('[id^="modal-total-"]');
 
-                    // Update the hidden input values
-                    hiddenSubTotalInput.value = subTotal.toFixed(2);
-                    hiddenDeliveryChargeInput.value = deliveryCharge.toFixed(2);
-                    hiddenTotalInput.value = total.toFixed(2);
-                }
+                modalName.textContent = itemName;
+                modalImage.setAttribute('src', itemImage);
+                modalPrice.textContent = itemPrice + '৳';
+                modalSubtotal.textContent = itemPrice + '৳';
+                modalDeliveryCharge.textContent = '0৳';
+                modalTotal.textContent = itemPrice + '৳';
 
-                quantityInput.addEventListener('input', calculateTotal);
-                insideDhakaCheckbox.addEventListener('change', calculateTotal);
-                outsideDhakaCheckbox.addEventListener('change', calculateTotal);
+                var quantityInput = modal.querySelector('input[name="quantity"]');
+                var deliveryChargeInputs = modal.querySelectorAll('.shipping-method');
 
-                // Check at least one checkbox is selected before form submission
-                document.querySelector(`#orderForm-${modalId}`).addEventListener('submit', function (event) {
-                    if (!insideDhakaCheckbox.checked && !outsideDhakaCheckbox.checked) {
-                        event.preventDefault(); // Prevent form submission
-                        alert('Please select a shipping method.'); // Show an alert or handle validation message
-                    }
+                quantityInput.addEventListener('input', updateTotals);
+                deliveryChargeInputs.forEach(function (input) {
+                    input.addEventListener('change', updateTotals);
                 });
 
-                calculateTotal();
+                function updateTotals() {
+                    var quantity = quantityInput.value;
+                    var itemSubtotal = quantity * itemPrice;
+                    var deliveryCharge = 0;
+
+                    deliveryChargeInputs.forEach(function (input) {
+                        if (input.checked) {
+                            deliveryCharge = parseInt(input.value, 10);
+                        }
+                    });
+
+                    var total = itemSubtotal + deliveryCharge;
+
+                    modalSubtotal.textContent = itemSubtotal + '৳';
+                    modalDeliveryCharge.textContent = deliveryCharge + '৳';
+                    modalTotal.textContent = total + '৳';
+
+                    modal.querySelector('[id^="hiddenItemName-"]').value = itemName;
+                    modal.querySelector('[id^="hiddenItemPrice-"]').value = itemPrice;
+                    modal.querySelector('[id^="hiddenSubTotal-"]').value = itemSubtotal;
+                    modal.querySelector('[id^="hiddenDeliveryCharge-"]').value = deliveryCharge;
+                    modal.querySelector('[id^="hiddenTotal-"]').value = total;
+                }
+
+                modal.addEventListener('hidden.bs.modal', function () {
+                    quantityInput.removeEventListener('input', updateTotals);
+                    deliveryChargeInputs.forEach(function (input) {
+                        input.removeEventListener('change', updateTotals);
+                    });
+                });
             });
         });
     });
