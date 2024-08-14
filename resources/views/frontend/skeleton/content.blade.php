@@ -1,57 +1,4 @@
-@extends('frontend.skeleton.body') @section('custom-head')
-<style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-
-    .b-example-divider {
-      height: 3rem;
-      background-color: rgba(0, 0, 0, .1);
-      border: solid rgba(0, 0, 0, .15);
-      border-width: 1px 0;
-      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-    }
-
-    .b-example-vr {
-      flex-shrink: 0;
-      width: 1.5rem;
-      height: 100vh;
-    }
-
-    .bi {
-      vertical-align: -.125em;
-      fill: currentColor;
-    }
-
-    .nav-scroller {
-      position: relative;
-      z-index: 2;
-      height: 2.75rem;
-      overflow-y: hidden;
-    }
-
-    .nav-scroller .nav {
-      display: flex;
-      flex-wrap: nowrap;
-      padding-bottom: 1rem;
-      margin-top: -1px;
-      overflow-x: auto;
-      text-align: center;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-    }
-</style>
-@endsection @section('content')
+@extends('frontend.skeleton.body') @section('content')
 
 <!-- Featured Header -->
 <section>
@@ -105,91 +52,6 @@
         </div>
     </div>
 </section>
-
-<!-- HR -->
-<hr class="featurette-divider" />
-
-<div class="mt-3"></div>
-<!-- Categories -->
-<section>
-    <div class="row border-top-0 border-start-0 border-bottom-0 border-end-0">
-        <div class="col-lg-10">
-            <h2 class="display-6">Categories</h2>
-
-            <p>
-                Embark on a journey through our blog, where valuable insights await your exploration. Uncover the foundational aspects of SEO, delving into a comprehensive beginner's guide that unveils essential strategies and tips. Elevate
-                your online presence by mastering the art of optimizing your website for search engines with our expertly curated content.
-            </p>
-        </div>
-        <div class="col-lg-2 align-self-center">
-            <div class="row">
-                <div class="col-12 col-sm-12">
-                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('item.shop') }}">All Categories</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="mt-3"></div>
-
-    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-        @php
-            // Combine all categories into a single collection
-            $combinedItems = $categories->concat($subcategories)->concat($sub_subcategories);
-            $count = $combinedItems->count();
-
-            // Determine column class based on the count
-            $colClass = 'col-md-12'; // Default for one item
-            if ($count == 2) {
-                $colClass = 'col-md-6';
-            } elseif ($count == 3) {
-                $colClass = 'col-md-4';
-            } elseif ($count == 4) {
-                $colClass = 'col-md-3';
-            }
-        @endphp
-
-        @foreach($categories as $category)
-        <div class="{{ $colClass }}">
-            <div class="card ms-3 border-0">
-                <a href="{{ url('shop/'.$category->slug) }}" class="card-link">
-                    <figure class="figure">
-                        <img src="{{ asset('ecommerce/category/image/thumb/'.$category->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $category->thumb_alt_text }}" />
-                        <figcaption class="figure-caption">{{ $category->category_name }}</figcaption>
-                    </figure>
-                </a>
-            </div>
-        </div>
-        @endforeach
-
-        @foreach($subcategories as $subcategory)
-        <div class="{{ $colClass }}">
-            <div class="card ms-3 border-0">
-                <a href="{{ url('shop',['category' => $category->slug, 'subcategory' => $subcategory->slug]) }}" class="card-link">
-                    <figure class="figure">
-                        <img src="{{ asset('ecommerce/category/subcategory/image/thumb/'.$subcategory->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $subcategory->thumb_alt_text }}" />
-                        <figcaption class="figure-caption">{{ $subcategory->subcategory_name }}</figcaption>
-                    </figure>
-                </a>
-            </div>
-        </div>
-        @endforeach
-
-        @foreach($sub_subcategories as $sub_subcategory)
-        <div class="{{ $colClass }}">
-            <div class="card ms-3 border-0">
-                <a href="{{ url('shop',['category' => $category->slug, 'subcategory' => $subcategory->slug, 'sub-subcategory' => $sub_subcategory->slug]) }}" class="card-link">
-                    <figure class="figure">
-                        <img src="{{ asset('ecommerce/category/subcategory/sub-subcategory/image/thumb/'.$sub_subcategory->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $sub_subcategory->thumb_alt_text }}" />
-                        <figcaption class="figure-caption">{{ $sub_subcategory->sub_subcategory_name }}</figcaption>
-                    </figure>
-                </a>
-            </div>
-        </div>
-        @endforeach
-    </div>
-</section>
-
 <!-- HR -->
 <div class="mt-3 border-top border-start-0 border-bottom-0 border-end-0"></div>
 
@@ -199,10 +61,8 @@
     <div class="row border-top-0 border-start-0 border-bottom-0 border-end-0">
         <div class="col-lg-10">
             <h3 class="display-6">Browse Featured Items</h3>
-
             <p>
-                Embark on a journey through our blog, where valuable insights await your exploration. Uncover the foundational aspects of SEO, delving into a comprehensive beginner's guide that unveils essential strategies and tips. Elevate
-                your online presence by mastering the art of optimizing your website for search engines with our expertly curated content.
+                Embark on a journey through our blog, where valuable insights await your exploration. Uncover the foundational aspects of SEO, delving into a comprehensive beginner's guide that unveils essential strategies and tips. Elevate your online presence by mastering the art of optimizing your website for search engines with our expertly curated content.
             </p>
         </div>
         <div class="col-lg-2 align-self-center">
@@ -433,6 +293,91 @@
 </section>
 <!-- End Featured Item -->
 
+
+<!-- HR -->
+<hr class="featurette-divider" />
+
+<div class="mt-3"></div>
+<!-- Categories -->
+<section>
+    <div class="row border-top-0 border-start-0 border-bottom-0 border-end-0">
+        <div class="col-lg-10">
+            <h2 class="display-6">Categories</h2>
+
+            <p>
+                Embark on a journey through our blog, where valuable insights await your exploration. Uncover the foundational aspects of SEO, delving into a comprehensive beginner's guide that unveils essential strategies and tips. Elevate
+                your online presence by mastering the art of optimizing your website for search engines with our expertly curated content.
+            </p>
+        </div>
+        <div class="col-lg-2 align-self-center">
+            <div class="row">
+                <div class="col-12 col-sm-12">
+                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('item.shop') }}">All Categories</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3"></div>
+
+    <div class="row">
+        @php
+            // Combine all categories into a single collection
+            $combinedItems = $categories->concat($subcategories)->concat($sub_subcategories);
+            $count = $combinedItems->count();
+
+            // Determine column class based on the count
+            $colClass = 'col-md-12'; // Default for one item
+            if ($count == 2) {
+                $colClass = 'col-md-6';
+            } elseif ($count == 3) {
+                $colClass = 'col-md-4';
+            } elseif ($count == 4) {
+                $colClass = 'col-md-3';
+            }
+        @endphp
+
+        @foreach($categories as $category)
+        <div class="{{ $colClass }}">
+            <div class="card ms-3 border-0">
+                <a href="{{ url('shop/'.$category->slug) }}" class="card-link">
+                    <figure class="figure">
+                        <img src="{{ asset('ecommerce/category/image/thumb/'.$category->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $category->thumb_alt_text }}" />
+                        <figcaption class="figure-caption">{{ $category->category_name }}</figcaption>
+                    </figure>
+                </a>
+            </div>
+        </div>
+        @endforeach
+
+        @foreach($subcategories as $subcategory)
+        <div class="{{ $colClass }}">
+            <div class="card ms-3 border-0">
+                <a href="{{ url('shop',['category' => $category->slug, 'subcategory' => $subcategory->slug]) }}" class="card-link">
+                    <figure class="figure">
+                        <img src="{{ asset('ecommerce/category/subcategory/image/thumb/'.$subcategory->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $subcategory->thumb_alt_text }}" />
+                        <figcaption class="figure-caption">{{ $subcategory->subcategory_name }}</figcaption>
+                    </figure>
+                </a>
+            </div>
+        </div>
+        @endforeach
+
+        @foreach($sub_subcategories as $sub_subcategory)
+        <div class="{{ $colClass }}">
+            <div class="card ms-3 border-0">
+                <a href="{{ url('shop',['category' => $category->slug, 'subcategory' => $subcategory->slug, 'sub-subcategory' => $sub_subcategory->slug]) }}" class="card-link">
+                    <figure class="figure">
+                        <img src="{{ asset('ecommerce/category/subcategory/sub-subcategory/image/thumb/'.$sub_subcategory->thumb) }}" class="figure-img img-fluid rounded" alt="{{ $sub_subcategory->thumb_alt_text }}" />
+                        <figcaption class="figure-caption">{{ $sub_subcategory->sub_subcategory_name }}</figcaption>
+                    </figure>
+                </a>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</section>
+<!-- End Categories -->
 <!-- HR -->
 <div class="mt-3 border-top border-start-0 border-bottom-0 border-end-0"></div>
 
