@@ -53,7 +53,7 @@ Route::get('sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 |--------------------------------------------------------------------------
 */
 
-Route::get('blog/more-blogs', [PageController::class, 'blogs'])->name('blog.more');
+Route::get('blog', [PageController::class, 'blog'])->name('blog.more');
 Route::get('blog/detail/{slug}', [PageController::class, 'detail'])->name('blog.detail');
 
 /*
