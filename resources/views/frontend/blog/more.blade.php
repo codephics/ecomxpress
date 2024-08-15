@@ -7,7 +7,7 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="{{ route('front.home') }}">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">More Blog</li>
+							<li class="breadcrumb-item active" aria-current="page">More Blogs</li>
 						</ol>
 					</nav>
 				</div>
