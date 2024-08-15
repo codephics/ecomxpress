@@ -90,9 +90,9 @@ return new class extends Migration
                 'slug' => 'contact-us',
             ],
             [
-                'name' => 'More Blogs',
-                'title' => 'More Blogs',
-                'slug' => 'more-blogs',
+                'name' => 'Blog',
+                'title' => 'Blog',
+                'slug' => 'blog',
             ],
         ]);
     }

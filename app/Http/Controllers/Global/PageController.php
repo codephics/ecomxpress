@@ -77,9 +77,9 @@ class PageController extends Controller
         ]);
     }
 
-    public function blogs()
+    public function blog()
     {
-        $page = Page::where('slug', 'more-blogs')->firstOrFail();
+        $page = Page::where('slug', 'blog')->firstOrFail();
         $setting = Setting::first();
         $blogs = Blog::all();
 
