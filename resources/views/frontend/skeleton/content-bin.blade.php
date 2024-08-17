@@ -433,13 +433,13 @@
             <article>
                 <figure>
                     <div class="card shadow mb-5 rounded-3 no-border-card">
-                        <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                        <a href="{{ route('blog',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                             <img src="{{ asset('blog/image/featured/' . $blog->featured_image) }}" class="card-img-top" alt="..." />
                         </a>
                         <figcaption>
                             <div class="card-body">
                                 <div class="card-title lead">
-                                    <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                                    <a href="{{ route('blog',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                                         {{ \Illuminate\Support\Str::limit($blog->title, 160, '...') }}
                                     </a>
                                     <span class="blog-post-meta">{{ $blog->created_at->format('M d, Y') }}</span>
@@ -448,7 +448,7 @@
                             </div>
                             <!-- <div class="card-body">
                                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
-                                    <a href="{{ route('blog.detail',$blog->slug) }}" target="_self" type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Read Blog">Read</a>
+                                    <a href="{{ route('blog',$blog->slug) }}" target="_self" type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Read Blog">Read</a>
                                 </div>
                             </div> -->
                         </figcaption>

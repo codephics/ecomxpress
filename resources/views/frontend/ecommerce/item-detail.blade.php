@@ -182,14 +182,14 @@
 	            <article>
 	                <figure>
 	                    <div class="card shadow mb-5 rounded-3 no-border-card">
-	                        <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+	                        <a href="{{ route('blog',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
 	                            <img src="{{ asset('blog/image/featured/' . $blog->featured_image) }}" class="card-img-top" alt="...">
 	                        </a>
 	                        <figcaption>
 	                            <div class="card-body">
 	                                <ul class="d-flex list-unstyled mt-auto">
 	                                  <li class="me-auto">
-	                                    <a href="{{ route('blog.detail',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">{{ \Illuminate\Support\Str::limit($blog->title, 60, '...') }}</a>
+	                                    <a href="{{ route('blog',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">{{ \Illuminate\Support\Str::limit($blog->title, 60, '...') }}</a>
 	                                    <small>{{ $blog->created_at->format('M d, Y') }}</small>
 	                                  </li>
 	                                  <li class="d-flex align-items-center">
