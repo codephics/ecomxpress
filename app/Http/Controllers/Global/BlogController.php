@@ -79,13 +79,13 @@ class BlogController extends Controller
 
         if ($request->hasFile('featured_image')) {
             $featuredImage = $request->file('featured_image')->getClientOriginalName();
-            $request->file('featured_image')->move(public_path('global/blog/image/featured'), $featuredImage);
+            $request->file('featured_image')->move(public_path('global/weblog/image/featured'), $featuredImage);
             $blog->featured_image = $featuredImage;
         }
 
         if ($request->hasFile('og_image')) {
             $oGImage = $request->file('og_image')->getClientOriginalName();
-            $request->file('og_image')->move(public_path('global/blog/image/og'), $oGImage);
+            $request->file('og_image')->move(public_path('global/weblog/image/og'), $oGImage);
             $blog->og_image = $oGImage;
         }
 
@@ -135,7 +135,7 @@ class BlogController extends Controller
             if ($featuredImage) {
 
                 $featuredImageName = $request->featured_image->getClientOriginalName();
-                $request->featured_image->move(public_path('global/blog/image/featured'), $featuredImageName);
+                $request->featured_image->move(public_path('global/weblog/image/featured'), $featuredImageName);
 
                 $blog->featured_image = $featuredImageName;
             }
@@ -145,7 +145,7 @@ class BlogController extends Controller
             if ($og) {
 
                 $ogImageName = $request->og_image->getClientOriginalName();
-                $request->og_image->move(public_path('global/blog/image/og'), $ogImageName);
+                $request->og_image->move(public_path('global/weblog/image/og'), $ogImageName);
 
                 $blog->og_image = $ogImageName;
             }

@@ -51,37 +51,37 @@ class SettingController extends Controller
 
         if ($request->hasFile('favicon')) {
             $faviconName = $request->file('favicon')->getClientOriginalName();
-            $request->file('favicon')->move(public_path('global/blog/image/setting'), $faviconName);
+            $request->file('favicon')->move(public_path('global/weblog/image/setting'), $faviconName);
             $setting->favicon = $faviconName;
         }
 
         if ($request->hasFile('favicon_apple')) {
             $faviconAppleName = $request->file('favicon_apple')->getClientOriginalName();
-            $request->file('favicon_apple')->move(public_path('global/blog/image/setting'), $faviconAppleName);
+            $request->file('favicon_apple')->move(public_path('global/weblog/image/setting'), $faviconAppleName);
             $setting->favicon_apple = $faviconAppleName;
         }
 
         if ($request->hasFile('favicon_32')) {
             $favicon32Name = $request->file('favicon_32')->getClientOriginalName();
-            $request->file('favicon_32')->move(public_path('global/blog/image/setting'), $favicon32Name);
+            $request->file('favicon_32')->move(public_path('global/weblog/image/setting'), $favicon32Name);
             $setting->favicon_32 = $favicon32Name;
         }
 
         if ($request->hasFile('favicon_16')) {
             $favicon16Name = $request->file('favicon_16')->getClientOriginalName();
-            $request->file('favicon_16')->move(public_path('global/blog/image/setting'), $favicon16Name);
+            $request->file('favicon_16')->move(public_path('global/weblog/image/setting'), $favicon16Name);
             $setting->favicon_16 = $favicon16Name;
         }
 
         if ($request->hasFile('logo')) {
             $logoName = $request->file('logo')->getClientOriginalName();
-            $request->file('logo')->move(public_path('global/blog/image/setting'), $logoName);
+            $request->file('logo')->move(public_path('global/weblog/image/setting'), $logoName);
             $setting->logo = $logoName;
         }
 
         if ($request->hasFile('og_image')) {
             $oGImage = $request->file('og_image')->getClientOriginalName();
-            $request->file('og_image')->move(public_path('global/blog/image/setting'), $oGImage);
+            $request->file('og_image')->move(public_path('global/weblog/image/setting'), $oGImage);
             $setting->og_image = $oGImage;
         }
 
@@ -111,7 +111,7 @@ class SettingController extends Controller
             if ($favicon) {
 
                 $faviconName = $request->favicon->getClientOriginalName();
-                $request->favicon->move(public_path('global/blog/image/setting'), $faviconName);
+                $request->favicon->move(public_path('global/weblog/image/setting'), $faviconName);
 
                 $setting->favicon = $faviconName;
             }
@@ -121,7 +121,7 @@ class SettingController extends Controller
             if ($favicon_apple) {
 
                 $faviconAppleName = $request->favicon_apple->getClientOriginalName();
-                $request->favicon_apple->move(public_path('global/blog/image/setting'), $faviconAppleName);
+                $request->favicon_apple->move(public_path('global/weblog/image/setting'), $faviconAppleName);
 
                 $setting->favicon_apple = $faviconAppleName;
             }
@@ -131,7 +131,7 @@ class SettingController extends Controller
             if ($favicon_32) {
 
                 $favicon32Name = $request->favicon_32->getClientOriginalName();
-                $request->favicon_32->move(public_path('global/blog/image/setting'), $favicon32Name);
+                $request->favicon_32->move(public_path('global/weblog/image/setting'), $favicon32Name);
 
                 $setting->favicon_32 = $favicon32Name;
             }
@@ -141,7 +141,7 @@ class SettingController extends Controller
             if ($favicon_16) {
 
                 $favicon16Name = $request->favicon_16->getClientOriginalName();
-                $request->favicon_16->move(public_path('global/blog/image/setting'), $favicon16Name);
+                $request->favicon_16->move(public_path('global/weblog/image/setting'), $favicon16Name);
 
                 $setting->favicon_16 = $favicon16Name;
             }
@@ -151,7 +151,7 @@ class SettingController extends Controller
             if ($logo) {
 
                 $logoName = $request->logo->getClientOriginalName();
-                $request->logo->move(public_path('global/blog/image/setting'), $logoName);
+                $request->logo->move(public_path('global/weblog/image/setting'), $logoName);
 
                 $setting->logo = $logoName;
             }
@@ -161,7 +161,7 @@ class SettingController extends Controller
             if ($og) {
 
                 $ogImageName = $request->og_image->getClientOriginalName();
-                $request->og_image->move(public_path('global/blog/image/setting'), $ogImageName);
+                $request->og_image->move(public_path('global/weblog/image/setting'), $ogImageName);
 
                 $setting->og_image = $ogImageName;
             }
