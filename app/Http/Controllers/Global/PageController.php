@@ -1,6 +1,5 @@
 <?php
 
-namespace App\Http\Controllers\Blog;
 namespace App\Http\Controllers\Global;
 
 use App\Http\Controllers\Controller;
@@ -10,10 +9,10 @@ use App\Models\Ecommerce\EcommerceCategory;
 use App\Models\Ecommerce\EcommerceSubcategory;
 use App\Models\Ecommerce\EcommerceSubSubcategory;
 
-use App\Models\Blog\Blog;
-use App\Models\Blog\BlogCategory;
-use App\Models\Blog\BlogSubcategory;
-use App\Models\Blog\BlogSubSubcategory;
+use App\Models\Global\Blog;
+use App\Models\Global\BlogCategory;
+use App\Models\Global\BlogSubcategory;
+use App\Models\Global\BlogSubSubcategory;
 
 use App\Models\Global\Slider;
 use App\Models\Global\Page;

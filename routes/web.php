@@ -13,9 +13,9 @@ use App\Http\Controllers\Ecommerce\EcommerceCategoryController;
 use App\Http\Controllers\Ecommerce\EcommerceAudioController;
 
 // Blog
-use App\Http\Controllers\Blog\BlogController;
-use App\Http\Controllers\Blog\BlogCategoryController;
-use App\Http\Controllers\Blog\BlogTagController;
+use App\Http\Controllers\Global\BlogController;
+use App\Http\Controllers\Global\BlogCategoryController;
+use App\Http\Controllers\Global\BlogTagController;
 
 use App\Http\Controllers\Global\SliderController;
 use App\Http\Controllers\Global\PageController;
@@ -171,7 +171,7 @@ Route::middleware('auth')->group(function () {
 */
 
 // Blog -> Manage Blog
-Route::get('blogs/manage/blog', [BlogController::class, 'show'])->middleware(['auth', 'verified'])->name('blog.manage');
+Route::get('blogs/manage', [BlogController::class, 'show'])->middleware(['auth', 'verified'])->name('blog.manage');
 Route::get('blogs/new', [BlogController::class, 'create'])->middleware(['auth', 'verified'])->name('blog.new');
 Route::post('blogs/new/store', [BlogController::class, 'store'])->middleware(['auth', 'verified'])->name('blog.store');
 Route::get('blogs/edit/{id}', [BlogController::class, 'edit'])->middleware(['auth', 'verified'])->name('blog.edit');

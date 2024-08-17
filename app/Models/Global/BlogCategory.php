@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\Blog;
+namespace App\Models\Global;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BlogSubSubcategory extends Model
+class BlogCategory extends Model
 {
     use HasFactory;
 
@@ -15,11 +15,9 @@ class BlogSubSubcategory extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'sub_subcategory_name',
-        'subcategory_name',
+        'category_name',
         'slug',
         'title',
-        'category_name',
         'description',
         'meta_title',
         'meta_description',
@@ -42,10 +40,9 @@ class BlogSubSubcategory extends Model
         'comment',
     ];
 
-    public function templates()
+    public function subcategories()
     {
-        return $this->hasMany(TemplateBlog::class, 'sub_subcategory_name', 'sub_subcategory_name');
+        return $this->hasMany(TemplateBlogSubcategory::class, 'category_name', 'category_name');
     }
-
 
 }

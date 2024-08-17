@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\Blog;
+namespace App\Models\Global;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Blog extends Model
+class BlogTag extends Model
 {
     use HasFactory;
 
@@ -15,15 +15,9 @@ class Blog extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'title',
+        'name',
         'slug',
-        'tags',
-        'author',
-        'category_name',
-        'subcategory_name',
-        'sub_subcategory_name',
-        'short_description',
-        'long_description',
+        'description',
         'youtube_iframe',
         'header_content',
         'meta_title',
@@ -32,13 +26,17 @@ class Blog extends Model
         'facebook_meta_description',
         'twitter_meta_title',
         'twitter_meta_description',
+        'icon',
+        'icon_alt_text',
+        'thumb',
+        'thumb_alt_text',
+        'cover',
+        'cover_alt_text',
+        'og_image',
+        'og_img_alt_text',
         'is_index',
         'is_follow',
         'is_featured',
-        'featured_img_alt_text',
-        'featured_image',
-        'og_img_alt_text',
-        'og_image',
         'status',
         'comment',
     ];

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Global\Page;
 use App\Models\Global\Setting;
-use App\Models\Blog\Blog;
+use App\Models\Global\Blog;
 
 use App\Models\Ecommerce\EcommerceItem;
 use App\Models\Ecommerce\EcommerceSeller;

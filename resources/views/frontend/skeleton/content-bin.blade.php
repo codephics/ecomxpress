@@ -434,7 +434,7 @@
                 <figure>
                     <div class="card shadow mb-5 rounded-3 no-border-card">
                         <a href="{{ route('blog',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                            <img src="{{ asset('blog/image/featured/' . $blog->featured_image) }}" class="card-img-top" alt="..." />
+                            <img src="{{ asset('global/blog/image/featured/' . $blog->featured_image) }}" class="card-img-top" alt="..." />
                         </a>
                         <figcaption>
                             <div class="card-body">

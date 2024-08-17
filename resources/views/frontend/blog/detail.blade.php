@@ -21,7 +21,7 @@
 				<div class="col-md-12">
 					<h1>{{ \Illuminate\Support\Str::limit($blog->title, 100, '...') }}</h1>
 
-					<img src="{{ asset('blog/image/featured/' . $blog->featured_image) }}" alt="" class="img-fluid mt-3" />
+					<img src="{{ asset('global/blog/image/featured/' . $blog->featured_image) }}" alt="" class="img-fluid mt-3" />
 
 					<article class="blog-post">
 						<p class="blog-post-meta mt-3">{{ $blog->created_at->format('M d, Y') }} by <b>{{ $blog->author }}</b></p>
@@ -64,7 +64,7 @@
 			                <figure>
 			                    <div class="card shadow mb-5 rounded-3 no-border-card">
 			                        <a href="{{ route('blog',$blog->slug) }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-			                            <img src="{{ asset('blog/image/featured/' . $blog->featured_image) }}" class="card-img-top" alt="...">
+			                            <img src="{{ asset('global/blog/image/featured/' . $blog->featured_image) }}" class="card-img-top" alt="...">
 			                        </a>
 			                        <figcaption>
 			                            <div class="card-body">

@@ -58,7 +58,7 @@
                 <tbody>
                     @foreach ($blogs as $blog)
                     <tr>
-                        <td><img src="{{ asset('blog/image/featured/' . $blog->featured_image) }}" class="" alt="..." height="42" width="42" /></td>
+                        <td><img src="{{ asset('global/blog/image/featured/' . $blog->featured_image) }}" class="" alt="..." height="42" width="42" /></td>
                         <td>{{ $blog->title }}</td>
                         <td>{{ $blog->tags }}</td>
                         <td>@if($blog->status == 1) Published @else Draft @endif</td>
