@@ -77,32 +77,33 @@ class PageController extends Controller
         ]);
     }
 
-    public function blog()
+    public function blog($slug = null)
     {
-        $page = Page::where('slug', 'blog')->firstOrFail();
         $setting = Setting::first();
-        $blogs = Blog::all();
 
-        return view('frontend.blog.more', [
-            'page' => $page,
-            'setting' => $setting,
-            'blogs' => $blogs
-        ]);
-    }
+        if ($slug) {
+            // Handle the detail view
+            $page = Blog::where('slug', $slug)->firstOrFail();
+            $blog = Blog::where('slug', $slug)->firstOrFail();
+            $relatedBlog = Blog::take(4)->get();
 
-    public function detail($slug)
-    {
-        $page = Blog::where('slug', $slug)->firstOrFail();
-        $blog = Blog::where('slug', $slug)->firstOrFail();
-        $setting = Setting::first();
-        $relatedBlog = Blog::take(4)->get();
+            return view('frontend.blog.detail', [
+                'page' => $page,
+                'blog' => $blog,
+                'setting' => $setting,
+                'relatedBlog' => $relatedBlog
+            ]);
+        } else {
+            // Handle the blog listing view
+            $page = Page::where('slug', 'blog')->firstOrFail();
+            $blogs = Blog::all();
 
-        return view('frontend.blog.detail', [
-            'page' => $page,
-            'blog' => $blog,
-            'setting' => $setting,
-            'relatedBlog' => $relatedBlog
-        ]);
+            return view('frontend.blog.more', [
+                'page' => $page,
+                'setting' => $setting,
+                'blogs' => $blogs
+            ]);
+        }
     }
 
     public function overview()
