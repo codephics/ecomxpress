@@ -32,7 +32,7 @@ class RouteServiceProvider extends ServiceProvider
     public const ManageSliders = 'manage-sliders';
     public const ManagePages = 'manage-pages';
 
-    public const Blog = 'blog/manage-blog';
+    public const Blog = 'blog/manage';
     public const BlogCategories = 'blog/categories';
 
     public const ManageContacts = 'manage-contacts';

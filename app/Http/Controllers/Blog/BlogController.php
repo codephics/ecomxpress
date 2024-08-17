@@ -29,7 +29,7 @@ class BlogController extends Controller
         $subcategories = BlogSubcategory::all();
         $sub_subcategories = BlogSubSubcategory::all();
 
-        return view('backend.blog.new-blog', [
+        return view('backend.blog.new', [
             'tags' => $tags, 
             'categories' => $categories, 
             'subcategories' => $subcategories, 
@@ -102,7 +102,7 @@ class BlogController extends Controller
     {
         $blogs = Blog::all();
         
-        return view('backend.blog.manage-blog', ['blogs' => $blogs]);
+        return view('backend.blog.manage', ['blogs' => $blogs]);
     }
 
     public function edit($id)
@@ -115,7 +115,7 @@ class BlogController extends Controller
 
         $selectedTags = array_map('trim', explode(',', $blog->tags));
         
-        return view('backend.blog.edit-blog', [
+        return view('backend.blog.edit', [
             'tags' => $tags,
             'selectedTags' => $selectedTags,
             'blog' => $blog,

@@ -27,7 +27,7 @@
         <div class="col-lg-2 align-self-center">
             <div class="row">
                 <div class="col-12 col-sm-12">
-                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('blog.new-blog') }}">+ Add Blog</a>
+                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('blog.new') }}">+ Add Blog</a>
                 </div>
             </div>
         </div>

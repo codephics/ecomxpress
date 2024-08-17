@@ -49,8 +49,8 @@
                     <div class="col-md-6">
                         <h2>Quick Links</h2>
                         <ul class="icon-list ps-0">
-                            <li class="d-flex align-items-start mb-1"><a href="{{ route('blog.new-blog') }}">Add Blog</a></li>
-                            <li class="d-flex align-items-start mb-1"><a href="{{ route('blog.manage-blog') }}">Manage Blog</a></li>
+                            <li class="d-flex align-items-start mb-1"><a href="{{ route('blog.new') }}">Add Blog</a></li>
+                            <li class="d-flex align-items-start mb-1"><a href="{{ route('blog.manage') }}">Manage Blog</a></li>
                             <li class="d-flex align-items-start mb-1"><a href="{{ route('blog.categories') }}">Manage Categories</a></li>
                             <li class="d-flex align-items-start mb-1"><a href="{{ route('blog.subcategories') }}">Manage Subcategories</a></li>
                             <li class="d-flex align-items-start mb-1"><a href="{{ route('blog.sub-subcategories') }}">Manage Sub Subcategories</a></li>
