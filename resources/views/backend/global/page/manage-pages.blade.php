@@ -83,6 +83,7 @@
                         <th>SN</th>
                         <th>Name</th>
                         <th>Title</th>
+                        <th>Slug</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -93,6 +94,7 @@
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $page->name }}</td>
                         <td>{{ $page->title }}</td>
+                        <td>{{ $page->slug }}</td>
                         <td>@if($page->status == 1) Live @else Draft @endif</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
@@ -132,6 +134,7 @@
                         <th>SN</th>
                         <th>Name</th>
                         <th>Title</th>
+                        <th>Slug</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
