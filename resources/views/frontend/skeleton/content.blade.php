@@ -37,7 +37,7 @@
             <p class="lead">{!! $page->short_description !!}</p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                 <a href="{{ route('item.shop') }}" class="btn btn-primary btn-lg px-4 me-md-2">Explore Items</a>
-                <a href="{{ route('blog.more') }}" class="btn btn-outline-secondary btn-lg px-4">Read Blogs</a>
+                <a href="{{ route('blog') }}" class="btn btn-outline-secondary btn-lg px-4">Read Blog</a>
             </div>
         </div>
     </div>
@@ -387,7 +387,7 @@
         <div class="col-lg-2 align-self-center">
             <div class="row">
                 <div class="col-12 col-sm-12">
-                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('blog.more') }}">Read Blogs</a>
+                    <a type="button" class="btn btn-outline-secondary float-end" href="{{ route('blog') }}">Read Blog</a>
                 </div>
             </div>
         </div>

@@ -13,7 +13,7 @@
 						<ul class="navbar-nav">
 							<li class="nav-item"><a href="{{ route('front.home') }}" class="nav-link">Home</a></li>
 							<li class="nav-item"><a href="{{ route('item.shop') }}" class="nav-link">Shop</a></li>
-							<li class="nav-item"><a href="{{ route('blog.more') }}" class="nav-link">Blog</a></li>
+							<li class="nav-item"><a href="{{ route('blog') }}" class="nav-link">Blog</a></li>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 									About Us
