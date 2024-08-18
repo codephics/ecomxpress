@@ -19,7 +19,5 @@ yarn-error.log
 /.vscode
 
 #custom
-*.png
-*.jpg
-*.gif
-
+/ecommerce
+/global
