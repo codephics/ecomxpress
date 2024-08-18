@@ -1,8 +1,4 @@
-@extends('backend.skeleton.body')
-
-@section('content') @section('custom-head')
-<script src="https://cdn.tiny.cloud/1/m9g2pjluv64jkrzcnksdf4ur6nd9lvyrbatcjua3iazeof63/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-@endsection
+@extends('backend.skeleton.body') @section('content')
 
 <main class="container p-3 py-5">
     <!-- Breadcrumb -->
@@ -168,4 +164,4 @@
         doc.save('invoice.pdf');
     });
 </script>
-@endsection @endsection
+@endsection @section('custom-scripts') @include('backend.skeleton.summernote') @endsection @endsection

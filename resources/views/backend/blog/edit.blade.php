@@ -1,6 +1,4 @@
-@extends('backend.skeleton.body') @section('content') @section('custom-head')
-<script src="https://cdn.tiny.cloud/1/m9g2pjluv64jkrzcnksdf4ur6nd9lvyrbatcjua3iazeof63/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-@endsection
+@extends('backend.skeleton.body') @section('content')
 
 <main class="container p-3 py-5">
     <!-- Breadcrumb -->
@@ -113,7 +111,7 @@
                     <div class="col-sm-12">
                         <div class="mb-3">
                             <label for="short_description" class="form-label">Short Description</label>
-                            <textarea id="custom-textarea" name="short_description">{{ $blog->short_description }}</textarea>
+                            <textarea class="custom-textarea" name="short_description">{{ $blog->short_description }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -121,7 +119,7 @@
                     <div class="col-sm-12">
                         <div class="mb-3">
                             <label for="long_description" class="form-label">Long Description</label>
-                            <textarea id="custom-textarea" name="long_description">{{ $blog->long_description }}</textarea>
+                            <textarea class="custom-textarea" name="long_description">{{ $blog->long_description }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -242,7 +240,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="comment" class="form-label">Comment</label>
-                            <textarea class="form-control" id="custom-textarea" name="comment" rows="3">{{ $blog->comment }}</textarea>
+                            <textarea class="custom-textarea" name="comment" rows="3">{{ $blog->comment }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -256,34 +254,4 @@
     </form>
 </main>
 
-@section('custom-scripts')
-<script>
-    tinymce.init({
-        selector: '#custom-textarea',
-        plugins: 'link image code',
-        toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
-    });
-</script>
-
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (() => {
-      'use strict'
-
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      const forms = document.querySelectorAll('.needs-validation')
-
-      // Loop over them and prevent submission
-      Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-
-          form.classList.add('was-validated')
-        }, false)
-      })
-    })()
-</script>
-@endsection @endsection
+@section('custom-scripts') @include('backend.skeleton.summernote') @endsection @endsection

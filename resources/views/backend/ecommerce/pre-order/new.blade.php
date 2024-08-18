@@ -153,7 +153,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="comment" class="form-label">Comment</label>
-                            <textarea class="form-control" id="custom-textarea" name="comment" rows="3"></textarea>
+                            <textarea class="custom-textarea" name="comment" rows="3"></textarea>
                         </div>
                     </div>
                 </div>

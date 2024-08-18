@@ -1,0 +1,36 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-Dup3ddE_.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/bootstrap.min.css": {
+    "file": "assets/bootstrap-D29eqdnG.css",
+    "src": "resources/css/bootstrap.min.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-i_OAhKU4.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/bootstrap.bundle.min.js": {
+    "file": "assets/bootstrap.bundle.min-DuFD5Cds.js",
+    "name": "bootstrap.bundle.min",
+    "src": "resources/js/bootstrap.bundle.min.js",
+    "isEntry": true
+  },
+  "resources/js/datatable-script.js": {
+    "file": "assets/datatable-script-Druc6rPx.js",
+    "name": "datatable-script",
+    "src": "resources/js/datatable-script.js",
+    "isEntry": true
+  },
+  "resources/js/fontawesome-6.4.0.js": {
+    "file": "assets/fontawesome-6.4.0-BGCiRQhf.js",
+    "name": "fontawesome-6.4.0",
+    "src": "resources/js/fontawesome-6.4.0.js",
+    "isEntry": true
+  }
+}
