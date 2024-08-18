@@ -321,7 +321,6 @@
         <!-- End Questions or Suggestions -->
 
 @section('custom-scripts')
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const form = document.querySelector('form'); // Change this to the correct form selector
