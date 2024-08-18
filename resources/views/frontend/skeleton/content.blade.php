@@ -1,9 +1,10 @@
-@extends('frontend.skeleton.body') @section('content')
+@extends('frontend.skeleton.body')
+@section('content')
 
 <!-- Featured Header -->
 <section>
     <div class="row flex-lg-row-reverse align-items-center">
-        <div class="col-10 col-sm-8 col-lg-6">
+        <div class="col-12 col-sm-10 col-lg-6 mb-3 mx-auto position-relative">
             <div id="dynamicCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     @foreach($sliders as $index => $slider)
@@ -14,7 +15,7 @@
                     @foreach($sliders as $index => $slider)
                         <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                             <a href="{{ $slider->button_link_1 }}">
-                                <img src="{{ asset('global/slider/image/' . $slider->image) }}" class="d-block w-100" alt="{{ $slider->image_alt_text }}">
+                                <img src="{{ asset('global/slider/image/' . $slider->image) }}" class="d-block mx-auto" style="max-width: 100%; height: auto;" alt="{{ $slider->image_alt_text }}">
                             </a>
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>{{ $slider->heading }}</h5>

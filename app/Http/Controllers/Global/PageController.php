@@ -162,10 +162,10 @@ class PageController extends Controller
     
     public function error404()
     {
-        $page = Page::where('slug', '404')->firstOrFail();
+        $page = Page::all();
         $setting = Setting::first();
         
-        return view('frontend.global.404', [
+        return view('errors.404', [
             'page' => $page,
             'setting' => $setting,
         ]);
