@@ -162,6 +162,19 @@
 					                                </li>
 					                            </ul>
 					                            <div class="card-body">
+					                                <div class="d-grid mt-3 gap-2">
+					                                    @if($page->live_preview_link)
+					                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+					                                        <a href="{{ $page->live_preview_link }}" target="_blank" class="btn btn-outline-primary">Live Preview <i class="fa-solid fa-external-link"></i></a>
+					                                    </div>
+					                                    @endif
+					                                    @if($page->admin_link)
+					                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+					                                        <a href="{{ $page->admin_link }}" target="_blank" class="btn btn-primary position-relative" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Download HTML">Admin <i class="fa-solid fa-external-link"></i></a>
+					                                        <a href="{{ $page->downloadable_link }}" target="_blank" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Github">Github <i class="fa-solid fa-external-link"></i></a>
+					                                    </div>
+					                                    @endif
+					                                </div>
 					                                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#confirmNow-{{ $item->uuid }}" data-sale-price="{{ $item->sale_price ?? $item->regular_price ?? 0 }}" data-item-name="{{ $item->name }}" data-item-image="{{ asset('ecommerce/item/image/' . $item->image) }}">
 					                                    Pre Order
 					                                </button>

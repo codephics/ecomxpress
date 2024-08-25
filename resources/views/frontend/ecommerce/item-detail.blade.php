@@ -29,6 +29,19 @@
 		            <span>Free</span>
 		            @endif
 		        </small>
+                <div class="d-grid mt-3 gap-2">
+                    @if($page->live_preview_link)
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <a href="{{ $page->live_preview_link }}" target="_blank" class="btn btn-outline-primary">Live Preview <i class="fa-solid fa-external-link"></i></a>
+                    </div>
+                    @endif
+                    @if($page->admin_link)
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <a href="{{ $page->admin_link }}" target="_blank" class="btn btn-primary position-relative" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Download HTML">Admin <i class="fa-solid fa-external-link"></i></a>
+                        <a href="{{ $page->downloadable_link }}" target="_blank" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Github">Github <i class="fa-solid fa-external-link"></i></a>
+                    </div>
+                    @endif
+                </div>
 		        <div class="d-grid mt-3 gap-2">
 		            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
 		                <a type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#confirmNow" data-bs-whatever="@mdo">Pre Order <i class="fa-solid fa-shopping-cart"></i></a>
