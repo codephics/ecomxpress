@@ -91,7 +91,7 @@ Route::post('contact-us/new', [ContactController::class, 'newContact'])->name('c
 // Ecommerce
 // Route::match(['head', 'get'], '/', [EcommerceItemsController::class, 'index'])->name('ecommerce.home');
 Route::get('shop', [EcommerceItemsController::class, 'index'])->name('item.shop');
-Route::get('shop/detail/{slug}', [EcommerceItemsController::class, 'detail'])->name('item.detail');
+Route::get('shop/{slug}', [EcommerceItemsController::class, 'detail'])->name('item.detail');
 
 // Ecommerce -> Category
 Route::get('shop/{category:slug}', [EcommerceItemsController::class, 'showByCategory'])->name('category.show');

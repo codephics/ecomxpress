@@ -151,10 +151,10 @@
 					                                <li class="list-group-item">
 					                                    <small>
 					                                        @if($item->sale_price)
-					                                        <span class="fw-bold fs-5 text-success">{{ $item->sale_price }}৳</span>/
-					                                        <span class="fw-bold text-decoration-line-through text-muted">{{ $item->regular_price }}৳</span>
+					                                        <span class="fw-bold fs-5 text-success">{{ $item->sale_price }}$</span>/
+					                                        <span class="fw-bold text-decoration-line-through text-muted">{{ $item->regular_price }}$</span>
 					                                        @elseif($item->regular_price)
-					                                        <span class="fw-bold fs-5 text-success">{{ $item->regular_price }}৳</span>
+					                                        <span class="fw-bold fs-5 text-success">{{ $item->regular_price }}$</span>
 					                                        @else
 					                                        <span>Free</span>
 					                                        @endif
@@ -220,11 +220,11 @@
 					                                                        <div>
 					                                                            <div class="form-check">
 					                                                                <input class="form-check-input shipping-method" type="radio" id="insideDhaka-{{ $item->uuid }}" name="shipping_method" value="50" />
-					                                                                <label class="form-check-label" for="insideDhaka-{{ $item->uuid }}">Inside Dhaka (50৳)</label>
+					                                                                <label class="form-check-label" for="insideDhaka-{{ $item->uuid }}">Inside Dhaka (50$)</label>
 					                                                            </div>
 					                                                            <div class="form-check">
 					                                                                <input class="form-check-input shipping-method" type="radio" id="outsideDhaka-{{ $item->uuid }}" name="shipping_method" value="100" />
-					                                                                <label class="form-check-label" for="outsideDhaka-{{ $item->uuid }}">Outside Dhaka (100৳)</label>
+					                                                                <label class="form-check-label" for="outsideDhaka-{{ $item->uuid }}">Outside Dhaka (100$)</label>
 					                                                            </div>
 					                                                        </div>
 					                                                        <div id="shipping-method-error-{{ $item->uuid }}" class="invalid-feedback">
@@ -247,7 +247,7 @@
 					                                                                            <p id="modal-name-{{ $item->uuid }}" class="mb-0">{{ \Illuminate\Support\Str::limit($item->name, 40, '...') }}</p>
 					                                                                        </td>
 					                                                                        <td width="25%">
-					                                                                            <span id="modal-price-{{ $item->uuid }}" class="mb-0">{{ $item->sale_price ?? $item->regular_price }}৳</span>
+					                                                                            <span id="modal-price-{{ $item->uuid }}" class="mb-0">{{ $item->sale_price ?? $item->regular_price }}$</span>
 					                                                                        </td>
 					                                                                    </tr>
 					                                                                </tbody>
@@ -263,16 +263,16 @@
 					                                                                            <label class="col-form-label">Sub Total</label>
 					                                                                        </td>
 					                                                                        <td width="25%">
-					                                                                            <div id="modal-subtotal-{{ $item->uuid }}">0৳</div>
+					                                                                            <div id="modal-subtotal-{{ $item->uuid }}">0$</div>
 					                                                                        </td>
 					                                                                    </tr>
 					                                                                    <tr>
 					                                                                        <td width="75%"><label class="col-form-label">Delivery Charge</label></td>
-					                                                                        <td width="25%"><div id="modal-delivery-charge-{{ $item->uuid }}">0৳</div></td>
+					                                                                        <td width="25%"><div id="modal-delivery-charge-{{ $item->uuid }}">0$</div></td>
 					                                                                    </tr>
 					                                                                    <tr>
 					                                                                        <td width="75%"><label class="col-form-label">Total</label></td>
-					                                                                        <td width="25%"><div id="modal-total-{{ $item->uuid }}">0৳</div></td>
+					                                                                        <td width="25%"><div id="modal-total-{{ $item->uuid }}">0$</div></td>
 					                                                                    </tr>
 					                                                                </tbody>
 					                                                            </table>
@@ -364,10 +364,10 @@
 
                 modalName.textContent = itemName;
                 modalImage.setAttribute('src', itemImage);
-                modalPrice.textContent = itemPrice + '৳';
-                modalSubtotal.textContent = itemPrice + '৳';
-                modalDeliveryCharge.textContent = '0৳';
-                modalTotal.textContent = itemPrice + '৳';
+                modalPrice.textContent = itemPrice + '$';
+                modalSubtotal.textContent = itemPrice + '$';
+                modalDeliveryCharge.textContent = '0$';
+                modalTotal.textContent = itemPrice + '$';
 
                 var quantityInput = modal.querySelector('input[name="quantity"]');
                 var deliveryChargeInputs = modal.querySelectorAll('.shipping-method');
@@ -390,9 +390,9 @@
 
                     var total = itemSubtotal + deliveryCharge;
 
-                    modalSubtotal.textContent = itemSubtotal + '৳';
-                    modalDeliveryCharge.textContent = deliveryCharge + '৳';
-                    modalTotal.textContent = total + '৳';
+                    modalSubtotal.textContent = itemSubtotal + '$';
+                    modalDeliveryCharge.textContent = deliveryCharge + '$';
+                    modalTotal.textContent = total + '$';
 
                     modal.querySelector('[id^="hiddenItemName-"]').value = itemName;
                     modal.querySelector('[id^="hiddenItemPrice-"]').value = itemPrice;

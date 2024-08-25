@@ -1,0 +1,354 @@
+Todo
+---------------
+#Categories description & meta title text length
+#Shop route
+#Digital button actions
+#Mobile Responsive Slider
+#Blog Route
+#Digital Pre-Order Form
+#Invoice finder
+#Module Manager - nwidart - 
+#Update 404 Page (need to improve)
+#Search Module
+#Dynamic Menu
+#APP_ENV=local (migrate)
+#APP_KEY=base64:v6x3zGItVfHectU4GEaWYvgO1NPeVbA+jMOaRLhIZ/Q= (ecx v1)
+
+I'm developing laravel web applications for sell & opensource also. I already developed & updating two polished solution that one is for ecommerce named "EcomXpress" & another is for blog management name "BlogForge10". Two application is makes by laravel 10, php 8.2, html5, css3, bootstrap 5.2. I will add new modules & features on existing applications day by day & will make new laravel web applications also.
+
+EcomXpress is now offers -
+Manage Products: Easily add, update, and delete products.
+Categories: Organize your products into categories for better navigation.
+Seller Management: Handle multiple sellers efficiently.
+Lead Management: Track and convert potential customers.
+Blog: Share updates, news, and stories with your audience.
+Blog Categories & Tags: Categorize and tag your blog posts for better reach.
+Slider: Showcase featured products and promotions.
+Pages: Create and manage static pages like About Us, Contact Us, and more.
+Contact Query: Handle customer inquiries effectively.
+Subscriber Lead: Manage your email subscribers.
+Settings: Customize your store settings to fit your needs.
+User Profile: Allow users to manage their accounts and orders.
+
+BlogForge10 is now offers -
+Intuitive Admin Panel
+Dynamic Blog Creation
+Effortless Category Management
+Tag Customization
+Secure Comment Handling
+Social Link Integration
+SEO-Friendly Structure
+and much more...
+
+My main domain is codephics.com, EcomXpress is in ecomxpress.codephics.com & BlogForge10 is in blogforge10.codephics.com. User can see admin panel & frontend.
+
+Now, you think what should be my targeted audience. So make best seo contents for my codephics.com website.
+
+Now start making Meta Title, Meta Description, Facebook Meta Title, Facebook Meta Description, Twitter Meta Title, Twitter Meta Description, Meta keywords, Icon/Cover/Thumb/OG alt image text, Short Description & Long Description content for Homepage.
+---------------
+Notes
+---------------
+git@github.com:BrandsDev/system-app.git
+https://codephics.com/solution/detail/blogforge10
+https://codephics.com/blog-detail/revolutionize-your-blogging-journey-with-blogforge-10-a-free-seo-friendly-laravel-10-solution
+https://codephics.com/blog-detail/empower-your-content-journey-with-blogforge10-unleashing-the-power-of-blogging
+---------------
+Modules
+---------------
+php artisan module:make Pricing
+
+   INFO  Creating module: [Pricing].
+
+  Generating file C:\xampp\htdocs\ecomxpress\Modules/Pricing/module.json .................................... 1ms DONE
+  Generating file C:\xampp\htdocs\ecomxpress\Modules/Pricing/routes/web.php ................................. 1ms DONE
+  Generating file C:\xampp\htdocs\ecomxpress\Modules/Pricing/routes/api.php ................................. 1ms DONE
+  Generating file C:\xampp\htdocs\ecomxpress\Modules/Pricing/resources/views/index.blade.php ................ 1ms DONE
+  Generating file C:\xampp\htdocs\ecomxpress\Modules/Pricing/resources/views/layouts/master.blade.php ....... 1ms DONE
+  Generating file C:\xampp\htdocs\ecomxpress\Modules/Pricing/config/config.php .............................. 1ms DONE
+  Generating file C:\xampp\htdocs\ecomxpress\Modules/Pricing/composer.json .................................. 2ms DONE
+  Generating file C:\xampp\htdocs\ecomxpress\Modules/Pricing/resources/assets/js/app.js ..................... 1ms DONE
+  Generating file C:\xampp\htdocs\ecomxpress\Modules/Pricing/resources/assets/sass/app.scss ................. 5ms DONE
+  Generating file C:\xampp\htdocs\ecomxpress\Modules/Pricing/vite.config.js ................................. 1ms DONE
+  Generating file C:\xampp\htdocs\ecomxpress\Modules/Pricing/package.json ................................... 1ms DONE
+  Generating file C:/xampp/htdocs/ecomxpress/Modules/Pricing/database/seeders/PricingDatabaseSeeder.php ..... 1ms DONE
+  Generating file C:/xampp/htdocs/ecomxpress/Modules/Pricing/app/Providers/PricingServiceProvider.php ....... 1ms DONE
+  Generating file C:/xampp/htdocs/ecomxpress/Modules/Pricing/app/Providers/EventServiceProvider.php ......... 1ms DONE
+  Generating file C:/xampp/htdocs/ecomxpress/Modules/Pricing/app/Providers/RouteServiceProvider.php ......... 1ms DONE
+  Generating file C:/xampp/htdocs/ecomxpress/Modules/Pricing/app/Http/Controllers/PricingController.php ..... 1ms DONE
+
+   INFO  Module [Pricing] created successfully.
+
+Manage Module (Install, Uninstall)
+You can manage modules with commands like:
+
+Install Module: php artisan module:enable MyModule
+Uninstall Module: php artisan module:disable MyModule
+Remove Module: php artisan module:delete MyModule
+---------------
+Notes
+---------------
+Apache Setup:
+sudo nano /etc/apache2/apache2.conf (set root dir)
+/etc/apache2/sites-available (set vhost)
+/etc/letsencrypt/live/ (set ssl on vhost)
+/etc/apache2/sites-enabled/(httpd.conf)(ssl.conf)
+sudo ln -s /etc/apache2/sites-available/example.com.conf /etc/apache2/sites-enabled/ (enable vhost)
+
+Forbidden Permission:
+sudo chmod +x /home/user
+sudo chmod +x /home/user/htdocs
+sudo chown -R www-data:www-data /home/user/htdocs/subdomain.domain.institute
+sudo chmod -R 755 /home/user/htdocs/subdomain.domain.institute
+
+sudo apache2ctl configtest
+
+sudo certbot --apache -d attanal.ilannoor.institute -d www.attanal.ilannoor.institute
+
+sudo systemctl restart apache2
+
+tail -f /var/log/apache2/error.log
+
+ls -l /path/to/your/php/files (ls -l command to check the permissions of the directory and files)
+
+systemctl status apache2.service
+journalctl -xeu apache2.service
+
+Reinstalling PHP:
+sudo apt-get purge apache2
+sudo apt-get install apache2
+sudo a2enmod rewrite
+sudo service apache2 stop
+sudo service apache2 start
+---------------
+Notes
+---------------
+Public key - first ssh-rsa pubkey capp (key comment)
+
+https://hostinger.titan.email/login/
+info - 27#Info
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDkh4TF1FOrkQ3MIXDidwByBD5I2F5oHVgp07GydNEZ2YBhvUtoAoC2fU789XtYirAlUAyQYvy1JSaJVahfSJi4TtNSW/X1pXxC2uKDSym7iKa7eok1N99CPwfOD7dXNZEhXARx0eATy/HkVs8jJjOcS6IihDgS6u8liff3IRqicUdh0/u7EXG7IaR7VRwDkIuB3ODcFo+0i2fOPCiEigHQYmhs+9CKs9H4LMl4k4+7KLXtBUI+OZl8EZWimgpWpsv3x7RMNBqaWO9wRPZ6q9LT3Ux117cZ3c5eszv4elfYWuuQbaFWndTVKARAtMvmzfWOXMHzBwtOYhZWnnrixvs5 blogforge10
+
+http://localhost/capp/ecommerce/pre-order/82f11912-5032-4d96-aaa0-091f7500f70d
+---------------
+Notes
+---------------
+{{ $template->sub_subcategory_name ?: ($template->subcategory_name ?: $template->category_name) }}
+
+
+    // "scripts": {
+    //     "dev": "vite",
+    //     "build": "vite build",
+    //     "clear-vite-cache": "npx vite clear",
+    // },
+    
+    "scripts": {
+        "dev-ex": "vite",
+        "build": "vite build",
+        "clear-vite-cache": "npx vite clear",
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+
+---------------
+Setup Local Environment
+---------------
+# install local server, vendor, composer, nodeJS, npm install, TemplateSitemapController - sitemap url, robot.txt - sitemap url, generate new app, app_url
+
+---------------
+Setup Server Environment
+---------------
+# install local server, vendor, composer, nodeJS, npm install
+
+# Apache Cofig - Set /etc/apache2/sites-available/domain.conf & /etc/apache2/sites-available/domain-le-ssl.conf 
+
+---------------
+Domain 
+---------------
+probnsol
+
+---------------
+To Do
+---------------
+- - - Branding (Name, Color, Logo, Intro & Tagline) *****
+
+- Technical SEO
+- - DOM Structure
+- - Heading Structure ***** (welcome, why-our-themes, blog, blog-detail, about - overview, brand, license, hire-us, contact-us, privacy-policy, terms-of-service, 404, teplate-store)
+- - Pera Structure with STRONG Tag ***** (welcome, why-our-themes, blog, blog-detail, about - overview, brand, license, hire-us, contact-us, privacy-policy, terms-of-service, 404, teplate-store)
+- - UL, OL, Blockquote, EM, Cite, B & I Tags
+- - - Img ALT (Need this feature) & Title Tags *****
+- - HTML5 Doctype
+- - <header> Tag ***** (welcome, why-our-themes, blog, blog-detail, about - overview, brand, license, qr-code-generator, hire-us, contact-us, privacy-policy, terms-of-service, 404, teplate-store)
+- - - <aside> Tags ***** (welcome, )
+- - - <article> Tags ***** (welcome, blog, blog-detail, about - overview, brand, license, )
+- - <section> Tag ***** (welcome, why-our-themes, blog, blog-detail, about - overview, brand, license, qr-code-generator, hire-us, contact-us, privacy-policy, terms-of-service, 404, teplate-store)
+- - <footer> Tag ***** (welcome, why-our-themes, blog, blog-detail, about - overview, brand, license, qr-code-generator, hire-us, contact-us, privacy-policy, terms-of-service, 404, teplate-store)
+- - <nav> Tag ***** (welcome, why-our-themes, blog, blog-detail, about - overview, brand, license, qr-code-generator, hire-us, contact-us, privacy-policy, terms-of-service, 404, teplate-store)
+- - <details> Tag ***** (welcome, why-our-themes, blog, blog-detail, about - overview, brand, license, qr-code-generator, hire-us, contact-us, privacy-policy, terms-of-service, 404, teplate-store)
+- - HTML Microdata
+- - ARIA Roles: Element: div with the role: tabpanel 
+- - - Open Graph protocol (Different meta title & description for generel, fb & twitter) *****
+- - - Twitter Cards *****
+- - - Meta Keywords
+- - Meta Robots: index, follow ***** (welcome, why-our-themes, blog, blog-detail, about - overview, brand, license, qr-code-generator, hire-us, contact-us, privacy-policy, terms-of-service, 404, teplate-store)
+- - - robots.txt ***** (welcome, why-our-themes, blog, blog-detail, about - overview, brand, license, qr-code-generator, hire-us, contact-us, privacy-policy, terms-of-service, 404, teplate-store)
+- - HTML Errors in the Source Code
+- - Canonical Tag / rel Next rel Prev / hreflang Tags
+- - Does the site respond for multiple URLs (Duplicate Content)
+- - Url: directory depth, dynamic parameters
+- - HTTP Header / GZIP
+- - - sitemap.xml ***** (welcome, why-our-themes, blog, blog-detail, about - overview, brand, license, qr-code-generator, hire-us, contact-us, privacy-policy, terms-of-service, 404, teplate-store)
+- - CSS / JavaScript / Flash (CSS files to 3-4, JavaScript files to 2-3)
+- - Frames - <frame> or <iframe> Tag (No)
+
+- OnPage SEO
+- - Meta Title & Description ***** (welcome, why-our-themes, blog, blog-detail, about - overview, brand, license, qr-code-generator, hire-us, contact-us, privacy-policy, terms-of-service, 404, teplate-store)
+- - Internal & External Links with nofollow & noreferrer ***** (welcome, why-our-themes, blog, blog-detail, about - overview, brand, license, qr-code-generator, hire-us, contact-us, privacy-policy, terms-of-service, 404, teplate-store)
+
+- OffPage SEO
+- - - Backlinks *****
+- - - Wikipedia Backlinks *****
+- - - Keyword Frequency
+- - - SMM & Business Directory *****
+
+- - New templates ***** (10 categories & 50 templates) [Remember to focus on providing templates with modern and responsive designs that cater to the needs of your target audience. Additionally, consider offering customization options and support to help users make the most of the templates you provide.]
+- - New tech solutions *****
+- - Free CV Maker *****
+- - Category binary tree ***** ok
+- - Filter
+- - SEO friendly content making - Now make this individual categories slug, short description, long description, meta title, meta description, twitter meta title, twitter meta description, facebook meta title, facebook meta description, icon image, thumb image, cover image & og image seo friendly svg format images with alt name based on best seo practices.
+
+- CSS & JS link to file
+
+- Add blog -> featured checkbox [solved]
+- User CRUD
+- Comment CRUD
+
+-----------------
+Wordpress
+-----------------
+# Remove homepage features by Homepage Control plugin by WooThemes
+# Adding slider to Child theme -> template-homepage.php after get_header(); ?>
+
+---------------
+Generate Random Mobile Number
+---------------
+<?php
+function generateNumbers($start, $end) {
+    for ($i = $start; $i <= $end; $i++) {
+        $formattedNumber = '+880171' . str_pad($i, 7, '0', STR_PAD_LEFT);
+        echo $formattedNumber . PHP_EOL;
+    }
+}
+
+$startNumber = 8001;
+$endNumber = 10000;
+generateNumbers($startNumber, $endNumber);
+?>
+---------------
+New Domain & File Configuring
+---------------
+sudo certbot --apache -d yourdomain.com -d www.yourdomain.com
+sudo service apache2 restart
+sudo a2ensite yourdomain.com-le-ssl.conf
+
+sudo nano /etc/apache2/sites-available/subdomain.example.com.conf
+SSLCertificateFile /etc/letsencrypt/live/subdomain.example.com/fullchain.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/subdomain.example.com/privkey.pem
+---------------
+Storing image 
+---------------
+// $imageName = time().'.'.$request->image->extension();
+// $request->image->move(resource_path('images/templates'), $imageName
+
+$imageName = $request->image->getClientOriginalName();
+$request->image->move(resource_path('images/templates'), $imageName);
+
+// $uploadedImage = $request->file('image');
+// $imageName = $uploadedImage->getClientOriginalName(); // Get the original file name
+// $path = $uploadedImage->storeAs(resource_path('images/templates'), $imageName); // Store the image with its original name
+// Save the image path or perform other necessary operations
+
+---------------
+SSL Configure 
+---------------
+To remove all Let's Encrypt SSL certificates related to the ilannoor.institute domain and generate a new one, you can follow these steps:
+
+    Stop the web server:
+
+    arduino
+
+sudo systemctl stop apache2
+
+Remove the existing SSL certificate files:
+
+bash
+
+sudo rm -rf /etc/letsencrypt/live/ilannoor.institute
+sudo rm -rf /etc/letsencrypt/archive/ilannoor.institute
+sudo rm -rf /etc/letsencrypt/renewal/ilannoor.institute.conf
+
+Remove the Certbot cron job for certificate renewal:
+
+sudo crontab -e
+
+Locate the line that refers to the Certbot renewal for the ilannoor.institute domain and remove it. Save and exit the editor.
+
+Generate a new SSL certificate using Certbot:
+
+css
+
+sudo certbot certonly --apache -d ilannoor.institute -d www.ilannoor.institute
+
+This command will request a new SSL certificate for the ilannoor.institute domain and its www subdomain, using the Apache authenticator.
+
+Follow the prompts to complete the certificate generation process. Make sure to provide valid email address and agree to the terms of service.
+
+Restart the web server:
+
+sql
+
+sudo systemctl start apache2
+
+Configure Apache2: 
+sudo a2ensite yourdomain.com-le-ssl.conf
+sudo service apache2 reload
+
+-----------------
+Solutions
+-----------------
+hello, how are you? recently I changed my server name. after that, I can't access my server via ssh.
+
+ssh-keygen -R [vps-ip]
+
+-----------------
+User
+-----------------
+User:
+luisinfoluis@gmail.com
+BNG2023intcorp
+
+Admin User:
+usuario@bngstores.com
+BngCR2023
+
+LuisBNG2023
+-----------------
+infinity
+-----------------
+6WwyhqYzyp-GXEWlTQrF5
+1t94JSRelL-SQHSAOcWQ4
+rAl7W7Cgv3-RIrNmXpJRB
+yX4PWo6E4P-VKUj03i9EO
+vnql7izAyA-E2HW4gGTbU
+pPFVsrBJMC-xyALPDZzCT
+cAs94pSeUy-deRcriC2Pp
+REHHeavcjY-rlp4gh2nZS
+
+if0_35361587!

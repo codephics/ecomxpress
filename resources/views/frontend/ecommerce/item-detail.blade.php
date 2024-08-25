@@ -22,9 +22,9 @@
 		        <p>{!! $page->short_description !!}</p>
 		        <small>
 		            @if($page->sale_price)
-		            <span class="fw-bold fs-5 text-success">৳ {{ $page->sale_price }}</span> | <span class="fw-bold text-decoration-line-through text-muted">৳ {{ $page->regular_price }}</span>
+		            <span class="fw-bold fs-5 text-success">$ {{ $page->sale_price }}</span> | <span class="fw-bold text-decoration-line-through text-muted">$ {{ $page->regular_price }}</span>
 		            @elseif($page->regular_price)
-		            <span class="fw-bold fs-5 text-success">৳ {{ $page->regular_price }}</span>
+		            <span class="fw-bold fs-5 text-success">$ {{ $page->regular_price }}</span>
 		            @else
 		            <span>Free</span>
 		            @endif
@@ -77,11 +77,11 @@
 		                                        <div>
 		                                            <div class="form-check">
 		                                                <input class="form-check-input shipping-method" type="checkbox" id="insideDhaka" name="shipping_method" value="50" />
-		                                                <label class="form-check-label" for="insideDhaka">Inside Dhaka (50৳)</label>
+		                                                <label class="form-check-label" for="insideDhaka">Inside Dhaka (50$)</label>
 		                                            </div>
 		                                            <div class="form-check">
 		                                                <input class="form-check-input shipping-method" type="checkbox" id="outsideDhaka" name="shipping_method" value="100" />
-		                                                <label class="form-check-label" for="outsideDhaka">Outside Dhaka (100৳)</label>
+		                                                <label class="form-check-label" for="outsideDhaka">Outside Dhaka (100$)</label>
 		                                            </div>
 		                                        </div>
 		                                        <div id="shipping-method-error" class="invalid-feedback">Please select a shipping method.</div>
@@ -92,15 +92,15 @@
 		                                                <tbody>
 		                                                    <tr>
 		                                                        <td width="75%"><label class="col-form-label">Sub Total</label></td>
-		                                                        <td width="25%"><p id="subTotal">৳ 0.00</p></td>
+		                                                        <td width="25%"><p id="subTotal">$ 0.00</p></td>
 		                                                    </tr>
 		                                                    <tr>
 		                                                        <td width="75%"><label class="col-form-label">Delivery Charge</label></td>
-		                                                        <td width="25%"><p id="deliveryCharge">৳ 0.00</p></td>
+		                                                        <td width="25%"><p id="deliveryCharge">$ 0.00</p></td>
 		                                                    </tr>
 		                                                    <tr>
 		                                                        <td width="75%"><label class="col-form-label">Total</label></td>
-		                                                        <td width="25%"><p id="total">৳ 0.00</p></td>
+		                                                        <td width="25%"><p id="total">$ 0.00</p></td>
 		                                                    </tr>
 		                                                </tbody>
 		                                            </table>
@@ -257,9 +257,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	        const subTotal = productPrice * quantity;
 	        const total = subTotal + parseFloat(deliveryCharge);
 
-	        subTotalElement.textContent = `৳ ${subTotal.toFixed(2)}`;
-	        deliveryChargeElement.textContent = `৳ ${parseFloat(deliveryCharge).toFixed(2)}`;
-	        totalElement.textContent = `৳ ${total.toFixed(2)}`;
+	        subTotalElement.textContent = `$ ${subTotal.toFixed(2)}`;
+	        deliveryChargeElement.textContent = `$ ${parseFloat(deliveryCharge).toFixed(2)}`;
+	        totalElement.textContent = `$ ${total.toFixed(2)}`;
 
 	        hiddenSubTotal.value = subTotal.toFixed(2);
 	        hiddenDeliveryCharge.value = parseFloat(deliveryCharge).toFixed(2);
