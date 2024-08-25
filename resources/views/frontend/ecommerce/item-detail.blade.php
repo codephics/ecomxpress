@@ -29,22 +29,31 @@
 		            <span>Free</span>
 		            @endif
 		        </small>
-                <div class="d-grid mt-3 gap-2">
-                    @if($page->live_preview_link)
-                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <a href="{{ $page->live_preview_link }}" target="_blank" class="btn btn-outline-primary">Live Preview <i class="fa-solid fa-external-link"></i></a>
+                <div class="d-grid gap-2">
+                    <div class="btn-group" role="group" >
+                        @if($page->live_preview_link)
+                        <a href="{{ $page->live_preview_link }}" target="_blank" class="btn btn-primary">Live Preview <i class="fa-solid fa-magnifying-glass"></i></a>
+                        @endif
                     </div>
-                    @endif
-                    @if($page->admin_link)
-                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <a href="{{ $page->admin_link }}" target="_blank" class="btn btn-primary position-relative" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Download HTML">Admin <i class="fa-solid fa-external-link"></i></a>
-                        <a href="{{ $page->downloadable_link }}" target="_blank" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Github">Github <i class="fa-solid fa-external-link"></i></a>
+                    <div class="btn-group" role="group" >
+                        @if($page->admin_link)
+                        <a href="{{ $page->admin_link }}" target="_blank" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Live Preview">Admin <i class="fa-solid fa-lock"></i></a>
+                        @endif
+                        @if($page->downloadable_link)
+                        <a href="{{ $page->downloadable_link }}" target="_blank" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Github">Github <i class="fa-brands fa-github"></i></a>
+                        @endif
                     </div>
-                    @endif
+                    <div class="btn-group" role="group" >
+                        <a href="{{ route('contact-us') }}" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Let's Start Discussion">Let's Start Discussion <i class="fa-regular fa-message"></i></a>
+                    </div>
+                    <div class="btn-group" role="group" >
+                        <a href="mailto:info@codephics.com" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Email Us">Email Us <i class="fa-regular fa-envelope"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone=8801705723616" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="WhatsApp">WhatsApp <i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
                 </div>
 		        <div class="d-grid mt-3 gap-2">
 		            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-		                <a type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#confirmNow" data-bs-whatever="@mdo">Pre Order <i class="fa-solid fa-shopping-cart"></i></a>
+		                <a type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#confirmNow" data-bs-whatever="@mdo">Pre Order <i class="fa-brands fa-first-order"></i></a>
 		                <div class="modal fade" id="confirmNow" tabindex="-1" aria-labelledby="confirmNowLabel" aria-hidden="true">
 		                    <div class="modal-dialog">
 		                        <div class="modal-content">

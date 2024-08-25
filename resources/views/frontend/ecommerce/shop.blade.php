@@ -161,23 +161,32 @@
 					                                    </small>
 					                                </li>
 					                            </ul>
-				                                <div class="d-grid mt-3 gap-2">
-				                                    @if($item->live_preview_link)
-				                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-				                                        <a href="{{ $item->live_preview_link }}" target="_blank" class="btn btn-outline-primary">Live Preview <i class="fa-solid fa-external-link"></i></a>
-				                                    </div>
-				                                    @endif
-				                                    @if($item->admin_link)
-				                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-				                                        <a href="{{ $item->admin_link }}" target="_blank" class="btn btn-primary position-relative" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Download HTML">Admin <i class="fa-solid fa-external-link"></i></a>
-				                                        <a href="{{ $item->downloadable_link }}" target="_blank" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Github">Github <i class="fa-solid fa-external-link"></i></a>
-				                                    </div>
-				                                    @endif
-				                                </div>
 					                            <div class="card-body">
-					                                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#confirmNow-{{ $item->uuid }}" data-sale-price="{{ $item->sale_price ?? $item->regular_price ?? 0 }}" data-item-name="{{ $item->name }}" data-item-image="{{ asset('ecommerce/item/image/' . $item->image) }}">
-					                                    Pre Order
-					                                </button>
+					                                <div class="d-grid gap-2">
+					                                    <div class="btn-group" role="group" >
+					                                        @if($item->live_preview_link)
+					                                        <a href="{{ $item->live_preview_link }}" target="_blank" class="btn btn-primary">Live Preview <i class="fa-solid fa-magnifying-glass"></i></a>
+					                                        @endif
+					                                    </div>
+					                                    <div class="btn-group" role="group" >
+					                                        @if($item->admin_link)
+					                                        <a href="{{ $item->admin_link }}" target="_blank" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Live Preview">Admin <i class="fa-solid fa-lock"></i></a>
+					                                        @endif
+					                                        @if($item->downloadable_link)
+					                                        <a href="{{ $item->downloadable_link }}" target="_blank" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Github">Github <i class="fa-brands fa-github"></i></a>
+					                                        @endif
+					                                    </div>
+					                                    <div class="btn-group" role="group" >
+					                                        <a href="{{ route('contact-us') }}" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Let's Start Discussion">Let's Start Discussion <i class="fa-regular fa-message"></i></a>
+					                                    </div>
+					                                    <div class="btn-group" role="group" >
+					                                        <a href="mailto:info@codephics.com" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Email Us">Email Us <i class="fa-regular fa-envelope"></i></a>
+					                                        <a href="https://api.whatsapp.com/send?phone=8801705723616" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="WhatsApp">WhatsApp <i class="fa-brands fa-whatsapp"></i></a>
+					                                    </div>
+					                                    <div class="btn-group" role="group" >
+					                                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#confirmNow-{{ $item->uuid }}" data-sale-price="{{ $item->sale_price ?? $item->regular_price ?? 0 }}" data-item-name="{{ $item->name }}" data-item-image="{{ asset('ecommerce/item/image/' . $item->image) }}">Pre Order <i class="fa-brands fa-first-order"></i></button>
+					                                    </div>
+					                                </div>
 					                                <div class="modal fade" id="confirmNow-{{ $item->uuid }}" tabindex="-1" aria-labelledby="confirmNowLabel-{{ $item->uuid }}" aria-hidden="true">
 					                                    <div class="modal-dialog">
 					                                        <div class="modal-content">
