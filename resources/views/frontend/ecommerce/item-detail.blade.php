@@ -44,11 +44,9 @@
                         @endif
                     </div>
                     <div class="btn-group" role="group" >
-                        <a href="{{ route('contact-us') }}" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Let's Start Discussion">Let's Start Discussion <i class="fa-regular fa-message"></i></a>
-                    </div>
-                    <div class="btn-group" role="group" >
-                        <a href="mailto:info@codephics.com" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Email Us">Email Us <i class="fa-regular fa-envelope"></i></a>
-                        <a href="https://api.whatsapp.com/send?phone=8801705723616" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="WhatsApp">WhatsApp <i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="{{ route('contact-us') }}" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Let's Start Discussion"> <i class="fa-regular fa-message fa-lg"></i></a>
+                        <a href="mailto:info@codephics.com" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Email Us"> <i class="fa-regular fa-envelope fa-lg"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone=8801705723616" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="WhatsApp"> <i class="fa-brands fa-whatsapp fa-lg"></i></a>
                     </div>
                 </div>
 		        <div class="d-grid mt-3 gap-2">
