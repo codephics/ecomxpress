@@ -26,6 +26,17 @@ use App\Http\Controllers\Global\SettingController;
 use App\Http\Controllers\Global\SitemapController;
 
 
+
+/*
+|--------------------------------------------------------------------------
+| Riderect
+|--------------------------------------------------------------------------
+*/
+
+Route::redirect('/solution/detail/blogforge10', '/shop/item/blogforge10', 301);
+Route::redirect('/blog-detail/revolutionize-your-blogging-journey-with-blogforge-10-a-free-seo-friendly-laravel-10-solution', '/blogs/revolutionize-your-blogging-journey-with-blogforge-10-a-free-seo-friendly-laravel-10-solution', 301);
+Route::redirect('/blog-detail/empower-your-content-journey-with-blogforge10-unleashing-the-power-of-blogging', '/blogs/empower-your-content-journey-with-blogforge10-unleashing-the-power-of-blogging', 301);
+
 /*
 |--------------------------------------------------------------------------
 | Frontend -> Global
