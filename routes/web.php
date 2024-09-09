@@ -33,6 +33,7 @@ use App\Http\Controllers\Global\SitemapController;
 |--------------------------------------------------------------------------
 */
 
+Route::redirect('/solution/detail/blogforge-10', '/shop/item/blogforge10', 301);
 Route::redirect('/solution/detail/blogforge10', '/shop/item/blogforge10', 301);
 Route::redirect('/shop/detail/blogforge10', '/shop/item/blogforge10', 301);
 Route::redirect('/codephics.com', '/', 301);
