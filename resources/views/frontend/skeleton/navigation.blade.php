@@ -3,8 +3,8 @@
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="container">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="navbar-brand fw-bold fs-4" href="{{ route('front.home') }}">EcomXpress</a></li>
-						<li class="nav-item"><small>by <a href="https://codephics.com">codephics.com</a></small></li>
+						<li class="nav-item"><a class="navbar-brand fw-bold fs-4" href="{{ route('front.home') }}">codephics.com</a></li>
+						<li class="nav-item"><small>Theme <a href="https://codephics.com">EcomXpress</a></small></li>
 					</ul>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
