@@ -17,13 +17,13 @@ class SitemapController extends Controller
         $path = public_path('sitemap.xml');
 
         // Generate the sitemap for your website
-        SitemapGenerator::create('https://ecomxpress.codephics.com')
+        SitemapGenerator::create('http://localhost/ecomxpress/')
             ->writeToFile($path);
 
         return response()->file($path);
 
         // Optionally, you can specify additional options, such as the maximum number of links per sitemap file:
-        SitemapGenerator::create('https://ecomxpress.codephics.com')
+        SitemapGenerator::create('http://localhost/ecomxpress/')
             ->setMaxTags(50000) // Set the maximum number of links per sitemap file
             ->writeToFile($path);
 
