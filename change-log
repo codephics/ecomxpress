@@ -1,11 +1,13 @@
 Todo
 ---------------
+#Documentation
+#Redirection
 #/shop/man-category issue
+#Blog/post route
+#Make pricing module
+#Contact us form to email
 #Categories description & meta title text length
 #Shop route
-#Digital button actions
-#Mobile Responsive Slider
-#Blog Route
 #Digital Pre-Order Form
 #Invoice finder
 #Module Manager - nwidart - 
@@ -14,6 +16,26 @@ Todo
 #Dynamic Menu
 #APP_ENV=local (migrate)
 #APP_KEY=base64:v6x3zGItVfHectU4GEaWYvgO1NPeVbA+jMOaRLhIZ/Q= (ecx v1)
+
+---------------
+Setup Local Environment
+---------------
+# How to install local server: 
+1. composer install
+2. npm install (nodeJS (if not installed))
+3. php artisan key:generate
+4. php artisan migrate
+5. Copy & paste public/build
+6. TemplateSitemapController - sitemap url, robot.txt - sitemap url, generate new app, app_url
+
+---------------
+Setup Server Environment
+---------------
+# install local server, vendor, composer, nodeJS, npm install
+
+# php artisan make:model Global/Installation -mcr
+
+# Apache Cofig - Set /etc/apache2/sites-available/domain.conf & /etc/apache2/sites-available/domain-le-ssl.conf 
 
 I'm developing laravel web applications for sell & opensource also. I already developed & updating two polished solution that one is for ecommerce named "EcomXpress" & another is for blog management name "BlogForge10". Two application is makes by laravel 10, php 8.2, html5, css3, bootstrap 5.2. I will add new modules & features on existing applications day by day & will make new laravel web applications also.
 
@@ -155,18 +177,6 @@ Notes
         "prod": "npm run production",
         "production": "mix --production"
     },
-
----------------
-Setup Local Environment
----------------
-# install local server, vendor, composer, nodeJS, npm install, TemplateSitemapController - sitemap url, robot.txt - sitemap url, generate new app, app_url
-
----------------
-Setup Server Environment
----------------
-# install local server, vendor, composer, nodeJS, npm install
-
-# Apache Cofig - Set /etc/apache2/sites-available/domain.conf & /etc/apache2/sites-available/domain-le-ssl.conf 
 
 ---------------
 Domain 

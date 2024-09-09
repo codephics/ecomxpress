@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Global\InstallationController;
+
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +27,14 @@ use App\Http\Controllers\Global\SubscriberController;
 use App\Http\Controllers\Global\SettingController;
 use App\Http\Controllers\Global\SitemapController;
 
+/*
+|--------------------------------------------------------------------------
+| Installation
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/install', [InstallationController::class, 'showInstallForm'])->name('install.form');
+Route::get('/install', [InstallationController::class, 'install'])->name('install');
 
 /*
 |--------------------------------------------------------------------------
