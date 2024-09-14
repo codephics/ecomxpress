@@ -214,19 +214,19 @@
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label class="col-form-label">Shipping Method</label>
+                                                        <label class="col-form-label">Delivery Method</label>
                                                         <div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input shipping-method" type="radio" id="insideDhaka-{{ $item->uuid }}" name="shipping_method" value="50" />
-                                                                <label class="form-check-label" for="insideDhaka-{{ $item->uuid }}">Inside Dhaka (50$)</label>
+                                                                <input class="form-check-input shipping-method" type="radio" id="insideDhaka-{{ $item->uuid }}" name="shipping_method" value="15" />
+                                                                <label class="form-check-label" for="insideDhaka-{{ $item->uuid }}">Installation (15$)</label>
                                                             </div>
                                                             <div class="form-check">
                                                                 <input class="form-check-input shipping-method" type="radio" id="outsideDhaka-{{ $item->uuid }}" name="shipping_method" value="100" />
-                                                                <label class="form-check-label" for="outsideDhaka-{{ $item->uuid }}">Outside Dhaka (100$)</label>
+                                                                <label class="form-check-label" for="outsideDhaka-{{ $item->uuid }}">Installation + Maintenance (100$)</label>
                                                             </div>
                                                         </div>
                                                         <div id="shipping-method-error-{{ $item->uuid }}" class="invalid-feedback">
-                                                            Please select a shipping method.
+                                                            Please select a Delivery Method.
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">

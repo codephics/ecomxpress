@@ -93,18 +93,18 @@
 		                                        <div class="invalid-feedback">Please enter a valid quantity.</div>
 		                                    </div>
 		                                    <div class="mb-3">
-		                                        <label class="col-form-label">Shipping Method</label>
+		                                        <label class="col-form-label">Delivery Method</label>
 		                                        <div>
 		                                            <div class="form-check">
-		                                                <input class="form-check-input shipping-method" type="checkbox" id="insideDhaka" name="shipping_method" value="50" />
-		                                                <label class="form-check-label" for="insideDhaka">Inside Dhaka (50$)</label>
+		                                                <input class="form-check-input shipping-method" type="checkbox" id="insideDhaka" name="shipping_method" value="15" />
+		                                                <label class="form-check-label" for="insideDhaka">Installation (15$)</label>
 		                                            </div>
 		                                            <div class="form-check">
 		                                                <input class="form-check-input shipping-method" type="checkbox" id="outsideDhaka" name="shipping_method" value="100" />
-		                                                <label class="form-check-label" for="outsideDhaka">Outside Dhaka (100$)</label>
+		                                                <label class="form-check-label" for="outsideDhaka">Installation + Maintenance (100$)</label>
 		                                            </div>
 		                                        </div>
-		                                        <div id="shipping-method-error" class="invalid-feedback">Please select a shipping method.</div>
+		                                        <div id="shipping-method-error" class="invalid-feedback">Please select a Delivery Method.</div>
 		                                    </div>
 		                                    <div class="mb-3">
 		                                        <div class="table-responsive">
